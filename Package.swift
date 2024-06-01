@@ -21,7 +21,7 @@ let package = Package(
         .target(
             name: "Eth",
             dependencies: ["BigInt"]
-        )
+        ),
         .testTarget(
             name: "EthTests",
             dependencies: ["Eth"]
