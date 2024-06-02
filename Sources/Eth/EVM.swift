@@ -13,6 +13,7 @@ enum EVM {
         case stackUnderflow
         case stackOverflow
         case pcOutOfBounds
+        case invalidOperation
         case impure(Operation)
         case notImplemented(Operation)
         case unexpectedError(String)
@@ -475,6 +476,8 @@ enum EVM {
         // TODO: If not jump
         context.incrementPC()
         switch operation {
+        case .stop:
+            context.halted = true
         case .add:
             try unsignedOp2(&context) { $0 + $1 }
         case .sub:
@@ -528,13 +531,15 @@ enum EVM {
             try wordOp2(&context, Op.sar)
         case .callvalue:
             try context.push(bigUIntToEthWord(input.value))
+        case .pop:
+            _ = try context.pop()
         case let .push(_, v):
             try context.push(v)
-        case .stop:
-            context.halted = true
-        case .address, .balance, .origin, .caller:
+        case .invalid:
+            throw VMError.invalidOperation
+        case .address, .balance, .origin, .caller, .gasprice, .extcodesize, .extcodecopy, .returndatasize, .returndatacopy, .extcodehash, .blockhash, .coinbase, .timestamp, .number, .prevrandao, .gaslimit, .chainid, .selfbalance, .basefee, .blobhash, .blobbasefee, .sload, .sstore, .gas, .log, .create, .call, .callcode, .delegatecall, .create2, .staticcall, .selfdestruct:
             throw VMError.impure(operation)
-        case .calldataload, .calldatasize, .calldatacopy, .codesize, .codecopy, .gasprice, .extcodesize, .extcodecopy, .returndatasize, .returndatacopy, .extcodehash, .blockhash, .coinbase, .timestamp, .number, .prevrandao, .gaslimit, .chainid, .selfbalance, .basefee, .blobhash, .blobbasefee, .pop, .mload, .mstore, .mstore8, .sload, .sstore, .jump, .jumpi, .pc, .msize, .gas, .jumpdest, .tload, .tstore, .mcopy, .dup, .swap, .log, .create, .call, .callcode, .return, .delegatecall, .create2, .staticcall, .revert, .invalid, .selfdestruct:
+        case .calldataload, .calldatasize, .calldatacopy, .codesize, .codecopy, .mload, .mstore, .mstore8, .jump, .jumpi, .pc, .msize, .jumpdest, .tload, .tstore, .mcopy, .dup, .swap, .return, .revert:
             throw VMError.notImplemented(operation)
         }
     }
@@ -560,6 +565,8 @@ extension EVM.VMError: LocalizedError {
             return NSLocalizedString("Stack overflow occurred.", comment: "Stack Overflow Error")
         case .pcOutOfBounds:
             return NSLocalizedString("Program counter went out of bounds.", comment: "PC Out of Bounds Error")
+        case .invalidOperation:
+            return NSLocalizedString("Invalid operation (INVALID) was executed.", comment: "Invalid Operation")
         case let .impure(operation):
             return NSLocalizedString("Failed to execute impure operation \(operation.description)", comment: "Impure Operation")
         case let .notImplemented(operation):

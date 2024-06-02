@@ -639,6 +639,31 @@ let tests: [EvmTest] =
             ],
             withCallValue: BigUInt(55)
         ),
+        EvmTest(
+            name: "Pop",
+            withCode: [
+                .push(32, word(1)),
+                .pop,
+                .stop,
+            ],
+            expStack: []
+        ),
+        EvmTest(
+            name: "Pop Underflow",
+            withCode: [
+                .pop,
+                .stop,
+            ],
+            expError: EVM.VMError.stackUnderflow
+        ),
+        EvmTest(
+            name: "Invalid",
+            withCode: [
+                .invalid,
+                .stop,
+            ],
+            expError: EVM.VMError.invalidOperation
+        ),
     ]
 
 final class EVMTests: XCTestCase {
