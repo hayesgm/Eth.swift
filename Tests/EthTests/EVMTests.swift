@@ -48,8 +48,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Simple Add",
             withCode: [
-                .push(word(0x11)),
-                .push(word(0x22)),
+                .push(32, word(0x11)),
+                .push(32, word(0x22)),
                 .add,
                 .stop,
             ],
@@ -60,8 +60,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Add Overflowing",
             withCode: [
-                .push("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffef"),
-                .push(word(0x22)),
+                .push(32, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffef"),
+                .push(32, word(0x22)),
                 .add,
                 .stop,
             ],
@@ -72,8 +72,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Simple Sub",
             withCode: [
-                .push(word(0x11)),
-                .push(word(0x22)),
+                .push(32, word(0x11)),
+                .push(32, word(0x22)),
                 .sub,
                 .stop,
             ],
@@ -84,8 +84,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Underflowing Sub",
             withCode: [
-                .push(word(0x33)),
-                .push(word(0x22)),
+                .push(32, word(0x33)),
+                .push(32, word(0x22)),
                 .sub,
                 .stop,
             ],
@@ -96,8 +96,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Simple Mul",
             withCode: [
-                .push(word(0x11)),
-                .push(word(0x03)),
+                .push(32, word(0x11)),
+                .push(32, word(0x03)),
                 .mul,
                 .stop,
             ],
@@ -108,8 +108,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Simple Div",
             withCode: [
-                .push(word(0x11)),
-                .push(word(0x33)),
+                .push(32, word(0x11)),
+                .push(32, word(0x33)),
                 .div,
                 .stop,
             ],
@@ -120,8 +120,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Simple Div Zero",
             withCode: [
-                .push(word(0x00)),
-                .push(word(0x33)),
+                .push(32, word(0x00)),
+                .push(32, word(0x33)),
                 .div,
                 .stop,
             ],
@@ -133,8 +133,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Simple Mod",
             withCode: [
-                .push(word(5)),
-                .push(word(33)),
+                .push(32, word(5)),
+                .push(32, word(33)),
                 .mod,
                 .stop,
             ],
@@ -145,8 +145,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Simple Mod Zero",
             withCode: [
-                .push(word(0)),
-                .push(word(33)),
+                .push(32, word(0)),
+                .push(32, word(33)),
                 .mod,
                 .stop,
             ],
@@ -158,9 +158,9 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Simple AddMod",
             withCode: [
-                .push(word(05)),
-                .push(word(01)),
-                .push(word(32)),
+                .push(32, word(05)),
+                .push(32, word(01)),
+                .push(32, word(32)),
                 .addmod,
                 .stop,
             ],
@@ -171,9 +171,9 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Simple MulMod",
             withCode: [
-                .push(word(05)),
-                .push(word(03)),
-                .push(word(11)),
+                .push(32, word(05)),
+                .push(32, word(03)),
+                .push(32, word(11)),
                 .mulmod,
                 .stop,
             ],
@@ -184,8 +184,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Simple Exp",
             withCode: [
-                .push(word(03)),
-                .push(word(05)),
+                .push(32, word(03)),
+                .push(32, word(05)),
                 .exp,
                 .stop,
             ],
@@ -197,8 +197,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Lt Yes",
             withCode: [
-                .push(word(04)),
-                .push(word(03)),
+                .push(32, word(04)),
+                .push(32, word(03)),
                 .lt,
                 .stop,
             ],
@@ -209,8 +209,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Lt No",
             withCode: [
-                .push(word(02)),
-                .push(word(03)),
+                .push(32, word(02)),
+                .push(32, word(03)),
                 .lt,
                 .stop,
             ],
@@ -221,8 +221,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Gt No",
             withCode: [
-                .push(word(04)),
-                .push(word(03)),
+                .push(32, word(04)),
+                .push(32, word(03)),
                 .gt,
                 .stop,
             ],
@@ -233,8 +233,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Gt Yes",
             withCode: [
-                .push(word(02)),
-                .push(word(03)),
+                .push(32, word(02)),
+                .push(32, word(03)),
                 .gt,
                 .stop,
             ],
@@ -247,8 +247,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Eq No",
             withCode: [
-                .push(word(04)),
-                .push(word(03)),
+                .push(32, word(04)),
+                .push(32, word(03)),
                 .eq,
                 .stop,
             ],
@@ -259,8 +259,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Eq Yes",
             withCode: [
-                .push(word(03)),
-                .push(word(03)),
+                .push(32, word(03)),
+                .push(32, word(03)),
                 .eq,
                 .stop,
             ],
@@ -271,7 +271,7 @@ let tests: [EvmTest] =
         EvmTest(
             name: "IsZero Yes",
             withCode: [
-                .push(word(0)),
+                .push(32, word(0)),
                 .iszero,
                 .stop,
             ],
@@ -282,7 +282,7 @@ let tests: [EvmTest] =
         EvmTest(
             name: "IsZero No",
             withCode: [
-                .push(word(55)),
+                .push(32, word(55)),
                 .iszero,
                 .stop,
             ],
@@ -293,8 +293,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Binary And",
             withCode: [
-                .push("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00ff"),
-                .push("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff11"),
+                .push(32, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00ff"),
+                .push(32, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff11"),
                 .and,
                 .stop,
             ],
@@ -305,8 +305,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Binary Or",
             withCode: [
-                .push("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00ff"),
-                .push("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff11"),
+                .push(32, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00ff"),
+                .push(32, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff11"),
                 .or,
                 .stop,
             ],
@@ -317,8 +317,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Binary Or",
             withCode: [
-                .push("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00ff"),
-                .push("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff11"),
+                .push(32, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00ff"),
+                .push(32, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff11"),
                 .or,
                 .stop,
             ],
@@ -329,8 +329,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Binary Xor",
             withCode: [
-                .push("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00ff"),
-                .push("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff11"),
+                .push(32, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00ff"),
+                .push(32, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff11"),
                 .xor,
                 .stop,
             ],
@@ -341,7 +341,7 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Binary Not",
             withCode: [
-                .push("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff2211"),
+                .push(32, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff2211"),
                 .not,
                 .stop,
             ],
@@ -352,8 +352,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Byte 31",
             withCode: [
-                .push("0x1100000000000000000000000000000000000000000000000000000000002233"),
-                .push(word(31)),
+                .push(32, "0x1100000000000000000000000000000000000000000000000000000000002233"),
+                .push(32, word(31)),
                 .byte,
                 .stop,
             ],
@@ -364,8 +364,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Byte 30",
             withCode: [
-                .push("0x1100000000000000000000000000000000000000000000000000000000002233"),
-                .push(word(30)),
+                .push(32, "0x1100000000000000000000000000000000000000000000000000000000002233"),
+                .push(32, word(30)),
                 .byte,
                 .stop,
             ],
@@ -376,8 +376,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Byte 0",
             withCode: [
-                .push("0x1100000000000000000000000000000000000000000000000000000000002233"),
-                .push(word(0)),
+                .push(32, "0x1100000000000000000000000000000000000000000000000000000000002233"),
+                .push(32, word(0)),
                 .byte,
                 .stop,
             ],
@@ -388,8 +388,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Byte 99",
             withCode: [
-                .push("0x1100000000000000000000000000000000000000000000000000000000002233"),
-                .push(word(99)),
+                .push(32, "0x1100000000000000000000000000000000000000000000000000000000002233"),
+                .push(32, word(99)),
                 .byte,
                 .stop,
             ],
@@ -400,8 +400,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Shl[0]",
             withCode: [
-                .push("0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
-                .push(word(0)),
+                .push(32, "0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
+                .push(32, word(0)),
                 .shl,
                 .stop,
             ],
@@ -412,8 +412,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Shl[1]",
             withCode: [
-                .push("0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
-                .push(word(1)),
+                .push(32, "0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
+                .push(32, word(1)),
                 .shl,
                 .stop,
             ],
@@ -424,8 +424,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Shl[8]",
             withCode: [
-                .push("0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
-                .push(word(8)),
+                .push(32, "0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
+                .push(32, word(8)),
                 .shl,
                 .stop,
             ],
@@ -436,8 +436,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Shl[255]",
             withCode: [
-                .push("0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1111"),
-                .push(word(255)),
+                .push(32, "0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1111"),
+                .push(32, word(255)),
                 .shl,
                 .stop,
             ],
@@ -448,8 +448,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Shr[0]",
             withCode: [
-                .push("0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
-                .push(word(0)),
+                .push(32, "0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
+                .push(32, word(0)),
                 .shr,
                 .stop,
             ],
@@ -460,8 +460,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Shr[1]",
             withCode: [
-                .push("0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
-                .push(word(1)),
+                .push(32, "0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
+                .push(32, word(1)),
                 .shr,
                 .stop,
             ],
@@ -472,8 +472,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Shr[8]",
             withCode: [
-                .push("0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
-                .push(word(8)),
+                .push(32, "0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
+                .push(32, word(8)),
                 .shr,
                 .stop,
             ],
@@ -484,8 +484,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Shr[255] MSB=0x11",
             withCode: [
-                .push("0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
-                .push(word(255)),
+                .push(32, "0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
+                .push(32, word(255)),
                 .shr,
                 .stop,
             ],
@@ -496,8 +496,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Shr[255] MSB=0xF0",
             withCode: [
-                .push("0xf02233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
-                .push(word(255)),
+                .push(32, "0xf02233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
+                .push(32, word(255)),
                 .shr,
                 .stop,
             ],
@@ -508,8 +508,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Shr[4] MSB=0xF0",
             withCode: [
-                .push("0xf000000000000000000000000000000000000000000000000000000000000000"),
-                .push(word(4)),
+                .push(32, "0xf000000000000000000000000000000000000000000000000000000000000000"),
+                .push(32, word(4)),
                 .shr,
                 .stop,
             ],
@@ -520,8 +520,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Sar[255] MSB=0x11",
             withCode: [
-                .push("0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
-                .push(word(255)),
+                .push(32, "0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
+                .push(32, word(255)),
                 .sar,
                 .stop,
             ],
@@ -533,8 +533,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Sar[255] MSB=0xF0",
             withCode: [
-                .push("0xf02233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
-                .push(word(128)),
+                .push(32, "0xf02233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
+                .push(32, word(128)),
                 .sar,
                 .stop,
             ],
@@ -545,8 +545,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Sar[4] MSB=0xF0",
             withCode: [
-                .push("0xf000000000000000000000000000000000000000000000000000000000000000"),
-                .push(word(4)),
+                .push(32, "0xf000000000000000000000000000000000000000000000000000000000000000"),
+                .push(32, word(4)),
                 .sar,
                 .stop,
             ],
@@ -557,8 +557,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Sar[4] MSB=0x30",
             withCode: [
-                .push("0x3000000000000000000000000000000000000000000000000000000000000000"),
-                .push(word(4)),
+                .push(32, "0x3000000000000000000000000000000000000000000000000000000000000000"),
+                .push(32, word(4)),
                 .sar,
                 .stop,
             ],
@@ -569,8 +569,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Sar[8] MSB=0xF0",
             withCode: [
-                .push("0xf000000000000000000000000000000000000000000000000000000000000000"),
-                .push(word(8)),
+                .push(32, "0xf000000000000000000000000000000000000000000000000000000000000000"),
+                .push(32, word(8)),
                 .sar,
                 .stop,
             ],
@@ -581,8 +581,8 @@ let tests: [EvmTest] =
         EvmTest(
             name: "Sar[8] MSB=0x30",
             withCode: [
-                .push("0x3000000000000000000000000000000000000000000000000000000000000000"),
-                .push(word(8)),
+                .push(32, "0x3000000000000000000000000000000000000000000000000000000000000000"),
+                .push(32, word(8)),
                 .sar,
                 .stop,
             ],

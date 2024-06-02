@@ -14,6 +14,7 @@ enum EVM {
         case stackOverflow
         case pcOutOfBounds
         case impure(Operation)
+        case notImplemented(Operation)
         case unexpectedError(String)
     }
 
@@ -109,7 +110,57 @@ enum EVM {
         case origin
         case caller
         case callvalue
-        case push(EthWord)
+        case calldataload
+        case calldatasize
+        case calldatacopy
+        case codesize
+        case codecopy
+        case gasprice
+        case extcodesize
+        case extcodecopy
+        case returndatasize
+        case returndatacopy
+        case extcodehash
+        case blockhash
+        case coinbase
+        case timestamp
+        case number
+        case prevrandao
+        case gaslimit
+        case chainid
+        case selfbalance
+        case basefee
+        case blobhash
+        case blobbasefee
+        case pop
+        case mload
+        case mstore
+        case mstore8
+        case sload
+        case sstore
+        case jump
+        case jumpi
+        case pc
+        case msize
+        case gas
+        case jumpdest
+        case tload
+        case tstore
+        case mcopy
+        case push(Int, EthWord)
+        case dup(Int)
+        case swap(Int)
+        case log(Int)
+        case create
+        case call
+        case callcode
+        case `return`
+        case delegatecall
+        case create2
+        case staticcall
+        case revert
+        case invalid
+        case selfdestruct
 
         var description: String {
             switch self {
@@ -175,8 +226,108 @@ enum EVM {
                 return "caller"
             case .callvalue:
                 return "callvalue"
-            case let .push(ethWord):
-                return "push(\(ethWord))"
+            case .calldataload:
+                return "calldataload"
+            case .calldatasize:
+                return "calldatasize"
+            case .calldatacopy:
+                return "calldatacopy"
+            case .codesize:
+                return "codesize"
+            case .codecopy:
+                return "codecopy"
+            case .gasprice:
+                return "gasprice"
+            case .extcodesize:
+                return "extcodesize"
+            case .extcodecopy:
+                return "extcodecopy"
+            case .returndatasize:
+                return "returndatasize"
+            case .returndatacopy:
+                return "returndatacopy"
+            case .extcodehash:
+                return "extcodehash"
+            case .blockhash:
+                return "blockhash"
+            case .coinbase:
+                return "coinbase"
+            case .timestamp:
+                return "timestamp"
+            case .number:
+                return "number"
+            case .prevrandao:
+                return "prevrandao"
+            case .gaslimit:
+                return "gaslimit"
+            case .chainid:
+                return "chainid"
+            case .selfbalance:
+                return "selfbalance"
+            case .basefee:
+                return "basefee"
+            case .blobhash:
+                return "blobhash"
+            case .blobbasefee:
+                return "blobbasefee"
+            case .pop:
+                return "pop"
+            case .mload:
+                return "mload"
+            case .mstore:
+                return "mstore"
+            case .mstore8:
+                return "mstore8"
+            case .sload:
+                return "sload"
+            case .sstore:
+                return "sstore"
+            case .jump:
+                return "jump"
+            case .jumpi:
+                return "jumpi"
+            case .pc:
+                return "pc"
+            case .msize:
+                return "msize"
+            case .gas:
+                return "gas"
+            case .jumpdest:
+                return "jumpdest"
+            case .tload:
+                return "tload"
+            case .tstore:
+                return "tstore"
+            case .mcopy:
+                return "mcopy"
+            case let .push(n, ethWord):
+                return "push\(n)(\(ethWord))"
+            case let .dup(n):
+                return "dup\(n)"
+            case let .swap(n):
+                return "swap\(n)"
+            case let .log(n):
+                return "log\(n)"
+            case .create:
+                return "create"
+            case .call:
+                return "call"
+            case .callcode:
+                return "callcode"
+            case .return:
+                return "return"
+            case .delegatecall:
+                return "delegatecall"
+            case .create2:
+                return "create2"
+            case .staticcall:
+                return "staticcall"
+            case .revert:
+                return "revert"
+            case .invalid:
+                return "invalid"
+            case .selfdestruct:
+                return "selfdestruct"
             }
         }
     }
@@ -375,14 +526,16 @@ enum EVM {
             try wordOp2(&context, Op.shr)
         case .sar:
             try wordOp2(&context, Op.sar)
-        case .address, .balance, .origin, .caller:
-            throw VMError.impure(operation)
         case .callvalue:
             try context.push(bigUIntToEthWord(input.value))
-        case let .push(v):
+        case let .push(_, v):
             try context.push(v)
         case .stop:
             context.halted = true
+        case .address, .balance, .origin, .caller:
+            throw VMError.impure(operation)
+        case .calldataload, .calldatasize, .calldatacopy, .codesize, .codecopy, .gasprice, .extcodesize, .extcodecopy, .returndatasize, .returndatacopy, .extcodehash, .blockhash, .coinbase, .timestamp, .number, .prevrandao, .gaslimit, .chainid, .selfbalance, .basefee, .blobhash, .blobbasefee, .pop, .mload, .mstore, .mstore8, .sload, .sstore, .jump, .jumpi, .pc, .msize, .gas, .jumpdest, .tload, .tstore, .mcopy, .dup, .swap, .log, .create, .call, .callcode, .return, .delegatecall, .create2, .staticcall, .revert, .invalid, .selfdestruct:
+            throw VMError.notImplemented(operation)
         }
     }
 
@@ -409,6 +562,8 @@ extension EVM.VMError: LocalizedError {
             return NSLocalizedString("Program counter went out of bounds.", comment: "PC Out of Bounds Error")
         case let .impure(operation):
             return NSLocalizedString("Failed to execute impure operation \(operation.description)", comment: "Impure Operation")
+        case let .notImplemented(operation):
+            return NSLocalizedString("Unimplemented operation \(operation.description)", comment: "Not Implemented Operation")
         case let .unexpectedError(message):
             return String(format: NSLocalizedString("An unexpected error occurred: %@", comment: "Unexpected Error"), message)
         }
