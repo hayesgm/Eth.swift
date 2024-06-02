@@ -2,6 +2,8 @@ import BigInt
 import Foundation
 
 enum EVM {
+    static let maxUint256 = BigUInt(1) << 256
+
     enum VMError: Error {
         case stackUnderflow
         case stackOverflow
@@ -53,6 +55,9 @@ enum EVM {
 
     enum Operation {
         case add
+        case sub
+        case mul
+        case div
         case stop
         case push(EthWord)
     }
@@ -67,22 +72,34 @@ enum EVM {
 
     private static func wrappedUnsignedOp(a: EthWord, b: EthWord, _ fn: (BigUInt, BigUInt) -> BigUInt) throws -> EthWord {
         let res = fn(a.toBigUInt(), b.toBigUInt())
-        let resWrapped = res % (BigUInt(1) << 256)
+        let resWrapped = res % maxUint256
+        debugPrint(resWrapped)
         guard let resWord = EthWord(fromBigUInt: resWrapped) else {
-            throw VMError.unexpectedError("wrapped unsigned overflow")
+            throw VMError.unexpectedError("wrapped unsigned overflow: \(Hex.toHex(resWrapped.serialize()))")
         }
         return resWord
     }
 
+    private static func unsignedOp2(_ context: inout Context, _ fn: (BigUInt, BigUInt) -> BigUInt) throws {
+        let (a, b) = try context.pop2()
+        try context.push(wrappedUnsignedOp(a: a, b: b, fn))
+    }
+
     private static func runSingleOp(code: Code, withInput _: CallInput, withContext context: inout Context) throws {
-        switch try getOp(code, pc: context.pc) {
+        let operation = try getOp(code, pc: context.pc)
+        // TODO: If not jump
+        context.incrementPC()
+        switch operation {
         case .add:
-            let (a, b) = try context.pop2()
-            try context.push(wrappedUnsignedOp(a: a, b: b) { $0 + $1 })
-            context.incrementPC()
+            try unsignedOp2(&context) { $0 + $1 }
+        case .sub:
+            try unsignedOp2(&context) { $1 > $0 ? maxUint256 - $1 + $0 : $0 - $1 }
+        case .mul:
+            try unsignedOp2(&context) { $0 * $1 }
+        case .div:
+            try unsignedOp2(&context) { $1 == .zero ? .zero : $0 / $1 }
         case let .push(v):
             try context.push(v)
-            context.incrementPC()
         case .stop:
             context.halted = true
         }

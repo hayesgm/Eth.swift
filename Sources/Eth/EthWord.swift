@@ -1,7 +1,7 @@
 import BigInt
 import Foundation
 
-struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible {
+struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, ExpressibleByStringLiteral {
     let data: Data
 
     init?(_ data: Data) {
@@ -20,7 +20,7 @@ struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible {
 
     init?(dataExtending data: Data) {
         let paddingSize = 32 - data.count
-        guard paddingSize > 0 else {
+        guard paddingSize >= 0 else {
             return nil
         }
         let padding = Data(repeating: 0, count: paddingSize)
