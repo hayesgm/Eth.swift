@@ -42,6 +42,14 @@ struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, Expressib
         self.init(dataExtending: value.serialize())
     }
 
+    init?(fromInt value: Int) {
+        self.init(fromBigInt: BigInt(value))
+    }
+
+    init?(fromUInt8 value: UInt8) {
+        self.init(fromBigInt: BigInt(value))
+    }
+
     init(stringLiteral value: StringLiteralType) {
         guard let data = Hex.parseHex(value), data.count == 32 else {
             fatalError("Invalid Ethereum Word")
@@ -59,5 +67,14 @@ struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, Expressib
 
     func toBigInt() -> BigInt {
         return BigInt(data)
+    }
+
+    func toInt() -> Int? {
+        let bigInt = toBigUInt()
+        if bigInt <= BigUInt(Int.max) {
+            return Int(bigInt)
+        } else {
+            return nil
+        }
     }
 }
