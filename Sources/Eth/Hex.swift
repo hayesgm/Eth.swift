@@ -21,4 +21,16 @@ enum Hex {
 
         return data
     }
+
+    static func toHex(_ data: Data) -> String {
+        return "0x" + data.map { String(format: "%02x", $0) }.joined()
+    }
+
+    static func toShortHex(_ data: Data) -> String {
+        let hexString = data.map { String(format: "%02x", $0) }.joined()
+        let trimmedHexString = hexString.drop { $0 == "0" }
+
+        // If the string is empty after trimming (i.e., it was all zeros), return "0x0"
+        return "0x" + (trimmedHexString.isEmpty ? "0" : String(trimmedHexString))
+    }
 }
