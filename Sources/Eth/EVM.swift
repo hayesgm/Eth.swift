@@ -13,6 +13,8 @@ enum EVM {
         case stackUnderflow
         case stackOverflow
         case pcOutOfBounds
+        case invalidJumpDest
+        case outOfMemory
         case invalidOperation
         case impure(Operation)
         case notImplemented(Operation)
@@ -34,6 +36,27 @@ enum EVM {
         var halted: Bool = false
         var returnData: Data = .init()
         var tStorage: [EthWord: EthWord] = [:]
+        let code: Code
+        var opMap: [Int: Operation]
+
+        init(withCode code: Code) {
+            self.code = code
+            opMap = Context.buildOpMap(code: code)
+        }
+
+        private static func buildOpMap(code: Code) -> [Int: Operation] {
+            var pc = 0
+            var opMap: [Int: Operation] = [:]
+            for operation in code {
+                opMap[pc] = operation
+                pc += operation.size
+            }
+            return opMap
+        }
+
+        func getOperation() -> Operation? {
+            opMap[pc]
+        }
 
         mutating func pop() throws -> (EthWord) {
             guard stack.count >= 1 else {
@@ -62,6 +85,20 @@ enum EVM {
             return (a, b, c)
         }
 
+        mutating func peek(_ x: Int) throws -> EthWord {
+            guard stack.count >= x else {
+                throw VMError.stackUnderflow
+            }
+            return stack[x]
+        }
+
+        mutating func swap(_ a: Int, _ b: Int) throws {
+            guard stack.count >= b, stack.count >= b else {
+                throw VMError.stackUnderflow
+            }
+            stack.swapAt(a, b)
+        }
+
         mutating func push(_ x: EthWord) throws {
             guard stack.count < 1024 else {
                 throw VMError.stackOverflow
@@ -69,8 +106,36 @@ enum EVM {
             stack.insert(x, at: 0)
         }
 
-        mutating func incrementPC() {
-            pc = pc + 1
+        mutating func incrementPC(operation: Operation) {
+            pc = pc + operation.size
+        }
+
+        mutating func memoryExpand(to sz: Int) throws {
+            let paddingSize = sz - memory.count
+            if paddingSize > 0 {
+                let padding = Data(repeating: 0, count: paddingSize)
+                memory += padding
+            }
+        }
+
+        mutating func memoryRead(offset: Int, bytes sz: Int) throws -> Data {
+            try memoryExpand(to: offset + sz)
+
+            guard offset >= 0, sz >= 0, offset + sz <= memory.count else {
+                throw VMError.outOfMemory
+            }
+
+            return memory.subdata(in: offset ..< (offset + sz))
+        }
+
+        mutating func memoryWrite(offset: Int, value: Data) throws {
+            try memoryExpand(to: offset + value.count)
+
+            guard offset >= 0, offset + value.count <= memory.count else {
+                throw VMError.outOfMemory
+            }
+
+            memory.replaceSubrange(offset ..< (offset + value.count), with: value)
         }
     }
 
@@ -331,10 +396,18 @@ enum EVM {
                 return "selfdestruct"
             }
         }
+
+        var size: Int {
+            switch self {
+            case let .push(n, _):
+                n + 1
+            default:
+                1
+            }
+        }
     }
 
     private static func getOp(_ code: Code, pc: Int) throws -> Operation {
-        // TODO: Probably need the opMap thing
         guard pc < code.count else {
             throw VMError.pcOutOfBounds
         }
@@ -469,12 +542,78 @@ enum EVM {
 
             return try bigUIntToEthWord(shiftedValue)
         }
+
+        static func mstore(offset: EthWord, value: EthWord, context: inout Context) throws {
+            guard let offset_ = offset.toInt() else {
+                throw VMError.outOfMemory
+            }
+            try context.memoryWrite(offset: offset_, value: value.data)
+        }
+
+        static func mstore8(offset: EthWord, value: EthWord, context: inout Context) throws {
+            guard let offset_ = offset.toInt() else {
+                throw VMError.outOfMemory
+            }
+            guard !value.data.isEmpty else {
+                throw VMError.unexpectedError("Empty eth word")
+            }
+            try context.memoryWrite(offset: offset_, value: Data([value.data.last!]))
+        }
+
+        static func mload(offset: EthWord, context: inout Context) throws -> EthWord {
+            guard let offset_ = offset.toInt() else {
+                throw VMError.outOfMemory
+            }
+            let data = try context.memoryRead(offset: offset_, bytes: 32)
+            guard let value = EthWord(data) else {
+                throw VMError.unexpectedError("Data read too large")
+            }
+            return value
+        }
+
+        static func jump(counter: EthWord, context: inout Context) throws {
+            guard let counter_ = counter.toInt() else {
+                throw VMError.invalidJumpDest
+            }
+            context.pc = counter_
+            guard let operation = context.getOperation(), operation == .jumpdest else {
+                throw VMError.invalidJumpDest
+            }
+        }
+
+        static func jumpi(counter: EthWord, b: EthWord, context: inout Context) throws {
+            if b != wordZero {
+                try jump(counter: counter, context: &context)
+            }
+        }
+
+        static func pc(context: inout Context) throws {
+            guard let pc = EthWord(fromInt: context.pc) else {
+                throw VMError.unexpectedError("Invalid pc")
+            }
+            try context.push(pc)
+        }
+
+        static func msize(context: inout Context) throws {
+            guard let memorySize = EthWord(fromInt: context.memory.count) else {
+                throw VMError.unexpectedError("Invalid memory size")
+            }
+            try context.push(memorySize)
+        }
+
+        static func `return`(offset: EthWord, size: EthWord, context: inout Context) throws {
+            guard let offset_ = offset.toInt(), let size_ = size.toInt() else {
+                throw VMError.outOfMemory
+            }
+            context.returnData = try context.memoryRead(offset: offset_, bytes: size_)
+            context.halted = true
+        }
     }
 
-    private static func runSingleOp(code: Code, withInput input: CallInput, withContext context: inout Context) throws {
-        let operation = try getOp(code, pc: context.pc)
-        // TODO: If not jump
-        context.incrementPC()
+    private static func runSingleOp(withInput input: CallInput, withContext context: inout Context) throws {
+        guard let operation = context.getOperation() else {
+            throw VMError.pcOutOfBounds
+        }
         switch operation {
         case .stop:
             context.halted = true
@@ -533,21 +672,50 @@ enum EVM {
             try context.push(bigUIntToEthWord(input.value))
         case .pop:
             _ = try context.pop()
+        case .mload:
+            let offset = try context.pop()
+            try context.push(Op.mload(offset: offset, context: &context))
+        case .mstore:
+            let (offset, value) = try context.pop2()
+            try Op.mstore(offset: offset, value: value, context: &context)
+        case .mstore8:
+            let (offset, value) = try context.pop2()
+            try Op.mstore8(offset: offset, value: value, context: &context)
+        case .jump:
+            try Op.jump(counter: context.pop(), context: &context)
+        case .jumpi:
+            let (counter, b) = try context.pop2()
+            try Op.jumpi(counter: counter, b: b, context: &context)
+        case .pc:
+            try Op.pc(context: &context)
+        case .msize:
+            try Op.msize(context: &context)
+        case .jumpdest:
+            break
         case let .push(_, v):
             try context.push(v)
+        case let .dup(n):
+            try context.push(context.peek(n - 1))
+        case let .swap(n):
+            try context.swap(0, n)
+        case .return:
+            let (offset, size) = try context.pop2()
+            try Op.return(offset: offset, size: size, context: &context)
         case .invalid:
             throw VMError.invalidOperation
         case .address, .balance, .origin, .caller, .gasprice, .extcodesize, .extcodecopy, .returndatasize, .returndatacopy, .extcodehash, .blockhash, .coinbase, .timestamp, .number, .prevrandao, .gaslimit, .chainid, .selfbalance, .basefee, .blobhash, .blobbasefee, .sload, .sstore, .gas, .log, .create, .call, .callcode, .delegatecall, .create2, .staticcall, .selfdestruct:
             throw VMError.impure(operation)
-        case .calldataload, .calldatasize, .calldatacopy, .codesize, .codecopy, .mload, .mstore, .mstore8, .jump, .jumpi, .pc, .msize, .jumpdest, .tload, .tstore, .mcopy, .dup, .swap, .return, .revert:
+        case .calldataload, .calldatasize, .calldatacopy, .codesize, .codecopy, .tload, .tstore, .mcopy, .revert:
             throw VMError.notImplemented(operation)
         }
+        context.incrementPC(operation: operation)
     }
 
     static func execVm(code: Code, withInput inputs: CallInput) throws -> ExecutionResult {
-        var context = Context()
+        var context = Context(withCode: code)
+        // throw VMError.unexpectedError("\(context.opMap)")
         while !context.halted {
-            try runSingleOp(code: code, withInput: inputs, withContext: &context)
+            try runSingleOp(withInput: inputs, withContext: &context)
         }
         return ExecutionResult(
             stack: context.stack,
@@ -565,6 +733,10 @@ extension EVM.VMError: LocalizedError {
             return NSLocalizedString("Stack overflow occurred.", comment: "Stack Overflow Error")
         case .pcOutOfBounds:
             return NSLocalizedString("Program counter went out of bounds.", comment: "PC Out of Bounds Error")
+        case .invalidJumpDest:
+            return NSLocalizedString("Invalid jump destination.", comment: "Invalid Jump Dest")
+        case .outOfMemory:
+            return NSLocalizedString("Memory read or write out of bounds.", comment: "Out-of-Memory Error")
         case .invalidOperation:
             return NSLocalizedString("Invalid operation (INVALID) was executed.", comment: "Invalid Operation")
         case let .impure(operation):
