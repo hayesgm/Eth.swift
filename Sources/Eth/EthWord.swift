@@ -52,7 +52,7 @@ struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, Expressib
 
     init(stringLiteral value: StringLiteralType) {
         guard let data = Hex.parseHex(value), data.count == 32 else {
-            fatalError("Invalid Ethereum Word")
+            fatalError("Invalid Ethereum Word: \(value)")
         }
         self.data = data
     }

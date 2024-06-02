@@ -2,8 +2,8 @@ import Foundation
 
 enum Hex {
     static func parseHex(_ hex: String) -> Data? {
-        let hexString = hex.hasPrefix("0x") ? String(hex.dropFirst(2)) : hex
-        guard hexString.count % 2 == 0 else { return nil }
+        let hexStringPre = hex.hasPrefix("0x") ? String(hex.dropFirst(2)) : hex
+        let hexString = hexStringPre.count % 2 == 0 ? hexStringPre : "0\(hexStringPre)"
 
         var data = Data()
         var index = hexString.startIndex

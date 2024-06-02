@@ -9,16 +9,17 @@ enum EVM {
     static let sOne = BigInt(1)
     static let wordZero = EthWord(fromBigInt: .zero)!
 
-    enum VMError: Error {
+    enum VMError: Error, Equatable {
         case stackUnderflow
         case stackOverflow
         case pcOutOfBounds
+        case impure(Operation)
         case unexpectedError(String)
     }
 
     struct CallInput {
         let data: Data
-        let value: BigInt
+        let value: BigUInt
     }
 
     typealias Code = [Operation]
@@ -76,7 +77,7 @@ enum EVM {
         let returnData: Data
     }
 
-    enum Operation {
+    enum Operation: Equatable {
         case stop
         case add
         case sub
@@ -100,7 +101,84 @@ enum EVM {
         case xor
         case not
         case byte
+        case shl
+        case shr
+        case sar
+        case address
+        case balance
+        case origin
+        case caller
+        case callvalue
         case push(EthWord)
+
+        var description: String {
+            switch self {
+            case .stop:
+                return "stop"
+            case .add:
+                return "add"
+            case .sub:
+                return "sub"
+            case .mul:
+                return "mul"
+            case .div:
+                return "div"
+            case .sdiv:
+                return "sdiv"
+            case .mod:
+                return "mod"
+            case .smod:
+                return "smod"
+            case .addmod:
+                return "addmod"
+            case .mulmod:
+                return "mulmod"
+            case .exp:
+                return "exp"
+            case .signextend:
+                return "signextend"
+            case .lt:
+                return "lt"
+            case .gt:
+                return "gt"
+            case .slt:
+                return "slt"
+            case .sgt:
+                return "sgt"
+            case .eq:
+                return "eq"
+            case .iszero:
+                return "iszero"
+            case .and:
+                return "and"
+            case .or:
+                return "or"
+            case .xor:
+                return "xor"
+            case .not:
+                return "not"
+            case .byte:
+                return "byte"
+            case .shl:
+                return "shl"
+            case .shr:
+                return "shr"
+            case .sar:
+                return "sar"
+            case .address:
+                return "address"
+            case .balance:
+                return "balance"
+            case .origin:
+                return "origin"
+            case .caller:
+                return "caller"
+            case .callvalue:
+                return "callvalue"
+            case let .push(ethWord):
+                return "push(\(ethWord))"
+            }
+        }
     }
 
     private static func getOp(_ code: Code, pc: Int) throws -> Operation {
@@ -111,46 +189,41 @@ enum EVM {
         return code[pc]
     }
 
-    private static func wrappedUnsignedOp1(a: EthWord, _ fn: (BigUInt) -> BigUInt) throws -> EthWord {
-        let res = fn(a.toBigUInt())
-        let resWrapped = res % maxUint256
-        guard let resWord = EthWord(fromBigUInt: resWrapped) else {
-            throw VMError.unexpectedError("wrapped unsigned overflow: \(Hex.toHex(resWrapped.serialize()))")
+    private static func bigIntToEthWord(_ x: BigInt) throws -> EthWord {
+        let xWrapped = x % maxInt256
+        guard let xWord = EthWord(fromBigInt: xWrapped) else {
+            throw VMError.unexpectedError("wrapped signed overflow: \(Hex.toHex(xWrapped.serialize()))")
         }
-        return resWord
+        return xWord
+    }
+
+    private static func bigUIntToEthWord(_ x: BigUInt) throws -> EthWord {
+        let xWrapped = x % maxUint256
+        guard let xWord = EthWord(fromBigUInt: xWrapped) else {
+            throw VMError.unexpectedError("wrapped unsigned overflow: \(Hex.toHex(xWrapped.serialize()))")
+        }
+        return xWord
+    }
+
+    private static func wrappedUnsignedOp1(a: EthWord, _ fn: (BigUInt) -> BigUInt) throws -> EthWord {
+        try bigUIntToEthWord(fn(a.toBigUInt()))
     }
 
     private static func wrappedUnsignedOp2(a: EthWord, b: EthWord, _ fn: (BigUInt, BigUInt) -> BigUInt) throws -> EthWord {
-        let res = fn(a.toBigUInt(), b.toBigUInt())
-        let resWrapped = res % maxUint256
-        guard let resWord = EthWord(fromBigUInt: resWrapped) else {
-            throw VMError.unexpectedError("wrapped unsigned overflow: \(Hex.toHex(resWrapped.serialize()))")
-        }
-        return resWord
+        try bigUIntToEthWord(fn(a.toBigUInt(), b.toBigUInt()))
     }
 
     private static func wrappedUnsignedOp3(a: EthWord, b: EthWord, c: EthWord, _ fn: (BigUInt, BigUInt, BigUInt) -> BigUInt) throws -> EthWord {
-        let res = fn(a.toBigUInt(), b.toBigUInt(), c.toBigUInt())
-        let resWrapped = res % maxUint256
-        guard let resWord = EthWord(fromBigUInt: resWrapped) else {
-            throw VMError.unexpectedError("wrapped unsigned overflow: \(Hex.toHex(resWrapped.serialize()))")
-        }
-        return resWord
+        try bigUIntToEthWord(fn(a.toBigUInt(), b.toBigUInt(), c.toBigUInt()))
     }
 
     private static func wrappedSignedOp2(a: EthWord, b: EthWord, _ fn: (BigInt, BigInt) -> BigInt) throws -> EthWord {
         // Note: the BigInt conversions here are likely wrong
-        let res = fn(a.toBigInt(), b.toBigInt())
-        let resWrapped = res % maxInt256
-        guard let resWord = EthWord(fromBigInt: resWrapped) else {
-            throw VMError.unexpectedError("wrapped signed overflow: \(Hex.toHex(resWrapped.serialize()))")
-        }
-        return resWord
+        try bigIntToEthWord(fn(a.toBigInt(), b.toBigInt()))
     }
 
     private static func wrappedBinaryOp1(a: EthWord, _ fn: (UInt8) -> UInt8) throws -> EthWord {
         var result = Data(count: 32)
-
         for i in 0 ..< 32 {
             result[i] = fn(a.data[i])
         }
@@ -159,9 +232,7 @@ enum EVM {
 
     private static func wrappedBinaryOp2(a: EthWord, b: EthWord, _ fn: (UInt8, UInt8) -> UInt8) throws -> EthWord {
         var result = Data(count: 32)
-
         for i in 0 ..< 32 {
-            // TODO: This could be faster..
             result[i] = fn(a.data[i], b.data[i])
         }
         return EthWord(result)!
@@ -197,26 +268,58 @@ enum EVM {
         try context.push(wrappedBinaryOp2(a: a, b: b, fn))
     }
 
-    private static func wordOp2(_ context: inout Context, _ fn: (EthWord, EthWord) -> EthWord) throws {
+    private static func wordOp2(_ context: inout Context, _ fn: (EthWord, EthWord) throws -> EthWord) throws {
         let (a, b) = try context.pop2()
         try context.push(fn(a, b))
     }
 
-    private static func byte(i: EthWord, x: EthWord) -> EthWord {
-        // TODO: Why am I making this so hard?
-        return x
-        guard let index = i.toInt(), index >= 0, index < 32 else {
-            return wordZero
+    enum Op {
+        static func byte(i: EthWord, x: EthWord) -> EthWord {
+            guard let index = i.toInt(), index < 32 else {
+                return wordZero
+            }
+            return EthWord(fromUInt8: x.data[index])!
         }
-        let intValue = if index == 0 {
-            x.data[0]
-        } else {
-            x.data.dropFirst(index)[0]
+
+        static func shl(shift: EthWord, value: EthWord) throws -> EthWord {
+            guard let shift_ = shift.toInt(), shift_ < 256 else {
+                return wordZero
+            }
+            return try bigUIntToEthWord(value.toBigUInt() << shift_)
         }
-        return EthWord(fromUInt8: intValue)!
+
+        static func shr(shift: EthWord, value: EthWord) throws -> EthWord {
+            guard let shift_ = shift.toInt(), shift_ < 256 else {
+                return wordZero
+            }
+            return try bigUIntToEthWord(value.toBigUInt() >> shift_)
+        }
+
+        static func sar(shift: EthWord, value: EthWord) throws -> EthWord {
+            // TODO: Something is a little off here
+            guard let shift_ = shift.toInt(), shift_ < 256 else {
+                return wordZero
+            }
+            let signBitSet = (value.data[0] & 0x80) != 0
+            let shiftedValue: BigUInt
+            if signBitSet {
+                // Calculate the mask for sign extension
+                let bitsToShift = 255 - shift_
+                let signExtensionMask = (BigUInt(1) << bitsToShift) - 1
+                let signExtension = signExtensionMask << bitsToShift
+                // throw VMError.unexpectedError("shift=\(shift_), signExtensionMask=\(EthWord(fromBigUInt: signExtensionMask)), signExtension=\(EthWord(fromBigUInt: signExtension))")
+                // Perform the shift and apply the sign extension
+                shiftedValue = (value.toBigUInt() >> shift_) | signExtension
+            } else {
+                // Perform a normal right shift for non-negative values
+                shiftedValue = value.toBigUInt() >> shift_
+            }
+
+            return try bigUIntToEthWord(shiftedValue)
+        }
     }
 
-    private static func runSingleOp(code: Code, withInput _: CallInput, withContext context: inout Context) throws {
+    private static func runSingleOp(code: Code, withInput input: CallInput, withContext context: inout Context) throws {
         let operation = try getOp(code, pc: context.pc)
         // TODO: If not jump
         context.incrementPC()
@@ -265,7 +368,17 @@ enum EVM {
         case .not:
             try binaryOp1(&context) { $0 ^ 255 }
         case .byte:
-            try wordOp2(&context, byte)
+            try wordOp2(&context, Op.byte)
+        case .shl:
+            try wordOp2(&context, Op.shl)
+        case .shr:
+            try wordOp2(&context, Op.shr)
+        case .sar:
+            try wordOp2(&context, Op.sar)
+        case .address, .balance, .origin, .caller:
+            throw VMError.impure(operation)
+        case .callvalue:
+            try context.push(bigUIntToEthWord(input.value))
         case let .push(v):
             try context.push(v)
         case .stop:
@@ -282,5 +395,22 @@ enum EVM {
             stack: context.stack,
             returnData: context.returnData
         )
+    }
+}
+
+extension EVM.VMError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .stackUnderflow:
+            return NSLocalizedString("Stack underflow occurred.", comment: "Stack Underflow Error")
+        case .stackOverflow:
+            return NSLocalizedString("Stack overflow occurred.", comment: "Stack Overflow Error")
+        case .pcOutOfBounds:
+            return NSLocalizedString("Program counter went out of bounds.", comment: "PC Out of Bounds Error")
+        case let .impure(operation):
+            return NSLocalizedString("Failed to execute impure operation \(operation.description)", comment: "Impure Operation")
+        case let .unexpectedError(message):
+            return String(format: NSLocalizedString("An unexpected error occurred: %@", comment: "Unexpected Error"), message)
+        }
     }
 }
