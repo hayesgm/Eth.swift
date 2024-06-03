@@ -12,14 +12,16 @@ struct EvmTest {
     let input: EVM.CallInput
     let expStack: EVM.Stack?
     let expReturn: Data?
+    let expRevert: Data?
     let expError: EVM.VMError?
 
-    init(name: String, withCode code: EVM.Code, expStack: EVM.Stack? = nil, expReturn: Data? = nil, expError: EVM.VMError? = nil, withCallData callData: Data = Data(), withCallValue callValue: BigUInt = BigUInt(0)) {
+    init(name: String, withCode code: EVM.Code, expStack: EVM.Stack? = nil, expReturn: Data? = nil, expRevert: Data? = nil, expError: EVM.VMError? = nil, withCallData callData: Data = Data(), withCallValue callValue: BigUInt = BigUInt(0)) {
         self.name = name
         self.code = code
         input = EVM.CallInput(data: callData, value: callValue)
         self.expStack = expStack
         self.expReturn = expReturn
+        self.expRevert = expRevert
         self.expError = expError
     }
 
@@ -38,6 +40,11 @@ struct EvmTest {
                     XCTAssertEqual(executionResult.stack, stack, name)
                 }
                 if let returnData = expReturn {
+                    XCTAssert(!executionResult.reverted, "\(name) unexpectedly reverted with data \(Hex.toHex(executionResult.returnData))")
+                    XCTAssertEqual(Hex.toHex(executionResult.returnData), Hex.toHex(returnData), name)
+                }
+                if let returnData = expRevert {
+                    XCTAssert(executionResult.reverted, "\(name) was expected to revert, but successfully returned with data \(Hex.toHex(executionResult.returnData))")
                     XCTAssertEqual(Hex.toHex(executionResult.returnData), Hex.toHex(returnData), name)
                 }
             } catch let error as EVM.VMError {
@@ -928,6 +935,18 @@ let tests: [EvmTest] =
                 .return,
             ],
             expReturn: Hex.parseHex("0xbbccddeeff1122334455")!
+        ),
+        EvmTest(
+            name: "Revert Value",
+            withCode: [
+                .push(32, "0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
+                .push(32, word(100)),
+                .mstore,
+                .push(32, word(10)),
+                .push(32, word(110)),
+                .revert,
+            ],
+            expRevert: Hex.parseHex("0xbbccddeeff1122334455")!
         ),
         // EvmTest(
         //     name: "Invalid",

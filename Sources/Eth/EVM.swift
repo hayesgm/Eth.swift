@@ -34,6 +34,7 @@ enum EVM {
         var stack: Stack = []
         var memory: Data = .init()
         var halted: Bool = false
+        var reverted: Bool = false
         var returnData: Data = .init()
         var tStorage: [EthWord: EthWord] = [:]
         let code: Code
@@ -141,6 +142,7 @@ enum EVM {
 
     struct ExecutionResult: Equatable {
         let stack: Stack
+        let reverted: Bool
         let returnData: Data
     }
 
@@ -608,6 +610,11 @@ enum EVM {
             context.returnData = try context.memoryRead(offset: offset_, bytes: size_)
             context.halted = true
         }
+
+        static func revert(offset: EthWord, size: EthWord, context: inout Context) throws {
+            context.reverted = true
+            try `return`(offset: offset, size: size, context: &context)
+        }
     }
 
     private static func runSingleOp(withInput input: CallInput, withContext context: inout Context) throws {
@@ -701,11 +708,14 @@ enum EVM {
         case .return:
             let (offset, size) = try context.pop2()
             try Op.return(offset: offset, size: size, context: &context)
+        case .revert:
+            let (offset, size) = try context.pop2()
+            try Op.revert(offset: offset, size: size, context: &context)
         case .invalid:
             throw VMError.invalidOperation
         case .address, .balance, .origin, .caller, .gasprice, .extcodesize, .extcodecopy, .returndatasize, .returndatacopy, .extcodehash, .blockhash, .coinbase, .timestamp, .number, .prevrandao, .gaslimit, .chainid, .selfbalance, .basefee, .blobhash, .blobbasefee, .sload, .sstore, .gas, .log, .create, .call, .callcode, .delegatecall, .create2, .staticcall, .selfdestruct:
             throw VMError.impure(operation)
-        case .calldataload, .calldatasize, .calldatacopy, .codesize, .codecopy, .tload, .tstore, .mcopy, .revert:
+        case .calldataload, .calldatasize, .calldatacopy, .codesize, .codecopy, .tload, .tstore, .mcopy:
             throw VMError.notImplemented(operation)
         }
         context.incrementPC(operation: operation)
@@ -719,6 +729,7 @@ enum EVM {
         }
         return ExecutionResult(
             stack: context.stack,
+            reverted: context.reverted,
             returnData: context.returnData
         )
     }
