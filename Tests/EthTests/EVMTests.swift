@@ -6,6 +6,10 @@ private func word(_ data: Int) -> EthWord {
     EthWord(fromBigInt: BigInt(data))!
 }
 
+private func hex(_ data: String) -> Data {
+    Hex.parseHex(data)!
+}
+
 struct EvmTest {
     let name: String
     let code: EVM.Code
@@ -650,6 +654,81 @@ let tests: [EvmTest] =
         //     ],
         //     withCallValue: BigUInt(55)
         // ),
+        EvmTest(
+            name: "CallDataLoad - Empty",
+            withCode: [
+                .push(1, word(100)),
+                .calldataload,
+                .stop,
+            ],
+            expStack: [
+                word(0),
+            ]
+        ),
+        EvmTest(
+            name: "CallDataLoad - Set",
+            withCode: [
+                .push(1, word(5)),
+                .calldataload,
+                .stop,
+            ],
+            expStack: [
+                "0x1122334455000000000000000000000000000000000000000000000000000000",
+            ],
+            withCallData: hex("0xbbccddeeff1122334455")
+        ),
+        EvmTest(
+            name: "CallDataSize - Empty",
+            withCode: [
+                .calldatasize,
+                .stop,
+            ],
+            expStack: [
+                word(0),
+            ]
+        ),
+        EvmTest(
+            name: "CallDataSize - Set",
+            withCode: [
+                .calldatasize,
+                .stop,
+            ],
+            expStack: [
+                word(10),
+            ],
+            withCallData: hex("0xbbccddeeff1122334455")
+        ),
+        EvmTest(
+            name: "CallDataCopy - Empty",
+            withCode: [
+                .push(1, word(5)), // size
+                .push(1, word(1)), // offset
+                .push(1, word(100)), // destOffset
+                .calldatacopy,
+                .push(32, word(101)),
+                .mload,
+                .stop,
+            ],
+            expStack: [
+                word(0),
+            ]
+        ),
+        EvmTest(
+            name: "CallDataCopy - Set",
+            withCode: [
+                .push(1, word(5)), // size
+                .push(1, word(1)), // offset
+                .push(1, word(100)), // destOffset
+                .calldatacopy,
+                .push(32, word(101)),
+                .mload,
+                .stop,
+            ],
+            expStack: [
+                "0xddeeff1100000000000000000000000000000000000000000000000000000000",
+            ],
+            withCallData: hex("0xbbccddeeff1122334455")
+        ),
         // EvmTest(
         //     name: "Pop",
         //     withCode: [

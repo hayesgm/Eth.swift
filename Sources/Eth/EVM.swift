@@ -24,6 +24,18 @@ enum EVM {
     struct CallInput {
         let data: Data
         let value: BigUInt
+
+        func readData(offset: Int, bytes sz: Int) throws -> Data {
+            let paddingSize = (offset + sz) - data.count
+            let padding: Data
+            if paddingSize > 0 {
+                padding = Data(repeating: 0, count: paddingSize)
+            } else {
+                padding = Data()
+            }
+            let paddedData = data + padding
+            return paddedData.subdata(in: offset ..< (offset + sz))
+        }
     }
 
     typealias Code = [Operation]
@@ -173,6 +185,7 @@ enum EVM {
         case shl
         case shr
         case sar
+        case keccak256
         case address
         case balance
         case origin
@@ -284,6 +297,8 @@ enum EVM {
                 return "shr"
             case .sar:
                 return "sar"
+            case .keccak256:
+                return "keccak256"
             case .address:
                 return "address"
             case .balance:
@@ -573,6 +588,30 @@ enum EVM {
             return value
         }
 
+        static func calldataload(i: EthWord, withInput input: CallInput) throws -> EthWord {
+            guard let i_ = i.toInt() else {
+                return wordZero
+            }
+            let data = try input.readData(offset: i_, bytes: 32)
+            guard let value = EthWord(data) else {
+                throw VMError.unexpectedError("Call data read too large")
+            }
+            return value
+        }
+
+        static func calldatacopy(destOffset: EthWord, offset: EthWord, size: EthWord, withInput input: CallInput, context: inout Context) throws {
+            guard let destOffset_ = destOffset.toInt(), let size_ = size.toInt() else {
+                throw VMError.outOfMemory
+            }
+            let data: Data
+            if let offset_ = offset.toInt() {
+                data = try input.readData(offset: offset_, bytes: size_)
+            } else {
+                data = Data(repeating: 0, count: size_)
+            }
+            try context.memoryWrite(offset: destOffset_, value: data)
+        }
+
         static func jump(counter: EthWord, context: inout Context) throws {
             guard let counter_ = counter.toInt() else {
                 throw VMError.invalidJumpDest
@@ -677,6 +716,17 @@ enum EVM {
             try wordOp2(&context, Op.sar)
         case .callvalue:
             try context.push(bigUIntToEthWord(input.value))
+        case .calldataload:
+            let i = try context.pop()
+            try context.push(Op.calldataload(i: i, withInput: input))
+        case .calldatasize:
+            guard let calldataSize = EthWord(fromInt: input.data.count) else {
+                throw VMError.unexpectedError("Invalid calldata size")
+            }
+            try context.push(calldataSize)
+        case .calldatacopy:
+            let (destOffset, offset, size) = try context.pop3()
+            try Op.calldatacopy(destOffset: destOffset, offset: offset, size: size, withInput: input, context: &context)
         case .pop:
             _ = try context.pop()
         case .mload:
@@ -715,7 +765,7 @@ enum EVM {
             throw VMError.invalidOperation
         case .address, .balance, .origin, .caller, .gasprice, .extcodesize, .extcodecopy, .returndatasize, .returndatacopy, .extcodehash, .blockhash, .coinbase, .timestamp, .number, .prevrandao, .gaslimit, .chainid, .selfbalance, .basefee, .blobhash, .blobbasefee, .sload, .sstore, .gas, .log, .create, .call, .callcode, .delegatecall, .create2, .staticcall, .selfdestruct:
             throw VMError.impure(operation)
-        case .calldataload, .calldatasize, .calldatacopy, .codesize, .codecopy, .tload, .tstore, .mcopy:
+        case .keccak256, .codesize, .codecopy, .tload, .tstore, .mcopy:
             throw VMError.notImplemented(operation)
         }
         context.incrementPC(operation: operation)
