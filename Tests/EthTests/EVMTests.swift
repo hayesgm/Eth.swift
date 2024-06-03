@@ -605,6 +605,21 @@ let tests: [EvmTest] =
         //         "0x0030000000000000000000000000000000000000000000000000000000000000",
         //     ]
         // ),
+        EvmTest(
+            name: "Sha3 Value",
+            withCode: [
+                .push(32, "0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
+                .push(32, word(100)),
+                .mstore,
+                .push(32, word(10)),
+                .push(32, word(110)),
+                .keccak256,
+                .stop,
+            ],
+            expStack: [
+                "0x045e288bf0d99a3c6d375f2346e49d6ea1965518853fca8dbca586ba44775e46",
+            ]
+        ),
         // EvmTest(
         //     name: "Address",
         //     withCode: [

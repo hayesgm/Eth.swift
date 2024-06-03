@@ -14,13 +14,14 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/attaswift/BigInt.git", from: "5.3.0"),
+        .package(url: "https://github.com/bitflying/SwiftKeccak.git", from: "0.1.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "Eth",
-            dependencies: ["BigInt"]
+            dependencies: ["BigInt", "SwiftKeccak"]
         ),
         .testTarget(
             name: "EthTests",

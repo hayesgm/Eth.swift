@@ -1,5 +1,6 @@
 import BigInt
 import Foundation
+import SwiftKeccak
 
 enum EVM {
     static let maxUint256 = BigUInt(1) << 256
@@ -607,31 +608,35 @@ enum EVM {
             return value
         }
 
-        private static func performRead(destOffset: EthWord, offset: EthWord, size: EthWord, readFn fn: (Int, Int) throws -> Data) throws -> (Int, Data) {
-            guard let destOffset_ = destOffset.toInt(), let size_ = size.toInt() else {
+        private static func performRead(offset: EthWord, size: EthWord, readFn fn: (Int, Int) throws -> Data) throws -> Data {
+            guard let size_ = size.toInt() else {
                 throw VMError.outOfMemory
             }
-            let data: Data
             if let offset_ = offset.toInt() {
-                data = try fn(offset_, size_)
+                return try fn(offset_, size_)
             } else {
-                data = Data(repeating: 0, count: size_)
+                return Data(repeating: 0, count: size_)
             }
-            return (destOffset_, data)
         }
 
         static func calldatacopy(destOffset: EthWord, offset: EthWord, size: EthWord, withInput input: CallInput, context: inout Context) throws {
-            let (destOffset, data) = try performRead(destOffset: destOffset, offset: offset, size: size) { offset, bytes in
+            guard let destOffset_ = destOffset.toInt() else {
+                throw VMError.outOfMemory
+            }
+            let data = try performRead(offset: offset, size: size) { offset, bytes in
                 input.readData(offset: offset, bytes: bytes)
             }
-            try context.memoryWrite(offset: destOffset, value: data)
+            try context.memoryWrite(offset: destOffset_, value: data)
         }
 
         static func codecopy(destOffset: EthWord, offset: EthWord, size: EthWord, context: inout Context) throws {
-            let (destOffset, data) = try performRead(destOffset: destOffset, offset: offset, size: size) { offset, bytes in
+            guard let destOffset_ = destOffset.toInt() else {
+                throw VMError.outOfMemory
+            }
+            let data = try performRead(offset: offset, size: size) { offset, bytes in
                 readZeroPaddedData(offset: offset, bytes: bytes, fromData: context.codeEncoded)
             }
-            try context.memoryWrite(offset: destOffset, value: data)
+            try context.memoryWrite(offset: destOffset_, value: data)
         }
 
         static func jump(counter: EthWord, context: inout Context) throws {
@@ -675,6 +680,18 @@ enum EVM {
         static func revert(offset: EthWord, size: EthWord, context: inout Context) throws {
             context.reverted = true
             try `return`(offset: offset, size: size, context: &context)
+        }
+
+        static func keccak256(offset: EthWord, size: EthWord, context: inout Context) throws -> EthWord {
+            guard let offset_ = offset.toInt(), let size_ = size.toInt() else {
+                throw VMError.outOfMemory
+            }
+            let data = try context.memoryRead(offset: offset_, bytes: size_)
+            let hash = SwiftKeccak.keccak256(data)
+            guard let hashWord = EthWord(hash) else {
+                throw VMError.unexpectedError("hash does not fit in word")
+            }
+            return hashWord
         }
     }
 
@@ -736,6 +753,9 @@ enum EVM {
             try wordOp2(&context, Op.shr)
         case .sar:
             try wordOp2(&context, Op.sar)
+        case .keccak256:
+            let (offset, size) = try context.pop2()
+            try context.push(Op.keccak256(offset: offset, size: size, context: &context))
         case .callvalue:
             try context.push(bigUIntToEthWord(input.value))
         case .calldataload:
@@ -795,7 +815,7 @@ enum EVM {
             throw VMError.invalidOperation
         case .address, .balance, .origin, .caller, .gasprice, .extcodesize, .extcodecopy, .returndatasize, .returndatacopy, .extcodehash, .blockhash, .coinbase, .timestamp, .number, .prevrandao, .gaslimit, .chainid, .selfbalance, .basefee, .blobhash, .blobbasefee, .sload, .sstore, .gas, .log, .create, .call, .callcode, .delegatecall, .create2, .staticcall, .selfdestruct:
             throw VMError.impure(operation)
-        case .keccak256, .tload, .tstore, .mcopy:
+        case .tload, .tstore, .mcopy:
             throw VMError.notImplemented(operation)
         }
         context.incrementPC(operation: operation)
