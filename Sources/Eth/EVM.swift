@@ -22,6 +22,11 @@ enum EVM {
         case unexpectedError(String)
     }
 
+    enum CodeError: Error, Equatable {
+        case outOfBounds
+        case invalidOpcode(UInt8)
+    }
+
     struct CallInput {
         let data: Data
         let value: BigUInt
@@ -431,6 +436,49 @@ enum EVM {
                 1
             }
         }
+
+        var encoded: [UInt8] {
+            switch self {
+            case .stop:
+                [00]
+            case .add:
+                [01]
+            default:
+                [99]
+            }
+        }
+
+        static func decode(_ encodedCode: Data) throws -> Operation {
+            guard !encodedCode.isEmpty else {
+                throw CodeError.outOfBounds
+            }
+            switch encodedCode[encodedCode.startIndex] {
+            case 0x00:
+                return .stop
+            default:
+                throw CodeError.invalidOpcode(encodedCode[0])
+            }
+        }
+    }
+
+    static func encodeCode(_ code: Code) -> Data {
+        var res = Data()
+        for operation in code {
+            res += operation.encoded
+        }
+        return res
+    }
+
+    static func decodeCode(fromData data: Data) throws -> Code {
+        let dataSize = data.count
+        var code: Code = []
+        var index = 0
+        while index < dataSize {
+            let nextOperation = try Operation.decode(data[index ..< dataSize])
+            code.append(nextOperation)
+            index += nextOperation.size
+        }
+        return code
     }
 
     private static func getOp(_ code: Code, pc: Int) throws -> Operation {
