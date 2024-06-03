@@ -729,6 +729,33 @@ let tests: [EvmTest] =
             ],
             withCallData: hex("0xbbccddeeff1122334455")
         ),
+        EvmTest(
+            name: "CodeSize",
+            withCode: [
+                .codesize,
+                .stop,
+            ],
+            expStack: [
+                // TODO: Fix
+                word(5),
+            ]
+        ),
+        EvmTest(
+            name: "CodeCopy - Set",
+            withCode: [
+                .push(1, word(5)), // size
+                .push(1, word(1)), // offset
+                .push(1, word(100)), // destOffset
+                .codecopy,
+                .push(32, word(101)),
+                .mload,
+                .stop,
+            ],
+            expStack: [
+                // TODO: Fix
+                "0x3344550000000000000000000000000000000000000000000000000000000000",
+            ]
+        ),
         // EvmTest(
         //     name: "Pop",
         //     withCode: [

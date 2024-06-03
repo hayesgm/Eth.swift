@@ -25,17 +25,21 @@ enum EVM {
         let data: Data
         let value: BigUInt
 
-        func readData(offset: Int, bytes sz: Int) throws -> Data {
-            let paddingSize = (offset + sz) - data.count
-            let padding: Data
-            if paddingSize > 0 {
-                padding = Data(repeating: 0, count: paddingSize)
-            } else {
-                padding = Data()
-            }
-            let paddedData = data + padding
-            return paddedData.subdata(in: offset ..< (offset + sz))
+        func readData(offset: Int, bytes: Int) -> Data {
+            EVM.readZeroPaddedData(offset: offset, bytes: bytes, fromData: data)
         }
+    }
+
+    private static func readZeroPaddedData(offset: Int, bytes sz: Int, fromData data: Data) -> Data {
+        let paddingSize = (offset + sz) - data.count
+        let padding: Data
+        if paddingSize > 0 {
+            padding = Data(repeating: 0, count: paddingSize)
+        } else {
+            padding = Data()
+        }
+        let paddedData = data + padding
+        return paddedData.subdata(in: offset ..< (offset + sz))
     }
 
     typealias Code = [Operation]
@@ -55,6 +59,10 @@ enum EVM {
         init(withCode code: Code) {
             self.code = code
             opMap = Context.buildOpMap(code: code)
+        }
+
+        var codeEncoded: Data {
+            Hex.parseHex("0x1122334455")!
         }
 
         private static func buildOpMap(code: Code) -> [Int: Operation] {
@@ -592,24 +600,38 @@ enum EVM {
             guard let i_ = i.toInt() else {
                 return wordZero
             }
-            let data = try input.readData(offset: i_, bytes: 32)
+            let data = input.readData(offset: i_, bytes: 32)
             guard let value = EthWord(data) else {
                 throw VMError.unexpectedError("Call data read too large")
             }
             return value
         }
 
-        static func calldatacopy(destOffset: EthWord, offset: EthWord, size: EthWord, withInput input: CallInput, context: inout Context) throws {
+        private static func performRead(destOffset: EthWord, offset: EthWord, size: EthWord, readFn fn: (Int, Int) throws -> Data) throws -> (Int, Data) {
             guard let destOffset_ = destOffset.toInt(), let size_ = size.toInt() else {
                 throw VMError.outOfMemory
             }
             let data: Data
             if let offset_ = offset.toInt() {
-                data = try input.readData(offset: offset_, bytes: size_)
+                data = try fn(offset_, size_)
             } else {
                 data = Data(repeating: 0, count: size_)
             }
-            try context.memoryWrite(offset: destOffset_, value: data)
+            return (destOffset_, data)
+        }
+
+        static func calldatacopy(destOffset: EthWord, offset: EthWord, size: EthWord, withInput input: CallInput, context: inout Context) throws {
+            let (destOffset, data) = try performRead(destOffset: destOffset, offset: offset, size: size) { offset, bytes in
+                input.readData(offset: offset, bytes: bytes)
+            }
+            try context.memoryWrite(offset: destOffset, value: data)
+        }
+
+        static func codecopy(destOffset: EthWord, offset: EthWord, size: EthWord, context: inout Context) throws {
+            let (destOffset, data) = try performRead(destOffset: destOffset, offset: offset, size: size) { offset, bytes in
+                readZeroPaddedData(offset: offset, bytes: bytes, fromData: context.codeEncoded)
+            }
+            try context.memoryWrite(offset: destOffset, value: data)
         }
 
         static func jump(counter: EthWord, context: inout Context) throws {
@@ -727,6 +749,14 @@ enum EVM {
         case .calldatacopy:
             let (destOffset, offset, size) = try context.pop3()
             try Op.calldatacopy(destOffset: destOffset, offset: offset, size: size, withInput: input, context: &context)
+        case .codesize:
+            guard let codeSize = EthWord(fromInt: context.codeEncoded.count) else {
+                throw VMError.unexpectedError("Invalid code size")
+            }
+            try context.push(codeSize)
+        case .codecopy:
+            let (destOffset, offset, size) = try context.pop3()
+            try Op.codecopy(destOffset: destOffset, offset: offset, size: size, context: &context)
         case .pop:
             _ = try context.pop()
         case .mload:
@@ -765,7 +795,7 @@ enum EVM {
             throw VMError.invalidOperation
         case .address, .balance, .origin, .caller, .gasprice, .extcodesize, .extcodecopy, .returndatasize, .returndatacopy, .extcodehash, .blockhash, .coinbase, .timestamp, .number, .prevrandao, .gaslimit, .chainid, .selfbalance, .basefee, .blobhash, .blobbasefee, .sload, .sstore, .gas, .log, .create, .call, .callcode, .delegatecall, .create2, .staticcall, .selfdestruct:
             throw VMError.impure(operation)
-        case .keccak256, .codesize, .codecopy, .tload, .tstore, .mcopy:
+        case .keccak256, .tload, .tstore, .mcopy:
             throw VMError.notImplemented(operation)
         }
         context.incrementPC(operation: operation)
