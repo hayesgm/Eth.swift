@@ -111,7 +111,7 @@ public struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, Ex
 
             return positiveValue
         } else {
-            return BigInt(data)
+            return BigInt(Data([0x00]) + data)
         }
     }
 
