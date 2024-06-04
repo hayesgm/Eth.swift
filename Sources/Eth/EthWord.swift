@@ -38,18 +38,15 @@ public struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, Ex
         self.init(dataExtending: value.serialize())
     }
 
-    /*
-     import Eth
-     import BigInt
-     EthWord(fromBigInt: BigInt(-1))?.description
-     EthWord(fromBigInt: BigInt(-2))?.description
-     EthWord(fromBigInt: BigInt(-2))?.description
-     */
     public init?(fromBigInt value: BigInt) {
         var data: Data
 
         if value.sign == .plus {
-            data = value.serialize()
+            data = value.serialize().dropFirst(1)
+            if data.count == 32, let msb = data.first, msb & 0x80 != 0 {
+                // Positive signed value overflow
+                return nil
+            }
         } else {
             // Calculate the two's complement for negative values
             var serialized = (-(value + 1)).serialize().dropFirst(1)
@@ -117,13 +114,6 @@ public struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, Ex
             return BigInt(data)
         }
     }
-
-    // EthWord(hex: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE")!.toBigInt().description
-    // EthWord(hex: "0x8000000000000000000000000000000000000000000000000000000000000000")!.toBigInt().description
-
-    // Functions we need:
-    //   EthWord (two's complemented serialized) -> BigInt toBigInt()
-    //   BigInt -> EthWord (two's complement serialized)   init(fromBigInt:)
 
     public func toInt() -> Int? {
         let bigInt = toBigUInt()

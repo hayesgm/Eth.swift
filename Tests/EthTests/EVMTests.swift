@@ -2,8 +2,11 @@ import BigInt
 @testable import Eth
 import XCTest
 
-private func word(_ data: Int) -> EthWord {
-    EthWord(fromBigInt: BigInt(data))!
+private func word(_ x: Int) -> EthWord {
+    guard let ethWord = EthWord(fromBigInt: BigInt(x)) else {
+        fatalError("Invalid word in EVMTest \(x)")
+    }
+    return ethWord
 }
 
 private func hex(_ data: String) -> Data {

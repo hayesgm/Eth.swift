@@ -11,11 +11,25 @@ final class EthWordTests: XCTestCase {
         XCTAssertNil(EthWord(hex: "0xaa"))
     }
 
+    func testInitFromBigUInt() throws {
+        XCTAssertEqual(EthWord(fromBigUInt: BigUInt(0))!, EthWord(hex: "0x0000000000000000000000000000000000000000000000000000000000000000"))
+        XCTAssertEqual(EthWord(fromBigUInt: BigUInt(1))!, EthWord(hex: "0x0000000000000000000000000000000000000000000000000000000000000001"))
+        XCTAssertEqual(EthWord(fromBigUInt: BigUInt(2))!, EthWord(hex: "0x0000000000000000000000000000000000000000000000000000000000000002"))
+        XCTAssertEqual(EthWord(fromBigUInt: BigUInt(256))!, EthWord(hex: "0x0000000000000000000000000000000000000000000000000000000000000100"))
+        XCTAssertEqual(EthWord(fromBigUInt: BigUInt(257))!, EthWord(hex: "0x0000000000000000000000000000000000000000000000000000000000000101"))
+        XCTAssertEqual(EthWord(fromBigUInt: (BigUInt(1) << 256) - 1)!, EthWord(hex: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"))
+    }
+
     func testInitFromBigInt() throws {
+        XCTAssertEqual(EthWord(fromBigInt: BigInt(0))!, EthWord(hex: "0x0000000000000000000000000000000000000000000000000000000000000000"))
         XCTAssertEqual(EthWord(fromBigInt: BigInt(-1))!, EthWord(hex: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"))
         XCTAssertEqual(EthWord(fromBigInt: BigInt(-2))!, EthWord(hex: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE"))
         XCTAssertEqual(EthWord(fromBigInt: BigInt(-256))!, EthWord(hex: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00"))
         XCTAssertEqual(EthWord(fromBigInt: BigInt(-257))!, EthWord(hex: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFF"))
+        // Largest valid signed value
+        XCTAssertEqual(EthWord(fromBigInt: (BigInt(1) << 255) - 1)!, EthWord(hex: "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"))
+        // Signed value overflow
+        XCTAssertNil(EthWord(fromBigInt: (BigInt(1) << 255) + 1))
     }
 
     func testToBigInt() throws {
