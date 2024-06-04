@@ -2,7 +2,7 @@ import BigInt
 import Foundation
 import SwiftKeccak
 
-enum EVM {
+public enum EVM {
     static let maxUint256 = BigUInt(1) << 256
     static let maxInt256 = BigInt(1) << 256
     static let one = BigUInt(1)
@@ -10,7 +10,7 @@ enum EVM {
     static let sOne = BigInt(1)
     static let wordZero = EthWord(fromBigInt: .zero)!
 
-    enum VMError: Error, Equatable {
+    public enum VMError: Error, Equatable {
         case stackUnderflow
         case stackOverflow
         case pcOutOfBounds
@@ -22,12 +22,12 @@ enum EVM {
         case unexpectedError(String)
     }
 
-    enum CodeError: Error, Equatable {
+    public enum CodeError: Error, Equatable {
         case outOfBounds
         case invalidOpcode(UInt8)
     }
 
-    struct CallInput {
+    public struct CallInput {
         let data: Data
         let value: BigUInt
 
@@ -48,8 +48,8 @@ enum EVM {
         return paddedData.subdata(in: offset ..< (offset + sz))
     }
 
-    typealias Code = [Operation]
-    typealias Stack = [EthWord]
+    public typealias Code = [Operation]
+    public typealias Stack = [EthWord]
 
     struct Context {
         var pc: Int = 0
@@ -166,13 +166,13 @@ enum EVM {
         }
     }
 
-    struct ExecutionResult: Equatable {
+    public struct ExecutionResult: Equatable {
         let stack: Stack
         let reverted: Bool
         let returnData: Data
     }
 
-    enum Operation: Equatable {
+    public enum Operation: Equatable {
         case stop
         case add
         case sub
@@ -257,7 +257,7 @@ enum EVM {
         case invalid
         case selfdestruct
 
-        var description: String {
+        public var description: String {
             switch self {
             case .stop:
                 return "stop"
@@ -792,7 +792,7 @@ enum EVM {
         }
     }
 
-    static func encodeCode(_ code: Code) -> Data {
+    public static func encodeCode(_ code: Code) -> Data {
         var res = Data()
         for operation in code {
             res += operation.encoded
@@ -800,7 +800,7 @@ enum EVM {
         return res
     }
 
-    static func decodeCode(fromData data: Data) throws -> Code {
+    public static func decodeCode(fromData data: Data) throws -> Code {
         let dataSize = data.count
         var code: Code = []
         var index = 0
@@ -1200,7 +1200,7 @@ enum EVM {
         context.incrementPC(operation: operation)
     }
 
-    static func execVm(code: Code, withInput inputs: CallInput) throws -> ExecutionResult {
+    public static func execVm(code: Code, withInput inputs: CallInput) throws -> ExecutionResult {
         var context = Context(withCode: code)
         // throw VMError.unexpectedError("\(context.opMap)")
         while !context.halted {

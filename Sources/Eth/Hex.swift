@@ -1,7 +1,7 @@
 import Foundation
 
-enum Hex {
-    static func parseHex(_ hex: String) -> Data? {
+public enum Hex {
+    public static func parseHex(_ hex: String) -> Data? {
         let hexStringPre = hex.hasPrefix("0x") ? String(hex.dropFirst(2)) : hex
         let hexString = hexStringPre.count % 2 == 0 ? hexStringPre : "0\(hexStringPre)"
 
@@ -22,11 +22,11 @@ enum Hex {
         return data
     }
 
-    static func toHex(_ data: Data) -> String {
+    public static func toHex(_ data: Data) -> String {
         return "0x" + data.map { String(format: "%02x", $0) }.joined()
     }
 
-    static func toShortHex(_ data: Data) -> String {
+    public static func toShortHex(_ data: Data) -> String {
         let hexString = data.map { String(format: "%02x", $0) }.joined()
         let trimmedHexString = hexString.drop { $0 == "0" }
 

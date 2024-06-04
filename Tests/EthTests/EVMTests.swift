@@ -144,7 +144,42 @@ let tests: [EvmTest] =
                 word(0x00),
             ]
         ),
-        // TODO: SDiv
+        EvmTest(
+            name: "Simple SDiv",
+            withCode: [
+                .push(32, word(-0x11)),
+                .push(32, word(-0x33)),
+                .sdiv,
+                .stop,
+            ],
+            expStack: [
+                word(0x03),
+            ]
+        ),
+        EvmTest(
+            name: "Mixed Sign SDiv Denom",
+            withCode: [
+                .push(32, word(-0x11)),
+                .push(32, word(0x33)),
+                .sdiv,
+                .stop,
+            ],
+            expStack: [
+                word(-0x03),
+            ]
+        ),
+        EvmTest(
+            name: "Mixed Sign SDiv Num",
+            withCode: [
+                .push(32, word(0x11)),
+                .push(32, word(-0x33)),
+                .sdiv,
+                .stop,
+            ],
+            expStack: [
+                word(-0x03),
+            ]
+        ),
         EvmTest(
             name: "Simple Mod",
             withCode: [
