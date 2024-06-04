@@ -904,6 +904,21 @@ public enum EVM {
     }
 
     enum Op {
+        static func signExtend(b: EthWord, x: EthWord) throws -> EthWord {
+            guard let b_ = b.toInt(), b_ < 32, x.data[31 - b_] & 0x80 != 0 else {
+                return x // Value already positive or sign-extended to this length
+            }
+
+            var res = x.data
+            for i in 0 ..< 31 - b_ {
+                res[i] = 0xFF
+            }
+            guard let value = EthWord(res) else {
+                throw VMError.unexpectedError("Sign extend data too large")
+            }
+            return value
+        }
+
         static func byte(i: EthWord, x: EthWord) -> EthWord {
             guard let index = i.toInt(), index < 32 else {
                 return wordZero
@@ -1102,8 +1117,8 @@ public enum EVM {
         case .exp:
             try unsignedOp2(&context) { $0.power($1, modulus: maxUint256) }
         case .signextend:
-            // TODO: Sign Extend
-            break
+            let (b, x) = try context.pop2()
+            try context.push(Op.signExtend(b: b, x: x))
         case .lt:
             try unsignedOp2(&context) { $0 < $1 ? one : .zero }
         case .gt:

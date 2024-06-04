@@ -204,7 +204,67 @@ let tests: [EvmTest] =
                 word(0),
             ]
         ),
-        // TODO: SMod
+        EvmTest(
+            name: "Simple SMod Positives",
+            withCode: [
+                .push(32, word(5)),
+                .push(32, word(33)),
+                .smod,
+                .stop,
+            ],
+            expStack: [
+                word(3),
+            ]
+        ),
+        EvmTest(
+            name: "Simple SMod Negatives",
+            withCode: [
+                .push(32, word(-5)),
+                .push(32, word(-33)),
+                .smod,
+                .stop,
+            ],
+            expStack: [
+                word(-3),
+            ]
+        ),
+        EvmTest(
+            name: "Simple SMod Mixed Num",
+            withCode: [
+                .push(32, word(5)),
+                .push(32, word(-33)),
+                .smod,
+                .stop,
+            ],
+            expStack: [
+                word(-3),
+            ]
+        ),
+        // TODO: Double check this is how this works
+        EvmTest(
+            name: "Simple SMod Mixed Denom",
+            withCode: [
+                .push(32, word(-5)),
+                .push(32, word(33)),
+                .smod,
+                .stop,
+            ],
+            expStack: [
+                word(3),
+            ]
+        ),
+        EvmTest(
+            name: "Simple SMod Zero",
+            withCode: [
+                .push(32, word(0)),
+                .push(32, word(33)),
+                .smod,
+                .stop,
+            ],
+            expStack: [
+                word(0),
+            ]
+        ),
         EvmTest(
             name: "Simple AddMod",
             withCode: [
@@ -243,7 +303,66 @@ let tests: [EvmTest] =
                 word(125),
             ]
         ),
-        // TODO: Sign Extend
+        EvmTest(
+            name: "Sign Extend - Byte 0 Negative",
+            withCode: [
+                .push(32, word(0xFF)),
+                .push(32, word(0)),
+                .signextend,
+                .stop,
+            ],
+            expStack: [
+                "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            ]
+        ),
+        EvmTest(
+            name: "Sign Extend - Byte 0 Positive",
+            withCode: [
+                .push(32, word(0x7F)),
+                .push(32, word(0)),
+                .signextend,
+                .stop,
+            ],
+            expStack: [
+                "0x000000000000000000000000000000000000000000000000000000000000007f",
+            ]
+        ),
+        EvmTest(
+            name: "Sign Extend - Byte 1 Unset",
+            withCode: [
+                .push(32, word(0xFF)),
+                .push(32, word(1)),
+                .signextend,
+                .stop,
+            ],
+            expStack: [
+                "0x00000000000000000000000000000000000000000000000000000000000000ff",
+            ]
+        ),
+        EvmTest(
+            name: "Sign Extend - Byte 1 Set",
+            withCode: [
+                .push(32, word(0x8522)),
+                .push(32, word(1)),
+                .signextend,
+                .stop,
+            ],
+            expStack: [
+                "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8522",
+            ]
+        ),
+        EvmTest(
+            name: "Sign Extend - Byte 32",
+            withCode: [
+                .push(32, word(0x8522)),
+                .push(32, word(32)),
+                .signextend,
+                .stop,
+            ],
+            expStack: [
+                word(0x8522),
+            ]
+        ),
         EvmTest(
             name: "Lt Yes",
             withCode: [
