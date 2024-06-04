@@ -1079,6 +1079,26 @@ let tests: [EvmTest] =
         ),
     ]
 
+struct CodeEncodeTest {
+    let name: String
+    let code: EVM.Code
+    let encoding: Data
+}
+
+let encodingTests: [CodeEncodeTest] =
+    [
+        CodeEncodeTest(
+            name: "STOP STOP",
+            code: [.stop, .stop],
+            encoding: hex("0x0000")
+        ),
+        CodeEncodeTest(
+            name: "PUSH6 0x112233445566",
+            code: [.push(6, word(0x1122_3344_5566))],
+            encoding: hex("0x65112233445566")
+        ),
+    ]
+
 final class EVMTests: XCTestCase {
     func testRunEvmTests() throws {
         for test in tests {
@@ -1087,14 +1107,16 @@ final class EVMTests: XCTestCase {
     }
 
     func testEncodeCode() throws {
-        let code: EVM.Code = [.stop, .stop]
-        let encoded = EVM.encodeCode(code)
-        XCTAssertEqual(Hex.toHex(encoded), Hex.toHex(hex("0x0000")))
+        for encodeTest in encodingTests {
+            let encoded = EVM.encodeCode(encodeTest.code)
+            XCTAssertEqual(Hex.toHex(encoded), Hex.toHex(encodeTest.encoding), encodeTest.name)
+        }
     }
 
     func testDecodeCode() throws {
-        let encoded = hex("0x0000")
-        let code = try! EVM.decodeCode(fromData: encoded)
-        XCTAssertEqual(code, [.stop, .stop])
+        for encodeTest in encodingTests {
+            let code = try! EVM.decodeCode(fromData: encodeTest.encoding)
+            XCTAssertEqual(code, encodeTest.code, encodeTest.name)
+        }
     }
 }

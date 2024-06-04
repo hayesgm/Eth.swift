@@ -440,11 +440,173 @@ enum EVM {
         var encoded: [UInt8] {
             switch self {
             case .stop:
-                [00]
+                return [0x00]
             case .add:
-                [01]
-            default:
-                [99]
+                return [0x01]
+            case .sub:
+                return [0x03]
+            case .mul:
+                return [0x02]
+            case .div:
+                return [0x04]
+            case .sdiv:
+                return [0x05]
+            case .mod:
+                return [0x06]
+            case .smod:
+                return [0x07]
+            case .addmod:
+                return [0x08]
+            case .mulmod:
+                return [0x09]
+            case .exp:
+                return [0x0A]
+            case .signextend:
+                return [0x0B]
+            case .lt:
+                return [0x10]
+            case .gt:
+                return [0x11]
+            case .slt:
+                return [0x12]
+            case .sgt:
+                return [0x13]
+            case .eq:
+                return [0x14]
+            case .iszero:
+                return [0x15]
+            case .and:
+                return [0x16]
+            case .or:
+                return [0x17]
+            case .xor:
+                return [0x18]
+            case .not:
+                return [0x19]
+            case .byte:
+                return [0x1A]
+            case .shl:
+                return [0x1B]
+            case .shr:
+                return [0x1C]
+            case .sar:
+                return [0x1D]
+            case .keccak256:
+                return [0x20]
+            case .address:
+                return [0x30]
+            case .balance:
+                return [0x31]
+            case .origin:
+                return [0x32]
+            case .caller:
+                return [0x33]
+            case .callvalue:
+                return [0x34]
+            case .calldataload:
+                return [0x35]
+            case .calldatasize:
+                return [0x36]
+            case .calldatacopy:
+                return [0x37]
+            case .codesize:
+                return [0x38]
+            case .codecopy:
+                return [0x39]
+            case .gasprice:
+                return [0x3A]
+            case .extcodesize:
+                return [0x3B]
+            case .extcodecopy:
+                return [0x3C]
+            case .returndatasize:
+                return [0x3D]
+            case .returndatacopy:
+                return [0x3E]
+            case .extcodehash:
+                return [0x3F]
+            case .blockhash:
+                return [0x40]
+            case .coinbase:
+                return [0x41]
+            case .timestamp:
+                return [0x42]
+            case .number:
+                return [0x43]
+            case .prevrandao:
+                return [0x44]
+            case .gaslimit:
+                return [0x45]
+            case .chainid:
+                return [0x46]
+            case .selfbalance:
+                return [0x47]
+            case .basefee:
+                return [0x48]
+            case .blobhash:
+                return [0x49]
+            case .blobbasefee:
+                return [0x4A]
+            case .pop:
+                return [0x50]
+            case .mload:
+                return [0x51]
+            case .mstore:
+                return [0x52]
+            case .mstore8:
+                return [0x53]
+            case .sload:
+                return [0x54]
+            case .sstore:
+                return [0x55]
+            case .jump:
+                return [0x56]
+            case .jumpi:
+                return [0x57]
+            case .pc:
+                return [0x58]
+            case .msize:
+                return [0x59]
+            case .gas:
+                return [0x5A]
+            case .jumpdest:
+                return [0x5B]
+            case .tload:
+                return [0x5C]
+            case .tstore:
+                return [0x5D]
+            case .mcopy:
+                return [0x5E]
+            case .create:
+                return [0xF0]
+            case .call:
+                return [0xF1]
+            case .callcode:
+                return [0xF2]
+            case .return:
+                return [0xF3]
+            case .delegatecall:
+                return [0xF4]
+            case .create2:
+                return [0xF5]
+            case .staticcall:
+                return [0xFA]
+            case .revert:
+                return [0xFD]
+            case .invalid:
+                return [0xFE]
+            case .selfdestruct:
+                return [0xFF]
+            case let .push(n, value):
+                let prefix = [0x5F + UInt8(n)]
+                let dataBytes = Array(value.data.suffix(n))
+                return prefix + dataBytes
+            case let .dup(n):
+                return [0x80 + UInt8(n) - 1]
+            case let .swap(n):
+                return [0x90 + UInt8(n) - 1]
+            case let .log(n):
+                return [0xA0 + UInt8(n)]
             }
         }
 
@@ -455,8 +617,177 @@ enum EVM {
             switch encodedCode[encodedCode.startIndex] {
             case 0x00:
                 return .stop
+            case 0x01:
+                return .add
+            case 0x02:
+                return .mul
+            case 0x03:
+                return .sub
+            case 0x04:
+                return .div
+            case 0x05:
+                return .sdiv
+            case 0x06:
+                return .mod
+            case 0x07:
+                return .smod
+            case 0x08:
+                return .addmod
+            case 0x09:
+                return .mulmod
+            case 0x0A:
+                return .exp
+            case 0x0B:
+                return .signextend
+            case 0x10:
+                return .lt
+            case 0x11:
+                return .gt
+            case 0x12:
+                return .slt
+            case 0x13:
+                return .sgt
+            case 0x14:
+                return .eq
+            case 0x15:
+                return .iszero
+            case 0x16:
+                return .and
+            case 0x17:
+                return .or
+            case 0x18:
+                return .xor
+            case 0x19:
+                return .not
+            case 0x1A:
+                return .byte
+            case 0x1B:
+                return .shl
+            case 0x1C:
+                return .shr
+            case 0x1D:
+                return .sar
+            case 0x20:
+                return .keccak256
+            case 0x30:
+                return .address
+            case 0x31:
+                return .balance
+            case 0x32:
+                return .origin
+            case 0x33:
+                return .caller
+            case 0x34:
+                return .callvalue
+            case 0x35:
+                return .calldataload
+            case 0x36:
+                return .calldatasize
+            case 0x37:
+                return .calldatacopy
+            case 0x38:
+                return .codesize
+            case 0x39:
+                return .codecopy
+            case 0x3A:
+                return .gasprice
+            case 0x3B:
+                return .extcodesize
+            case 0x3C:
+                return .extcodecopy
+            case 0x3D:
+                return .returndatasize
+            case 0x3E:
+                return .returndatacopy
+            case 0x3F:
+                return .extcodehash
+            case 0x40:
+                return .blockhash
+            case 0x41:
+                return .coinbase
+            case 0x42:
+                return .timestamp
+            case 0x43:
+                return .number
+            case 0x44:
+                return .prevrandao
+            case 0x45:
+                return .gaslimit
+            case 0x46:
+                return .chainid
+            case 0x47:
+                return .selfbalance
+            case 0x48:
+                return .basefee
+            case 0x49:
+                return .blobhash
+            case 0x4A:
+                return .blobbasefee
+            case 0x50:
+                return .pop
+            case 0x51:
+                return .mload
+            case 0x52:
+                return .mstore
+            case 0x53:
+                return .mstore8
+            case 0x54:
+                return .sload
+            case 0x55:
+                return .sstore
+            case 0x56:
+                return .jump
+            case 0x57:
+                return .jumpi
+            case 0x58:
+                return .pc
+            case 0x59:
+                return .msize
+            case 0x5A:
+                return .gas
+            case 0x5B:
+                return .jumpdest
+            case 0x5C:
+                return .tload
+            case 0x5D:
+                return .tstore
+            case 0x5E:
+                return .mcopy
+            case 0xF0:
+                return .create
+            case 0xF1:
+                return .call
+            case 0xF2:
+                return .callcode
+            case 0xF3:
+                return .return
+            case 0xF4:
+                return .delegatecall
+            case 0xF5:
+                return .create2
+            case 0xFA:
+                return .staticcall
+            case 0xFD:
+                return .revert
+            case 0xFE:
+                return .invalid
+            case 0xFF:
+                return .selfdestruct
             default:
-                throw CodeError.invalidOpcode(encodedCode[0])
+                let byte = encodedCode[encodedCode.startIndex]
+                if byte >= 0x5F && byte < 0x80 {
+                    let sz = Int(byte - 0x5F)
+                    let data = encodedCode.dropFirst().prefix(sz)
+                    return .push(sz, EthWord(dataExtending: Data(data))!)
+                } else if byte >= 0x80 && byte < 0x90 {
+                    return .dup(Int(byte - 0x80) + 1)
+                } else if byte >= 0x90 && byte < 0xA0 {
+                    return .swap(Int(byte - 0x90) + 1)
+                } else if byte >= 0xA0 && byte <= 0xA4 {
+                    return .log(Int(byte - 0xA0))
+                } else {
+                    throw CodeError.invalidOpcode(encodedCode[0])
+                }
             }
         }
     }
