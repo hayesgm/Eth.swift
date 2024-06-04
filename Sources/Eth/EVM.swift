@@ -48,6 +48,20 @@ public enum EVM {
         return paddedData.subdata(in: offset ..< (offset + sz))
     }
 
+    private static func chunkData(data: Data, chunkSize: Int) -> [Data] {
+        var chunks = [Data]()
+        let totalChunks = (data.count + chunkSize - 1) / chunkSize
+
+        for i in 0 ..< totalChunks {
+            let start = i * chunkSize
+            let end = min(start + chunkSize, data.count)
+            let chunk = data.subdata(in: start ..< end)
+            chunks.append(chunk)
+        }
+
+        return chunks
+    }
+
     public typealias Code = [Operation]
     public typealias Stack = [EthWord]
 
@@ -68,7 +82,14 @@ public enum EVM {
         }
 
         var codeEncoded: Data {
-            Hex.parseHex("0x1122334455")!
+            encodeCode(code)
+        }
+
+        var description: String {
+            let operation = "\u{1b}[33m" + (getOperation()?.description ?? "UNK") + "\u{1b}[39m"
+            let showStack = stack.count == 0 ? "[Empty]" : stack.map { $0.description }.joined(separator: "\n\t\t")
+            let showMemory = memory.isEmpty ? "000: " : chunkData(data: memory, chunkSize: 32).enumerated().map { "\(String(format: "%03X", $0 * 32)): \(Hex.toHex($1))" }.joined(separator: "\n\t\t")
+            return " [pc=\(pc)] \(operation)\n\n\tStack\n\t╰ Top\n\t\t\(showStack)\n\n\tMemory\n\t╰\n\t\t\(showMemory)\n\n"
         }
 
         private static func buildOpMap(code: Code) -> [Int: Operation] {
@@ -254,7 +275,7 @@ public enum EVM {
         case create2
         case staticcall
         case revert
-        case invalid
+        case invalid(Data)
         case selfdestruct
 
         public var description: String {
@@ -421,8 +442,8 @@ public enum EVM {
                 return "staticcall"
             case .revert:
                 return "revert"
-            case .invalid:
-                return "invalid"
+            case let .invalid(data):
+                return "invalid(\(Hex.toHex(data)))"
             case .selfdestruct:
                 return "selfdestruct"
             }
@@ -432,6 +453,8 @@ public enum EVM {
             switch self {
             case let .push(n, _):
                 n + 1
+            case let .invalid(data):
+                data.count + 1
             default:
                 1
             }
@@ -593,8 +616,8 @@ public enum EVM {
                 return [0xFA]
             case .revert:
                 return [0xFD]
-            case .invalid:
-                return [0xFE]
+            case let .invalid(data):
+                return [0xFE] + data
             case .selfdestruct:
                 return [0xFF]
             case let .push(n, value):
@@ -770,13 +793,16 @@ public enum EVM {
             case 0xFD:
                 return .revert
             case 0xFE:
-                return .invalid
+                return .invalid(encodedCode.dropFirst())
             case 0xFF:
                 return .selfdestruct
             default:
                 let byte = encodedCode[encodedCode.startIndex]
                 if byte >= 0x5F && byte < 0x80 {
                     let sz = Int(byte - 0x5F)
+                    if sz >= encodedCode.count + 1 {
+                        throw CodeError.outOfBounds
+                    }
                     let data = encodedCode.dropFirst().prefix(sz)
                     return .push(sz, EthWord(dataExtending: Data(data))!)
                 } else if byte >= 0x80 && byte < 0x90 {
@@ -1024,6 +1050,7 @@ public enum EVM {
         }
 
         static func codecopy(destOffset: EthWord, offset: EthWord, size: EthWord, context: inout Context) throws {
+            print("Code: \(Hex.toHex(context.codeEncoded))")
             guard let destOffset_ = destOffset.toInt() else {
                 throw VMError.outOfMemory
             }
@@ -1043,9 +1070,12 @@ public enum EVM {
             }
         }
 
-        static func jumpi(counter: EthWord, b: EthWord, context: inout Context) throws {
+        static func jumpi(counter: EthWord, b: EthWord, context: inout Context) throws -> Bool {
             if b != wordZero {
                 try jump(counter: counter, context: &context)
+                return false
+            } else {
+                return true
             }
         }
 
@@ -1090,6 +1120,8 @@ public enum EVM {
     }
 
     private static func runSingleOp(withInput input: CallInput, withContext context: inout Context) throws {
+        var showContextDescription = true
+        var shouldIncrementPC = true
         guard let operation = context.getOperation() else {
             throw VMError.pcOutOfBounds
         }
@@ -1183,10 +1215,15 @@ public enum EVM {
             let (offset, value) = try context.pop2()
             try Op.mstore8(offset: offset, value: value, context: &context)
         case .jump:
+            showContextDescription = false
+            debugShowContext(context)
+            shouldIncrementPC = false
             try Op.jump(counter: context.pop(), context: &context)
         case .jumpi:
+            showContextDescription = false
+            debugShowContext(context)
             let (counter, b) = try context.pop2()
-            try Op.jumpi(counter: counter, b: b, context: &context)
+            shouldIncrementPC = try Op.jumpi(counter: counter, b: b, context: &context)
         case .pc:
             try Op.pc(context: &context)
         case .msize:
@@ -1212,20 +1249,62 @@ public enum EVM {
         case .tload, .tstore, .mcopy:
             throw VMError.notImplemented(operation)
         }
-        context.incrementPC(operation: operation)
+        if showContextDescription {
+            debugShowContext(context)
+        }
+
+        if shouldIncrementPC {
+            context.incrementPC(operation: operation)
+        }
     }
 
-    public static func execVm(code: Code, withInput inputs: CallInput) throws -> ExecutionResult {
+    private static func debugShowContext(_ context: Context) {
+        #if DEBUG_EVM
+            print(context.description)
+        #endif
+    }
+
+    public static func execVm(code: Code, withInput input: CallInput) throws -> ExecutionResult {
         var context = Context(withCode: code)
-        // throw VMError.unexpectedError("\(context.opMap)")
         while !context.halted {
-            try runSingleOp(withInput: inputs, withContext: &context)
+            try runSingleOp(withInput: input, withContext: &context)
         }
         return ExecutionResult(
             stack: context.stack,
             reverted: context.reverted,
             returnData: context.returnData
         )
+    }
+
+    enum QueryError: Error {
+        case invalidCode(CodeError)
+        case vmError(VMError)
+        case revert(Data)
+    }
+
+    public static func runQuery(bytecode: Data, query: Data, withValue value: BigUInt = BigUInt(0)) throws -> Data {
+        let code: Code
+        do {
+            code = try EVM.decodeCode(fromData: bytecode)
+        } catch let error as CodeError {
+            throw QueryError.invalidCode(error)
+        } catch {
+            throw error
+        }
+        let input = CallInput(data: query, value: value)
+        let executionResult: ExecutionResult
+        do {
+            executionResult = try EVM.execVm(code: code, withInput: input)
+        } catch let error as VMError {
+            throw QueryError.vmError(error)
+        } catch {
+            throw error
+        }
+        if executionResult.reverted {
+            throw QueryError.revert(executionResult.returnData)
+        }
+        return executionResult.returnData
+        return Data()
     }
 }
 
