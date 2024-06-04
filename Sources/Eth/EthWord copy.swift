@@ -115,7 +115,15 @@ public struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, Ex
 
             return positiveValue
         } else {
-            return BigInt(Data([0x00]) + data)
+                func hexEncodedString() -> String {
+                    return map { String(format: "%02hhx", $0) }.joined()
+                }
+
+            debugPrint(data, "Positive Valued Word to Big Int", BigInt(data))
+            for i in 0 ..< 32 {
+                debugPrint(i, data[i])
+            }
+            return BigInt(data)
         }
     }
 

@@ -941,23 +941,27 @@ public enum EVM {
         }
 
         static func sar(shift: EthWord, value: EthWord) throws -> EthWord {
+            debugPrint(value)
             let shift = shift.toBigInt()
             let value = value.toBigInt()
-            debugPrint("hei")
+            debugPrint("shift", shift)
+            
+            debugPrint(value)
+            debugPrint(value.sign)
             if shift > 256 {
               switch value.sign {
                 case .plus:
                   return wordZero
                 case .minus:
                   // Max negative shift: all bits set=
-                  return try! bigIntToEthWord(maxInt256)
+                  return EthWord(hex: "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")!
                }
           }
     
-           let shiftedValue = value >> shift
-           debugPrint(value)
-           debugPrint(shift)
-           debugPrint(shiftedValue)
+            let shiftedValue = value >> Int(shift)
+           debugPrint("value", value)
+           debugPrint("shift", shift)
+           debugPrint("shifted", shiftedValue)
            return try! bigIntToEthWord(shiftedValue)
         }
 
