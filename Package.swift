@@ -14,6 +14,10 @@ let package = Package(
             name: "Eth",
             targets: ["Eth"]
         ),
+        .executable(
+            name: "EthCodeGen",
+            targets: ["ABIGen"]
+        ),
     ],
     dependencies: [
         .package(url: "https://github.com/attaswift/BigInt.git", from: "5.3.0"),
@@ -27,7 +31,7 @@ let package = Package(
             name: "Eth",
             dependencies: ["BigInt", "SwiftKeccak"]
         ),
-        .target(
+        .executableTarget(
             name: "ABIGen",
             dependencies: [
                 "Eth",
