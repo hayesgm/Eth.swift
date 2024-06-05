@@ -940,27 +940,22 @@ public enum EVM {
             return try bigUIntToEthWord(value.toBigUInt() >> shift_)
         }
 
-        static func sar(shift: EthWord, value: EthWord) throws -> EthWord {
-            // TODO: Something is a little off here
-            guard let shift_ = shift.toInt(), shift_ < 256 else {
-                return wordZero
-            }
-            let signBitSet = (value.data[0] & 0x80) != 0
-            let shiftedValue: BigUInt
-            if signBitSet {
-                // Calculate the mask for sign extension
-                let bitsToShift = 255 - shift_
-                let signExtensionMask = (BigUInt(1) << bitsToShift) - 1
-                let signExtension = signExtensionMask << bitsToShift
-                // throw VMError.unexpectedError("shift=\(shift_), signExtensionMask=\(EthWord(fromBigUInt: signExtensionMask)), signExtension=\(EthWord(fromBigUInt: signExtension))")
-                // Perform the shift and apply the sign extension
-                shiftedValue = (value.toBigUInt() >> shift_) | signExtension
-            } else {
-                // Perform a normal right shift for non-negative values
-                shiftedValue = value.toBigUInt() >> shift_
-            }
-
-            return try bigUIntToEthWord(shiftedValue)
+        static func sar(shift theShift: EthWord, value theValue: EthWord) throws -> EthWord {
+            let shift = theShift.toBigInt()
+            let value = theValue.toBigInt()
+            
+            if shift >= 256 {
+              switch value.sign {
+                case .plus:
+                  return wordZero
+                case .minus:
+                  // Max negative shift: all bits set=
+                  return EthWord(hex: "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")!
+               }
+          }
+    
+           let shiftedValue = value >> Int(shift)
+           return try! bigIntToEthWord(shiftedValue)
         }
 
         static func mstore(offset: EthWord, value: EthWord, context: inout Context) throws {
