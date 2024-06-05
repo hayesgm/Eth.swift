@@ -95,17 +95,13 @@ public struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, Ex
         // As EthWords are stored as two's complement, we will
         // need to convert this to a form that BigInt recognizes,
         // which is [sign_byte, ...bytes]
-        debugPrint(data[0], 0x80, data[0] & 0x80, separator: "--")
         if data[0] & 0x80 != 0 {
             // Negative number handling
             // Create an inverted copy of the data
             var invertedData = Data(count: 32)
             for i in 0 ..< 32 {
                 invertedData[i] = ~data[i]
-                debugPrint(1)
-                debugPrint(i, invertedData[i])
             }
-            debugPrint(invertedData)
 
             // Convert the inverted data to a BigInt and add 1 to get the positive equivalent
             var positiveValue = BigInt(Data([0]) + invertedData) + 1

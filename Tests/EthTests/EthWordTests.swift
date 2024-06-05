@@ -26,22 +26,20 @@ final class EthWordTests: XCTestCase {
         XCTAssertEqual(EthWord(fromBigInt: BigInt(-2))!, EthWord(hex: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE"))
         XCTAssertEqual(EthWord(fromBigInt: BigInt(-256))!, EthWord(hex: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00"))
         XCTAssertEqual(EthWord(fromBigInt: BigInt(-257))!, EthWord(hex: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFF"))
+        XCTAssertEqual(EthWord(fromBigInt: BigInt(2).power(254))!, EthWord(hex: "0x4000000000000000000000000000000000000000000000000000000000000000")!)
         // Largest valid signed value
         XCTAssertEqual(EthWord(fromBigInt: (BigInt(1) << 255) - 1)!, EthWord(hex: "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"))
         // Signed value overflow
         XCTAssertNil(EthWord(fromBigInt: (BigInt(1) << 255) + 1))
     }
     
-    func testPainfulToBigInt() throws {
-        XCTAssertNotEqual(EthWord(hex: "0x400000000000000000000000000000000000000000000000000000000000000")!.toBigInt(), BigInt(0))
-    }
 
     func testToBigInt() throws {
         XCTAssertEqual(EthWord(hex: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")!.toBigInt(), BigInt(-1))
         XCTAssertEqual(EthWord(hex: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE")!.toBigInt(), BigInt(-2))
         XCTAssertEqual(EthWord(hex: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00")!.toBigInt(), BigInt(-256))
         XCTAssertEqual(EthWord(hex: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFF")!.toBigInt(), BigInt(-257))
-        XCTAssertNotEqual(EthWord(hex: "0x4000000000000000000000000000000000000000000000000000000000000000")!.toBigInt(), BigInt(0))
+        XCTAssertEqual(EthWord(hex: "0x4000000000000000000000000000000000000000000000000000000000000000")!.toBigInt(), BigInt(2).power(254))
     }
 
     func testIsomorphicBigInts() throws {
