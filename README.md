@@ -39,6 +39,13 @@ case let .tuple1(.array(_, words)):
 default:
   throw ABI.DecodeError.invalidResponse
 }
+
+## Generating Swift from ABI
+
+To generate Swift files from ABI json files (e.g. the `out/` directory of forge build), run:
+
+```
+swift run Geno Tests/Solidity/out/Cool.sol/Cool.json --outDir Tests/Gen
 ```
 
 ## Compliance Tests
