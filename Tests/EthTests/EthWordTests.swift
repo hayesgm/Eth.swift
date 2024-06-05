@@ -32,7 +32,6 @@ final class EthWordTests: XCTestCase {
         // Signed value overflow
         XCTAssertNil(EthWord(fromBigInt: (BigInt(1) << 255) + 1))
     }
-    
 
     func testToBigInt() throws {
         XCTAssertEqual(EthWord(hex: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")!.toBigInt(), BigInt(-1))
