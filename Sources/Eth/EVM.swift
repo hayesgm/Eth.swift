@@ -969,19 +969,19 @@ public enum EVM {
         static func sar(shift theShift: EthWord, value theValue: EthWord) throws -> EthWord {
             let shift = theShift.toBigInt()
             let value = theValue.toBigInt()
-            
+
             if shift >= 256 {
-              switch value.sign {
+                switch value.sign {
                 case .plus:
-                  return wordZero
+                    return wordZero
                 case .minus:
-                  // Max negative shift: all bits set=
-                  return EthWord(hex: "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")!
-               }
-          }
-    
-           let shiftedValue = value >> Int(shift)
-           return try! bigIntToEthWord(shiftedValue)
+                    // Max negative shift: all bits set=
+                    return EthWord(hex: "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")!
+                }
+            }
+
+            let shiftedValue = value >> Int(shift)
+            return try! bigIntToEthWord(shiftedValue)
         }
 
         static func mstore(offset: EthWord, value: EthWord, context: inout Context) throws {
@@ -1299,7 +1299,6 @@ public enum EVM {
             throw QueryError.revert(executionResult.returnData)
         }
         return executionResult.returnData
-        return Data()
     }
 }
 
