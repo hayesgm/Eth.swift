@@ -18,6 +18,14 @@ For testing with EVM debug information:
 swift test -Xswiftc -DDEBUG_EVM
 ```
 
+## Generating Swift from ABI
+
+To generate Swift files from ABI json files (e.g. the `out/` directory of forge build), run:
+
+```
+swift run EthCodeGen Tests/Solidity/out/Cool.sol/Cool.json --outDir Tests/Gen
+```
+
 ## Compliance Tests
 
 Compliance tests are Solidity tests which log their results. We then compare the output of the Eth.swift EVM to those results to ensure compliance over a variety of real Solidity contracts.

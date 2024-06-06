@@ -9,16 +9,16 @@ extension String {
     }
 }
 
-func writeStringToFile(_ content: String, to filePath: String) -> Bool {
-    let url = URL(fileURLWithPath: filePath)
+func replaceFileExtension(of fileName: String, with newExtension: String) -> String {
+    let fileURL = URL(fileURLWithPath: fileName)
+    let fileNameWithoutExtension = fileURL.deletingPathExtension().lastPathComponent
+    let newFileName = "\(fileNameWithoutExtension).\(newExtension)"
+    return newFileName
+}
 
-    do {
-        try content.write(to: url, atomically: true, encoding: .utf8)
-        return true
-    } catch {
-        print("Failed to write to file: \(error)")
-        return false
-    }
+func writeStringToFile(_ content: String, to filePath: String) throws {
+    let url = URL(fileURLWithPath: filePath)
+    try content.write(to: url, atomically: true, encoding: .utf8)
 }
 
 func generateSwift() -> String {
@@ -49,7 +49,10 @@ func generateSwift() -> String {
     return source.formatted().description
 }
 
-func generateSwiftFile(input _: URL, outputDir: URL, prefix _: String? = nil) {
-    let filePath = outputDir.appendingPathComponent("Cool.swift")
-    _ = writeStringToFile(generateSwift(), to: filePath.path)
+func generateSwiftFile(input: URL, outputDir: URL, prefix _: String? = nil) throws {
+    let fileName = input.lastPathComponent
+    let outFileName = replaceFileExtension(of: fileName, with: "swift")
+    let filePath = outputDir.appendingPathComponent(outFileName)
+    print("outFile: \(filePath)")
+    try writeStringToFile(generateSwift(), to: filePath.path)
 }
