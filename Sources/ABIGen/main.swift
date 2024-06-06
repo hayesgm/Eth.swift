@@ -1,6 +1,6 @@
 import Foundation
 
-func main() {
+func main() throws {
     let arguments = CommandLine.arguments
 
     guard arguments.count > 1 else {
@@ -60,7 +60,7 @@ func main() {
     print("Output directory: \(outputFullPath)")
     print("File prefix: \(prefix ?? "")")
 
-    generateSwiftFile(input: inputFullPath, outputDir: outputFullPath)
+    try generateSwiftFile(input: inputFullPath, outputDir: outputFullPath)
 }
 
-main()
+try main()
