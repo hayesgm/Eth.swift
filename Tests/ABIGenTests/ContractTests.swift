@@ -1,4 +1,4 @@
-@testable import Geno
+@testable import ABIGen
 import XCTest
 
 final class ContractTests: XCTestCase {
@@ -71,6 +71,7 @@ final class ContractTests: XCTestCase {
         // Assert ABI
         XCTAssertEqual(contract.abi.count, 2)
         XCTAssertEqual(contract.abi[0].name, "callsInternal")
+        XCTAssertEqual(contract.abi[0].stateMutability, "pure")
         XCTAssertEqual(contract.abi[1].name, "callsLibrary")
 
         // Assert Bytecode

@@ -18,10 +18,6 @@ let package = Package(
             name: "EthCodeGen",
             targets: ["ABIGen"]
         ),
-        .executable(
-            name: "Geno",
-            targets: ["Geno"]
-        ),
     ],
     dependencies: [
         .package(url: "https://github.com/attaswift/BigInt.git", from: "5.3.0"),
@@ -43,14 +39,6 @@ let package = Package(
                 .product(name: "SwiftSyntaxBuilder", package: "swift-syntax"),
             ]
         ),
-        .executableTarget(
-            name: "Geno",
-            dependencies: [
-                "Eth",
-                .product(name: "SwiftSyntax", package: "swift-syntax"),
-                .product(name: "SwiftSyntaxBuilder", package: "swift-syntax"),
-            ]
-        ),
         .testTarget(
             name: "EthTests",
             dependencies: ["Eth"]
@@ -58,10 +46,6 @@ let package = Package(
         .testTarget(
             name: "ABIGenTests",
             dependencies: ["ABIGen", "Eth"]
-        ),
-        .testTarget(
-            name: "GenoTests",
-            dependencies: ["Geno"]
         ),
     ]
 )
