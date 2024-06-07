@@ -1,6 +1,6 @@
 import Foundation
 
-public struct EthAddress: ExpressibleByStringLiteral {
+public struct EthAddress: Equatable, ExpressibleByStringLiteral {
     let address: Data
 
     public init?(_ data: Data) {
