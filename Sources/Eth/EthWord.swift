@@ -61,6 +61,10 @@ public struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, Ex
         self.init(fromBigInt: BigInt(value))
     }
 
+    public init?(fromUInt value: UInt) {
+        self.init(fromBigInt: BigInt(value))
+    }
+
     public init?(fromUInt8 value: UInt8) {
         self.init(fromBigInt: BigInt(value))
     }

@@ -48,20 +48,6 @@ public enum EVM {
         return paddedData.subdata(in: offset ..< (offset + sz))
     }
 
-    private static func chunkData(data: Data, chunkSize: Int) -> [Data] {
-        var chunks = [Data]()
-        let totalChunks = (data.count + chunkSize - 1) / chunkSize
-
-        for i in 0 ..< totalChunks {
-            let start = i * chunkSize
-            let end = min(start + chunkSize, data.count)
-            let chunk = data.subdata(in: start ..< end)
-            chunks.append(chunk)
-        }
-
-        return chunks
-    }
-
     public typealias Code = [Operation]
     public typealias Stack = [EthWord]
 
@@ -88,7 +74,7 @@ public enum EVM {
         var description: String {
             let operation = "\u{1b}[33m" + (getOperation()?.description ?? "UNK") + "\u{1b}[39m"
             let showStack = stack.count == 0 ? "[Empty]" : stack.map { $0.description }.joined(separator: "\n\t\t")
-            let showMemory = memory.isEmpty ? "000: " : chunkData(data: memory, chunkSize: 32).enumerated().map { "\(String(format: "%03X", $0 * 32)): \(Hex.toHex($1))" }.joined(separator: "\n\t\t")
+            let showMemory = EthUtil.showChunkedWords(memory)
             return " [pc=\(pc)] \(operation)\n\n\tStack\n\t╰ Top\n\t\t\(showStack)\n\n\tMemory\n\t╰\n\t\t\(showMemory)\n\n"
         }
 
@@ -1045,7 +1031,6 @@ public enum EVM {
         }
 
         static func codecopy(destOffset: EthWord, offset: EthWord, size: EthWord, context: inout Context) throws {
-            print("Code: \(Hex.toHex(context.codeEncoded))")
             guard let destOffset_ = destOffset.toInt() else {
                 throw VMError.outOfMemory
             }
