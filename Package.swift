@@ -61,7 +61,7 @@ let package = Package(
         ),
         .testTarget(
             name: "GenoTests",
-            dependencies: ["Geno"]
+            dependencies: ["Geno", "Eth"]
         ),
     ]
 )

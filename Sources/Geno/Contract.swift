@@ -3,13 +3,7 @@ import Foundation
 struct Contract: Decodable {
     struct ABI: Decodable {
         struct Function: Decodable {
-            struct Input: Decodable {
-                let name: String
-                let type: String
-                let internalType: String
-            }
-
-            struct Output: Decodable {
+            struct Parameter: Decodable {
                 let name: String
                 let type: String
                 let internalType: String
@@ -17,8 +11,8 @@ struct Contract: Decodable {
 
             let type: String
             let name: String
-            let inputs: [Input]
-            let outputs: [Output]
+            let inputs: [Parameter]
+            let outputs: [Parameter]
             let stateMutability: String
         }
 
