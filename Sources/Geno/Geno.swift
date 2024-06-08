@@ -73,9 +73,8 @@ func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax
                 let decoded = try \(raw: f.name)Fn.decode(output: result)
 
                 let oot : \(raw: outputs)
-                switch decoded {
-        // cant match on arrays dynamically this way //
-                case [\(raw: outParameters(f: f))]:
+                switch (\(raw: matchableDecoded(f: f))) {
+                case let (\(raw: outParameters(f: f))):
                     oot = \(raw: f.outputs.enumerated().map { index, _ in "out\(index)" }.joined(separator: ", "))
                 default:
                     throw ABI.FunctionError.unexpectedError("invalid decode")
@@ -88,6 +87,12 @@ func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax
     .with(\.trailingTrivia, .newline)
 }
 
+func matchableDecoded(f: Contract.ABI.Function) -> String {
+    return f.outputs.enumerated().map { index, o in
+        "decoded[\(index)]"
+    }.joined(separator: ", ")
+}
+
 func outParameters(f: Contract.ABI.Function) -> String {
     return f.outputs.enumerated().map { index, o in
         let n: String
@@ -97,7 +102,7 @@ func outParameters(f: Contract.ABI.Function) -> String {
             n = o.name
         }
 
-        return "\(stringABITypeToStringyETHABIType(solidityType: o.type))(let \(n))"
+        return "\(stringABITypeToStringyETHABIType(solidityType: o.type))(\(n))"
     }.joined(separator: ", ")
 }
 

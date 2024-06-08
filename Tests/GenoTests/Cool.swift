@@ -18,8 +18,8 @@ struct Cool {
         let decoded = try sumFn.decode(output: result)
 
         let oot : BigUInt
-        switch decoded.enumerated() {
-        case let .uint256(out0):
+        switch (decoded[0]) {
+        case let (.uint256(out0)):
             oot = out0
         default:
             throw ABI.FunctionError.unexpectedError("invalid decode")
