@@ -1,6 +1,7 @@
 import BigInt
 @testable import Geno
 import XCTest
+import SwiftSyntax
 
 final class GenoTests: XCTestCase {
     func testParsingStructAbiTypes() {
@@ -15,7 +16,7 @@ final class GenoTests: XCTestCase {
             let fieldTypes = f.outputs.map { parameterToFieldType(p: $0) }
             abiTypes.append(contentsOf: fieldTypes)
         }
-        let desired =   [".int256", ".tuple4(.uint96, .uint160, .array(.tuple3(.int256, .bytes, .bytes32)), .string)"]
+        let desired =   [".int256", ".tuple(.uint96, .uint160, .array(.tuple(.int256, .bytes, .bytes32)), .string)"]
         for (i, _)  in desired.enumerated() {
             XCTAssertEqual(abiTypes[i], desired[i])
         }
@@ -37,6 +38,19 @@ final class GenoTests: XCTestCase {
         for (i, _)  in desired.enumerated() {
             XCTAssertEqual(abiTypes[i], desired[i])
         }
+    }
+    
+    func testBuildStructDefs() {
+        guard let jsonData = jsonString().data(using: .utf8) else {
+            XCTFail("Failed to convert jsonString to Data")
+            return
+        }
+        let contract = try! JSONDecoder().decode(Contract.self, from: jsonData)
+
+    
+        let structDefs = generateStructs(c: contract)
+        
+        XCTAssertEqual(structDefs.map {s in s.description }, ["foo"])
     }
     
     func testConstructorForStruct() {

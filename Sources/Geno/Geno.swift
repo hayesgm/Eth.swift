@@ -13,6 +13,10 @@ func createSourceFileSyntax(from contract: Contract, name: String) -> SourceFile
         try! ImportDeclSyntax("import Eth").with(\.trailingTrivia, .newline)
 
         try! StructDeclSyntax(leadingTrivia: .newline, name: .identifier(name, leadingTrivia: .space)) {
+            for s in generateStructs(c: contract) {
+                s
+            }
+            
             try VariableDeclSyntax("static let bytecode: Data = Hex.parseHex(\"\(raw: contract.bytecode.object)\")!").with(\.trailingTrivia, .newline)
             try VariableDeclSyntax("static let deployedBytecode: Data = Hex.parseHex(\"\(raw: contract.deployedBytecode.object)\")!").with(\.trailingTrivia, .newlines(2))
 
@@ -80,7 +84,7 @@ func outValues(f: Contract.ABI.Function) -> String {
             let arrayContents = arrayType.replacingOccurrences(of: "[]", with: "")
             if arrayContents == "tuple" {
                 let componentTypes = p.components!.enumerated().map { i, p in parameterToMatchableFieldType(p: p, index: i) }
-                return ".array(.tuple\(componentTypes.count)(\(componentTypes.joined(separator: ", "))))"
+                return ".array(.tuple(\(componentTypes.joined(separator: ", "))))"
             } else {
                 return ".array(\(arrayContents))"
             }
@@ -96,6 +100,7 @@ func outValues(f: Contract.ABI.Function) -> String {
         }
     }.joined(separator: ", ")
 }
+
 
 
 func structInitializer(p: Contract.ABI.Function.Parameter) -> String {
@@ -132,13 +137,13 @@ func parameterToFieldType(p: Contract.ABI.Function.Parameter) -> String {
         let arrayContents = arrayType.replacingOccurrences(of: "[]", with: "")
         if arrayContents == "tuple" {
             let componentTypes = p.components?.map { parameterToFieldType(p: $0) } ?? []
-            return ".array(.tuple\(componentTypes.count)(\(componentTypes.joined(separator: ", "))))"
+            return ".array(.tuple(\(componentTypes.joined(separator: ", "))))"
         } else {
             return ".array(\(arrayContents))"
         }
     case "tuple":
         let componentTypes = p.components?.map { parameterToFieldType(p: $0) } ?? []
-        return ".tuple\(componentTypes.count)(\(componentTypes.joined(separator: ", ")))"
+        return ".tuple(\(componentTypes.joined(separator: ", ")))"
     default:
         // low key turning them into the enum values
         return ".\(p.type)"
@@ -214,16 +219,30 @@ func generateAbiFile(input_path: URL) -> String {
     return text
 }
 
-// func generateStructs(f: Contract.ABI.Function, structsSoFar: [String: StructDeclSyntax]) -> [String: StructDeclSyntax] {
-//    var struccs: [String: StructDeclSyntax] = [:]
-//
-//    for i in f.inputs {
-//        makeStruccs(i, struccs: &struccs)
-//    }
-//
-//    for o in f.outputs {
-//        makeStruccs(o, struccs: &struccs)
-//    }
-//    return struccs
-// }
 
+ func generateStructs(c: Contract) ->  [StructDeclSyntax] {
+     var structsSoFar : [String: StructDeclSyntax] = [:]
+     for f in c.abi {
+         for i in f.inputs {
+             _ = makeStruccs(i, struccs: &structsSoFar)
+         }
+         
+         for o in f.outputs {
+             _ = makeStruccs(o, struccs: &structsSoFar)
+         }
+     }
+     return Array(structsSoFar.values)
+ }
+
+func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: StructDeclSyntax]) -> [String: StructDeclSyntax] {
+    if p.internalType.starts(with: "struct") {
+        let def = try! StructDeclSyntax(leadingTrivia: .newline, name: .identifier(p.internalType.replacingOccurrences(of: "struct ", with: ""), leadingTrivia: .space)) {
+            try VariableDeclSyntax("static let schema: ABI.Schema = \(raw: parameterToFieldType(p: p))")
+            for c in p.components! {
+                try VariableDeclSyntax("static let \(raw: c.name): \(raw: typeMapper(for: c.internalType))")
+            }
+        }
+        struccs[p.internalType] = def
+    }
+    return struccs
+}
