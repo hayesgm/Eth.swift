@@ -15,10 +15,6 @@ let package = Package(
             targets: ["Eth"]
         ),
         .executable(
-            name: "EthCodeGen",
-            targets: ["ABIGen"]
-        ),
-        .executable(
             name: "Geno",
             targets: ["Geno"]
         ),
@@ -36,14 +32,6 @@ let package = Package(
             dependencies: ["BigInt", "SwiftKeccak"]
         ),
         .executableTarget(
-            name: "ABIGen",
-            dependencies: [
-                "Eth",
-                .product(name: "SwiftSyntax", package: "swift-syntax"),
-                .product(name: "SwiftSyntaxBuilder", package: "swift-syntax"),
-            ]
-        ),
-        .executableTarget(
             name: "Geno",
             dependencies: [
                 "Eth",
@@ -54,10 +42,6 @@ let package = Package(
         .testTarget(
             name: "EthTests",
             dependencies: ["Eth"]
-        ),
-        .testTarget(
-            name: "ABIGenTests",
-            dependencies: ["ABIGen", "Eth"]
         ),
         .testTarget(
             name: "GenoTests",

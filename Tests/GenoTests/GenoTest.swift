@@ -1,7 +1,7 @@
 import BigInt
 @testable import Geno
-import XCTest
 import SwiftSyntax
+import XCTest
 
 final class GenoTests: XCTestCase {
     func testParsingStructAbiTypes() {
@@ -16,12 +16,12 @@ final class GenoTests: XCTestCase {
             let fieldTypes = f.outputs.map { parameterToFieldType(p: $0) }
             abiTypes.append(contentsOf: fieldTypes)
         }
-        let desired =   [".int256", ".tuple(.uint96, .uint160, .array(.tuple(.int256, .bytes, .bytes32)), .string)"]
-        for (i, _)  in desired.enumerated() {
+        let desired = [".int256", ".tuple(.uint96, .uint160, .array(.tuple(.int256, .bytes, .bytes32)), .string)"]
+        for (i, _) in desired.enumerated() {
             XCTAssertEqual(abiTypes[i], desired[i])
         }
     }
-    
+
     func testParsingStructMatchableAbiTypes() {
         guard let jsonData = jsonString().data(using: .utf8) else {
             XCTFail("Failed to convert jsonString to Data")
@@ -34,12 +34,12 @@ final class GenoTests: XCTestCase {
             let fieldTypes = f.outputs.enumerated().map { i, p in parameterToMatchableFieldType(p: p, index: i) }
             abiTypes.append(contentsOf: fieldTypes)
         }
-        let desired =   [".int256(out0)", ".tuple4(.uint96(a), .uint160(b), .array(.tuple3(.int256, .bytes, .bytes32), c), .string(d))"]
-        for (i, _)  in desired.enumerated() {
+        let desired = [".int256(out0)", ".tuple4(.uint96(a), .uint160(b), .array(.tuple3(.int256, .bytes, .bytes32), c), .string(d))"]
+        for (i, _) in desired.enumerated() {
             XCTAssertEqual(abiTypes[i], desired[i])
         }
     }
-    
+
     func testBuildStructDefs() {
         guard let jsonData = jsonString().data(using: .utf8) else {
             XCTFail("Failed to convert jsonString to Data")
@@ -47,12 +47,11 @@ final class GenoTests: XCTestCase {
         }
         let contract = try! JSONDecoder().decode(Contract.self, from: jsonData)
 
-    
         let structDefs = generateStructs(c: contract)
-        
-        XCTAssertEqual(structDefs.map {s in s.description }, ["foo"])
+
+        XCTAssertEqual(structDefs.map { s in s.description }, ["foo"])
     }
-    
+
     func testConstructorForStruct() {
         guard let jsonData = jsonString().data(using: .utf8) else {
             XCTFail("Failed to convert jsonString to Data")
@@ -62,16 +61,15 @@ final class GenoTests: XCTestCase {
 
         var intializers: [String] = []
         for f in contract.abi {
-            let fieldTypes = f.outputs.enumerated().map { i, p in structInitializer(p: p)}
+            let fieldTypes = f.outputs.enumerated().map { _, p in structInitializer(p: p) }
             intializers.append(contentsOf: fieldTypes)
         }
-        
-        let desired =   ["", "Bat(a: a, b: b, c: c, d: d)"]
-        for (i, _)  in desired.enumerated() {
+
+        let desired = ["", "Bat(a: a, b: b, c: c, d: d)"]
+        for (i, _) in desired.enumerated() {
             XCTAssertEqual(intializers[i], desired[i])
         }
     }
-
 
     func jsonString() -> String {
         """

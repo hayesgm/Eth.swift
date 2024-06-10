@@ -16,7 +16,7 @@ func createSourceFileSyntax(from contract: Contract, name: String) -> SourceFile
             for s in generateStructs(c: contract) {
                 s
             }
-            
+
             try VariableDeclSyntax("static let bytecode: Data = Hex.parseHex(\"\(raw: contract.bytecode.object)\")!").with(\.trailingTrivia, .newline)
             try VariableDeclSyntax("static let deployedBytecode: Data = Hex.parseHex(\"\(raw: contract.deployedBytecode.object)\")!").with(\.trailingTrivia, .newlines(2))
 
@@ -35,7 +35,7 @@ func generateETHABIFunction(f: Contract.ABI.Function) -> VariableDeclSyntax {
 
         return DeclSyntax("\(raw: out)")
     }
-    
+
     return try! VariableDeclSyntax("""
     static let \(raw: f.name)Fn = ABI.Function(
             name: "\(raw: f.name)",
@@ -45,7 +45,6 @@ func generateETHABIFunction(f: Contract.ABI.Function) -> VariableDeclSyntax {
     """)
     .with(\.trailingTrivia, .newline)
 }
-
 
 func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax {
     let parameters = functionParameters(f: f)
@@ -72,10 +71,8 @@ func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax
         """)
     }
     .with(\.leadingTrivia, .newline)
-    .with(\.trailingTrivia, .newline)
+    .with(\.trailingTrivia, .newlines(2))
 }
-
-
 
 func outValues(f: Contract.ABI.Function) -> String {
     f.outputs.enumerated().map { index, p in
@@ -84,7 +81,7 @@ func outValues(f: Contract.ABI.Function) -> String {
             let arrayContents = arrayType.replacingOccurrences(of: "[]", with: "")
             if arrayContents == "tuple" {
                 let componentTypes = p.components!.enumerated().map { i, p in parameterToMatchableFieldType(p: p, index: i) }
-                return ".array(.tuple(\(componentTypes.joined(separator: ", "))))"
+                return ".array(.tuple([\(componentTypes.joined(separator: ", "))]))"
             } else {
                 return ".array(\(arrayContents))"
             }
@@ -101,12 +98,32 @@ func outValues(f: Contract.ABI.Function) -> String {
     }.joined(separator: ", ")
 }
 
-
+func namedParameterToOutValue(p: Contract.ABI.Function.Parameter) -> String {
+    switch p.type {
+    case let arrayType where arrayType.contains("[]"):
+        let arrayContents = arrayType.replacingOccurrences(of: "[]", with: "")
+        if arrayContents == "tuple" {
+            let componentTypes = p.components!.enumerated().map { i, p in parameterToMatchableFieldType(p: p, index: i) }
+            return ".array(.tuple([\(componentTypes.joined(separator: ", "))]))"
+        } else {
+            return ".array(\(arrayContents))"
+        }
+    case "tuple":
+        if p.internalType.starts(with: "struct") {
+            return structInitializer(p: p)
+        } else {
+            let componentTypes = p.components!.enumerated().map { i, p in parameterToMatchableFieldType(p: p, index: i) }
+            return "(\(componentTypes.joined(separator: ", ")))"
+        }
+    default:
+        return nameOrNot(p: p, index: 0)
+    }
+}
 
 func structInitializer(p: Contract.ABI.Function.Parameter) -> String {
     if let c = p.components {
         let structName = p.internalType.replacingOccurrences(of: "struct ", with: "")
-        let args = c.map({ "\($0.name): \($0.name)" }).joined(separator: ", ")
+        let args = c.map { "\($0.name): \($0.name)" }.joined(separator: ", ")
         return "\(structName)(\(args))"
     } else {
         return p.name
@@ -115,7 +132,7 @@ func structInitializer(p: Contract.ABI.Function.Parameter) -> String {
 
 func outParameters(f: Contract.ABI.Function) -> String {
     return f.outputs.enumerated().map { index, o in
-        return parameterToMatchableFieldType(p: o, index: index)
+        parameterToMatchableFieldType(p: o, index: index)
     }.joined(separator: ", ")
 }
 
@@ -137,13 +154,13 @@ func parameterToFieldType(p: Contract.ABI.Function.Parameter) -> String {
         let arrayContents = arrayType.replacingOccurrences(of: "[]", with: "")
         if arrayContents == "tuple" {
             let componentTypes = p.components?.map { parameterToFieldType(p: $0) } ?? []
-            return ".array(.tuple(\(componentTypes.joined(separator: ", "))))"
+            return ".array(.tuple([\(componentTypes.joined(separator: ", "))]))"
         } else {
             return ".array(\(arrayContents))"
         }
     case "tuple":
         let componentTypes = p.components?.map { parameterToFieldType(p: $0) } ?? []
-        return ".tuple(\(componentTypes.joined(separator: ", ")))"
+        return ".tuple([\(componentTypes.joined(separator: ", "))])"
     default:
         // low key turning them into the enum values
         return ".\(p.type)"
@@ -156,8 +173,8 @@ func parameterToMatchableFieldType(p: Contract.ABI.Function.Parameter, index: In
     case let arrayType where arrayType.contains("[]"):
         let arrayContents = arrayType.replacingOccurrences(of: "[]", with: "")
         if arrayContents == "tuple" {
-            let componentTypes = p.components!.enumerated().map { i, p in parameterToFieldType(p: p) }
-            return ".array(.tuple\(componentTypes.count)(\(componentTypes.joined(separator: ", "))), \(name))"
+            let componentTypes = p.components!.enumerated().map { _, p in parameterToFieldType(p: p) }
+            return ".array(.tuple([\(componentTypes.joined(separator: ", "))]), \(name))"
         } else {
             return ".array(\(arrayContents), \(name))"
         }
@@ -219,28 +236,46 @@ func generateAbiFile(input_path: URL) -> String {
     return text
 }
 
+func generateStructs(c: Contract) -> [StructDeclSyntax] {
+    var structsSoFar: [String: StructDeclSyntax] = [:]
+    for f in c.abi {
+        for i in f.inputs {
+            _ = makeStruccs(i, struccs: &structsSoFar)
+        }
 
- func generateStructs(c: Contract) ->  [StructDeclSyntax] {
-     var structsSoFar : [String: StructDeclSyntax] = [:]
-     for f in c.abi {
-         for i in f.inputs {
-             _ = makeStruccs(i, struccs: &structsSoFar)
-         }
-         
-         for o in f.outputs {
-             _ = makeStruccs(o, struccs: &structsSoFar)
-         }
-     }
-     return Array(structsSoFar.values)
- }
+        for o in f.outputs {
+            _ = makeStruccs(o, struccs: &structsSoFar)
+        }
+    }
+    return Array(structsSoFar.values)
+}
 
 func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: StructDeclSyntax]) -> [String: StructDeclSyntax] {
     if p.internalType.starts(with: "struct") {
         let def = try! StructDeclSyntax(leadingTrivia: .newline, name: .identifier(p.internalType.replacingOccurrences(of: "struct ", with: ""), leadingTrivia: .space)) {
             try VariableDeclSyntax("static let schema: ABI.Schema = \(raw: parameterToFieldType(p: p))")
+
             for c in p.components! {
-                try VariableDeclSyntax("static let \(raw: c.name): \(raw: typeMapper(for: c.internalType))")
+                try VariableDeclSyntax("let \(raw: c.name): \(raw: typeMapper(for: c.internalType))")
             }
+
+            try VariableDeclSyntax("var encoded: Data = \(raw: parameterToMatchableFieldType(p: p, index: 0)).encoded").with(\.trailingTrivia, .newlines(2))
+
+            try! FunctionDeclSyntax("""
+            static func decode(data: Data) throws -> \(raw: typeMapper(for: p.internalType))
+            """) {
+                StmtSyntax("""
+                let decoded = try schema.decode(data)
+                switch decoded {
+                case let \(raw: parameterToMatchableFieldType(p: p, index: 0)):
+                    return \(raw: namedParameterToOutValue(p: p))
+                default:
+                    throw ABI.FunctionError.unexpectedError("invalid decode")
+                }
+                """)
+
+            }.with(\.trailingTrivia, .newlines(2))
+                .with(\.leadingTrivia, .newlines(2))
         }
         struccs[p.internalType] = def
     }
