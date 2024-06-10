@@ -11,6 +11,7 @@ public enum EVM {
     static let wordZero = EthWord(fromBigInt: .zero)!
 
     public enum VMError: Error, Equatable {
+        /// Errors that can occur during the execution of the EVM.
         case stackUnderflow
         case stackOverflow
         case pcOutOfBounds
@@ -23,6 +24,7 @@ public enum EVM {
     }
 
     public enum CodeError: Error, Equatable {
+        /// Errors that can occur related to EVM code.
         case outOfBounds
         case invalidOpcode(UInt8)
     }
@@ -31,6 +33,11 @@ public enum EVM {
         let data: Data
         let value: BigUInt
 
+        /// Reads data from the call input with zero padding if necessary.
+        /// - Parameters:
+        ///   - offset: The starting point to read the data.
+        ///   - bytes: The number of bytes to read.
+        /// - Returns: The requested data with zero padding if out of bounds.
         func readData(offset: Int, bytes: Int) -> Data {
             EVM.readZeroPaddedData(offset: offset, bytes: bytes, fromData: data)
         }
@@ -62,6 +69,8 @@ public enum EVM {
         let code: Code
         var opMap: [Int: Operation]
 
+        /// Initializes the EVM context with the provided code.
+        /// - Parameter code: The code to execute in the EVM.
         init(withCode code: Code) {
             self.code = code
             opMap = Context.buildOpMap(code: code)
@@ -1244,6 +1253,11 @@ public enum EVM {
         #endif
     }
 
+    /// Executes the Ethereum Virtual Machine (EVM) with the given code and input.
+    /// - Parameters:
+    ///   - code: The bytecode to be executed.
+    ///   - input: The input data for the execution.
+    /// - Returns: The result of the execution.
     public static func execVm(code: Code, withInput input: CallInput) throws -> ExecutionResult {
         var context = Context(withCode: code)
         while !context.halted {

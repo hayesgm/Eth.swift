@@ -2,6 +2,23 @@ import BigInt
 import Foundation
 
 public extension ABI {
+    /**
+     An enumeration of errors that can occur during decoding.
+
+     - insufficientData: The data provided is insufficient for decoding the schema.
+     - excessData: There is excess data left after decoding the schema.
+     - nonEmptyDataFound: Data is found when none was expected.
+     - integerOverflow: An integer overflow occurred during decoding.
+     - sizedUnsignedIntegerOverflow: An overflow occurred for a sized unsigned integer.
+     - sizedSignedIntegerOverflow: An overflow occurred for a sized signed integer.
+     - invalidDataPointer: The data pointer is invalid.
+     - invalidDataHeapPointer: The data heap pointer is invalid.
+     - invalidUtf8String: The UTF-8 string is invalid.
+     - invalidAddress: The address is invalid.
+     - unexpectedError: An unexpected error occurred.
+     - mismatchedType: The types provided do not match the schema.
+     - invalidResponse: The response is invalid.
+     */
     enum DecodeError: Error, Equatable {
         case insufficientData(Schema, Data)
         case excessData(Schema, Data)
@@ -18,6 +35,9 @@ public extension ABI {
         case invalidResponse
     }
 
+    /**
+     An enumeration of all possible Solidity ABI types (e.g. `.uint256` for "uint256", `.tuple([.array(.string)])` for "(string[])")
+     */
     enum Schema: Equatable, CustomStringConvertible {
         // Unsigned Int
         case uint8
@@ -428,6 +448,13 @@ public extension ABI {
             return fields
         }
 
+        /**
+         Decodes the provided data into a `Field` based on the schema.
+
+         - Parameter data: The data to decode.
+         - Throws: `DecodeError` if the decoding fails.
+         - Returns: A `Field` object representing the decoded data.
+         */
         public func decode(_ data: Data) throws -> Field {
             switch self {
             case .uint8:
