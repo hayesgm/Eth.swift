@@ -7,6 +7,7 @@ struct Contract: Decodable {
                 let name: String
                 let type: String
                 let internalType: String
+                let components: [Parameter]?
             }
 
             let type: String
