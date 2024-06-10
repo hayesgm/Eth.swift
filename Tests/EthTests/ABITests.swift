@@ -394,42 +394,11 @@ func showEncoded(_ encoded: Data) -> String {
     "ABI Encoded ⬇️\n\n\t\t\(EthUtil.showChunkedWords(encoded))\n\n"
 }
 
-func jsonValue(field: ABI.Field) -> String {
-    switch field {
-    case let .uint8(v), let .uint16(v), let .uint24(v), let .uint32(v):
-        return v.description
-    case let .uint40(v), let .uint48(v), let .uint56(v), let .uint64(v), let .uint72(v), let .uint80(v), let .uint88(v), let .uint96(v), let .uint104(v), let .uint112(v), let .uint120(v), let .uint128(v), let .uint136(v), let .uint144(v), let .uint152(v), let .uint160(v), let .uint168(v), let .uint176(v), let .uint184(v), let .uint192(v), let .uint200(v), let .uint208(v), let .uint216(v), let .uint224(v), let .uint232(v), let .uint240(v), let .uint248(v), let .uint256(v):
-        return v.description
-    case let .int8(v), let .int16(v), let .int24(v), let .int32(v):
-        return v.description
-    case let .int40(v), let .int48(v), let .int56(v), let .int64(v), let .int72(v), let .int80(v), let .int88(v), let .int96(v), let .int104(v), let .int112(v), let .int120(v), let .int128(v), let .int136(v), let .int144(v), let .int152(v), let .int160(v), let .int168(v), let .int176(v), let .int184(v), let .int192(v), let .int200(v), let .int208(v), let .int216(v), let .int224(v), let .int232(v), let .int240(v), let .int248(v), let .int256(v):
-        return v.description
-    case let .bool(v):
-        return v.description
-    case let .address(v):
-        return "\"\(Hex.toHex(v.address))\""
-    case let .bytes(d):
-        return "\"\(Hex.toHex(d))\""
-    case let .bytes1(d), let .bytes2(d), let .bytes3(d), let .bytes4(d), let .bytes5(d), let .bytes6(d), let .bytes7(d), let .bytes8(d), let .bytes9(d), let .bytes10(d), let .bytes11(d), let .bytes12(d), let .bytes13(d), let .bytes14(d), let .bytes15(d), let .bytes16(d), let .bytes17(d), let .bytes18(d), let .bytes19(d), let .bytes20(d), let .bytes21(d), let .bytes22(d), let .bytes23(d), let .bytes24(d), let .bytes25(d), let .bytes26(d), let .bytes27(d), let .bytes28(d), let .bytes29(d), let .bytes30(d), let .bytes31(d), let .bytes32(d):
-        return "\"\(Hex.toHex(d))\""
-    case let .string(v):
-        return "\"\(v.description)\""
-    case let .array(_, v):
-        return "'[\(v.map { jsonValue(field: $0) }.joined(separator: ","))]'"
-    case let .arrayN(_, _, v):
-        return "'[\(v.map { jsonValue(field: $0) }.joined(separator: ","))]'"
-    case let .tupleN(v):
-        return "'(\(v.map { jsonValue(field: $0) }.joined(separator: ",")))'"
-    case .tuple0, .tuple1, .tuple2, .tuple3, .tuple4, .tuple5, .tuple6, .tuple7, .tuple8, .tuple9, .tuple10, .tuple11, .tuple12, .tuple13, .tuple14, .tuple15, .tuple16:
-        return jsonValue(field: field.asTupleN!)
-    }
-}
-
 func showHelp(_ field: ABI.Field) -> String? {
     switch field {
     case let .tupleN(fields):
         let fieldTypeStrings = fields.map { $0.fieldType.description }.joined(separator: ", ")
-        let fieldValueStrings = fields.map { jsonValue(field: $0) }.joined(separator: " ")
+        let fieldValueStrings = fields.map { $0.jsonValue }.joined(separator: " ")
         return " - Compare to `cast abi-encode 'tuple(\(fieldTypeStrings))' \(fieldValueStrings)`"
     case .tuple0, .tuple1, .tuple2, .tuple3, .tuple4, .tuple5, .tuple6, .tuple7, .tuple8, .tuple9, .tuple10:
         return showHelp(field.asTupleN!)

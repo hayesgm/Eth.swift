@@ -1,22 +1,10 @@
-# Eth.swift
+# ``Eth``
 
-A lightweight Ethereum library in Swift.
+`Eth.swift` is a very lightweight Ethereum library in Swift.
 
-## Running Tests
+## Overview
 
-Run the tests using `swift test`, preferably with `xcbeautify`:
-
-```sh
-swift test | xcbeautify
-```
-
-(install xcbeautify via `brew install xcbeautify`)
-
-For testing with EVM debug information:
-
-```sh
-swift test -Xswiftc -DDEBUG_EVM
-```
+`Eth.swift` supports ABI encoding and decoding and has a custom `EVM` which can run pure Ethereum code locally. Currently `Eth.swift` does not support any advanced features such as `JSON-RPC` or other common Ethereum features.
 
 ## Usage
 
@@ -39,13 +27,6 @@ case let .tuple1(.array(_, words)):
 default:
   throw ABI.DecodeError.invalidResponse
 }
-
-## Generating Swift from ABI
-
-To generate Swift files from ABI json files (e.g. the `out/` directory of forge build), run:
-
-```
-swift run Geno Tests/Solidity/out/Cool.sol/Cool.json --outDir Tests/Gen
 ```
 
 As noted above, tuples are generally represented as `.tuple2(.uint8(1), .uint8(2))` to make unwrapping easy. You can also unwrap values using helper methods such as ``ABI/Field/asString``, ``ABI/Field/asBigUInt``, ....
@@ -73,12 +54,9 @@ let result = try! EVM.runQuery(bytecode: code, query: .tuple1(.uint256(22)))
 print("result=" + result.asArray![0].asBigUInt!)
 ```
 
-## Compliance Tests
-
-Compliance tests are Solidity tests which log their results. We then compare the output of the Eth.swift EVM to those results to ensure compliance over a variety of real Solidity contracts.
-
-To build compliance tests, make sure to install `forge` and install submodules `git submodule update --init --recursive` and then run `./Tests/Solidity/build-compliance-tests.sh`. Note: you do not need to run this unless you are editing the Compliance tests.
-
-## Coding Conventions
-
-Please use `swiftformat` on all files before checking in. To install `swiftformat`, run `brew install swiftformat`.
+## Topics
+### Essentials
+- <doc:Hex>
+- <doc:EthAddress>
+- <doc:EVM>
+- <doc:ABI>
