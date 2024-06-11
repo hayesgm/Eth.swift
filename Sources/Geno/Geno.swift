@@ -244,19 +244,19 @@ func generateStructs(c: Contract) -> [StructDeclSyntax] {
     var structsSoFar: [String: StructDeclSyntax] = [:]
     for f in c.abi {
         for i in f.inputs {
-            _ = makeStruccs(i, struccs: &structsSoFar)
+            makeStruccs(i, struccs: &structsSoFar)
         }
 
         for o in f.outputs {
-            _ = makeStruccs(o, struccs: &structsSoFar)
+            makeStruccs(o, struccs: &structsSoFar)
         }
     }
     return Array(structsSoFar.values)
 }
 
-func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: StructDeclSyntax]) -> [String: StructDeclSyntax] {
+func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: StructDeclSyntax]) {
     if p.internalType.starts(with: "struct") {
-        let def = try! StructDeclSyntax(leadingTrivia: .newline, name: .identifier(p.internalType.replacingOccurrences(of: "struct ", with: ""), leadingTrivia: .space)) {
+        let def = try! StructDeclSyntax(leadingTrivia: .newline, name: .identifier(p.internalType.replacingOccurrences(of: "struct ", with: "").replacingOccurrences(of: "[]", with: ""), leadingTrivia: .space)) {
             try VariableDeclSyntax("static let schema: ABI.Schema = \(raw: parameterToFieldType(p: p))")
 
             for c in p.components! {
@@ -270,6 +270,7 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
             static func decode(data: Data) throws -> \(raw: typeMapper(for: p.internalType))
             """) {
                 StmtSyntax("""
+
                 let decoded = try schema.decode(data)
                 switch decoded {
                 case let \(raw: parameterToMatchableFieldType(p: p, index: 0)):
@@ -284,5 +285,9 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
         }
         struccs[p.internalType] = def
     }
-    return struccs
+    if let components = p.components {
+        for c in components {
+            makeStruccs(c, struccs: &struccs)
+        }
+    }
 }
