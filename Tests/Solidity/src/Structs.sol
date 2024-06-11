@@ -13,6 +13,8 @@ struct Bat {
     uint160 b;
     Cat[] c;
     string d;
+    uint256[] e;
+    Cat f;
 }
 
 contract Structs {
@@ -25,12 +27,19 @@ contract Structs {
                 cc: hex"1122334455667788991122334455667788991122334455667788991122334455"
             });
         }
+ 
+        uint256[] memory es = new uint256[](y);
+        for (uint256 i = 0; i < y; i++) {
+            es[i] = i ** i;
+        }
 
         return Bat({
             a: uint96(x),
             b: uint96(x - 1),
             c: cats,
-            d: "hello"
+            d: "hello",
+            e: es,
+            f: cats[0]
         });
     }
 

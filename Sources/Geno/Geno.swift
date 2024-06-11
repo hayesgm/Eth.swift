@@ -104,6 +104,8 @@ func fieldValue(parameter: Contract.ABI.Function.Parameter, index _: Int) -> Str
     if isArray(parameter) {
         // TODO: check struct
         return "\(parameter.name).map { \(try! asFieldMapper(parameter: parameter)) }"
+    } else if structName(parameter) != nil {
+        return try! asFieldMapper(parameter: parameter, name: parameter.name)
     } else {
         return parameter.name
     }
@@ -132,7 +134,7 @@ func outParameters(f: Contract.ABI.Function) -> String {
 
 func callParameters(f: Contract.ABI.Function) -> String {
     return f.inputs.map { parameter in
-        if let structName = structName(parameter) {
+        if structName(parameter) != nil {
             "\(parameter.name).asField"
         } else {
             "\(parameterToFieldType(parameter, allowSchema: true))(\(parameter.name))"
@@ -171,7 +173,7 @@ func parameterToFieldType(_ parameter: Contract.ABI.Function.Parameter, allowSch
     }
 }
 
-func parameterToMatchableFieldType(p: Contract.ABI.Function.Parameter, index: Int, asField: Bool = false) -> String {
+func parameterToMatchableFieldType(p: Contract.ABI.Function.Parameter, index: Int, asField: Bool = false, isChild: Bool = false) -> String {
     // Note: it's comical that all of these cases need to be handled differently...
     let varName = parameterVar(parameter: p, index: index, withPrefix: "var")
 
@@ -196,11 +198,15 @@ func parameterToMatchableFieldType(p: Contract.ABI.Function.Parameter, index: In
         }
     } else {
         if isTuple(p) {
-            if false, let structName = structName(p) {
-                return "\(varName)"
+            if isChild && structName(p) != nil {
+                if asField {
+                    return "\(varName).asField"
+                } else {
+                    return varName
+                }
             } else {
-                let componentTypes = p.components!.enumerated().map { i, p in parameterToMatchableFieldType(p: p, index: index * 10 + i, asField: asField) }
-                return ".tuple\(componentTypes.count)(\(componentTypes.joined(separator: ", ")))"
+                let componentTypes = p.components!.enumerated().map { i, p in parameterToMatchableFieldType(p: p, index: index * 10 + i, asField: asField, isChild: true) }
+                return ".tuple\(componentTypes.count)(\(componentTypes.joined(separator: ",\n ")))"
             }
         } else {
             // turning them into the enum values, with name values
@@ -321,7 +327,7 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
             }.with(\.trailingTrivia, .newlines(1))
                 .with(\.leadingTrivia, .newlines(1))
         }
-        struccs[p.internalType] = def
+        struccs[structName] = def
     }
     if let c = p.components {
         for cp in c {
@@ -347,9 +353,9 @@ func isArray(_ p: Contract.ABI.Function.Parameter) -> Bool {
     p.type.contains("[]")
 }
 
-func asFieldMapper(parameter: Contract.ABI.Function.Parameter) throws -> String {
+func asFieldMapper(parameter: Contract.ABI.Function.Parameter, name: String = "$0") throws -> String {
     if let structName = structName(parameter) {
-        return "try \(structName).decodeField($0)"
+        return "try \(structName).decodeField(\(name))"
     } else {
         switch parameter.type {
         case "bool":
