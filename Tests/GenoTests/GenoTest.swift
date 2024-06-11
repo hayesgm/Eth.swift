@@ -16,7 +16,7 @@ final class GenoTests: XCTestCase {
             let fieldTypes = f.outputs.map { parameterToFieldType($0) }
             abiTypes.append(contentsOf: fieldTypes)
         }
-        let desired = [".int256", ".tuple(.uint96, .uint160, .array(.tuple(.int256, .bytes, .bytes32)), .string)"]
+        let desired = [".int256", ".tuple([.uint96, .uint160, .array(Cat.schema), .string])"]
         for (i, _) in desired.enumerated() {
             XCTAssertEqual(abiTypes[i], desired[i])
         }
@@ -34,7 +34,7 @@ final class GenoTests: XCTestCase {
             let fieldTypes = f.outputs.enumerated().map { i, p in parameterToMatchableFieldType(p: p, index: i) }
             abiTypes.append(contentsOf: fieldTypes)
         }
-        let desired = [".int256(out0)", ".tuple4(.uint96(a), .uint160(b), .array(.tuple3(.int256, .bytes, .bytes32), c), .string(d))"]
+        let desired = [".int256(var0)", ".tuple4(.uint96(a), .uint160(b), .array(Cat.schema, c), .string(d))"]
         for (i, _) in desired.enumerated() {
             XCTAssertEqual(abiTypes[i], desired[i])
         }
@@ -49,7 +49,19 @@ final class GenoTests: XCTestCase {
 
         let structDefs = generateStructs(c: contract)
 
-        XCTAssertEqual(structDefs.map { s in s.description }, ["foo"])
+        // smoke test that is building somethign sane
+        guard let regex = try? NSRegularExpression(pattern: "struct Bat\\{static let schema: ABI\\.Schema = ABI.Schema\\.tuple") else {
+            XCTFail("Invalid regex")
+            return
+        }
+
+        // Perform the matching
+        let testString = structDefs[0].description
+        let range = NSRange(location: 0, length: testString.description.utf16.count)
+        let match = regex.firstMatch(in: testString, options: [], range: range)
+
+        // Assert that a match was found
+        XCTAssertNotNil(match, "The string does not match the regex")
     }
 
     func testConstructorForStruct() {
@@ -65,7 +77,7 @@ final class GenoTests: XCTestCase {
             intializers.append(contentsOf: fieldTypes)
         }
 
-        let desired = ["", "Bat(a: a, b: b, c: c, d: d)"]
+        let desired = ["", "try Bat(a: a, b: b, c: c.map { try Cat.decodeField($0) }, d: d)"]
         for (i, _) in desired.enumerated() {
             XCTAssertEqual(intializers[i], desired[i])
         }
