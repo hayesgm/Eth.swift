@@ -30,7 +30,8 @@ enum Structs {
                     f.asField)
         }
 
-        static func decode(data: Data) throws -> Bat { try decodeField(schema.decode(data))
+        static func decode(data: Data) throws -> Bat {
+            try decodeField(schema.decode(data))
         }
 
         static func decodeField(_ field: ABI.Field) throws -> Bat {
@@ -69,7 +70,8 @@ enum Structs {
                     .bytes32(cc))
         }
 
-        static func decode(data: Data) throws -> Cat { try decodeField(schema.decode(data))
+        static func decode(data: Data) throws -> Cat {
+            try decodeField(schema.decode(data))
         }
 
         static func decodeField(_ field: ABI.Field) throws -> Cat {
@@ -98,15 +100,12 @@ enum Structs {
         let result = try EVM.runQuery(bytecode: runtimeCode, query: query)
         let decoded = try acceptBatFn.decode(output: result)
 
-        let oot: BigInt
         switch decoded {
         case let .tuple1(.int256(var0)):
-            oot = var0
+            return var0
         default:
             throw ABI.DecodeError.mismatchedType(decoded.fieldType, acceptBatFn.outputTuple)
         }
-
-        return oot
     }
 
     static let buildBatFn = ABI.Function(
@@ -120,7 +119,6 @@ enum Structs {
         let result = try EVM.runQuery(bytecode: runtimeCode, query: query)
         let decoded = try buildBatFn.decode(output: result)
 
-        let oot: Bat
         switch decoded {
         case let .tuple1(.tuple6(.uint96(a),
                                  .uint160(b),
@@ -128,11 +126,9 @@ enum Structs {
                                  .string(d),
                                  .array(.uint256, e),
                                  f)):
-            oot = try Bat(a: a, b: b, c: c.map { try Cat.decodeField($0) }, d: d, e: e.map { $0.asBigUInt! }, f: Cat.decodeField(f))
+            return try Bat(a: a, b: b, c: c.map { try Cat.decodeField($0) }, d: d, e: e.map { $0.asBigUInt! }, f: Cat.decodeField(f))
         default:
             throw ABI.DecodeError.mismatchedType(decoded.fieldType, buildBatFn.outputTuple)
         }
-
-        return oot
     }
 }

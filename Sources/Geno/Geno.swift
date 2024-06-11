@@ -6,9 +6,9 @@ import SwiftSyntaxBuilder
 // Create the struct declaration syntax
 func createSourceFileSyntax(from contract: Contract, name: String) -> SourceFileSyntax {
     return SourceFileSyntax {
-        try! ImportDeclSyntax("import Foundation").with(\.trailingTrivia, .newline)
         try! ImportDeclSyntax("import BigInt").with(\.trailingTrivia, .newline)
         try! ImportDeclSyntax("import Eth").with(\.trailingTrivia, .newline)
+        try! ImportDeclSyntax("import Foundation").with(\.trailingTrivia, .newline)
 
         try! StructDeclSyntax(leadingTrivia: .newline, name: .identifier(name, leadingTrivia: .space)) {
             for s in generateStructs(c: contract) {
@@ -57,15 +57,12 @@ func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax
                 let result = try EVM.runQuery(bytecode: runtimeCode, query: query)
                 let decoded = try \(raw: f.name)Fn.decode(output: result)
 
-                let oot : \(raw: outputs)
                 switch decoded {
                 case let \(raw: outParameters(f: f)):
-                    oot = \(raw: outValues(f: f))
+                    return \(raw: outValues(f: f))
                 default:
                     throw ABI.DecodeError.mismatchedType(decoded.fieldType, \(raw: f.name)Fn.outputTuple)
                 }
-
-                return oot
         """)
     }
     .with(\.leadingTrivia, .newline)
@@ -126,7 +123,7 @@ func outParameters(f: Contract.ABI.Function) -> String {
     }.joined(separator: ", ")
 
     guard f.outputs.count <= 16 else {
-        // TODO: Handle N-sized tuples
+        // Note the count constraint could be expanded by adding more tuple{n} cases to the ABI.Field enum. 16 is chosen as a reasonable max until expansion is needed.
         fatalError("Geno cannot decode tuples with more than 16 fields")
     }
     return ".tuple\(f.outputs.count)(\(inner))"
@@ -180,14 +177,11 @@ func parameterToMatchableFieldType(p: Contract.ABI.Function.Parameter, index: In
     if isArray(p) {
         let baseParameter = baseParameter(p)
         if isTuple(p) {
-            if let structName = structName(p) {
-                if asField {
-                    return ".array(\(structName).schema, \(varName).map { $0.asField })"
-                } else {
-                    return ".array(\(structName).schema, \(varName))"
-                }
+            let structName = structName(p)!
+            if asField {
+                return ".array(\(structName).schema, \(varName).map { $0.asField })"
             } else {
-                return "tuplearray"
+                return ".array(\(structName).schema, \(varName))"
             }
         } else {
             if asField {
