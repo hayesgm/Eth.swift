@@ -245,29 +245,37 @@ func generateStructs(c: Contract) -> [StructDeclSyntax] {
             _ = makeStruccs(o, struccs: &structsSoFar)
         }
     }
+
     return Array(structsSoFar.values)
+}
+
+func deArray(_ p: Contract.ABI.Function.Parameter) -> Contract.ABI.Function.Parameter {
+    let newType = p.type.replacingOccurrences(of: "[]", with: "")
+    let newInternalType = p.internalType.replacingOccurrences(of: "[]", with: "")
+    return Contract.ABI.Function.Parameter(name: p.name, type: newType, internalType: newInternalType, components: p.components)
 }
 
 func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: StructDeclSyntax]) -> [String: StructDeclSyntax] {
     if p.internalType.starts(with: "struct") {
-        let def = try! StructDeclSyntax(leadingTrivia: .newline, name: .identifier(p.internalType.replacingOccurrences(of: "struct ", with: ""), leadingTrivia: .space)) {
-            try VariableDeclSyntax("static let schema: ABI.Schema = \(raw: parameterToFieldType(p: p))")
+        let def = try! StructDeclSyntax(leadingTrivia: .newline, name: .identifier(p.internalType.replacingOccurrences(of: "struct ", with: "").replacingOccurrences(of: "[]", with: ""), leadingTrivia: .space)) {
+            let nonArray = deArray(p)
+            try VariableDeclSyntax("static let schema: ABI.Schema = \(raw: parameterToFieldType(p: nonArray))")
 
             for c in p.components! {
                 try VariableDeclSyntax("let \(raw: c.name): \(raw: typeMapper(for: c.internalType))")
             }
 
             try VariableDeclSyntax("var encoded: Data { asField.encoded }").with(\.trailingTrivia, .newlines(2))
-            try VariableDeclSyntax("var asField: ABI.Field { \(raw: parameterToMatchableFieldType(p: p, index: 0)) }").with(\.trailingTrivia, .newlines(2))
+            try VariableDeclSyntax("var asField: ABI.Field { \(raw: parameterToMatchableFieldType(p: nonArray, index: 0)) }").with(\.trailingTrivia, .newlines(2))
 
             try! FunctionDeclSyntax("""
-            static func decode(data: Data) throws -> \(raw: typeMapper(for: p.internalType))
+            static func decode(data: Data) throws -> \(raw: typeMapper(for: nonArray.internalType))
             """) {
                 StmtSyntax("""
                 let decoded = try schema.decode(data)
                 switch decoded {
-                case let \(raw: parameterToMatchableFieldType(p: p, index: 0)):
-                    return \(raw: namedParameterToOutValue(p: p))
+                case let \(raw: parameterToMatchableFieldType(p: nonArray, index: 0)):
+                    return \(raw: namedParameterToOutValue(p: nonArray))
                 default:
                     throw ABI.FunctionError.unexpectedError("invalid decode")
                 }
@@ -277,6 +285,11 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
                 .with(\.leadingTrivia, .newlines(2))
         }
         struccs[p.internalType] = def
+    }
+    if let c = p.components {
+        for cp in c {
+            _ = makeStruccs(cp, struccs: &struccs)
+        }
     }
     return struccs
 }
