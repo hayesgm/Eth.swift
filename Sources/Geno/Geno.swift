@@ -281,7 +281,8 @@ func baseParameter(_ p: Contract.ABI.Function.Parameter) -> Contract.ABI.Functio
 
 func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: StructDeclSyntax]) -> [String: StructDeclSyntax] {
     if let structName = structName(p) {
-        let def = try! StructDeclSyntax(leadingTrivia: .newline, name: .identifier(structName, leadingTrivia: .space)) {
+        let equatableClause = InheritanceClauseSyntax(inheritedTypes: InheritedTypeListSyntax([InheritedTypeSyntax(type: TypeSyntax("Equatable"))]))
+        let def = try! StructDeclSyntax(leadingTrivia: .newline, name: .identifier(structName, leadingTrivia: .space), inheritanceClause: equatableClause) {
             // if we find a struct nestled down in an array somewhere, pretend it is a top level thing
             let baseParameter = baseParameter(p)
             try VariableDeclSyntax("static let schema: ABI.Schema = \(raw: "ABI.Schema" + parameterToFieldType(baseParameter))").with(\.trailingTrivia, .newlines(2))

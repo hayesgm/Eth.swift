@@ -3,7 +3,7 @@ import Eth
 import Foundation
 
 enum Structs {
-    struct Bat {
+    struct Bat: Equatable {
         static let schema: ABI.Schema = .tuple([.uint96, .uint160, .array(Cat.schema), .string])
 
         let a: BigUInt
@@ -37,7 +37,7 @@ enum Structs {
         }
     }
 
-    struct Cat {
+    struct Cat: Equatable {
         static let schema: ABI.Schema = .tuple([.int256, .bytes, .bytes32])
 
         let ca: BigInt
