@@ -315,6 +315,11 @@ let codingTests: [CodingTest] =
             encoded: hexes([0x20, 0x02, 0x40, 0x80, /* Heap (0x40) */ 0x3, "xxx", 0x04, "yyyy"])
         ),
         CodingTest(
+            name: "Static Single Tuple",
+            input: .tuple1(.uint256(BigUInt(0x07D0))),
+            encoded: hex("0x00000000000000000000000000000000000000000000000000000000000007d0")
+        ),
+        CodingTest(
             name: "Static Expanded Tuple",
             input: .tuple3(.uint8(0x55), .tuple2(.uint8(0x01), .uint8(0x02)), .string("hello")),
             encoded: hexes([0x55, 0x01, 0x02, 0x80, /* Heap (0x80) */ 0x05, "hello"])

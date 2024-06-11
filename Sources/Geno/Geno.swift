@@ -15,8 +15,8 @@ func createSourceFileSyntax(from contract: Contract, name: String) -> SourceFile
                 s
             }
 
-            try VariableDeclSyntax("static let bytecode: Data = Hex.parseHex(\"\(raw: contract.bytecode.object)\")!").with(\.trailingTrivia, .newline)
-            try VariableDeclSyntax("static let deployedBytecode: Data = Hex.parseHex(\"\(raw: contract.deployedBytecode.object)\")!").with(\.trailingTrivia, .newlines(2))
+            try VariableDeclSyntax("static let creationCode: Data = Hex.parseHex(\"\(raw: contract.bytecode.object)\")!").with(\.trailingTrivia, .newline)
+            try VariableDeclSyntax("static let runtimeCode: Data = Hex.parseHex(\"\(raw: contract.deployedBytecode.object)\")!").with(\.trailingTrivia, .newlines(2))
 
             // Generate a swift function and {ETH.ABI.Function} for each ABI function
             for function in contract.abi {
@@ -54,7 +54,7 @@ func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax
         StmtSyntax("""
 
                 let query = try \(raw: f.name)Fn.encoded(with: [\(raw: callParameters(f: f))])
-                let result = try EVM.runQuery(bytecode: deployedBytecode, query: query)
+                let result = try EVM.runQuery(bytecode: runtimeCode, query: query)
                 let decoded = try \(raw: f.name)Fn.decode(output: result)
 
                 let oot : \(raw: outputs)
@@ -129,9 +129,15 @@ func structInitializer(p: Contract.ABI.Function.Parameter) -> String {
 }
 
 func outParameters(f: Contract.ABI.Function) -> String {
-    return f.outputs.enumerated().map { index, o in
+    let inner = f.outputs.enumerated().map { index, o in
         parameterToMatchableFieldType(p: o, index: index)
     }.joined(separator: ", ")
+
+    guard f.outputs.count <= 16 else {
+        // TODO: Handle N-sized tuples
+        fatalError("Geno cannot decode tuples with more than 16 fields")
+    }
+    return ".tuple\(f.outputs.count)(\(inner))"
 }
 
 func callParameters(f: Contract.ABI.Function) -> String {
