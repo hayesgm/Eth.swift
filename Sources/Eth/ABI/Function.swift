@@ -9,9 +9,9 @@ public extension ABI {
     }
 
     struct Function: Equatable, CustomStringConvertible {
-        let name: String
-        let inputs: [ABI.Schema]
-        let outputs: [ABI.Schema]
+        public let name: String
+        public let inputs: [ABI.Schema]
+        public let outputs: [ABI.Schema]
 
         public init(name: String, inputs: [ABI.Schema], outputs: [ABI.Schema]) {
             self.name = name
@@ -19,12 +19,12 @@ public extension ABI {
             self.outputs = outputs
         }
 
-        var inputTuple: ABI.Schema {
+        public var inputTuple: ABI.Schema {
             .tuple(inputs)
         }
 
-        var outputTuple: ABI.Schema {
-            .tuple(inputs)
+        public var outputTuple: ABI.Schema {
+            .tuple(outputs)
         }
 
         public var signature: String {

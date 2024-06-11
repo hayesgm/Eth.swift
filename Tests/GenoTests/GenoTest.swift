@@ -13,7 +13,7 @@ final class GenoTests: XCTestCase {
 
         var abiTypes: [String] = []
         for f in contract.abi {
-            let fieldTypes = f.outputs.map { parameterToFieldType(p: $0) }
+            let fieldTypes = f.outputs.map { parameterToFieldType($0) }
             abiTypes.append(contentsOf: fieldTypes)
         }
         let desired = [".int256", ".tuple(.uint96, .uint160, .array(.tuple(.int256, .bytes, .bytes32)), .string)"]
@@ -61,7 +61,7 @@ final class GenoTests: XCTestCase {
 
         var intializers: [String] = []
         for f in contract.abi {
-            let fieldTypes = f.outputs.enumerated().map { _, p in structInitializer(p: p) }
+            let fieldTypes = f.outputs.enumerated().map { _, p in structInitializer(parameter: p, structName: "Bat") }
             intializers.append(contentsOf: fieldTypes)
         }
 
