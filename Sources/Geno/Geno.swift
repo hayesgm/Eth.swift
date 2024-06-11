@@ -5,8 +5,6 @@ import SwiftSyntaxBuilder
 
 // Create the struct declaration syntax
 func createSourceFileSyntax(from contract: Contract, name: String) -> SourceFileSyntax {
-//    var strukts:[StructDeclSyntax] = []
-
     return SourceFileSyntax {
         try! ImportDeclSyntax("import Foundation").with(\.trailingTrivia, .newline)
         try! ImportDeclSyntax("import BigInt").with(\.trailingTrivia, .newline)
@@ -56,7 +54,7 @@ func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax
         StmtSyntax("""
 
                 let query = try \(raw: f.name)Fn.encoded(with: [\(raw: callParameters(f: f))])
-                let result = try EVM.runQuery(bytecode: bytecode, query: query)
+                let result = try EVM.runQuery(bytecode: deployedBytecode, query: query)
                 let decoded = try \(raw: f.name)Fn.decode(output: result)
 
                 let oot : \(raw: outputs)
@@ -259,7 +257,8 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
                 try VariableDeclSyntax("let \(raw: c.name): \(raw: typeMapper(for: c.internalType))")
             }
 
-            try VariableDeclSyntax("var encoded: Data = \(raw: parameterToMatchableFieldType(p: p, index: 0)).encoded").with(\.trailingTrivia, .newlines(2))
+            try VariableDeclSyntax("var encoded: Data { asField.encoded }").with(\.trailingTrivia, .newlines(2))
+            try VariableDeclSyntax("var asField: ABI.Field { \(raw: parameterToMatchableFieldType(p: p, index: 0)) }").with(\.trailingTrivia, .newlines(2))
 
             try! FunctionDeclSyntax("""
             static func decode(data: Data) throws -> \(raw: typeMapper(for: p.internalType))
