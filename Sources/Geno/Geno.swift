@@ -74,29 +74,11 @@ func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax
 
 func outValues(f: Contract.ABI.Function) -> String {
     f.outputs.enumerated().map { index, p in
-        switch p.type {
-        case let arrayType where arrayType.contains("[]"):
-            let arrayContents = arrayType.replacingOccurrences(of: "[]", with: "")
-            if arrayContents == "tuple" {
-                let componentTypes = p.components!.enumerated().map { i, p in parameterToMatchableFieldType(p: p, index: i) }
-                return ".array(.tuple([\(componentTypes.joined(separator: ", "))]))"
-            } else {
-                return ".array(\(arrayContents))"
-            }
-        case "tuple":
-            if p.internalType.starts(with: "struct") {
-                return structInitializer(p: p)
-            } else {
-                let componentTypes = p.components!.enumerated().map { i, p in parameterToMatchableFieldType(p: p, index: i) }
-                return "(\(componentTypes.joined(separator: ", ")))"
-            }
-        default:
-            return nameOrNot(p: p, index: index)
-        }
+        namedParameterToOutValue(p: p, index: index)
     }.joined(separator: ", ")
 }
 
-func namedParameterToOutValue(p: Contract.ABI.Function.Parameter) -> String {
+func namedParameterToOutValue(p: Contract.ABI.Function.Parameter, index: Int) -> String {
     switch p.type {
     case let arrayType where arrayType.contains("[]"):
         let arrayContents = arrayType.replacingOccurrences(of: "[]", with: "")
@@ -114,7 +96,7 @@ func namedParameterToOutValue(p: Contract.ABI.Function.Parameter) -> String {
             return "(\(componentTypes.joined(separator: ", ")))"
         }
     default:
-        return nameOrNot(p: p, index: 0)
+        return nameOrNot(p: p, index: index)
     }
 }
 
@@ -276,7 +258,7 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
                 let decoded = try schema.decode(data)
                 switch decoded {
                 case let \(raw: parameterToMatchableFieldType(p: nonArray, index: 0)):
-                    return \(raw: namedParameterToOutValue(p: nonArray))
+                    return \(raw: namedParameterToOutValue(p: nonArray, index: 0))
                 default:
                     throw ABI.FunctionError.unexpectedError("invalid decode")
                 }
