@@ -34,13 +34,8 @@ struct Contract: Decodable {
 }
 
 // Function to decode JSON data
-func decodeContract(from jsonData: Data) -> Contract? {
+func decodeContract(from jsonData: Data) -> Contract {
     let decoder = JSONDecoder()
-    do {
-        let contract = try decoder.decode(Contract.self, from: jsonData)
-        return contract
-    } catch {
-        print("Failed to decode JSON: \(error)")
-        return nil
-    }
+    let contract = try! decoder.decode(Contract.self, from: jsonData)
+    return contract
 }

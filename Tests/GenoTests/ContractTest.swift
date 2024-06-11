@@ -53,16 +53,9 @@ final class ContractTests: XCTestCase {
         }
         """
 
-        guard let jsonData = jsonString.data(using: .utf8) else {
-            XCTFail("Failed to convert jsonString to Data")
-            return
-        }
+        let jsonData = jsonString.data(using: .utf8)!
 
-        guard let contract = decodeContract(from: jsonData) else {
-            XCTFail("Failed to decode JSON")
-            return
-        }
-        debugPrint(contract)
+        let contract = decodeContract(from: jsonData)
 
         // Assert ABI
         XCTAssertEqual(contract.abi.count, 2)

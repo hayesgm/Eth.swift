@@ -14,9 +14,9 @@ final class GenTests: XCTestCase {
             Structs.Cat(ca: 0, cb: Data(count: 0), cc: catData),
             Structs.Cat(ca: -1, cb: Data(count: 1), cc: catData),
             Structs.Cat(ca: -2, cb: Data(count: 2), cc: catData),
-        ], d: "hello", e: [BigUInt(1), BigUInt(1), BigUInt(4)], f: Structs.Cat(ca: 0, cb: Data(count: 0), cc: catData) ))
+        ], d: "hello", e: [BigUInt(1), BigUInt(1), BigUInt(4)], f: Structs.Cat(ca: 0, cb: Data(count: 0), cc: catData)))
 
-        let r = try! Structs.acceptBat(bat: Structs.Bat(a: BigUInt(1), b: BigUInt(2), c: [Structs.Cat(ca: BigInt(2), cb: Hex.parseHex("1")!, cc: "bar".data(using: .utf8)!)], d: "Cave",  e: [], f: Structs.Cat(ca: 2, cb: Data(count: 1), cc: catData) ))
+        let r = try! Structs.acceptBat(bat: Structs.Bat(a: BigUInt(1), b: BigUInt(2), c: [Structs.Cat(ca: BigInt(2), cb: Hex.parseHex("1")!, cc: "bar".data(using: .utf8)!)], d: "Cave", e: [], f: Structs.Cat(ca: 2, cb: Data(count: 1), cc: catData)))
 
         XCTAssertEqual(r, BigInt(-2))
     }

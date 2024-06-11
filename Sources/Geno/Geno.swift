@@ -287,7 +287,7 @@ func baseParameter(_ p: Contract.ABI.Function.Parameter) -> Contract.ABI.Functio
 
 func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: StructDeclSyntax]) -> [String: StructDeclSyntax] {
     if let structName = structName(p) {
-        let equatableClause = InheritanceClauseSyntax(inheritedTypes: InheritedTypeListSyntax([InheritedTypeSyntax(type: TypeSyntax("Equatable"))]))
+        let equatableClause = InheritanceClauseSyntax(inheritedTypes: InheritedTypeListSyntax([InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Equatable"))]))
         let def = try! StructDeclSyntax(leadingTrivia: .newline, name: .identifier(structName, leadingTrivia: .space), inheritanceClause: equatableClause) {
             // if we find a struct nestled down in an array somewhere, pretend it is a top level thing
             let baseParameter = baseParameter(p)
@@ -303,10 +303,10 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
             try! FunctionDeclSyntax("""
             static func decode(data: Data) throws -> \(raw: typeMapper(for: baseParameter.internalType))
             """) {
-                StmtSyntax("""
-
-                            try decodeField(schema.decode(data))
-                """)
+                ExprSyntax("""
+                try decodeField(schema.decode(data))
+                """).with(\.trailingTrivia, .newlines(2))
+                    .with(\.leadingTrivia, .newlines(1))
 
             }.with(\.trailingTrivia, .newlines(1))
                 .with(\.leadingTrivia, .newlines(1))

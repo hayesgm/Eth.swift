@@ -30,8 +30,7 @@ enum Structs {
                     f.asField)
         }
 
-        static func decode(data: Data) throws -> Bat {
-            try decodeField(schema.decode(data))
+        static func decode(data: Data) throws -> Bat { try decodeField(schema.decode(data))
         }
 
         static func decodeField(_ field: ABI.Field) throws -> Bat {
@@ -70,8 +69,7 @@ enum Structs {
                     .bytes32(cc))
         }
 
-        static func decode(data: Data) throws -> Cat {
-            try decodeField(schema.decode(data))
+        static func decode(data: Data) throws -> Cat { try decodeField(schema.decode(data))
         }
 
         static func decodeField(_ field: ABI.Field) throws -> Cat {

@@ -34,7 +34,7 @@ final class GenoTests: XCTestCase {
             let fieldTypes = f.outputs.enumerated().map { i, p in parameterToMatchableFieldType(p: p, index: i) }
             abiTypes.append(contentsOf: fieldTypes)
         }
-        let desired = [".int256(var0)", ".tuple4(.uint96(a), .uint160(b), .array(Cat.schema, c), .string(d))"]
+        let desired = [".int256(var0)", ".tuple4(.uint96(a),\n .uint160(b),\n .array(Cat.schema, c),\n .string(d))"]
         for (i, _) in desired.enumerated() {
             XCTAssertEqual(abiTypes[i], desired[i])
         }
@@ -50,10 +50,7 @@ final class GenoTests: XCTestCase {
         let structDefs = generateStructs(c: contract)
 
         // smoke test that is building somethign sane
-        guard let regex = try? NSRegularExpression(pattern: "struct Bat\\{static let schema: ABI\\.Schema = ABI.Schema\\.tuple") else {
-            XCTFail("Invalid regex")
-            return
-        }
+        let regex = try! NSRegularExpression(pattern: "struct Bat: Equatable\\{static let schema: ABI\\.Schema = ABI.Schema\\.tuple")
 
         // Perform the matching
         let testString = structDefs[0].description
