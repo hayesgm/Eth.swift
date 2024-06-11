@@ -258,6 +258,7 @@ func deArray(_ p: Contract.ABI.Function.Parameter) -> Contract.ABI.Function.Para
 func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: StructDeclSyntax]) -> [String: StructDeclSyntax] {
     if p.internalType.starts(with: "struct") {
         let def = try! StructDeclSyntax(leadingTrivia: .newline, name: .identifier(p.internalType.replacingOccurrences(of: "struct ", with: "").replacingOccurrences(of: "[]", with: ""), leadingTrivia: .space)) {
+            // if we find a struct nestled down in an array somewhere, pretend it is a top level thing
             let nonArray = deArray(p)
             try VariableDeclSyntax("static let schema: ABI.Schema = \(raw: parameterToFieldType(p: nonArray))")
 
