@@ -24,7 +24,7 @@ public extension ABI {
         }
 
         var outputTuple: ABI.Schema {
-            .tuple(inputs)
+            .tuple(outputs)
         }
 
         public var signature: String {
