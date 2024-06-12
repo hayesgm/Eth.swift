@@ -76,30 +76,27 @@ func outValues(f: Contract.ABI.Function) -> String {
 }
 
 func namedParameterToOutValue(p: Contract.ABI.Function.Parameter, index: Int) -> String {
-    switch p.type {
-    case let arrayType where arrayType.contains("[]"):
-        let arrayContents = arrayType.replacingOccurrences(of: "[]", with: "")
-        if arrayContents == "tuple" {
+    if isArray(p) {
+        if isTuple(p) {
             let componentTypes = p.components!.enumerated().map { i, p in parameterToMatchableFieldType(p: p, index: i) }
             return ".array(.tuple([\(componentTypes.joined(separator: ", "))]))"
         } else {
-            return ".array(\(arrayContents))"
+            return ".array(\(baseParameter(p)))"
         }
-    case "tuple":
+    } else if isTuple(p) {
         if let structName = structName(p) {
             return structInitializer(parameter: p, structName: structName)
         } else {
             let componentTypes = p.components!.enumerated().map { i, p in parameterToMatchableFieldType(p: p, index: i) }
             return "(\(componentTypes.joined(separator: ", ")))"
         }
-    default:
+    } else {
         return parameterVar(parameter: p, index: index, withPrefix: "var")
     }
 }
 
 func fieldValue(parameter: Contract.ABI.Function.Parameter, index _: Int) -> String {
     if isArray(parameter) {
-        // TODO: check struct
         return "\(parameter.name).map { \(try! asFieldMapper(parameter: parameter)) }"
     } else if structName(parameter) != nil {
         return try! asFieldMapper(parameter: parameter, name: parameter.name)
@@ -140,11 +137,11 @@ func callParameters(f: Contract.ABI.Function) -> String {
 }
 
 func functionParameters(f: Contract.ABI.Function) -> [String] {
-    return f.inputs.map { "\($0.name): \(try! typeMapper(for: $0.internalType))" }
+    return f.inputs.map { "\($0.name): \(typeMapper(for: $0))" }
 }
 
 func returnValue(f: Contract.ABI.Function) -> String {
-    f.outputs.map { try! typeMapper(for: $0.internalType) }.joined(separator: ", ")
+    f.outputs.map { typeMapper(for: $0) }.joined(separator: ", ")
 }
 
 func parameterToFieldType(_ parameter: Contract.ABI.Function.Parameter, allowSchema: Bool = false) -> String {
@@ -217,8 +214,16 @@ func parameterVar(parameter: Contract.ABI.Function.Parameter, index: Int, withPr
     }
 }
 
-func typeMapper(for t: String) throws -> String {
-    switch t {
+func typeMapper(for p: Contract.ABI.Function.Parameter) -> String {
+    if isArray(p) {
+        return "[\(typeMapper(for: baseParameter(p)))]"
+    }
+
+    if isStruct(p) {
+        return structName(p)!
+    }
+
+    switch p.internalType {
     case "bool":
         return "Bool"
     case "string":
@@ -227,19 +232,14 @@ func typeMapper(for t: String) throws -> String {
         return "String"
     case "tuple":
         return "tuple"
-    case let arrayType where arrayType.hasSuffix("[]"):
-        let elementType = arrayType.replacingOccurrences(of: "[]", with: "")
-        return "[\(try! typeMapper(for: elementType))]"
     case let type where type.starts(with: "uint"):
         return "BigUInt"
     case let type where type.starts(with: "int"):
         return "BigInt"
     case let bytesType where bytesType.starts(with: "bytes"):
         return "Data" // Dynamically-sized bytes sequence.
-    case let structType where structType.starts(with: "struct"):
-        return structType.replacingOccurrences(of: "struct ", with: "")
     default:
-        throw NSError(domain: "TypeMapperError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unsupported type: \(t)"])
+        fatalError("TypeMapperError :Unsupported type: \(p.type)")
     }
 }
 
@@ -262,11 +262,11 @@ func generateStructs(c: Contract) -> [StructDeclSyntax] {
     var structsSoFar: [String: StructDeclSyntax] = [:]
     for f in c.abi {
         for i in f.inputs {
-            _ = makeStruccs(i, struccs: &structsSoFar)
+            makeStruccs(i, struccs: &structsSoFar)
         }
 
         for o in f.outputs {
-            _ = makeStruccs(o, struccs: &structsSoFar)
+            makeStruccs(o, struccs: &structsSoFar)
         }
     }
 
@@ -279,7 +279,7 @@ func baseParameter(_ p: Contract.ABI.Function.Parameter) -> Contract.ABI.Functio
     return Contract.ABI.Function.Parameter(name: p.name, type: newType, internalType: newInternalType, components: p.components)
 }
 
-func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: StructDeclSyntax]) -> [String: StructDeclSyntax] {
+func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: StructDeclSyntax]) {
     if let structName = structName(p) {
         let equatableClause = InheritanceClauseSyntax(inheritedTypes: InheritedTypeListSyntax([InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Equatable"))]))
         let def = try! StructDeclSyntax(leadingTrivia: .newline, name: .identifier(structName, leadingTrivia: .space), inheritanceClause: equatableClause) {
@@ -288,14 +288,14 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
             try VariableDeclSyntax("static let schema: ABI.Schema = \(raw: "ABI.Schema" + parameterToFieldType(baseParameter))").with(\.trailingTrivia, .newlines(2))
 
             for c in p.components! {
-                try VariableDeclSyntax("let \(raw: c.name): \(raw: typeMapper(for: c.internalType))")
+                try VariableDeclSyntax("let \(raw: c.name): \(raw: typeMapper(for: c))")
             }
 
             try VariableDeclSyntax("var encoded: Data { asField.encoded }").with(\.trailingTrivia, .newlines(2)).with(\.leadingTrivia, .newlines(2))
             try VariableDeclSyntax("var asField: ABI.Field { \(raw: parameterToMatchableFieldType(p: baseParameter, index: 0, asField: true)) }").with(\.trailingTrivia, .newlines(1))
 
             try! FunctionDeclSyntax("""
-            static func decode(data: Data) throws -> \(raw: typeMapper(for: baseParameter.internalType))
+            static func decode(data: Data) throws -> \(raw: typeMapper(for: baseParameter))
             """) {
                 ExprSyntax("""
                 try decodeField(schema.decode(data))
@@ -306,7 +306,7 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
                 .with(\.leadingTrivia, .newlines(1))
 
             try! FunctionDeclSyntax("""
-            static func decodeField(_ field: ABI.Field) throws -> \(raw: typeMapper(for: baseParameter.internalType))
+            static func decodeField(_ field: ABI.Field) throws -> \(raw: typeMapper(for: baseParameter))
             """) {
                 StmtSyntax("""
 
@@ -325,10 +325,9 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
     }
     if let c = p.components {
         for cp in c {
-            _ = makeStruccs(cp, struccs: &struccs)
+            makeStruccs(cp, struccs: &struccs)
         }
     }
-    return struccs
 }
 
 func structName(_ p: Contract.ABI.Function.Parameter) -> String? {
@@ -344,7 +343,11 @@ func isTuple(_ p: Contract.ABI.Function.Parameter) -> Bool {
 }
 
 func isArray(_ p: Contract.ABI.Function.Parameter) -> Bool {
-    p.type.contains("[]")
+    p.type.hasSuffix("[]")
+}
+
+func isStruct(_ p: Contract.ABI.Function.Parameter) -> Bool {
+    structName(p) != nil && !isArray(p)
 }
 
 func asFieldMapper(parameter: Contract.ABI.Function.Parameter, name: String = "$0") throws -> String {
