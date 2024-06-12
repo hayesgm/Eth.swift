@@ -10,7 +10,7 @@ private func word(_ x: Int) -> EthWord {
 }
 
 private func hexWord(_ data: String) -> EthWord {
-    return EthWord(hex: data)!
+    return EthWord(fromHexString: data)!
 }
 
 // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-145.md#test-cases

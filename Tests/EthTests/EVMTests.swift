@@ -9,23 +9,19 @@ private func word(_ x: Int) -> EthWord {
     return ethWord
 }
 
-private func hex(_ data: String) -> Data {
-    Hex.parseHex(data)!
-}
-
 struct EvmTest {
     let name: String
     let code: EVM.Code
     let input: EVM.CallInput
     let expStack: EVM.Stack?
-    let expReturn: Data?
-    let expRevert: Data?
+    let expReturn: Hex?
+    let expRevert: Hex?
     let expError: EVM.VMError?
 
-    init(name: String, withCode code: EVM.Code, expStack: EVM.Stack? = nil, expReturn: Data? = nil, expRevert: Data? = nil, expError: EVM.VMError? = nil, withCallData callData: Data = Data(), withCallValue callValue: BigUInt = BigUInt(0)) {
+    init(name: String, withCode code: EVM.Code, expStack: EVM.Stack? = nil, expReturn: Hex? = nil, expRevert: Hex? = nil, expError: EVM.VMError? = nil, withCallData callData: Hex = .empty, withCallValue callValue: BigUInt = BigUInt(0)) {
         self.name = name
         self.code = code
-        input = EVM.CallInput(data: callData, value: callValue)
+        input = EVM.CallInput(calldata: callData, value: callValue)
         self.expStack = expStack
         self.expReturn = expReturn
         self.expRevert = expRevert
@@ -47,12 +43,12 @@ struct EvmTest {
                     XCTAssertEqual(executionResult.stack, stack, name)
                 }
                 if let returnData = expReturn {
-                    XCTAssert(!executionResult.reverted, "\(name) unexpectedly reverted with data \(Hex.toHex(executionResult.returnData))")
-                    XCTAssertEqual(Hex.toHex(executionResult.returnData), Hex.toHex(returnData), name)
+                    XCTAssert(!executionResult.reverted, "\(name) unexpectedly reverted with data \(executionResult.returnData)")
+                    XCTAssertEqual(executionResult.returnData, returnData, name)
                 }
                 if let returnData = expRevert {
-                    XCTAssert(executionResult.reverted, "\(name) was expected to revert, but successfully returned with data \(Hex.toHex(executionResult.returnData))")
-                    XCTAssertEqual(Hex.toHex(executionResult.returnData), Hex.toHex(returnData), name)
+                    XCTAssert(executionResult.reverted, "\(name) was expected to revert, but successfully returned with data \(executionResult.returnData)")
+                    XCTAssertEqual(executionResult.returnData, returnData, name)
                 }
             } catch let error as EVM.VMError {
                 XCTFail("\(name): Unexpected error \(error.localizedDescription)")
@@ -1039,7 +1035,7 @@ let tests: [EvmTest] =
             expStack: [
                 "0x1122334455000000000000000000000000000000000000000000000000000000",
             ],
-            withCallData: hex("0xbbccddeeff1122334455")
+            withCallData: "0xbbccddeeff1122334455"
         ),
         EvmTest(
             name: "CallDataSize - Empty",
@@ -1060,7 +1056,7 @@ let tests: [EvmTest] =
             expStack: [
                 word(10),
             ],
-            withCallData: hex("0xbbccddeeff1122334455")
+            withCallData: "0xbbccddeeff1122334455"
         ),
         EvmTest(
             name: "CallDataCopy - Empty",
@@ -1091,7 +1087,7 @@ let tests: [EvmTest] =
             expStack: [
                 "0xddeeff1100000000000000000000000000000000000000000000000000000000",
             ],
-            withCallData: hex("0xbbccddeeff1122334455")
+            withCallData: "0xbbccddeeff1122334455"
         ),
         EvmTest(
             name: "CodeSize",
@@ -1402,7 +1398,7 @@ let tests: [EvmTest] =
                 .push(32, word(110)),
                 .return,
             ],
-            expReturn: hex("0xbbccddeeff1122334455")
+            expReturn: "0xbbccddeeff1122334455"
         ),
         EvmTest(
             name: "Revert Value",
@@ -1414,12 +1410,12 @@ let tests: [EvmTest] =
                 .push(32, word(110)),
                 .revert,
             ],
-            expRevert: hex("0xbbccddeeff1122334455")
+            expRevert: "0xbbccddeeff1122334455"
         ),
         EvmTest(
             name: "Invalid",
             withCode: [
-                .invalid(Data([11])),
+                .invalid(Hex(Data([11]))),
                 .stop,
             ],
             expError: EVM.VMError.invalidOperation
@@ -1429,7 +1425,7 @@ let tests: [EvmTest] =
 struct CodeEncodeTest {
     let name: String
     let code: EVM.Code
-    let encoding: Data
+    let encoding: Hex
 }
 
 let encodingTests: [CodeEncodeTest] =
@@ -1437,12 +1433,12 @@ let encodingTests: [CodeEncodeTest] =
         CodeEncodeTest(
             name: "STOP STOP",
             code: [.stop, .stop],
-            encoding: hex("0x0000")
+            encoding: "0x0000"
         ),
         CodeEncodeTest(
             name: "PUSH6 0x112233445566",
             code: [.push(6, word(0x1122_3344_5566))],
-            encoding: hex("0x65112233445566")
+            encoding: "0x65112233445566"
         ),
         CodeEncodeTest(
             name: "Complex",
@@ -1467,9 +1463,9 @@ let encodingTests: [CodeEncodeTest] =
                 .codecopy,
                 .push(1, word(0x0)),
                 .return,
-                .invalid(hex("0x608060405234801561001057600080fd5b50600436106100575760003560e01c806345bd069b1461005c578063543209b7146100815780636401557d14610094578063990c8f79146100a7578063c6162c61146100ae575b600080fd5b61006f61006a3660046100fb565b6100c1565b60405190815260200160405180910390f35b61006f61008f3660046100fb565b6100d4565b61006f6100a23660046100fb565b6100e1565b603761006f565b61006f6100bc3660046100fb565b6100ee565b60006100ce82603761012a565b92915050565b60006100ce82603761014c565b60006100ce82603761015f565b60006100ce826037610172565b60006020828403121561010d57600080fd5b5035919050565b634e487b7160e01b600052601160045260246000fd5b60008261014757634e487b7160e01b600052601260045260246000fd5b500490565b808201808211156100ce576100ce610114565b818103818111156100ce576100ce610114565b80820281158282048414176100ce576100ce61011456fea264697066735822122024f54513b165b76ea2c8cfdc9c6f8efc633ed13ab65265f188238976afbebd7e64736f6c63430008180033")),
+                .invalid("0x608060405234801561001057600080fd5b50600436106100575760003560e01c806345bd069b1461005c578063543209b7146100815780636401557d14610094578063990c8f79146100a7578063c6162c61146100ae575b600080fd5b61006f61006a3660046100fb565b6100c1565b60405190815260200160405180910390f35b61006f61008f3660046100fb565b6100d4565b61006f6100a23660046100fb565b6100e1565b603761006f565b61006f6100bc3660046100fb565b6100ee565b60006100ce82603761012a565b92915050565b60006100ce82603761014c565b60006100ce82603761015f565b60006100ce826037610172565b60006020828403121561010d57600080fd5b5035919050565b634e487b7160e01b600052601160045260246000fd5b60008261014757634e487b7160e01b600052601260045260246000fd5b500490565b808201808211156100ce576100ce610114565b818103818111156100ce576100ce610114565b80820281158282048414176100ce576100ce61011456fea264697066735822122024f54513b165b76ea2c8cfdc9c6f8efc633ed13ab65265f188238976afbebd7e64736f6c63430008180033"),
             ],
-            encoding: hex("0x608060405234801561001057600080fd5b506101bf806100206000396000f3fe608060405234801561001057600080fd5b50600436106100575760003560e01c806345bd069b1461005c578063543209b7146100815780636401557d14610094578063990c8f79146100a7578063c6162c61146100ae575b600080fd5b61006f61006a3660046100fb565b6100c1565b60405190815260200160405180910390f35b61006f61008f3660046100fb565b6100d4565b61006f6100a23660046100fb565b6100e1565b603761006f565b61006f6100bc3660046100fb565b6100ee565b60006100ce82603761012a565b92915050565b60006100ce82603761014c565b60006100ce82603761015f565b60006100ce826037610172565b60006020828403121561010d57600080fd5b5035919050565b634e487b7160e01b600052601160045260246000fd5b60008261014757634e487b7160e01b600052601260045260246000fd5b500490565b808201808211156100ce576100ce610114565b818103818111156100ce576100ce610114565b80820281158282048414176100ce576100ce61011456fea264697066735822122024f54513b165b76ea2c8cfdc9c6f8efc633ed13ab65265f188238976afbebd7e64736f6c63430008180033")
+            encoding: "0x608060405234801561001057600080fd5b506101bf806100206000396000f3fe608060405234801561001057600080fd5b50600436106100575760003560e01c806345bd069b1461005c578063543209b7146100815780636401557d14610094578063990c8f79146100a7578063c6162c61146100ae575b600080fd5b61006f61006a3660046100fb565b6100c1565b60405190815260200160405180910390f35b61006f61008f3660046100fb565b6100d4565b61006f6100a23660046100fb565b6100e1565b603761006f565b61006f6100bc3660046100fb565b6100ee565b60006100ce82603761012a565b92915050565b60006100ce82603761014c565b60006100ce82603761015f565b60006100ce826037610172565b60006020828403121561010d57600080fd5b5035919050565b634e487b7160e01b600052601160045260246000fd5b60008261014757634e487b7160e01b600052601260045260246000fd5b500490565b808201808211156100ce576100ce610114565b818103818111156100ce576100ce610114565b80820281158282048414176100ce576100ce61011456fea264697066735822122024f54513b165b76ea2c8cfdc9c6f8efc633ed13ab65265f188238976afbebd7e64736f6c63430008180033"
         ),
     ]
 
@@ -1483,13 +1479,13 @@ final class EVMTests: XCTestCase {
     func testEncodeCode() throws {
         for encodeTest in encodingTests {
             let encoded = EVM.encodeCode(encodeTest.code)
-            XCTAssertEqual(Hex.toHex(encoded), Hex.toHex(encodeTest.encoding), encodeTest.name)
+            XCTAssertEqual(encoded, encodeTest.encoding, encodeTest.name)
         }
     }
 
     func testDecodeCode() throws {
         for encodeTest in encodingTests {
-            let code = try! EVM.decodeCode(fromData: encodeTest.encoding)
+            let code = try! EVM.decodeCode(fromHex: encodeTest.encoding)
             XCTAssertEqual(code, encodeTest.code, encodeTest.name)
         }
     }

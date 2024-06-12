@@ -92,40 +92,40 @@ public extension ABI {
         case address(EthAddress)
 
         // Dynamic Bytes
-        case bytes(Data)
+        case bytes(Hex)
 
-        case bytes1(Data)
-        case bytes2(Data)
-        case bytes3(Data)
-        case bytes4(Data)
-        case bytes5(Data)
-        case bytes6(Data)
-        case bytes7(Data)
-        case bytes8(Data)
-        case bytes9(Data)
-        case bytes10(Data)
-        case bytes11(Data)
-        case bytes12(Data)
-        case bytes13(Data)
-        case bytes14(Data)
-        case bytes15(Data)
-        case bytes16(Data)
-        case bytes17(Data)
-        case bytes18(Data)
-        case bytes19(Data)
-        case bytes20(Data)
-        case bytes21(Data)
-        case bytes22(Data)
-        case bytes23(Data)
-        case bytes24(Data)
-        case bytes25(Data)
-        case bytes26(Data)
-        case bytes27(Data)
-        case bytes28(Data)
-        case bytes29(Data)
-        case bytes30(Data)
-        case bytes31(Data)
-        case bytes32(Data)
+        case bytes1(Hex)
+        case bytes2(Hex)
+        case bytes3(Hex)
+        case bytes4(Hex)
+        case bytes5(Hex)
+        case bytes6(Hex)
+        case bytes7(Hex)
+        case bytes8(Hex)
+        case bytes9(Hex)
+        case bytes10(Hex)
+        case bytes11(Hex)
+        case bytes12(Hex)
+        case bytes13(Hex)
+        case bytes14(Hex)
+        case bytes15(Hex)
+        case bytes16(Hex)
+        case bytes17(Hex)
+        case bytes18(Hex)
+        case bytes19(Hex)
+        case bytes20(Hex)
+        case bytes21(Hex)
+        case bytes22(Hex)
+        case bytes23(Hex)
+        case bytes24(Hex)
+        case bytes25(Hex)
+        case bytes26(Hex)
+        case bytes27(Hex)
+        case bytes28(Hex)
+        case bytes29(Hex)
+        case bytes30(Hex)
+        case bytes31(Hex)
+        case bytes32(Hex)
 
         // String
         case string(String)
@@ -240,8 +240,8 @@ public extension ABI {
             }
         }
 
-        /// Returns an `Data` if Field contains a fixed or variable-sized `.bytes`, otherwise nil
-        public var asData: Data? {
+        /// Returns an `Hex` if Field contains a fixed or variable-sized `.bytes`, otherwise nil
+        public var asHex: Hex? {
             switch self {
             case let .bytes(x):
                 x
@@ -715,7 +715,7 @@ public extension ABI {
         }
 
         /**
-         * Encodes the given input as ABI-encoded `Data`.
+         * Encodes the given input as ABI-encoded `Hex`.
          *
          * This method never fails, but be aware of the following edge cases:
          *   - Integer values are clamped to their bounds. For example, `.uint8(999)` will be treated as `uint8(255)`.
@@ -723,115 +723,115 @@ public extension ABI {
          *
          * Example:
          * ```
-         * let encoded = .uint256(BigUInt(0x55)).encoded
-         * // encoded -> 0x0000000000000000000000000000000000000000000000000000000000000055
+         * let encoded: Hex = .uint256(BigUInt(0x55)).encoded
+         * // encoded -> Hex("0x0000000000000000000000000000000000000000000000000000000000000055")
          * ```
          *
-         * - Returns: An ABI-encoded `Data` representation of the input.
+         * - Returns: An ABI-encoded `Hex` representation of the input.
          */
-        public var encoded: Data {
+        public var encoded: Hex {
             switch self {
             case let .uint8(v), let .uint16(v), let .uint24(v), let .uint32(v):
                 let bits = self.bits!
                 let max: UInt = (1 << bits) - 1
                 let clamped = clamped(uint: v, to: 0 ... max)
-                return EthWord(fromUInt: clamped)!.data
+                return EthWord(fromUInt: clamped)!.hex
             case let .uint40(v), let .uint48(v), let .uint56(v), let .uint64(v), let .uint72(v), let .uint80(v), let .uint88(v), let .uint96(v), let .uint104(v), let .uint112(v), let .uint120(v), let .uint128(v), let .uint136(v), let .uint144(v), let .uint152(v), let .uint160(v), let .uint168(v), let .uint176(v), let .uint184(v), let .uint192(v), let .uint200(v), let .uint208(v), let .uint216(v), let .uint224(v), let .uint232(v), let .uint240(v), let .uint248(v), let .uint256(v):
                 let bits = self.bits!
                 let max: BigUInt = (BigUInt(1) << bits) - 1
                 let clamped = clamped(bigUInt: v, to: 0 ... max)
-                return EthWord(fromBigUInt: clamped)!.data
+                return EthWord(fromBigUInt: clamped)!.hex
             case let .int8(v), let .int16(v), let .int24(v), let .int32(v):
                 let bits = self.bits!
                 let max: Int = (1 << (bits - 1)) - 1
                 let min: Int = -(1 << (bits - 1))
                 let clamped = clamped(int: v, to: min ... max)
-                return EthWord(fromInt: clamped)!.data
+                return EthWord(fromInt: clamped)!.hex
             case let .int40(v), let .int48(v), let .int56(v), let .int64(v), let .int72(v), let .int80(v), let .int88(v), let .int96(v), let .int104(v), let .int112(v), let .int120(v), let .int128(v), let .int136(v), let .int144(v), let .int152(v), let .int160(v), let .int168(v), let .int176(v), let .int184(v), let .int192(v), let .int200(v), let .int208(v), let .int216(v), let .int224(v), let .int232(v), let .int240(v), let .int248(v), let .int256(v):
                 let bits = self.bits!
                 let max: BigInt = (BigInt(1) << (bits - 1)) - 1
                 let min: BigInt = -(BigInt(1) << (bits - 1))
                 let clamped = clamped(bigInt: v, to: min ... max)
-                return EthWord(fromBigInt: clamped)!.data
+                return EthWord(fromBigInt: clamped)!.hex
             case let .bool(b):
                 // Zero and one are guaranteed to fit in an EthWord, QED
-                return EthWord(fromUInt: b ? 1 : 0)!.data
+                return EthWord(fromUInt: b ? 1 : 0)!.hex
             case let .address(v):
                 // Address is guaranteed to be 20-bytes which fits in an EthWord, QED
-                return EthWord(dataExtending: v.address)!.data
+                return EthWord(hexExtending: v.address)!.hex
             case let .bytes(d):
-                return encodeVariableSizedData(data: d)
+                return Hex(encodeVariableSizedData(data: d.data))
             case let .bytes1(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes2(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes3(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes4(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes5(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes6(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes7(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes8(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes9(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes10(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes11(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes12(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes13(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes14(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes15(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes16(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes17(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes18(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes19(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes20(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes21(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes22(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes23(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes24(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes25(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes26(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes27(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes28(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes29(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes30(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes31(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .bytes32(v):
-                return padRightToWordBoundary(v)
+                return Hex(padRightToWordBoundary(v))
             case let .string(s):
                 // If the string isn't valid UTF8, this will return an empty string encoding.
                 // Swift doesn't make it easy to generate an invalid UTF-8 string.
                 if let string = s.data(using: .utf8) {
-                    return encodeVariableSizedData(data: string)
+                    return Hex(encodeVariableSizedData(data: string))
                 } else {
-                    return encodeVariableSizedData(data: Data())
+                    return Hex(encodeVariableSizedData(data: Data()))
                 }
             case let .arrayN(_, _, fields):
                 return Field.tupleN(fields).encoded
@@ -840,19 +840,19 @@ public extension ABI {
                 let encodedFields = Field.tupleN(fields).encoded
                 // Note: we'll assert that fields.count will always fit nicely into an EthWord
                 let size = EthWord(fromInt: fields.count)!.data
-                return size + encodedFields
+                return Hex(size + encodedFields.data)
             case let .tupleN(fields):
                 // For a tuple, we encode non-dynamic types in-place ("prim") and dynamic types in a "heap"
                 let primarySizeBytes = fields.map { $0.fieldType.primaryWordSize }.reduce(0) { $0 + $1 } * 0x20
                 let (prim, heap) = fields.reduce((Data(), Data())) { acc, field in
                     let (prim, heap) = acc
                     if field.fieldType.dynamic {
-                        return (prim + EthWord(fromInt: primarySizeBytes + heap.count)!.data, heap + field.encoded)
+                        return (prim + EthWord(fromInt: primarySizeBytes + heap.count)!.data, heap + field.encoded.data)
                     } else {
-                        return (prim + field.encoded, heap)
+                        return (prim + field.encoded.data, heap)
                     }
                 }
-                return prim + heap
+                return Hex(prim + heap)
             case .tuple0, .tuple1, .tuple2, .tuple3, .tuple4, .tuple5, .tuple6, .tuple7, .tuple8, .tuple9, .tuple10, .tuple11, .tuple12, .tuple13, .tuple14, .tuple15, .tuple16:
                 return asTupleN!.encoded
             }
@@ -992,73 +992,73 @@ public extension ABI {
             case let .bool(v):
                 "bool(\(v.description))"
             case let .address(v):
-                "address(\(Hex.toHex(v.address)))"
+                "address(\(v.address)))"
             case let .bytes(d):
-                "bytes(\(Hex.toHex(d)))"
+                "bytes(\(d))"
             case let .bytes1(v):
-                "bytes1(\(Hex.toHex(v)))"
+                "bytes1(\(v))"
             case let .bytes2(v):
-                "bytes2(\(Hex.toHex(v)))"
+                "bytes2(\(v))"
             case let .bytes3(v):
-                "bytes3(\(Hex.toHex(v)))"
+                "bytes3(\(v))"
             case let .bytes4(v):
-                "bytes4(\(Hex.toHex(v)))"
+                "bytes4(\(v))"
             case let .bytes5(v):
-                "bytes5(\(Hex.toHex(v)))"
+                "bytes5(\(v))"
             case let .bytes6(v):
-                "bytes6(\(Hex.toHex(v)))"
+                "bytes6(\(v))"
             case let .bytes7(v):
-                "bytes7(\(Hex.toHex(v)))"
+                "bytes7(\(v))"
             case let .bytes8(v):
-                "bytes8(\(Hex.toHex(v)))"
+                "bytes8(\(v))"
             case let .bytes9(v):
-                "bytes9(\(Hex.toHex(v)))"
+                "bytes9(\(v))"
             case let .bytes10(v):
-                "bytes10(\(Hex.toHex(v)))"
+                "bytes10(\(v))"
             case let .bytes11(v):
-                "bytes11(\(Hex.toHex(v)))"
+                "bytes11(\(v))"
             case let .bytes12(v):
-                "bytes12(\(Hex.toHex(v)))"
+                "bytes12(\(v))"
             case let .bytes13(v):
-                "bytes13(\(Hex.toHex(v)))"
+                "bytes13(\(v))"
             case let .bytes14(v):
-                "bytes14(\(Hex.toHex(v)))"
+                "bytes14(\(v))"
             case let .bytes15(v):
-                "bytes15(\(Hex.toHex(v)))"
+                "bytes15(\(v))"
             case let .bytes16(v):
-                "bytes16(\(Hex.toHex(v)))"
+                "bytes16(\(v))"
             case let .bytes17(v):
-                "bytes17(\(Hex.toHex(v)))"
+                "bytes17(\(v))"
             case let .bytes18(v):
-                "bytes18(\(Hex.toHex(v)))"
+                "bytes18(\(v))"
             case let .bytes19(v):
-                "bytes19(\(Hex.toHex(v)))"
+                "bytes19(\(v))"
             case let .bytes20(v):
-                "bytes20(\(Hex.toHex(v)))"
+                "bytes20(\(v))"
             case let .bytes21(v):
-                "bytes21(\(Hex.toHex(v)))"
+                "bytes21(\(v))"
             case let .bytes22(v):
-                "bytes22(\(Hex.toHex(v)))"
+                "bytes22(\(v))"
             case let .bytes23(v):
-                "bytes23(\(Hex.toHex(v)))"
+                "bytes23(\(v))"
             case let .bytes24(v):
-                "bytes24(\(Hex.toHex(v)))"
+                "bytes24(\(v))"
             case let .bytes25(v):
-                "bytes25(\(Hex.toHex(v)))"
+                "bytes25(\(v))"
             case let .bytes26(v):
-                "bytes26(\(Hex.toHex(v)))"
+                "bytes26(\(v))"
             case let .bytes27(v):
-                "bytes27(\(Hex.toHex(v)))"
+                "bytes27(\(v))"
             case let .bytes28(v):
-                "bytes28(\(Hex.toHex(v)))"
+                "bytes28(\(v))"
             case let .bytes29(v):
-                "bytes29(\(Hex.toHex(v)))"
+                "bytes29(\(v))"
             case let .bytes30(v):
-                "bytes30(\(Hex.toHex(v)))"
+                "bytes30(\(v))"
             case let .bytes31(v):
-                "bytes31(\(Hex.toHex(v)))"
+                "bytes31(\(v))"
             case let .bytes32(v):
-                "bytes32(\(Hex.toHex(v)))"
+                "bytes32(\(v))"
             case let .string(s):
                 "string(\(s))"
             case let .arrayN(fieldType, n, fields):
@@ -1086,11 +1086,11 @@ public extension ABI {
             case let .bool(v):
                 return v.description
             case let .address(v):
-                return "\"\(Hex.toHex(v.address))\""
+                return "\"\(v.address.hex)\""
             case let .bytes(d):
-                return "\"\(Hex.toHex(d))\""
+                return "\"\(d.hex)\""
             case let .bytes1(d), let .bytes2(d), let .bytes3(d), let .bytes4(d), let .bytes5(d), let .bytes6(d), let .bytes7(d), let .bytes8(d), let .bytes9(d), let .bytes10(d), let .bytes11(d), let .bytes12(d), let .bytes13(d), let .bytes14(d), let .bytes15(d), let .bytes16(d), let .bytes17(d), let .bytes18(d), let .bytes19(d), let .bytes20(d), let .bytes21(d), let .bytes22(d), let .bytes23(d), let .bytes24(d), let .bytes25(d), let .bytes26(d), let .bytes27(d), let .bytes28(d), let .bytes29(d), let .bytes30(d), let .bytes31(d), let .bytes32(d):
-                return "\"\(Hex.toHex(d))\""
+                return "\"\(d.hex)\""
             case let .string(v):
                 return "\"\(v.description)\""
             case let .array(_, v):
@@ -1107,14 +1107,15 @@ public extension ABI {
 }
 
 /** Pads a data with 00's on the right side until it matches a 32-byte word boundary */
-private func padRightToWordBoundary(_ data: Data) -> Data {
+private func padRightToWordBoundary(_ hex: Hex) -> Data {
+    let data = hex.data
     let paddingSize = (data.count % 32 == 0) ? 0 : 32 - (data.count % 32)
     let padding = Data(repeating: 0, count: paddingSize)
     return data + padding
 }
 
 private func encodeVariableSizedData(data: Data) -> Data {
-    return EthWord(fromInt: data.count)!.data + padRightToWordBoundary(data)
+    return EthWord(fromInt: data.count)!.data + padRightToWordBoundary(Hex(data))
 }
 
 private func clamped(uint x: UInt, to limits: ClosedRange<UInt>) -> UInt {
