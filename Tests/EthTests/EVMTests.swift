@@ -1489,4 +1489,58 @@ final class EVMTests: XCTestCase {
             XCTAssertEqual(code, encodeTest.code, encodeTest.name)
         }
     }
+
+    func testRunQueryRevert() throws {
+        let errors = [ABI.Function(name: "myError", inputs: [.uint8])]
+        let code: EVM.Code = [
+            .push(4, "0x0000000000000000000000000000000000000000000000000000000011223344"),
+            .push(1, word(0)),
+            .mstore,
+            .push(1, word(4)),
+            .push(1, word(0x20 - 4)),
+            .revert,
+        ]
+
+        XCTAssertEqual(try unwrapError(EVM.runQuery(bytecode: EVM.encodeCode(code), query: "0x", withErrors: errors), as: EVM.QueryError.self), EVM.QueryError.revert("0x11223344"))
+    }
+
+    func testRunQueryError() throws {
+        let errors = [ABI.Function(name: "myError", inputs: [.uint8])]
+        let code: EVM.Code = [
+            .push(32, "0x10ff10dd00000000000000000000000000000000000000000000000000000000"),
+            .push(1, word(0)),
+            .mstore,
+            .push(32, "0x0000000000000000000000000000000000000000000000000000000000000055"),
+            .push(1, word(4)),
+            .mstore,
+            .push(1, word(0x24)),
+            .push(1, word(0)),
+            .revert,
+        ]
+
+        XCTAssertEqual(
+            try unwrapError(EVM.runQuery(bytecode: EVM.encodeCode(code), query: "0x", withErrors: errors), as: EVM.QueryError.self),
+            EVM.QueryError.error(ABI.Function(name: "myError", inputs: [.uint8]), .tuple1(.uint8(0x55)))
+        )
+    }
+
+    func testRunQueryErrorRepeating() throws {
+        let errors = [ABI.Function(name: "myError", inputs: [.uint8]), ABI.Function(name: "myError", inputs: [.uint8])]
+        let code: EVM.Code = [
+            .push(32, "0x10ff10dd00000000000000000000000000000000000000000000000000000000"),
+            .push(1, word(0)),
+            .mstore,
+            .push(32, "0x0000000000000000000000000000000000000000000000000000000000000055"),
+            .push(1, word(4)),
+            .mstore,
+            .push(1, word(0x24)),
+            .push(1, word(0)),
+            .revert,
+        ]
+
+        XCTAssertEqual(
+            try unwrapError(EVM.runQuery(bytecode: EVM.encodeCode(code), query: "0x", withErrors: errors), as: EVM.QueryError.self),
+            EVM.QueryError.error(ABI.Function(name: "myError", inputs: [.uint8]), .tuple1(.uint8(0x55)))
+        )
+    }
 }
