@@ -10,7 +10,7 @@ func createSourceFileSyntax(from contract: Contract, name: String) -> SourceFile
         try! ImportDeclSyntax("import Eth").with(\.trailingTrivia, .newline)
         try! ImportDeclSyntax("import Foundation").with(\.trailingTrivia, .newline)
 
-        try! StructDeclSyntax(leadingTrivia: .newline, name: .identifier(name, leadingTrivia: .space)) {
+        try! EnumDeclSyntax(leadingTrivia: .newline, name: .identifier(name, leadingTrivia: .space)) {
             for s in generateStructs(c: contract) {
                 s
             }

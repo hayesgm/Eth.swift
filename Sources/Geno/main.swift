@@ -1,10 +1,10 @@
 import Foundation
 
-func importAbi() throws {
+func generateSwiftFromAbi() throws {
     let arguments = CommandLine.arguments
 
     guard arguments.count > 1 else {
-        print("Usage: YourCLI <filePath> --outDir <outDir> --prefix <prefix>")
+        print("Usage: Geno <filePath> --outDir <outDir> --prefix <prefix>")
         return
     }
 
@@ -76,4 +76,4 @@ func replaceFileExtension(of fileName: String, with newExtension: String) -> Str
     return newFileName
 }
 
-try importAbi()
+try generateSwiftFromAbi()
