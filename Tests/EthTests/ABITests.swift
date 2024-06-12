@@ -2,6 +2,19 @@ import BigInt
 @testable import Eth
 import XCTest
 
+func unwrapError<T: Error, U>(_ expression: @autoclosure () throws -> U, as expectedErrorType: T.Type) -> T? {
+    do {
+        _ = try expression()
+        XCTFail("Expected error of type \(expectedErrorType) but no error was thrown")
+        return nil
+    } catch let error as T {
+        return error
+    } catch {
+        XCTFail("Expected error of type \(expectedErrorType) but got different error: \(error)")
+        return nil
+    }
+}
+
 private func word(_ x: Int) -> EthWord {
     guard let ethWord = EthWord(fromBigInt: BigInt(x)) else {
         fatalError("Invalid word in EVMTest \(x)")
@@ -566,5 +579,87 @@ final class ABITests: XCTestCase {
         for test in functionTests {
             XCTAssertEqual(try showEncoded(test.function.encoded(with: test.values)), showEncoded(test.encoded), test.name)
         }
+    }
+
+    func testFunctionExamples() throws {
+        XCTAssertEqual(
+            try ABI.Function(name: "cool", inputs: [.uint8], outputs: []).encoded(with: [.uint8(22)]),
+            Hex("0xa8cb34810000000000000000000000000000000000000000000000000000000000000016")
+        )
+
+        XCTAssertEqual(
+            try ABI.Function(name: "cool", inputs: [], outputs: [.uint8]).decode(output: "0000000000000000000000000000000000000000000000000000000000000016"),
+            ABI.Value.tuple1(.uint8(22))
+        )
+
+        XCTAssertEqual(
+            try ABI.Function(name: "myError", inputs: [.uint8]).decodeInput(input: Hex("0x10ff10dd0000000000000000000000000000000000000000000000000000000000000016")),
+            .tuple1(.uint8(22))
+        )
+
+        XCTAssertEqual(
+            ABI.Function(name: "cool", inputs: [.uint8], outputs: []).inputTuple,
+            .tuple([.uint8])
+        )
+
+        XCTAssertEqual(
+            ABI.Function(name: "cool", inputs: [.uint8], outputs: []).outputTuple,
+            .tuple([])
+        )
+
+        XCTAssertEqual(
+            ABI.Function(name: "cool", inputs: [.uint8], outputs: []).signature,
+            "cool(uint8)"
+        )
+
+        XCTAssertEqual(
+            ABI.Function(name: "cool", inputs: [.uint8], outputs: []).description,
+            "cool(uint8)"
+        )
+
+        XCTAssertEqual(
+            ABI.Function(name: "cool", inputs: [.uint8], outputs: []).signatureHash,
+            Hex("0xa8cb3481")
+        )
+
+        XCTAssertEqual(
+            try ABI.Function(name: "cool", inputs: [.uint8], outputs: []).encoded(with: [.uint8(22)]),
+            Hex("0xa8cb34810000000000000000000000000000000000000000000000000000000000000016")
+        )
+
+        XCTAssertEqual(
+            try unwrapError(ABI.Function(name: "cool", inputs: [.uint8], outputs: []).encoded(with: [.string("hello")]), as: ABI.FunctionError.self),
+            ABI.FunctionError.invalidFunctionInput(.tuple([.uint8]), .tuple([.string]))
+        )
+
+        XCTAssertEqual(
+            try ABI.Function(name: "cool", inputs: [.uint8], outputs: []).decodeInput(input: "0xa8cb34810000000000000000000000000000000000000000000000000000000000000016"),
+            .tuple1(.uint8(22))
+        )
+
+        XCTAssertEqual(
+            try ABI.Function(name: "cool", inputs: [.uint8], outputs: []).decodeInput(input: "0x0000000000000000000000000000000000000000000000000000000000000016", signatureIncluded: false),
+            .tuple1(.uint8(22))
+        )
+
+        XCTAssertEqual(
+            try unwrapError(ABI.Function(name: "cool", inputs: [.uint8], outputs: []).decodeInput(input: "0xffffffff0000000000000000000000000000000000000000000000000000000000000016"), as: ABI.FunctionError.self),
+            ABI.FunctionError.mismatchedAbiSignature("0xa8cb3481", "0xffffffff")
+        )
+
+        XCTAssertEqual(
+            try unwrapError(ABI.Function(name: "cool", inputs: [.uint8], outputs: []).encoded(with: [.string("hello")]), as: ABI.FunctionError.self),
+            ABI.FunctionError.invalidFunctionInput(.tuple([.uint8]), .tuple([.string]))
+        )
+
+        XCTAssertEqual(
+            try ABI.Function(name: "cool", inputs: [], outputs: [.uint8]).decode(output: "0x0000000000000000000000000000000000000000000000000000000000000016"),
+            .tuple1(.uint8(0x16))
+        )
+
+        XCTAssertEqual(
+            try unwrapError(ABI.Function(name: "cool", inputs: [], outputs: [.uint8]).decode(output: "0x1122"), as: ABI.DecodeError.self),
+            ABI.DecodeError.insufficientData(.uint8, "0x1122")
+        )
     }
 }

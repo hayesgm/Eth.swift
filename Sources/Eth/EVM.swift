@@ -1301,9 +1301,18 @@ public enum EVM {
         )
     }
 
-    enum QueryError: Error {
+    /**
+      An enumeration of errors that can occur during `runQuery`, such as a `revert`.
+
+      - invalidCode(CodeError): Raise when the bytecode passed in fails decoding
+      - vmError(VMError): Raised when a VM exception occurs (e.g. VMError.stackUnderflow)
+      - error(ABI.Function, ABI.Value): A wrapped error from a revert that matched an error signature passed in the `withErrors` parameter
+      - revert(Hex): For a revert that does not match any known error types.
+     */
+    enum QueryError: Error, Equatable {
         case invalidCode(CodeError)
         case vmError(VMError)
+        case error(ABI.Function, ABI.Value)
         case revert(Hex)
     }
 
@@ -1311,8 +1320,9 @@ public enum EVM {
     /// - Parameters:
     ///   - bytecode: The bytecode to be executed.
     ///   - query: The ABI-encoded function call to execute.
+    ///   - withErrors: A dictionary of known errors which we will attempt to decode from during a revert and throw a `QueryError.error`
     /// - Returns: The hex result of the execution of program successfully `RETURN`ed.
-    public static func runQuery(bytecode: Hex, query: Hex, withValue value: BigUInt = BigUInt(0)) throws -> Hex {
+    public static func runQuery(bytecode: Hex, query: Hex, withValue value: BigUInt = BigUInt(0), withErrors errors: [ABI.Function] = []) throws -> Hex {
         let code: Code
         do {
             code = try EVM.decodeCode(fromHex: bytecode)
@@ -1331,6 +1341,15 @@ public enum EVM {
             throw error
         }
         if executionResult.reverted {
+            let errorDict = Dictionary(errors.map { ($0.signatureHash, $0) }, uniquingKeysWith: { first, _ in first })
+            if executionResult.returnData.count >= 4, let error = errorDict[Hex(executionResult.returnData.data.subdata(in: 0 ..< 4))] {
+                // Note: this decoding shouldn't fail if the contract is from proper Solidity, but it's always possible,
+                //       and so we'll default to a standard revert in such a case.
+                if let value = try? error.decodeInput(input: executionResult.returnData) {
+                    throw QueryError.error(error, value)
+                }
+            }
+
             throw QueryError.revert(executionResult.returnData)
         }
         return executionResult.returnData

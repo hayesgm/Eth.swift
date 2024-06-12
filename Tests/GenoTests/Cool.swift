@@ -12,9 +12,17 @@ enum Cool {
         outputs: [.uint256]
     )
 
+    static let someErrFn = ABI.Function(
+        name: "someErr",
+        inputs: [.uint256],
+        outputs: []
+    )
+
+    static let errors: [ABI.Function] = [someErrFn]
+
     static func sum(x: BigUInt, y: BigUInt) throws -> BigUInt {
         let query = try sumFn.encoded(with: [.uint256(x), .uint256(y)])
-        let result = try EVM.runQuery(bytecode: runtimeCode, query: query)
+        let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors)
         let decoded = try sumFn.decode(output: result)
 
         switch decoded {
