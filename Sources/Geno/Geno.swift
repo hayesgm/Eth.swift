@@ -15,8 +15,8 @@ func createSourceFileSyntax(from contract: Contract, name: String) -> SourceFile
                 s
             }
 
-            try VariableDeclSyntax("static let creationCode: Data = Hex.parseHex(\"\(raw: contract.bytecode.object)\")!").with(\.trailingTrivia, .newline)
-            try VariableDeclSyntax("static let runtimeCode: Data = Hex.parseHex(\"\(raw: contract.deployedBytecode.object)\")!").with(\.trailingTrivia, .newlines(2))
+            try VariableDeclSyntax("static let creationCode: Hex = \"\(raw: contract.bytecode.object)\"").with(\.trailingTrivia, .newline)
+            try VariableDeclSyntax("static let runtimeCode: Hex = \"\(raw: contract.deployedBytecode.object)\"").with(\.trailingTrivia, .newlines(2))
 
             // Generate a swift function and {ETH.ABI.Function} for each ABI function
             for function in contract.abi {
@@ -237,7 +237,7 @@ func typeMapper(for p: Contract.ABI.Function.Parameter) -> String {
     case let type where type.starts(with: "int"):
         return "BigInt"
     case let bytesType where bytesType.starts(with: "bytes"):
-        return "Data" // Dynamically-sized bytes sequence.
+        return "Hex" // Dynamically-sized bytes sequence.
     default:
         fatalError("TypeMapperError :Unsupported type: \(p.type)")
     }
@@ -291,14 +291,14 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
                 try VariableDeclSyntax("let \(raw: c.name): \(raw: typeMapper(for: c))")
             }
 
-            try VariableDeclSyntax("var encoded: Data { asField.encoded }").with(\.trailingTrivia, .newlines(2)).with(\.leadingTrivia, .newlines(2))
+            try VariableDeclSyntax("var encoded: Hex { asField.encoded }").with(\.trailingTrivia, .newlines(2)).with(\.leadingTrivia, .newlines(2))
             try VariableDeclSyntax("var asField: ABI.Field { \(raw: parameterToMatchableFieldType(p: baseParameter, index: 0, asField: true)) }").with(\.trailingTrivia, .newlines(1))
 
             try! FunctionDeclSyntax("""
-            static func decode(data: Data) throws -> \(raw: typeMapper(for: baseParameter))
+            static func decode(hex: Hex) throws -> \(raw: typeMapper(for: baseParameter))
             """) {
                 ExprSyntax("""
-                try decodeField(schema.decode(data))
+                try decodeField(schema.decode(hex))
                 """).with(\.trailingTrivia, .newlines(2))
                     .with(\.leadingTrivia, .newlines(1))
 
@@ -366,7 +366,7 @@ func asFieldMapper(parameter: Contract.ABI.Function.Parameter, name: String = "$
         case let type where type.starts(with: "int"):
             return "$0.asBigInt!"
         case let bytesType where bytesType.starts(with: "bytes"):
-            return "$0.asData!" // Dynamically-sized bytes sequence.
+            return "$0.asHex!" // Dynamically-sized bytes sequence.
         default:
             throw NSError(domain: "TypeMapperError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unsupported type: \(parameter.type)"])
         }

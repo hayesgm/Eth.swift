@@ -10,8 +10,20 @@ public enum EVM {
     static let sOne = BigInt(1)
     static let wordZero = EthWord(fromBigInt: .zero)!
 
+    /**
+     An enumeration of errors that can occur during VM execution.
+
+     - stackUnderflow: Attempted to read data that did not exist on stack
+     - stackOverflow: 1024 or more items attempted to be stored on stack
+     - pcOutOfBounds: PC moved to a region of non-executable code. Note: may occur after an `INVALID` instruction.
+     - invalidJumpDest: `JUMP` or `JUMPI` did not move to a valid `JUMPDEST` code location.
+     - outOfMemory: Memory expanded beyond reasonable limits.
+     - invalidOperation: The `INVALID` instruction was executed.
+     - impure: The EVM only supports `pure` instructions (that is, ones that do not read any blockchain state). Such an impure instruction was executed.
+     - notImplemented: An instruction that is not currently supported was executed.
+     - unexpectedError: An unexpected error occurred. These are for truly exceptional events that should not occur.
+     */
     public enum VMError: Error, Equatable {
-        /// Errors that can occur during the execution of the EVM.
         case stackUnderflow
         case stackOverflow
         case pcOutOfBounds
@@ -23,15 +35,21 @@ public enum EVM {
         case unexpectedError(String)
     }
 
+    /**
+      Errors that occur when decoding EVM assembly code from opcodes.
+
+      - outOfBounds: Code ran outside of bounds, e.g. a `PUSH32` with insufficient data
+      - invalidOpcode: An unassigned opcode was reached. May be due to an upgraded EVM chain.
+     */
     public enum CodeError: Error, Equatable {
-        /// Errors that can occur related to EVM code.
         case outOfBounds
         case invalidOpcode(UInt8)
     }
 
+    /// Inputs to an EVM call. That is, the `calldata` and ETH `value`.
     public struct CallInput {
-        let data: Data
-        let value: BigUInt
+        public let calldata: Hex
+        public let value: BigUInt
 
         /// Reads data from the call input with zero padding if necessary.
         /// - Parameters:
@@ -39,7 +57,7 @@ public enum EVM {
         ///   - bytes: The number of bytes to read.
         /// - Returns: The requested data with zero padding if out of bounds.
         func readData(offset: Int, bytes: Int) -> Data {
-            EVM.readZeroPaddedData(offset: offset, bytes: bytes, fromData: data)
+            EVM.readZeroPaddedData(offset: offset, bytes: bytes, fromData: calldata.data)
         }
     }
 
@@ -55,7 +73,10 @@ public enum EVM {
         return paddedData.subdata(in: offset ..< (offset + sz))
     }
 
+    /// An alias for an array of `Operation`s representing an executable EVM program.
     public typealias Code = [Operation]
+
+    /// A structure to store the VM stack during execution of an EVM program.
     public typealias Stack = [EthWord]
 
     struct Context {
@@ -76,7 +97,7 @@ public enum EVM {
             opMap = Context.buildOpMap(code: code)
         }
 
-        var codeEncoded: Data {
+        var codeEncoded: Hex {
             encodeCode(code)
         }
 
@@ -182,12 +203,19 @@ public enum EVM {
         }
     }
 
+    /// The results of an EVM execution.
     public struct ExecutionResult: Equatable {
-        let stack: Stack
-        let reverted: Bool
-        let returnData: Data
+        /// The final stack when the program stopped (e.g. via `STOP`, `REVERT` or `RETURN`)
+        public let stack: Stack
+
+        /// Whether or not the program stopped due to a `REVERT` operation.
+        public let reverted: Bool
+
+        /// The `returnData` from either a `RETURN` or `REVERT`. See the `reverted` flag to determine which.
+        public let returnData: Hex
     }
 
+    /// A mapping of all known EVM operations.
     public enum Operation: Equatable {
         case stop
         case add
@@ -270,7 +298,7 @@ public enum EVM {
         case create2
         case staticcall
         case revert
-        case invalid(Data)
+        case invalid(Hex)
         case selfdestruct
 
         public var description: String {
@@ -437,8 +465,8 @@ public enum EVM {
                 return "staticcall"
             case .revert:
                 return "revert"
-            case let .invalid(data):
-                return "invalid(\(Hex.toHex(data)))"
+            case let .invalid(hex):
+                return "invalid(\(hex))"
             case .selfdestruct:
                 return "selfdestruct"
             }
@@ -448,8 +476,8 @@ public enum EVM {
             switch self {
             case let .push(n, _):
                 n + 1
-            case let .invalid(data):
-                data.count + 1
+            case let .invalid(hex):
+                hex.count + 1
             default:
                 1
             }
@@ -611,13 +639,13 @@ public enum EVM {
                 return [0xFA]
             case .revert:
                 return [0xFD]
-            case let .invalid(data):
-                return [0xFE] + data
+            case let .invalid(hex):
+                return [0xFE] + hex.data
             case .selfdestruct:
                 return [0xFF]
             case let .push(n, value):
                 let prefix = [0x5F + UInt8(n)]
-                let dataBytes = Array(value.data.suffix(n))
+                let dataBytes = Array(value.hex.data.suffix(n))
                 return prefix + dataBytes
             case let .dup(n):
                 return [0x80 + UInt8(n) - 1]
@@ -788,7 +816,7 @@ public enum EVM {
             case 0xFD:
                 return .revert
             case 0xFE:
-                return .invalid(encodedCode.dropFirst())
+                return .invalid(Hex(encodedCode.dropFirst()))
             case 0xFF:
                 return .selfdestruct
             default:
@@ -799,7 +827,7 @@ public enum EVM {
                         throw CodeError.outOfBounds
                     }
                     let data = encodedCode.dropFirst().prefix(sz)
-                    return .push(sz, EthWord(dataExtending: Data(data))!)
+                    return .push(sz, EthWord(hexExtending: Hex(Data(data)))!)
                 } else if byte >= 0x80 && byte < 0x90 {
                     return .dup(Int(byte - 0x80) + 1)
                 } else if byte >= 0x90 && byte < 0xA0 {
@@ -813,15 +841,18 @@ public enum EVM {
         }
     }
 
-    public static func encodeCode(_ code: Code) -> Data {
+    /// Encodes an EVM program into opcodes.
+    public static func encodeCode(_ code: Code) -> Hex {
         var res = Data()
         for operation in code {
             res += operation.encoded
         }
-        return res
+        return Hex(res)
     }
 
-    public static func decodeCode(fromData data: Data) throws -> Code {
+    /// Decodes an EVM program from Hex. Throws if the program is invalid.
+    public static func decodeCode(fromHex hex: Hex) throws -> Code {
+        let data = hex.data
         let dataSize = data.count
         var code: Code = []
         var index = 0
@@ -876,9 +907,9 @@ public enum EVM {
     private static func wrappedBinaryOp1(a: EthWord, _ fn: (UInt8) -> UInt8) throws -> EthWord {
         var result = Data(count: 32)
         for i in 0 ..< 32 {
-            result[i] = fn(a.data[i])
+            result[i] = fn(a.hex.data[i])
         }
-        return EthWord(result)!
+        return EthWord(Hex(result))!
     }
 
     private static func wrappedBinaryOp2(a: EthWord, b: EthWord, _ fn: (UInt8, UInt8) -> UInt8) throws -> EthWord {
@@ -886,7 +917,7 @@ public enum EVM {
         for i in 0 ..< 32 {
             result[i] = fn(a.data[i], b.data[i])
         }
-        return EthWord(result)!
+        return EthWord(Hex(result))!
     }
 
     private static func unsignedOp1(_ context: inout Context, _ fn: (BigUInt) -> BigUInt) throws {
@@ -934,7 +965,7 @@ public enum EVM {
             for i in 0 ..< 31 - b_ {
                 res[i] = 0xFF
             }
-            guard let value = EthWord(res) else {
+            guard let value = EthWord(fromData: res) else {
                 throw VMError.unexpectedError("Sign extend data too large")
             }
             return value
@@ -971,7 +1002,7 @@ public enum EVM {
                     return wordZero
                 case .minus:
                     // Max negative shift: all bits set=
-                    return EthWord(hex: "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")!
+                    return EthWord(fromHexString: "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")!
                 }
             }
 
@@ -1001,7 +1032,7 @@ public enum EVM {
                 throw VMError.outOfMemory
             }
             let data = try context.memoryRead(offset: offset_, bytes: 32)
-            guard let value = EthWord(data) else {
+            guard let value = EthWord(fromData: data) else {
                 throw VMError.unexpectedError("Data read too large")
             }
             return value
@@ -1012,7 +1043,7 @@ public enum EVM {
                 return wordZero
             }
             let data = input.readData(offset: i_, bytes: 32)
-            guard let value = EthWord(data) else {
+            guard let value = EthWord(fromData: data) else {
                 throw VMError.unexpectedError("Call data read too large")
             }
             return value
@@ -1044,7 +1075,7 @@ public enum EVM {
                 throw VMError.outOfMemory
             }
             let data = try performRead(offset: offset, size: size) { offset, bytes in
-                readZeroPaddedData(offset: offset, bytes: bytes, fromData: context.codeEncoded)
+                readZeroPaddedData(offset: offset, bytes: bytes, fromData: context.codeEncoded.data)
             }
             try context.memoryWrite(offset: destOffset_, value: data)
         }
@@ -1101,7 +1132,7 @@ public enum EVM {
             }
             let data = try context.memoryRead(offset: offset_, bytes: size_)
             let hash = SwiftKeccak.keccak256(data)
-            guard let hashWord = EthWord(hash) else {
+            guard let hashWord = EthWord(fromData: hash) else {
                 throw VMError.unexpectedError("hash does not fit in word")
             }
             return hashWord
@@ -1177,7 +1208,7 @@ public enum EVM {
             let i = try context.pop()
             try context.push(Op.calldataload(i: i, withInput: input))
         case .calldatasize:
-            guard let calldataSize = EthWord(fromInt: input.data.count) else {
+            guard let calldataSize = EthWord(fromInt: input.calldata.count) else {
                 throw VMError.unexpectedError("Invalid calldata size")
             }
             try context.push(calldataSize)
@@ -1253,7 +1284,7 @@ public enum EVM {
         #endif
     }
 
-    /// Executes the Ethereum Virtual Machine (EVM) with the given code and input.
+    /// Executes the Ethereum Virtual Machine (EVM) with the given `code` and `input`.
     /// - Parameters:
     ///   - code: The bytecode to be executed.
     ///   - input: The input data for the execution.
@@ -1266,26 +1297,31 @@ public enum EVM {
         return ExecutionResult(
             stack: context.stack,
             reverted: context.reverted,
-            returnData: context.returnData
+            returnData: Hex(context.returnData)
         )
     }
 
     enum QueryError: Error {
         case invalidCode(CodeError)
         case vmError(VMError)
-        case revert(Data)
+        case revert(Hex)
     }
 
-    public static func runQuery(bytecode: Data, query: Data, withValue value: BigUInt = BigUInt(0)) throws -> Data {
+    /// Executes the Ethereum Virtual Machine (EVM) with the given `code` and `input`, returning the `RETURN` result. Throws on `REVERT` or other VM error.
+    /// - Parameters:
+    ///   - bytecode: The bytecode to be executed.
+    ///   - query: The ABI-encoded function call to execute.
+    /// - Returns: The hex result of the execution of program successfully `RETURN`ed.
+    public static func runQuery(bytecode: Hex, query: Hex, withValue value: BigUInt = BigUInt(0)) throws -> Hex {
         let code: Code
         do {
-            code = try EVM.decodeCode(fromData: bytecode)
+            code = try EVM.decodeCode(fromHex: bytecode)
         } catch let error as CodeError {
             throw QueryError.invalidCode(error)
         } catch {
             throw error
         }
-        let input = CallInput(data: query, value: value)
+        let input = CallInput(calldata: query, value: value)
         let executionResult: ExecutionResult
         do {
             executionResult = try EVM.execVm(code: code, withInput: input)
@@ -1315,7 +1351,7 @@ extension EVM.VMError: LocalizedError {
         case .outOfMemory:
             return NSLocalizedString("Memory read or write out of bounds.", comment: "Out-of-Memory Error")
         case .invalidOperation:
-            return NSLocalizedString("Invalid operation (INVALID) was executed.", comment: "Invalid Operation")
+            return NSLocalizedString("Invalid operation `INVALID` was executed.", comment: "Invalid Operation")
         case let .impure(operation):
             return NSLocalizedString("Failed to execute impure operation \(operation.description)", comment: "Impure Operation")
         case let .notImplemented(operation):

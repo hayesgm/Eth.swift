@@ -9,17 +9,13 @@ private func word(_ x: Int) -> EthWord {
     return ethWord
 }
 
-private func hex(_ data: String) -> Data {
-    Hex.parseHex(data)!
-}
-
-private func hexes(_ items: [Any]) -> Data {
-    return items.map { v in
+private func hexes(_ items: [Any]) -> Hex {
+    return Hex(items.map { v in
         if let v = v as? Int {
             return word(v).data
         } else if let v = v as? String {
-            if let hex = Hex.parseHex(v) {
-                return hex
+            if let hex = Hex(hex: v) {
+                return hex.data
             } else {
                 if let enc = v.data(using: .utf8) {
                     return enc + Data(repeating: 0, count: 32 - enc.count)
@@ -27,6 +23,8 @@ private func hexes(_ items: [Any]) -> Data {
                     fatalError("Failed to encode string to data: \(v)")
                 }
             }
+        } else if let v = v as? Hex {
+            return v.data + Data(repeating: 0, count: 32 - v.count)
         } else if let v = v as? Data {
             return v + Data(repeating: 0, count: 32 - v.count)
         } else if let v = v as? EthWord {
@@ -34,17 +32,17 @@ private func hexes(_ items: [Any]) -> Data {
         } else {
             fatalError("Unknown hexes value: \(v)")
         }
-    }.reduce(Data()) { $0 + $1 }
+    }.reduce(Data()) { $0 + $1 })
 }
 
 struct CodingTest {
     let name: String
     let input: ABI.Field
-    let encoded: Data
+    let encoded: Hex
     let expectedDecodeError: ABI.DecodeError?
     let only: Bool
 
-    init(name: String, input: ABI.Field, encoded: Data, only: Bool = false) {
+    init(name: String, input: ABI.Field, encoded: Hex, only: Bool = false) {
         self.name = name
         self.input = input
         self.encoded = encoded
@@ -52,7 +50,7 @@ struct CodingTest {
         self.only = only
     }
 
-    init(input: ABI.Field, encoded: Data, only: Bool = false) {
+    init(input: ABI.Field, encoded: Hex, only: Bool = false) {
         name = input.description
         self.input = input
         self.encoded = encoded
@@ -60,7 +58,7 @@ struct CodingTest {
         self.only = only
     }
 
-    init(name _: String, input: ABI.Field, encoded: Data, expError expectedDecodeError: ABI.DecodeError, only: Bool = false) {
+    init(name _: String, input: ABI.Field, encoded: Hex, expError expectedDecodeError: ABI.DecodeError, only: Bool = false) {
         name = "[DecodeTest] \(input.description)"
         self.input = input
         self.encoded = encoded
@@ -73,99 +71,99 @@ let codingTests: [CodingTest] =
     [
         CodingTest(
             input: .uint8(0x37),
-            encoded: hex("0x0000000000000000000000000000000000000000000000000000000000000037")
+            encoded: "0x0000000000000000000000000000000000000000000000000000000000000037"
         ),
         CodingTest(
             name: "Unsigned Integer Overflow",
             input: .uint8(0x137),
-            encoded: hex("0x0000000000000000000000000000000000000000000000000000000000000137"),
-            expError: ABI.DecodeError.sizedUnsignedIntegerOverflow(8, hex("0x0000000000000000000000000000000000000000000000000000000000000137"))
+            encoded: "0x0000000000000000000000000000000000000000000000000000000000000137",
+            expError: ABI.DecodeError.sizedUnsignedIntegerOverflow(8, "0x0000000000000000000000000000000000000000000000000000000000000137")
         ),
 
         CodingTest(
             input: .int8(0x37),
-            encoded: hex("0x0000000000000000000000000000000000000000000000000000000000000037")
+            encoded: "0x0000000000000000000000000000000000000000000000000000000000000037"
         ),
         CodingTest(
             input: .int8(-0x02),
-            encoded: hex("0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe")
+            encoded: "0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe"
         ),
         CodingTest(
             input: .int16(-257),
-            encoded: hex("0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffeff")
+            encoded: "0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffeff"
         ),
         CodingTest(
             name: "Signed Integer Overflow Negative",
             input: .int8(-257),
-            encoded: hex("0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffeff"),
-            expError: ABI.DecodeError.sizedSignedIntegerOverflow(8, hex("0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffeff"))
+            encoded: "0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffeff",
+            expError: ABI.DecodeError.sizedSignedIntegerOverflow(8, "0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffeff")
         ),
         CodingTest(
             name: "Signed Integer Overflow Positive",
             input: .int8(0x137),
-            encoded: hex("0x0000000000000000000000000000000000000000000000000000000000000137"),
-            expError: ABI.DecodeError.sizedSignedIntegerOverflow(8, hex("0x0000000000000000000000000000000000000000000000000000000000000137"))
+            encoded: "0x0000000000000000000000000000000000000000000000000000000000000137",
+            expError: ABI.DecodeError.sizedSignedIntegerOverflow(8, "0x0000000000000000000000000000000000000000000000000000000000000137")
         ),
         CodingTest(
             name: "Too Little data",
             input: .uint8(0x37),
-            encoded: hex("0x1122"),
-            expError: ABI.DecodeError.insufficientData(.uint8, hex("0x1122"))
+            encoded: "0x1122",
+            expError: ABI.DecodeError.insufficientData(.uint8, "0x1122")
         ),
         CodingTest(
             name: "Too Much data",
             input: .uint8(0x37),
             encoded: hexes([word(1), word(2)]),
-            expError: ABI.DecodeError.excessData(.uint8, hex("0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002"))
+            expError: ABI.DecodeError.excessData(.uint8, "0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002")
         ),
         CodingTest(
             input: .string("hello"),
-            encoded: hex("0x000000000000000000000000000000000000000000000000000000000000000568656c6c6f000000000000000000000000000000000000000000000000000000")
+            encoded: "0x000000000000000000000000000000000000000000000000000000000000000568656c6c6f000000000000000000000000000000000000000000000000000000"
         ),
         CodingTest(
             name: "String minor overflow",
             input: .string("hello"),
-            encoded: hex("0x000000000000000000000000000000000000000000000000000000000000003368656c6c6f000000000000000000000000000000000000000000000000000000"),
-            expError: ABI.DecodeError.insufficientData(.string, hex("0x68656c6c6f000000000000000000000000000000000000000000000000000000"))
+            encoded: "0x000000000000000000000000000000000000000000000000000000000000003368656c6c6f000000000000000000000000000000000000000000000000000000",
+            expError: ABI.DecodeError.insufficientData(.string, "0x68656c6c6f000000000000000000000000000000000000000000000000000000")
         ),
         CodingTest(
             name: "String mega overflow",
             input: .string("hello"),
-            encoded: hex("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff68656c6c6f000000000000000000000000000000000000000000000000000000"),
-            expError: ABI.DecodeError.integerOverflow(.string, hex("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"))
+            encoded: "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff68656c6c6f000000000000000000000000000000000000000000000000000000",
+            expError: ABI.DecodeError.integerOverflow(.string, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
         ),
         CodingTest(
             name: "String no data",
             input: .string("hello"),
-            encoded: hex(""),
+            encoded: "",
             // TODO: Improve this error a bit?
-            expError: ABI.DecodeError.insufficientData(.string, hex(""))
+            expError: ABI.DecodeError.insufficientData(.string, "")
         ),
         CodingTest(
             name: "String too few words",
             input: .string("hello"),
-            encoded: hex("0x0000000000000000000000000000000000000000000000000000000000000005"),
+            encoded: "0x0000000000000000000000000000000000000000000000000000000000000005",
             // TODO: Improve this error a bit?
-            expError: ABI.DecodeError.insufficientData(.string, hex(""))
+            expError: ABI.DecodeError.insufficientData(.string, "")
         ),
         CodingTest(
             name: "String too much data",
             input: .string("hello"),
-            encoded: hex("0x000000000000000000000000000000000000000000000000000000000000000568656c6c6f00000000000000000000000000000000000000000000000000000011"),
+            encoded: "0x000000000000000000000000000000000000000000000000000000000000000568656c6c6f00000000000000000000000000000000000000000000000000000011",
             // TODO: Improve this error a bit?
-            expError: ABI.DecodeError.excessData(.string, hex("0x68656c6c6f00000000000000000000000000000000000000000000000000000011"))
+            expError: ABI.DecodeError.excessData(.string, "0x68656c6c6f00000000000000000000000000000000000000000000000000000011")
         ),
         CodingTest(
             name: "String length too big",
             input: .string("hello"),
-            encoded: hex("0xff00000000000000000000000000000000000000000000000000000000000000"),
+            encoded: "0xff00000000000000000000000000000000000000000000000000000000000000",
             // TODO: Improve this error a bit?
-            expError: ABI.DecodeError.integerOverflow(.string, hex("0xff00000000000000000000000000000000000000000000000000000000000000"))
+            expError: ABI.DecodeError.integerOverflow(.string, "0xff00000000000000000000000000000000000000000000000000000000000000")
         ),
         CodingTest(
             name: "Static Tuple",
             input: .tuple2(.uint8(0x37), .uint8(0x38)),
-            encoded: hex("0x00000000000000000000000000000000000000000000000000000000000000370000000000000000000000000000000000000000000000000000000000000038")
+            encoded: "0x00000000000000000000000000000000000000000000000000000000000000370000000000000000000000000000000000000000000000000000000000000038"
         ),
         CodingTest(
             name: "Dynamic Tuple",
@@ -174,83 +172,83 @@ let codingTests: [CodingTest] =
         ),
         CodingTest(
             name: "Bytes",
-            input: .bytes(hex("0x5566")),
-            encoded: hexes([0x02, hex("0x5566")])
+            input: .bytes("0x5566"),
+            encoded: hexes([0x02, Hex("0x5566")])
         ),
         CodingTest(
             name: "Bytes (2 Words)",
-            input: .bytes(hex("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff112233")),
-            encoded: hexes([0x23, hex("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"), hex("0x112233")])
+            input: .bytes("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff112233"),
+            encoded: hexes([0x23, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", Hex("0x112233")])
         ),
         CodingTest(
             name: "Tuple(Bytes)",
-            input: .tuple1(.bytes(hex("0x5566"))),
-            encoded: hexes([0x20, /* Heap (0x20) */ 0x02, hex("0x5566")])
+            input: .tuple1(.bytes("0x5566")),
+            encoded: hexes([0x20, /* Heap (0x20) */ 0x02, Hex("0x5566")])
         ),
         CodingTest(
             name: "Bytes - Mega Overflow",
-            input: .bytes(hex("0xff")),
-            encoded: hex("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff68656c6c6f000000000000000000000000000000000000000000000000000000"),
-            expError: ABI.DecodeError.integerOverflow(.bytes, hex("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"))
+            input: .bytes("0xff"),
+            encoded: "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff68656c6c6f000000000000000000000000000000000000000000000000000000",
+            expError: ABI.DecodeError.integerOverflow(.bytes, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
         ),
         CodingTest(
             name: "Tuple(Bytes) - minor overflow",
-            input: .tuple1(.bytes(Data())),
-            encoded: hex("0x0000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000003368656c6c6f000000000000000000000000000000000000000000000000000000"),
-            expError: ABI.DecodeError.insufficientData(.bytes, hex("0x68656c6c6f000000000000000000000000000000000000000000000000000000"))
+            input: .tuple1(.bytes(.empty)),
+            encoded: "0x0000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000003368656c6c6f000000000000000000000000000000000000000000000000000000",
+            expError: ABI.DecodeError.insufficientData(.bytes, "0x68656c6c6f000000000000000000000000000000000000000000000000000000")
         ),
         CodingTest(
             name: "Tuple(Bytes) mega overflow",
-            input: .tuple1(.bytes(Data())),
-            encoded: hex("0x0000000000000000000000000000000000000000000000000000000000000020ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff68656c6c6f000000000000000000000000000000000000000000000000000000"),
-            expError: ABI.DecodeError.integerOverflow(.bytes, hex("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"))
+            input: .tuple1(.bytes(.empty)),
+            encoded: "0x0000000000000000000000000000000000000000000000000000000000000020ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff68656c6c6f000000000000000000000000000000000000000000000000000000",
+            expError: ABI.DecodeError.integerOverflow(.bytes, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
         ),
         CodingTest(
             name: "Bytes1",
-            input: .bytes1(hex("0x55")),
-            encoded: hex("0x5500000000000000000000000000000000000000000000000000000000000000")
+            input: .bytes1("0x55"),
+            encoded: "0x5500000000000000000000000000000000000000000000000000000000000000"
         ),
         CodingTest(
             name: "Overflow Bytes1",
-            input: .bytes1(hex("0x55")),
-            encoded: hex("0x55FF000000000000000000000000000000000000000000000000000000000000"),
-            expError: ABI.DecodeError.nonEmptyDataFound(.bytes1, hex("0x55FF000000000000000000000000000000000000000000000000000000000000"))
+            input: .bytes1("0x55"),
+            encoded: "0x55FF000000000000000000000000000000000000000000000000000000000000",
+            expError: ABI.DecodeError.nonEmptyDataFound(.bytes1, "0x55FF000000000000000000000000000000000000000000000000000000000000")
         ),
         CodingTest(
             name: "Bytes2",
-            input: .bytes2(hex("0x55DD")),
-            encoded: hex("0x55DD000000000000000000000000000000000000000000000000000000000000")
+            input: .bytes2("0x55DD"),
+            encoded: "0x55DD000000000000000000000000000000000000000000000000000000000000"
         ),
         CodingTest(
-            input: .bytes32(hex("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")),
-            encoded: hex("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
+            input: .bytes32("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"),
+            encoded: "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
         ),
         CodingTest(
             name: "Bool True",
             input: .bool(true),
-            encoded: hex("0x0000000000000000000000000000000000000000000000000000000000000001")
+            encoded: "0x0000000000000000000000000000000000000000000000000000000000000001"
         ),
         CodingTest(
             name: "Bool False",
             input: .bool(false),
-            encoded: hex("0x0000000000000000000000000000000000000000000000000000000000000000")
+            encoded: "0x0000000000000000000000000000000000000000000000000000000000000000"
         ),
         CodingTest(
             name: "Bool Overflow",
             input: .bool(true),
-            encoded: hex("0x0000000000000000000000000000000000000000000000000000000000000002"),
-            expError: ABI.DecodeError.sizedUnsignedIntegerOverflow(1, hex("0x0000000000000000000000000000000000000000000000000000000000000002"))
+            encoded: "0x0000000000000000000000000000000000000000000000000000000000000002",
+            expError: ABI.DecodeError.sizedUnsignedIntegerOverflow(1, "0x0000000000000000000000000000000000000000000000000000000000000002")
         ),
         CodingTest(
             name: "Address",
             input: .address(EthAddress("0x1000000000000000000000000000000000000002")),
-            encoded: hex("0x0000000000000000000000001000000000000000000000000000000000000002")
+            encoded: "0x0000000000000000000000001000000000000000000000000000000000000002"
         ),
         CodingTest(
             name: "Address Non-Empty Data",
             input: .address(EthAddress("0x1000000000000000000000000000000000000002")),
-            encoded: hex("0x1100000000000000000000001000000000000000000000000000000000000002"),
-            expError: ABI.DecodeError.nonEmptyDataFound(.address, hex("0x1100000000000000000000001000000000000000000000000000000000000002"))
+            encoded: "0x1100000000000000000000001000000000000000000000000000000000000002",
+            expError: ABI.DecodeError.nonEmptyDataFound(.address, "0x1100000000000000000000001000000000000000000000000000000000000002")
         ),
         CodingTest(
             name: "Variable-Length Array with Static Elements",
@@ -266,7 +264,7 @@ let codingTests: [CodingTest] =
             name: "Variable-Length Array with Static Elements - InsufficientData",
             input: .array(.uint8, []),
             encoded: hexes(["0x000000000000000000000000000000000000000000000000000000000000"]),
-            expError: ABI.DecodeError.insufficientData(.uint8, hex("0x000000000000000000000000000000000000000000000000000000000000"))
+            expError: ABI.DecodeError.insufficientData(.uint8, "0x000000000000000000000000000000000000000000000000000000000000")
         ),
         CodingTest(
             name: "Variable-Length Array with Dynamic Elements",
@@ -348,8 +346,7 @@ let codingTests: [CodingTest] =
                 0x07,
                 "goodbye",
             ]),
-            expError: ABI.DecodeError.invalidDataHeapPointer(.string, 0x40, 0x100, hex("0x00000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000568656c6c6f0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000007676f6f6462796500000000000000000000000000000000000000000000000000")),
-            only: true
+            expError: ABI.DecodeError.invalidDataHeapPointer(.string, 0x40, 0x100, "0x00000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000568656c6c6f0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000007676f6f6462796500000000000000000000000000000000000000000000000000")
         ),
         CodingTest(
             name: "Tuple - Invalid Data Pointer - Backwards",
@@ -362,7 +359,7 @@ let codingTests: [CodingTest] =
                 0x07,
                 "goodbye",
             ]),
-            expError: ABI.DecodeError.invalidDataHeapPointer(.string, 0x40, 0x20, hex("0x00000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000568656c6c6f0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000007676f6f6462796500000000000000000000000000000000000000000000000000"))
+            expError: ABI.DecodeError.invalidDataHeapPointer(.string, 0x40, 0x20, "0x00000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000568656c6c6f0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000007676f6f6462796500000000000000000000000000000000000000000000000000")
         ),
         CodingTest(
             name: "Tuple - Invalid Data Pointer - Repeat Data",
@@ -373,7 +370,7 @@ let codingTests: [CodingTest] =
                 0x05,
                 "hello",
             ]),
-            expError: ABI.DecodeError.invalidDataHeapPointer(.string, 0x40, 0x40, hex("0x00000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000568656c6c6f000000000000000000000000000000000000000000000000000000"))
+            expError: ABI.DecodeError.invalidDataHeapPointer(.string, 0x40, 0x40, "0x00000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000568656c6c6f000000000000000000000000000000000000000000000000000000")
         ),
         CodingTest(
             name: "Tuple - Invalid Data Pointer - Invalid Alignment",
@@ -386,12 +383,12 @@ let codingTests: [CodingTest] =
                 0x07,
                 "goodbye",
             ]),
-            expError: ABI.DecodeError.invalidDataHeapPointer(.string, 0x40, 0x81, hex("0x00000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000081000000000000000000000000000000000000000000000000000000000000000568656c6c6f0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000007676f6f6462796500000000000000000000000000000000000000000000000000"))
+            expError: ABI.DecodeError.invalidDataHeapPointer(.string, 0x40, 0x81, "0x00000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000081000000000000000000000000000000000000000000000000000000000000000568656c6c6f0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000007676f6f6462796500000000000000000000000000000000000000000000000000")
         ),
     ]
 
-func showEncoded(_ encoded: Data) -> String {
-    "ABI Encoded ⬇️\n\n\t\t\(EthUtil.showChunkedWords(encoded))\n\n"
+func showEncoded(_ encoded: Hex) -> String {
+    "ABI Encoded ⬇️\n\n\t\t\(EthUtil.showChunkedWords(encoded.data))\n\n"
 }
 
 func showHelp(_ field: ABI.Field) -> String? {
@@ -411,11 +408,11 @@ struct FunctionTest {
     let name: String
     let function: ABI.Function
     let fields: [ABI.Field]
-    let encoded: Data
+    let encoded: Hex
     let expectedFunctionError: ABI.FunctionError?
     let expectedDecodeError: ABI.DecodeError?
 
-    init(name: String, function: ABI.Function, fields: [ABI.Field], encoded: Data) {
+    init(name: String, function: ABI.Function, fields: [ABI.Field], encoded: Hex) {
         self.name = name
         self.function = function
         self.fields = fields
@@ -424,7 +421,7 @@ struct FunctionTest {
         expectedDecodeError = nil
     }
 
-    init(function: ABI.Function, fields: [ABI.Field], encoded: Data) {
+    init(function: ABI.Function, fields: [ABI.Field], encoded: Hex) {
         name = function.signature
         self.function = function
         self.fields = fields
@@ -433,14 +430,14 @@ struct FunctionTest {
         expectedDecodeError = nil
     }
 
-    // init(input: ABI.Field, encoded: Data) {
+    // init(input: ABI.Field, encoded: Hex) {
     //     name = input.description
     //     self.input = input
     //     self.encoded = encoded
     //     expectedDecodeError = nil
     // }
 
-    // init(name _: String, input: ABI.Field, encoded: Data, expError expectedDecodeError: ABI.DecodeError) {
+    // init(name _: String, input: ABI.Field, encoded: Hex, expError expectedDecodeError: ABI.DecodeError) {
     //     name = "[DecodeTest] \(input.description)"
     //     self.input = input
     //     self.encoded = encoded
@@ -456,7 +453,7 @@ let functionTests = [
             outputs: []
         ),
         fields: [.uint8(0x37)],
-        encoded: hex("0xa8cb34810000000000000000000000000000000000000000000000000000000000000037")
+        encoded: "0xa8cb34810000000000000000000000000000000000000000000000000000000000000037"
     ),
     FunctionTest(
         function: ABI.Function(
@@ -465,7 +462,7 @@ let functionTests = [
             outputs: []
         ),
         fields: [.uint8(19), .tuple3(.uint8(22), .string("hello"), .uint8(33))],
-        encoded: hex("0xcd4d69f600000000000000000000000000000000000000000000000000000000000000130000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000001600000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000021000000000000000000000000000000000000000000000000000000000000000568656c6c6f000000000000000000000000000000000000000000000000000000")
+        encoded: "0xcd4d69f600000000000000000000000000000000000000000000000000000000000000130000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000001600000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000021000000000000000000000000000000000000000000000000000000000000000568656c6c6f000000000000000000000000000000000000000000000000000000"
     ),
 ]
 
@@ -480,41 +477,41 @@ final class ABITests: XCTestCase {
         let invalidNSString = NSString(data: invalidUTF8Data, encoding: String.Encoding.ascii.rawValue)
         let invalidString = invalidNSString as String?
 
-        XCTAssertEqual(Hex.toHex(ABI.Field.string(invalidString!).encoded), Hex.toHex(hex("0x0000000000000000000000000000000000000000000000000000000000000003c383280000000000000000000000000000000000000000000000000000000000")))
+        XCTAssertEqual(ABI.Field.string(invalidString!).encoded.hex, "0x0000000000000000000000000000000000000000000000000000000000000003c383280000000000000000000000000000000000000000000000000000000000")
     }
 
     func testSmallUIntClamped() throws {
-        XCTAssertEqual(Hex.toHex(ABI.Field.uint8(300).encoded), Hex.toHex(hex("0x00000000000000000000000000000000000000000000000000000000000000ff")))
-        XCTAssertEqual(Hex.toHex(ABI.Field.uint16(0x10000).encoded), Hex.toHex(hex("0x000000000000000000000000000000000000000000000000000000000000ffff")))
-        XCTAssertEqual(Hex.toHex(ABI.Field.uint24(0x1000000).encoded), Hex.toHex(hex("0x0000000000000000000000000000000000000000000000000000000000ffffff")))
-        XCTAssertEqual(Hex.toHex(ABI.Field.uint32(0x1_0000_0000).encoded), Hex.toHex(hex("0x00000000000000000000000000000000000000000000000000000000ffffffff")))
+        XCTAssertEqual(ABI.Field.uint8(300).encoded.hex, "0x00000000000000000000000000000000000000000000000000000000000000ff")
+        XCTAssertEqual(ABI.Field.uint16(0x10000).encoded.hex, "0x000000000000000000000000000000000000000000000000000000000000ffff")
+        XCTAssertEqual(ABI.Field.uint24(0x1000000).encoded.hex, "0x0000000000000000000000000000000000000000000000000000000000ffffff")
+        XCTAssertEqual(ABI.Field.uint32(0x1_0000_0000).encoded.hex, "0x00000000000000000000000000000000000000000000000000000000ffffffff")
     }
 
     func testLargeUIntClamped() throws {
-        XCTAssertEqual(Hex.toHex(ABI.Field.uint40(BigUInt(1) << 39).encoded), Hex.toHex(hex("0x0000000000000000000000000000000000000000000000000000008000000000")))
-        XCTAssertEqual(Hex.toHex(ABI.Field.uint40(BigUInt(1) << 41).encoded), Hex.toHex(hex("0x000000000000000000000000000000000000000000000000000000ffffffffff")))
-        XCTAssertEqual(Hex.toHex(ABI.Field.uint256(BigUInt(1) << 257).encoded), Hex.toHex(hex("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")))
+        XCTAssertEqual(ABI.Field.uint40(BigUInt(1) << 39).encoded.hex, "0x0000000000000000000000000000000000000000000000000000008000000000")
+        XCTAssertEqual(ABI.Field.uint40(BigUInt(1) << 41).encoded.hex, "0x000000000000000000000000000000000000000000000000000000ffffffffff")
+        XCTAssertEqual(ABI.Field.uint256(BigUInt(1) << 257).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
     }
 
     func testSmallIntClamped() throws {
-        XCTAssertEqual(Hex.toHex(ABI.Field.int8(100).encoded), Hex.toHex(hex("0x0000000000000000000000000000000000000000000000000000000000000064")))
-        XCTAssertEqual(Hex.toHex(ABI.Field.int8(200).encoded), Hex.toHex(hex("0x000000000000000000000000000000000000000000000000000000000000007f")))
-        XCTAssertEqual(Hex.toHex(ABI.Field.int8(-200).encoded), Hex.toHex(hex("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80")))
-        XCTAssertEqual(Hex.toHex(ABI.Field.int16(99999).encoded), Hex.toHex(hex("0x0000000000000000000000000000000000000000000000000000000000007fff")))
-        XCTAssertEqual(Hex.toHex(ABI.Field.int16(-99999).encoded), Hex.toHex(hex("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8000")))
-        XCTAssertEqual(Hex.toHex(ABI.Field.int24(0x1000000).encoded), Hex.toHex(hex("0x00000000000000000000000000000000000000000000000000000000007fffff")))
-        XCTAssertEqual(Hex.toHex(ABI.Field.int24(-0x1000000).encoded), Hex.toHex(hex("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffff800000")))
-        XCTAssertEqual(Hex.toHex(ABI.Field.int32(0x1_0000_0000).encoded), Hex.toHex(hex("0x000000000000000000000000000000000000000000000000000000007fffffff")))
-        XCTAssertEqual(Hex.toHex(ABI.Field.int32(-0x1_0000_0000).encoded), Hex.toHex(hex("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffff80000000")))
+        XCTAssertEqual(ABI.Field.int8(100).encoded.hex, "0x0000000000000000000000000000000000000000000000000000000000000064")
+        XCTAssertEqual(ABI.Field.int8(200).encoded.hex, "0x000000000000000000000000000000000000000000000000000000000000007f")
+        XCTAssertEqual(ABI.Field.int8(-200).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80")
+        XCTAssertEqual(ABI.Field.int16(99999).encoded.hex, "0x0000000000000000000000000000000000000000000000000000000000007fff")
+        XCTAssertEqual(ABI.Field.int16(-99999).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8000")
+        XCTAssertEqual(ABI.Field.int24(0x1000000).encoded.hex, "0x00000000000000000000000000000000000000000000000000000000007fffff")
+        XCTAssertEqual(ABI.Field.int24(-0x1000000).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffff800000")
+        XCTAssertEqual(ABI.Field.int32(0x1_0000_0000).encoded.hex, "0x000000000000000000000000000000000000000000000000000000007fffffff")
+        XCTAssertEqual(ABI.Field.int32(-0x1_0000_0000).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffff80000000")
     }
 
     func testLargeIntClamped() throws {
-        XCTAssertEqual(Hex.toHex(ABI.Field.int40(BigInt(1) << 38).encoded), Hex.toHex(hex("0x0000000000000000000000000000000000000000000000000000004000000000")))
-        XCTAssertEqual(Hex.toHex(ABI.Field.int40(-(BigInt(1) << 38)).encoded), Hex.toHex(hex("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffc000000000")))
-        XCTAssertEqual(Hex.toHex(ABI.Field.int40(BigInt(1) << 41).encoded), Hex.toHex(hex("0x0000000000000000000000000000000000000000000000000000007fffffffff")))
-        XCTAssertEqual(Hex.toHex(ABI.Field.int40(-(BigInt(1) << 41)).encoded), Hex.toHex(hex("0xffffffffffffffffffffffffffffffffffffffffffffffffffffff8000000000")))
-        XCTAssertEqual(Hex.toHex(ABI.Field.int256(BigInt(1) << 257).encoded), Hex.toHex(hex("0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")))
-        XCTAssertEqual(Hex.toHex(ABI.Field.int256(-(BigInt(1) << 257)).encoded), Hex.toHex(hex("0x8000000000000000000000000000000000000000000000000000000000000000")))
+        XCTAssertEqual(ABI.Field.int40(BigInt(1) << 38).encoded.hex, "0x0000000000000000000000000000000000000000000000000000004000000000")
+        XCTAssertEqual(ABI.Field.int40(-(BigInt(1) << 38)).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffc000000000")
+        XCTAssertEqual(ABI.Field.int40(BigInt(1) << 41).encoded.hex, "0x0000000000000000000000000000000000000000000000000000007fffffffff")
+        XCTAssertEqual(ABI.Field.int40(-(BigInt(1) << 41)).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffff8000000000")
+        XCTAssertEqual(ABI.Field.int256(BigInt(1) << 257).encoded.hex, "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
+        XCTAssertEqual(ABI.Field.int256(-(BigInt(1) << 257)).encoded.hex, "0x8000000000000000000000000000000000000000000000000000000000000000")
     }
 
     func testUnwrappingFunctions() throws {
@@ -531,10 +528,10 @@ final class ABITests: XCTestCase {
         XCTAssertEqual(ABI.Field.int256(BigInt(22)).asBigInt, BigInt(22))
         XCTAssertEqual(ABI.Field.bool(true).asBool, true)
         XCTAssertEqual(ABI.Field.address(EthAddress("0x0000000000000000000000000000000000000002")).asEthAddress, EthAddress("0x0000000000000000000000000000000000000002"))
-        XCTAssertEqual(ABI.Field.bytes1(hex("0x11")).asData, hex("0x11"))
-        XCTAssertEqual(ABI.Field.bytes2(hex("0x1122")).asData, hex("0x1122"))
-        XCTAssertEqual(ABI.Field.bytes32(hex("0x0000000000000000000000000000000000000000000000000000000000000064")).asData, hex("0x0000000000000000000000000000000000000000000000000000000000000064"))
-        XCTAssertEqual(ABI.Field.bytes(hex("0x0000000000000000000000000000000000000000000000000000000000000064")).asData, hex("0x0000000000000000000000000000000000000000000000000000000000000064"))
+        XCTAssertEqual(ABI.Field.bytes1("0x11").asHex, "0x11")
+        XCTAssertEqual(ABI.Field.bytes2("0x1122").asHex, "0x1122")
+        XCTAssertEqual(ABI.Field.bytes32("0x0000000000000000000000000000000000000000000000000000000000000064").asHex, "0x0000000000000000000000000000000000000000000000000000000000000064")
+        XCTAssertEqual(ABI.Field.bytes("0x0000000000000000000000000000000000000000000000000000000000000064").asHex, "0x0000000000000000000000000000000000000000000000000000000000000064")
         XCTAssertEqual(ABI.Field.array(.string, [.string("hi"), .string("mom")]).asArray?.map { $0.asString }, [String("hi"), String("mom")])
         XCTAssertEqual(ABI.Field.tuple2(.string("hi"), .string("mom")).asArray?.map { $0.asString }, [String("hi"), String("mom")])
     }

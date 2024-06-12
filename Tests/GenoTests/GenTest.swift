@@ -9,14 +9,14 @@ final class GenTests: XCTestCase {
 
     func testStructGen() {
         let bat = try! Structs.buildBat(x: BigUInt(5), y: BigUInt(3))
-        let catData = Hex.parseHex("1122334455667788991122334455667788991122334455667788991122334455")!
+        let catData: Hex = "1122334455667788991122334455667788991122334455667788991122334455"
         XCTAssertEqual(bat, Structs.Bat(a: 5, b: 4, c: [
-            Structs.Cat(ca: 0, cb: Data(count: 0), cc: catData),
-            Structs.Cat(ca: -1, cb: Data(count: 1), cc: catData),
-            Structs.Cat(ca: -2, cb: Data(count: 2), cc: catData),
-        ], d: "hello", e: [BigUInt(1), BigUInt(1), BigUInt(4)], f: Structs.Cat(ca: 0, cb: Data(count: 0), cc: catData)))
+            Structs.Cat(ca: 0, cb: "0x", cc: catData),
+            Structs.Cat(ca: -1, cb: "0x00", cc: catData),
+            Structs.Cat(ca: -2, cb: "0x0000", cc: catData),
+        ], d: "hello", e: [BigUInt(1), BigUInt(1), BigUInt(4)], f: Structs.Cat(ca: 0, cb: "0x", cc: catData)))
 
-        let r = try! Structs.acceptBat(bat: Structs.Bat(a: BigUInt(1), b: BigUInt(2), c: [Structs.Cat(ca: BigInt(2), cb: Hex.parseHex("1")!, cc: "bar".data(using: .utf8)!)], d: "Cave", e: [], f: Structs.Cat(ca: 2, cb: Data(count: 1), cc: catData)))
+        let r = try! Structs.acceptBat(bat: Structs.Bat(a: BigUInt(1), b: BigUInt(2), c: [Structs.Cat(ca: BigInt(2), cb: "0x01", cc: Hex("bar".data(using: .utf8)!))], d: "Cave", e: [], f: Structs.Cat(ca: 2, cb: "0x00", cc: catData)))
 
         XCTAssertEqual(r, BigInt(-2))
     }

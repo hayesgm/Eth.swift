@@ -5,31 +5,31 @@ public extension ABI {
     /**
      An enumeration of errors that can occur during decoding.
 
-     - insufficientData: The data provided is insufficient for decoding the schema.
+     - insufficientData: The data did not have sufficient data to decode the schema. This may be in a sub-decoding of a tuple or array.
      - excessData: There is excess data left after decoding the schema.
-     - nonEmptyDataFound: Data is found when none was expected.
-     - integerOverflow: An integer overflow occurred during decoding.
-     - sizedUnsignedIntegerOverflow: An overflow occurred for a sized unsigned integer.
-     - sizedSignedIntegerOverflow: An overflow occurred for a sized signed integer.
-     - invalidDataPointer: The data pointer is invalid.
-     - invalidDataHeapPointer: The data heap pointer is invalid.
-     - invalidUtf8String: The UTF-8 string is invalid.
-     - invalidAddress: The address is invalid.
-     - unexpectedError: An unexpected error occurred.
+     - nonEmptyDataFound: A size limited value had bits set unexpectedly (e.g. a uint8 had any of the first 248 bits set).
+     - integerOverflow: An integer overflow occurred during decoding unexpectedly. Generally this means that a string or variable-sized data reported its size to be more than 2^64 bytes.
+     - sizedUnsignedIntegerOverflow: An overflow occurred for a sized unsigned integer. E.g. uint8 overflows 8-bits
+     - sizedSignedIntegerOverflow: An overflow occurred for a sized signed integer. E.g. int8 overflows 8-bits
+     - invalidDataPointer: The data pointer is invalid. Specifically this is when the pointer to a dynamic size item doesn't fit in 2^64 bits.
+     - invalidDataHeapPointer: The data heap pointer is invalid. Generally this is when a pointer to a dynamic size item points to an area that's previous to another element or not on a 32-byte boundary.
+     - invalidUtf8String: A UTF-8 string is invalid.
+     - invalidAddress: An address is not a proper 20-byte Ethereum address.
+     - unexpectedError: An unexpected error occurred. These are for truly exceptional events that should not occur.
      - mismatchedType: The types provided do not match the schema.
      - invalidResponse: The response is invalid.
      */
     enum DecodeError: Error, Equatable {
-        case insufficientData(Schema, Data)
-        case excessData(Schema, Data)
-        case nonEmptyDataFound(Schema, Data)
-        case integerOverflow(Schema, Data)
-        case sizedUnsignedIntegerOverflow(Int, Data)
-        case sizedSignedIntegerOverflow(Int, Data)
-        case invalidDataPointer(Schema, Data)
-        case invalidDataHeapPointer(Schema, Int?, Int, Data)
-        case invalidUtf8String(Data)
-        case invalidAddress(Data)
+        case insufficientData(Schema, Hex)
+        case excessData(Schema, Hex)
+        case nonEmptyDataFound(Schema, Hex)
+        case integerOverflow(Schema, Hex)
+        case sizedUnsignedIntegerOverflow(Int, Hex)
+        case sizedSignedIntegerOverflow(Int, Hex)
+        case invalidDataPointer(Schema, Hex)
+        case invalidDataHeapPointer(Schema, Int?, Int, Hex)
+        case invalidUtf8String(Hex)
+        case invalidAddress(Hex)
         case unexpectedError(String)
         case mismatchedType(Schema, Schema)
         case invalidResponse
@@ -160,6 +160,7 @@ public extension ABI {
         // Tuple
         indirect case tuple([Schema])
 
+        /// The Solidity canonical form of the given schema, e.g. `uint256[]`.
         public var canonical: String {
             switch self {
             case .uint8:
@@ -416,8 +417,8 @@ public extension ABI {
                 let primaryData = try getPrimaryData(offset: offset, fromData: data, forSchema: fieldType)
                 var fieldPartial = FieldPartial(index: i, fieldType: fieldType, primaryData: primaryData)
                 if fieldType.dynamic {
-                    guard let heapStart = EthWord(primaryData)?.toInt() else {
-                        throw DecodeError.invalidDataPointer(fieldType, primaryData)
+                    guard let heapStart = EthWord(fromData: primaryData)?.toInt() else {
+                        throw DecodeError.invalidDataPointer(fieldType, Hex(primaryData))
                     }
                     fieldPartial.heapStart = heapStart
                 }
@@ -435,27 +436,28 @@ public extension ABI {
                     let nextFieldPartials = fieldPartials.dropFirst(fieldPartial.index + 1)
                     let heapEnd = findFirst(nextFieldPartials) { $0.heapStart } ?? data.count
                     guard let heapStart = fieldPartial.heapStart, heapEnd <= data.count, heapEnd > heapStart, heapEnd % 32 == 0 else {
-                        throw DecodeError.invalidDataHeapPointer(fieldPartial.fieldType, fieldPartial.heapStart, heapEnd, data)
+                        throw DecodeError.invalidDataHeapPointer(fieldPartial.fieldType, fieldPartial.heapStart, heapEnd, Hex(data))
                     }
                     fieldData = data.subdata(in: heapStart ..< heapEnd)
                 } else {
                     fieldData = fieldPartial.primaryData
                 }
 
-                try fields.append(fieldPartial.fieldType.decode(fieldData))
+                try fields.append(fieldPartial.fieldType.decode(Hex(fieldData)))
             }
 
             return fields
         }
 
         /**
-         Decodes the provided data into a `Field` based on the schema.
+         Decodes the provided data into a `Field` based on the `Schema`.
 
          - Parameter data: The data to decode.
-         - Throws: `DecodeError` if the decoding fails.
+         - Throws: `ABI.DecodeError` if the decoding fails.
          - Returns: A `Field` object representing the decoded data.
          */
-        public func decode(_ data: Data) throws -> Field {
+        public func decode(_ hex: Hex) throws -> Field {
+            let data = hex.data
             switch self {
             case .uint8:
                 return try .uint8(decodeUIntSmall(data, inBits: 8, withSchema: self))
@@ -524,10 +526,10 @@ public extension ABI {
             case .bool:
                 return try .bool(decodeUIntSmall(data, inBits: 1, withSchema: self) == 1)
             case .address:
-                if let ethAddress = try EthAddress(readRightBytesN(data, withSchema: self, bytes: 20)) {
+                if let ethAddress = try EthAddress(fromData: readRightBytesN(data, withSchema: self, bytes: 20)) {
                     return .address(ethAddress)
                 } else {
-                    throw DecodeError.invalidAddress(data)
+                    throw DecodeError.invalidAddress(Hex(data))
                 }
             case .int8:
                 return try .int8(decodeIntSmall(data, inBits: 8, withSchema: self))
@@ -659,13 +661,13 @@ public extension ABI {
                 return try .bytes32(readBytesN(data, withSchema: self, bytes: 32))
             case .bytes:
                 let data = try loadVariableSizedData(data: data, withSchema: self)
-                return .bytes(Data(data)) // Note: Data here is expressly copy in case we have a subdata
+                return .bytes(Hex(Data(data))) // Note: Data here is expressly copy in case we have a subdata
             case .string:
                 let utf8Data = try loadVariableSizedData(data: data, withSchema: self)
                 if let string = String(data: utf8Data, encoding: .utf8) {
                     return .string(string)
                 } else {
-                    throw DecodeError.invalidUtf8String(utf8Data)
+                    throw DecodeError.invalidUtf8String(Hex(utf8Data))
                 }
             case let .arrayN(fieldType, n):
                 let fieldTypes = arraySchemas(fieldType, n)
@@ -677,7 +679,7 @@ public extension ABI {
                 // This is because there's no way to know the size of an
                 // element before digging in.
                 if data.count < 32 {
-                    throw ABI.DecodeError.insufficientData(fieldType, data)
+                    throw ABI.DecodeError.insufficientData(fieldType, Hex(data))
                 }
                 let elementCount = try decodeUIntSmall(data.subdata(in: 0 ..< 32), inBits: 32, withSchema: self)
 
@@ -699,7 +701,7 @@ public extension ABI {
 private func getPrimaryData(offset startIndex: Int, fromData data: Data, forSchema fieldType: ABI.Schema) throws -> Data {
     let endIndex = startIndex + fieldType.primaryWordSize * 32
     if data.count < endIndex {
-        throw ABI.DecodeError.insufficientData(fieldType, data)
+        throw ABI.DecodeError.insufficientData(fieldType, Hex(data))
     }
     return data.subdata(in: startIndex ..< endIndex)
 }
@@ -740,7 +742,7 @@ private func bigUIntToUInt(_ bigUInt: BigUInt) -> UInt? {
 private func decodeUIntSmall(_ data: Data, inBits bits: Int, withSchema fieldType: ABI.Schema) throws -> UInt {
     let bigUInt = try decodeUInt(data, inBits: bits, withSchema: fieldType)
     guard let int = bigUIntToUInt(bigUInt) else {
-        throw ABI.DecodeError.sizedUnsignedIntegerOverflow(bits, data)
+        throw ABI.DecodeError.sizedUnsignedIntegerOverflow(bits, Hex(data))
     }
     return int
 }
@@ -749,7 +751,7 @@ private func decodeUIntSmall(_ data: Data, inBits bits: Int, withSchema fieldTyp
 private func decodeIntSmall(_ data: Data, inBits bits: Int, withSchema fieldType: ABI.Schema) throws -> Int {
     let bigInt = try decodeInt(data, inBits: bits, withSchema: fieldType)
     guard let int = bigIntToInt(bigInt) else {
-        throw ABI.DecodeError.sizedSignedIntegerOverflow(bits, data)
+        throw ABI.DecodeError.sizedSignedIntegerOverflow(bits, Hex(data))
     }
     return int
 }
@@ -772,10 +774,10 @@ private func wordsRequiredForLength(_ length: Int) -> Int {
 
 /** Reads a 32-byte word and returns back the extra data, raises if insufficient data **/
 private func readWord(_ data: Data, withSchema fieldType: ABI.Schema) throws -> (EthWord, Data) {
-    if data.count >= 32, let word = EthWord(data.prefix(32)) {
+    if data.count >= 32, let word = EthWord(fromData: data.prefix(32)) {
         return (word, data.dropFirst(32))
     } else {
-        throw ABI.DecodeError.insufficientData(fieldType, data)
+        throw ABI.DecodeError.insufficientData(fieldType, Hex(data))
     }
 }
 
@@ -786,7 +788,7 @@ private func readWord(_ data: Data, withSchema fieldType: ABI.Schema) throws -> 
 private func readInt(_ data: Data, withSchema fieldType: ABI.Schema) throws -> (Int, Data) {
     let (word, extra) = try readWord(data, withSchema: fieldType)
     guard let x = word.toInt() else {
-        throw ABI.DecodeError.integerOverflow(fieldType, word.data)
+        throw ABI.DecodeError.integerOverflow(fieldType, Hex(word.data))
     }
     return (x, extra)
 }
@@ -796,20 +798,20 @@ private func checkDataSize(_ data: Data, words: Int, forSchema fieldType: ABI.Sc
     if data.count == 32 * words {
         return
     } else if data.count < 32 * words {
-        throw ABI.DecodeError.insufficientData(fieldType, data)
+        throw ABI.DecodeError.insufficientData(fieldType, Hex(data))
     } else {
-        throw ABI.DecodeError.excessData(fieldType, data)
+        throw ABI.DecodeError.excessData(fieldType, Hex(data))
     }
 }
 
 /** Reads a single 32-byte word and returns it, iff the data is exactly 32-byte wide */
 private func readExactSingleWord(_ data: Data, withSchema fieldType: ABI.Schema) throws -> EthWord {
-    if data.count == 32, let word = EthWord(data) {
+    if data.count == 32, let word = EthWord(fromData: data) {
         return word
     } else if data.count < 32 {
-        throw ABI.DecodeError.insufficientData(fieldType, data)
+        throw ABI.DecodeError.insufficientData(fieldType, Hex(data))
     } else {
-        throw ABI.DecodeError.excessData(fieldType, data)
+        throw ABI.DecodeError.excessData(fieldType, Hex(data))
     }
 }
 
@@ -817,7 +819,7 @@ private func readExactSingleWord(_ data: Data, withSchema fieldType: ABI.Schema)
 private func toBigUInt(_ word: EthWord, bits: Int) throws -> BigUInt {
     let x = word.toBigUInt()
     guard x < BigUInt(2).power(bits) else {
-        throw ABI.DecodeError.sizedUnsignedIntegerOverflow(bits, word.data)
+        throw ABI.DecodeError.sizedUnsignedIntegerOverflow(bits, Hex(word.data))
     }
     return x
 }
@@ -829,25 +831,25 @@ private func toBigInt(_ word: EthWord, bits: Int) throws -> BigInt {
     let minValue = BigInt(-2).power(bits - 1)
 
     guard x < maxValue, x >= minValue else {
-        throw ABI.DecodeError.sizedSignedIntegerOverflow(bits, word.data)
+        throw ABI.DecodeError.sizedSignedIntegerOverflow(bits, Hex(word.data))
     }
     return x
 }
 
 /** Reads the N most significant bytes of a 32-byte data field **/
-private func readBytesN(_ data: Data, withSchema fieldType: ABI.Schema, bytes: Int) throws -> Data {
+private func readBytesN(_ data: Data, withSchema fieldType: ABI.Schema, bytes: Int) throws -> Hex {
     try checkDataSize(data, words: 1, forSchema: fieldType)
     guard BigUInt(data.suffix(32 - bytes)) == .zero else {
-        throw ABI.DecodeError.nonEmptyDataFound(fieldType, data)
+        throw ABI.DecodeError.nonEmptyDataFound(fieldType, Hex(data))
     }
-    return data.prefix(bytes)
+    return Hex(data.prefix(bytes))
 }
 
 /** Reads the N least significant bytes of a 32-byte data field **/
 private func readRightBytesN(_ data: Data, withSchema fieldType: ABI.Schema, bytes: Int) throws -> Data {
     try checkDataSize(data, words: 1, forSchema: fieldType)
     guard BigUInt(data.prefix(32 - bytes)) == .zero else {
-        throw ABI.DecodeError.nonEmptyDataFound(fieldType, data)
+        throw ABI.DecodeError.nonEmptyDataFound(fieldType, Hex(data))
     }
     return data.suffix(bytes)
 }
@@ -863,26 +865,26 @@ private func arraySchemas(_ fieldType: ABI.Schema, _ n: Int) -> [ABI.Schema] {
 extension ABI.DecodeError: LocalizedError {
     public var errorDescription: String? {
         switch self {
-        case let .insufficientData(fieldType, data):
-            return NSLocalizedString("Insufficent data to decode field \(fieldType.description), given data \"\(Hex.toHex(data))\".", comment: "Insufficient Data Error")
-        case let .excessData(fieldType, data):
-            return NSLocalizedString("Excess data found when decoding field \(fieldType.description), given data \"\(Hex.toHex(data))\".", comment: "Excess Data Error")
-        case let .nonEmptyDataFound(fieldType, data):
-            return NSLocalizedString("Non-empty data found where expected empty when decoding field \(fieldType.description), given data \"\(Hex.toHex(data))\".", comment: "Non-Empty Data Error")
-        case let .integerOverflow(fieldType, data):
-            return NSLocalizedString("Integer overflow when decoding type \(fieldType.description) with data \"\(Hex.toHex(data))\".", comment: "Integer Overflow Error")
-        case let .sizedUnsignedIntegerOverflow(size, data):
-            return NSLocalizedString("Overflowed integer type \"\(Hex.toHex(data))\" cannot fit into uint\(size).", comment: "Sized Unsigned Integer Overflow Error")
-        case let .sizedSignedIntegerOverflow(size, data):
-            return NSLocalizedString("Overflowed signed integer type \"\(Hex.toHex(data))\" cannot fit into int\(size).", comment: "Sized Signed Integer Overflow Error")
-        case let .invalidDataPointer(fieldType, data):
-            return NSLocalizedString("Invalid data pointer for \(fieldType.description) with data \"\(Hex.toHex(data))\".", comment: "Invalid Data Pointer Error")
-        case let .invalidDataHeapPointer(fieldType, heapStart, heapEnd, data):
-            return NSLocalizedString("Invalid data heap pointer for \(fieldType.description) tries to read data at \(heapStart != nil ? String(heapStart!) : "nil")..<\(heapEnd) in data \"\(Hex.toHex(data))\".", comment: "Invalid Data Heap Pointer Error")
-        case let .invalidUtf8String(data):
-            return NSLocalizedString("Invalid utf8-encoded string with data \"\(Hex.toHex(data))\".", comment: "Invalid UTF8 String Error")
-        case let .invalidAddress(data):
-            return NSLocalizedString("Invalid address with data \"\(Hex.toHex(data))\".", comment: "Invalid Address")
+        case let .insufficientData(fieldType, hex):
+            return NSLocalizedString("Insufficent data to decode field \(fieldType.description), given data \"\(hex.hex)\".", comment: "Insufficient Data Error")
+        case let .excessData(fieldType, hex):
+            return NSLocalizedString("Excess data found when decoding field \(fieldType.description), given data \"\(hex.hex)\".", comment: "Excess Data Error")
+        case let .nonEmptyDataFound(fieldType, hex):
+            return NSLocalizedString("Non-empty data found where expected empty when decoding field \(fieldType.description), given data \"\(hex.hex)\".", comment: "Non-Empty Data Error")
+        case let .integerOverflow(fieldType, hex):
+            return NSLocalizedString("Integer overflow when decoding type \(fieldType.description) with data \"\(hex.hex)\".", comment: "Integer Overflow Error")
+        case let .sizedUnsignedIntegerOverflow(size, hex):
+            return NSLocalizedString("Overflowed integer type \"\(hex.hex)\" cannot fit into uint\(size).", comment: "Sized Unsigned Integer Overflow Error")
+        case let .sizedSignedIntegerOverflow(size, hex):
+            return NSLocalizedString("Overflowed signed integer type \"\(hex.hex)\" cannot fit into int\(size).", comment: "Sized Signed Integer Overflow Error")
+        case let .invalidDataPointer(fieldType, hex):
+            return NSLocalizedString("Invalid data pointer for \(fieldType.description) with data \"\(hex.hex)\".", comment: "Invalid Data Pointer Error")
+        case let .invalidDataHeapPointer(fieldType, heapStart, heapEnd, hex):
+            return NSLocalizedString("Invalid data heap pointer for \(fieldType.description) tries to read data at \(heapStart != nil ? String(heapStart!) : "nil")..<\(heapEnd) in data \"\(hex.hex)\".", comment: "Invalid Data Heap Pointer Error")
+        case let .invalidUtf8String(hex):
+            return NSLocalizedString("Invalid utf8-encoded string with data \"\(hex)\".", comment: "Invalid UTF8 String Error")
+        case let .invalidAddress(hex):
+            return NSLocalizedString("Invalid address with data \"\(hex)\".", comment: "Invalid Address")
         case let .mismatchedType(fieldType, expSchema):
             return NSLocalizedString("Invalid field \(fieldType.description), expected to match \(expSchema.description).", comment: "Mismatched Type")
         case .invalidResponse:

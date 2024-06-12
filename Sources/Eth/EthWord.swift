@@ -1,59 +1,66 @@
 import BigInt
 import Foundation
 
-/// A 256-bit word used in Ethereum operations, represented by 32 bytes of data.
+/// A 256-bit (32-byte) word used in Ethereum operations.
 public struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, ExpressibleByStringLiteral {
-    let data: Data
+    let hex: Hex
 
-    /// Initializes an `EthWord` with a 32-byte data.
+    /// Initializes an `EthWord` with a 32-byte `Hex` data.
+    /// - Parameter hex: The hex data to initialize the `EthWord` with.
+    /// - Returns: An optional `EthWord` instance, or `nil` if the data is not 32-bytes long.
+    public init?(_ hex: Hex) {
+        guard hex.count == 32 else {
+            return nil
+        }
+        self.hex = hex
+    }
+
+    /// Initializes an `EthWord` with a 32-byte hexadecimal string from a `Data` object.
     /// - Parameter data: The data to initialize the `EthWord` with.
-    /// - Returns: An optional `EthWord` instance, or `nil` if the data is not 32 bytes long.
-    public init?(_ data: Data) {
-        guard data.count == 32 else {
-            return nil
-        }
-        self.data = data
+    /// - Returns: An optional `EthWord` instance, or `nil` if the string cannot be parsed or is not 32-bytes long.
+    public init?(fromData data: Data) {
+        self.init(Hex(data))
     }
 
-    /// Initializes an `EthWord` with a hexadecimal string.
-    /// - Parameter hex: The hexadecimal string to initialize the `EthWord` with.
-    /// - Returns: An optional `EthWord` instance, or `nil` if the string cannot be parsed or is not 32 bytes long.
-    public init?(hex: String) {
-        guard let data = Hex.parseHex(hex) else {
+    /// Initializes an `EthWord` with a 32-byte hexadecimal `String`.
+    /// - Parameter hex: The hexadecimal `String` to initialize the `EthWord` with.
+    /// - Returns: An optional `EthWord` instance, or `nil` if the string cannot be parsed or is not 32-bytes long.
+    public init?(fromHexString hexString: String) {
+        guard let hex = Hex(hex: hexString) else {
             return nil
         }
-        self.init(data)
+        self.init(hex)
     }
 
-    /// Initializes an `EthWord` by extending data with padding to 32 bytes.
+    /// Initializes an `EthWord` by extending hex data with padding to 32-bytes.
     /// - Parameters:
-    ///   - data: The data to extend.
-    ///   - paddingValue: The value to pad the data with (default is 0).
-    /// - Returns: An optional `EthWord` instance, or `nil` if the data is longer than 32 bytes.
-    public init?(dataExtending data: Data, withPadding paddingValue: UInt8 = 0) {
-        let paddingSize = 32 - data.count
+    ///   - hex: The hex data to extend.
+    ///   - paddingValue: The value to pad the data with (default: `0x00`). May be `0xff` for sign-extending signed values.
+    /// - Returns: An optional `EthWord` instance, or `nil` if the data is longer than 32-bytes.
+    public init?(hexExtending hex: Hex, withPadding paddingValue: UInt8 = 0) {
+        let paddingSize = 32 - hex.count
         guard paddingSize >= 0 else {
             return nil
         }
         let padding = Data(repeating: paddingValue, count: paddingSize)
-        self.init(padding + data)
+        self.init(fromData: padding + hex.data)
     }
 
-    /// Initializes an `EthWord` by extending a hexadecimal string with padding to 32 bytes.
+    /// Initializes an `EthWord` by extending a hexadecimal `String` with padding to 32 bytes.
     /// - Parameter hex: The hexadecimal string to extend.
-    /// - Returns: An optional `EthWord` instance, or `nil` if the string cannot be parsed or the resulting data is longer than 32 bytes.
-    public init?(hexExtending hex: String) {
-        guard let data = Hex.parseHex(hex) else {
+    /// - Returns: An optional `EthWord` instance, or `nil` if the string cannot be parsed or the resulting data is longer than 32-bytes.
+    public init?(hexStringExtending hexString: String) {
+        guard let hex = Hex(hex: hexString) else {
             return nil
         }
-        self.init(dataExtending: data)
+        self.init(hexExtending: hex)
     }
 
     /// Initializes an `EthWord` from a `BigUInt` value.
     /// - Parameter value: The `BigUInt` value to convert.
     /// - Returns: An optional `EthWord` instance, or `nil` if the conversion fails.
     public init?(fromBigUInt value: BigUInt) {
-        self.init(dataExtending: value.serialize())
+        self.init(hexExtending: Hex(value.serialize()))
     }
 
     /// Initializes an `EthWord` from a `BigInt` value.
@@ -75,7 +82,7 @@ public struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, Ex
             data = serialized
         }
 
-        self.init(dataExtending: data, withPadding: value.sign == .plus ? 0x00 : 0xFF)
+        self.init(hexExtending: Hex(data), withPadding: value.sign == .plus ? 0x00 : 0xFF)
     }
 
     /// Initializes an `EthWord` from an `Int` value.
@@ -103,21 +110,26 @@ public struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, Ex
     /// - Parameter value: The string literal to convert.
     /// - Returns: An `EthWord` instance, or triggers a runtime error if the string is invalid.
     public init(stringLiteral value: StringLiteralType) {
-        guard let data = Hex.parseHex(value), data.count == 32 else {
-            fatalError("Invalid Ethereum Word: \(value)")
+        guard let data = Hex.dataFromHexString(value), data.count == 32 else {
+            fatalError("Invalid Ethereum word: \(value)")
         }
-        self.data = data
+        hex = Hex(data)
     }
 
     /// A string representation of the `EthWord`.
     public var description: String {
-        "EthWord[\(Hex.toShortHex(data))]"
+        "EthWord[\(hex.shortHex)]"
+    }
+
+    /// The underlying `Data` for this `Hex` object.
+    public var data: Data {
+        hex.data
     }
 
     /// Converts the `EthWord` to a `BigUInt`.
     /// - Returns: A `BigUInt` representing the `EthWord`.
     public func toBigUInt() -> BigUInt {
-        return BigUInt(data)
+        return BigUInt(hex.data)
     }
 
     private static let maxInt256 = BigInt(1) << 256
@@ -125,7 +137,7 @@ public struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, Ex
     private func bitwise(_ fn: (UInt8) -> UInt8) -> Data {
         var result = Data(count: 32)
         for i in 0 ..< 32 {
-            result[i] = fn(data[i])
+            result[i] = fn(hex.data[i])
         }
         return result
     }
@@ -137,12 +149,12 @@ public struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, Ex
         // As EthWords are stored as two's complement, we will
         // need to convert this to a form that BigInt recognizes,
         // which is [sign_byte, ...bytes]
-        if data[0] & 0x80 != 0 {
+        if hex.data[0] & 0x80 != 0 {
             // Negative number handling
             // Create an inverted copy of the data
             var invertedData = Data(count: 32)
             for i in 0 ..< 32 {
-                invertedData[i] = ~data[i]
+                invertedData[i] = ~hex.data[i]
             }
 
             // Convert the inverted data to a BigInt and add 1 to get the positive equivalent
@@ -153,7 +165,7 @@ public struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, Ex
 
             return positiveValue
         } else {
-            return BigInt(Data([0x00]) + data)
+            return BigInt(Data([0x00]) + hex.data)
         }
     }
 

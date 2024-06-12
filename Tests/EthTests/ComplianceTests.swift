@@ -4,9 +4,9 @@ import XCTest
 
 struct ComplianceTest: Decodable {
     let name: String
-    let bytecode: Data
-    let query: Data
-    let expResp: Data
+    let bytecode: Hex
+    let query: Hex
+    let expResp: Hex
     let expSuccess: Bool
 
     enum CodingKeys: String, CodingKey {
@@ -21,12 +21,12 @@ struct ComplianceTest: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
 
-        func decodeHex(forKey key: CodingKeys) throws -> Data {
+        func decodeHex(forKey key: CodingKeys) throws -> Hex {
             let hexString = try container.decode(String.self, forKey: key)
-            guard let data = Hex.parseHex(hexString) else {
+            guard let data = Hex.dataFromHexString(hexString) else {
                 throw DecodingError.dataCorruptedError(forKey: key, in: container, debugDescription: "Invalid hex string")
             }
-            return data
+            return Hex(data)
         }
 
         bytecode = try decodeHex(forKey: .bytecode)
@@ -58,8 +58,8 @@ final class ComplianceTests: XCTestCase {
         }
 
         for test in complianceTests {
-            let resp: Data = try EVM.runQuery(bytecode: test.bytecode, query: test.query)
-            XCTAssertEqual(Hex.toHex(resp), Hex.toHex(test.expResp), test.name)
+            let resp: Hex = try EVM.runQuery(bytecode: test.bytecode, query: test.query)
+            XCTAssertEqual(resp, test.expResp, test.name)
         }
     }
 }
