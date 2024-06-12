@@ -3,20 +3,47 @@ import Foundation
 
 public extension ABI {
     /**
-     * A field that can be decoded from or encoded to an Ethereum ABI value.
+     * A `Value` represents any value that can be converted to or from an Ethereum ABI-encoded value.
      *
-     * Example:
+     * Example Values:
      * ```
-     * let encoded = .uint256(BigUInt(0x55)).encoded
-     * // encoded -> 0x0000000000000000000000000000000000000000000000000000000000000055
+     * ABI.Value.uint256(BigUInt(0x55))
+     * ABI.Value.uint8(55)
+     * ABI.Value.string("hi")
+     * ABI.Value.array(.string, [.string("hello"), .string("world")])
+     * ABI.Value.tuple2(.bool(true), .string("false"))
+     * ```
+     *
+     * Values can be encoded with the `.encoded` computed property
+     *
+     * ```
+     * > ABI.Value.uint256(BigUInt(0x55)).encoded
+     * Hex("0x0000000000000000000000000000000000000000000000000000000000000055")
+     * ```
+     *
+     * You can also decode from `Hex` to a `Value`, e.g.
+     *
+     * ```
+     * > ABI.Schema.uint256.decode("0x0000000000000000000000000000000000000000000000000000000000000055")
+     * ABI.Value.uint256(BigUInt(0x55))
+     * ```
+     *
+     * Canonically, to decode a complex tuple, you can pattern match on the the decoded `Value`.
+     *
+     * ```
+     * switch ABI.Schema.tuple([.bool, .string]).decode(Hex("0x...")) {
+     *   case .tuple2(.bool(isCool), .string(name)):
+     *      print("\(name) \(isCool ? "is cool" : "is not cool")")
+     *   default:
+     *      throw ABI.DecodeError.invalidResponse // should be impossible, but cases must be exhaustive
+     * }
      * ```
      *
      * Notes:
      *   - Small integers (≤32 bits) are represented as `UInt` or `Int` values. Larger values are represented as `BigUInt` or `BigInt`.
-     *   - Tuples are canonically represented for easy pattern matching, e.g., `.tuple2(.uint256, .uint256)`. For tuples with more than 16 values, use `.tupleN([.uint256, ...])`.
+     *   - Tuples are canonically represented for easy pattern-matching, e.g., `.tuple2(.uint256, .uint256)`. For tuples with more than 16 values, use `.tupleN([.uint256, ...])`.
      */
-
-    enum Field: Equatable, CustomStringConvertible {
+    enum Value: Equatable, CustomStringConvertible {
         // Unsigned Int
         case uint8(UInt)
         case uint16(UInt)
@@ -131,30 +158,36 @@ public extension ABI {
         case string(String)
 
         // Arrays
-        case arrayN(Schema, Int, [Field])
-        case array(Schema, [Field])
+        case arrayN(Schema, Int, [Value])
+        case array(Schema, [Value])
 
         // Tuples
         case tuple0
-        indirect case tuple1(Field)
-        indirect case tuple2(Field, Field)
-        indirect case tuple3(Field, Field, Field)
-        indirect case tuple4(Field, Field, Field, Field)
-        indirect case tuple5(Field, Field, Field, Field, Field)
-        indirect case tuple6(Field, Field, Field, Field, Field, Field)
-        indirect case tuple7(Field, Field, Field, Field, Field, Field, Field)
-        indirect case tuple8(Field, Field, Field, Field, Field, Field, Field, Field)
-        indirect case tuple9(Field, Field, Field, Field, Field, Field, Field, Field, Field)
-        indirect case tuple10(Field, Field, Field, Field, Field, Field, Field, Field, Field, Field)
-        indirect case tuple11(Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field)
-        indirect case tuple12(Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field)
-        indirect case tuple13(Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field)
-        indirect case tuple14(Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field)
-        indirect case tuple15(Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field)
-        indirect case tuple16(Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field, Field)
-        indirect case tupleN([Field])
+        indirect case tuple1(Value)
+        indirect case tuple2(Value, Value)
+        indirect case tuple3(Value, Value, Value)
+        indirect case tuple4(Value, Value, Value, Value)
+        indirect case tuple5(Value, Value, Value, Value, Value)
+        indirect case tuple6(Value, Value, Value, Value, Value, Value)
+        indirect case tuple7(Value, Value, Value, Value, Value, Value, Value)
+        indirect case tuple8(Value, Value, Value, Value, Value, Value, Value, Value)
+        indirect case tuple9(Value, Value, Value, Value, Value, Value, Value, Value, Value)
+        indirect case tuple10(Value, Value, Value, Value, Value, Value, Value, Value, Value, Value)
+        indirect case tuple11(Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value)
+        indirect case tuple12(Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value)
+        indirect case tuple13(Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value)
+        indirect case tuple14(Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value)
+        indirect case tuple15(Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value)
+        indirect case tuple16(Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value)
+        indirect case tupleN([Value])
 
-        /// Returns a `String` if Field contains a `.string`, otherwise nil
+        /// Returns a `String` if ``Value` contains a `.string`, otherwise `nil`
+        ///
+        /// Examples:
+        /// ```
+        /// > ABI.Value.string("hello").asString
+        /// "hello"
+        /// ```
         public var asString: String? {
             switch self {
             case let .string(x):
@@ -164,7 +197,16 @@ public extension ABI {
             }
         }
 
-        /// Returns an `Int` if Field contains a 32-byte or smaller signed `.int`, otherwise nil
+        /// Returns an `Int` if `Value` contains a 32-byte or smaller signed `.int`, otherwise `nil`
+        ///
+        /// Examples:
+        /// ```
+        /// > ABI.Value.int8(-22).asInt
+        /// -22
+        ///
+        /// > ABI.Value.int256(BigInt(-22)).asInt
+        /// nil
+        /// ```
         public var asInt: Int? {
             switch self {
             case let .int8(x), let .int16(x), let .int24(x), let .int32(x):
@@ -174,7 +216,16 @@ public extension ABI {
             }
         }
 
-        /// Returns an `UInt` if Field contains a 32-byte or smaller `.uint`, otherwise nil
+        /// Returns a `UInt` if `Value` contains a 32-byte or smaller `.uint`, otherwise `nil`
+        ///
+        /// Examples:
+        /// ```
+        /// > ABI.Value.uint8(22).asUInt
+        /// 22
+        ///
+        /// > ABI.Value.uint256(BigUInt(22)).asUInt
+        /// nil
+        /// ```
         public var asUInt: UInt? {
             switch self {
             case let .uint8(x), let .uint16(x), let .uint24(x), let .uint32(x):
@@ -184,7 +235,16 @@ public extension ABI {
             }
         }
 
-        /// Returns an `BigUInt` if Field contains any `.uint` value, otherwise nil
+        /// Returns a `BigUInt` if `Value` contains any `.uint` value, otherwise `nil`
+        ///
+        /// Examples:
+        /// ```
+        /// > ABI.Value.uint8(22).asBigUInt
+        /// BigUInt(22)
+        ///
+        /// > ABI.Value.uint256(BigUInt(22)).asBigUInt
+        /// BigUInt(22)
+        /// ```
         public var asBigUInt: BigUInt? {
             switch self {
             case let .uint40(x), let .uint48(x), let .uint56(x), let .uint64(x),
@@ -202,7 +262,16 @@ public extension ABI {
             }
         }
 
-        /// Returns an `BigInt` if Field contains any signed `.int` value, otherwise nil
+        /// Returns a `BigInt` if `Value` contains any signed `.int` value, otherwise `nil`
+        ///
+        /// Examples:
+        /// ```
+        /// > ABI.Value.int8(-22).asBigInt
+        /// BigInt(-22)
+        ///
+        /// > ABI.Value.int256(BigInt(-22)).asBigInt
+        /// BigInt(-22)
+        /// ```
         public var asBigInt: BigInt? {
             switch self {
             case let .int40(x), let .int48(x), let .int56(x), let .int64(x),
@@ -220,7 +289,13 @@ public extension ABI {
             }
         }
 
-        /// Returns an `Bool` if Field contains a `.bool`, otherwise nil
+        /// Returns a `Bool` if `Value` contains a `.bool`, otherwise `nil`
+        ///
+        /// Examples:
+        /// ```
+        /// > ABI.Value.bool(true).asBool
+        /// true
+        /// ```
         public var asBool: Bool? {
             switch self {
             case let .bool(x):
@@ -230,7 +305,13 @@ public extension ABI {
             }
         }
 
-        /// Returns an `EthAddress` if Field contains a `.address`, otherwise nil
+        /// Returns an `EthAddress` if `Value` contains a `.address`, otherwise `nil`
+        ///
+        /// Examples:
+        /// ```
+        /// > ABI.Value.address(EthAddress(Hex("0x112233445566778899aa112233445566778899aa"))!).asEthAddress
+        /// EthAddress(Hex("0x112233445566778899aa112233445566778899aa"))
+        /// ```
         public var asEthAddress: EthAddress? {
             switch self {
             case let .address(x):
@@ -240,7 +321,16 @@ public extension ABI {
             }
         }
 
-        /// Returns an `Hex` if Field contains a fixed or variable-sized `.bytes`, otherwise nil
+        /// Returns a `Hex` if `Value` contains a fixed `.bytes0`, `.bytes1`, ..., or variable-sized `.bytes`, otherwise `nil`
+        ///
+        /// Examples:
+        /// ```
+        /// > ABI.Value.bytes1(Hex("0x11")).asHex
+        /// Hex("0x11")
+        ///
+        /// > ABI.Value.bytes(Hex("0x1122")).asHex
+        /// Hex("0x1122")
+        /// ```
         public var asHex: Hex? {
             switch self {
             case let .bytes(x):
@@ -258,31 +348,64 @@ public extension ABI {
             }
         }
 
-        /// Returns an `Array` if Field contains a fixed or variable-sized `.array` or any `.tuple`, otherwise nil
-        public var asArray: [Field]? {
+        /// Returns an `Array` if `Value` contains a fixed or variable-sized array (`.arrayN` or `.array`) or any tuple (`.tuple0`, ..., `.tupleN`), otherwise `nil`
+        ///
+        /// Examples:
+        /// ```
+        /// > ABI.Value.array(.string, [.string("hello"), .string("world")]).asArray
+        /// [.string("hello"), .string("world")]
+        ///
+        /// > ABI.Value.array(.string, [.string("hello"), .string("world")]).asArray?.map { $0.asString }
+        /// ["hello", "world"]
+        ///
+        /// > ABI.Value.tuple2(.int8(22), .string("ok")).asArray
+        /// [.uint8(22), .string("ok")]
+        /// ```
+        public var asArray: [Value]? {
             switch self {
-            case let .arrayN(_, _, fields):
-                fields
-            case let .array(_, fields):
-                fields
+            case let .arrayN(_, _, values):
+                values
+            case let .array(_, values):
+                values
             case .tuple0, .tuple1, .tuple2, .tuple3, .tuple4, .tuple5, .tuple6, .tuple7, .tuple8, .tuple9, .tuple10, .tuple11, .tuple12, .tuple13, .tuple14, .tuple15, .tuple16, .tupleN:
-                tupleFields
+                tupleValues
             default:
                 nil
             }
         }
 
-        /// If the type is a tuple, returns a tupleN variant (e.g. `tuple1(.uint256)` to `.tupleN([.uint256])`)
-        public var asTupleN: Field? {
-            if let tupleFields {
-                .tupleN(tupleFields)
+        /// If the type is a `.tuple0`, `.tuple1`, ... `.tuple16`, returns a `.tupleN`, otherwise `nil`.
+        ///
+        /// Examples:
+        /// ```
+        /// > ABI.Value.tuple2(.uint8(22), .string("hello")).asTupleN
+        /// .tupleN([.uint8(22), .string("hello")])
+        ///
+        /// > ABI.Value.tuple0.asTupleN
+        /// .tupleN([])
+        ///
+        /// > ABI.Value.tupleN([.uint8(22), .string("hello")]).asTupleN
+        /// .tupleN([.uint8(22), .string("hello")])
+        /// ```
+        public var asTupleN: Value? {
+            if let tupleValues {
+                .tupleN(tupleValues)
             } else {
                 nil
             }
         }
 
-        /// Returns the associated Schema for this field
-        public var fieldType: Schema {
+        /// Returns the associated `ABI.Schema` for this value
+        ///
+        /// Examples
+        /// ```
+        /// > ABI.Value.uint256(22).schema
+        /// .uint256
+        ///
+        /// > ABI.Value.tuple2(.uint8(22), .string("hello")).schema
+        /// .tuple([.uint8, .string])
+        /// ```
+        public var schema: Schema {
             switch self {
             case .uint8:
                 .uint8
@@ -484,96 +607,96 @@ public extension ABI {
                 .bytes32
             case .string:
                 .string
-            case let .arrayN(fieldType, n, _):
-                .arrayN(fieldType, n)
-            case let .array(fieldType, _):
-                .array(fieldType)
-            case let .tupleN(fields):
-                .tuple(fields.map { $0.fieldType })
+            case let .arrayN(schema, n, _):
+                .arrayN(schema, n)
+            case let .array(schema, _):
+                .array(schema)
+            case let .tupleN(values):
+                .tuple(values.map { $0.schema })
             case .tuple0, .tuple1, .tuple2, .tuple3, .tuple4, .tuple5, .tuple6, .tuple7, .tuple8, .tuple9, .tuple10, .tuple11, .tuple12, .tuple13, .tuple14, .tuple15, .tuple16:
-                asTupleN!.fieldType
+                asTupleN!.schema
             }
         }
 
-        static func tupleFromFields(_ fields: [Field]) -> Field {
-            switch fields.count {
+        static func tupleFromValues(_ values: [Value]) -> Value {
+            switch values.count {
             case 0:
                 return .tuple0
             case 1:
-                return .tuple1(fields[0])
+                return .tuple1(values[0])
             case 2:
-                return .tuple2(fields[0], fields[1])
+                return .tuple2(values[0], values[1])
             case 3:
-                return .tuple3(fields[0], fields[1], fields[2])
+                return .tuple3(values[0], values[1], values[2])
             case 4:
-                return .tuple4(fields[0], fields[1], fields[2], fields[3])
+                return .tuple4(values[0], values[1], values[2], values[3])
             case 5:
-                return .tuple5(fields[0], fields[1], fields[2], fields[3], fields[4])
+                return .tuple5(values[0], values[1], values[2], values[3], values[4])
             case 6:
-                return .tuple6(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5])
+                return .tuple6(values[0], values[1], values[2], values[3], values[4], values[5])
             case 7:
-                return .tuple7(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5], fields[6])
+                return .tuple7(values[0], values[1], values[2], values[3], values[4], values[5], values[6])
             case 8:
-                return .tuple8(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5], fields[6], fields[7])
+                return .tuple8(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7])
             case 9:
-                return .tuple9(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5], fields[6], fields[7], fields[8])
+                return .tuple9(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8])
             case 10:
-                return .tuple10(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5], fields[6], fields[7], fields[8], fields[9])
+                return .tuple10(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9])
             case 11:
-                return .tuple11(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5], fields[6], fields[7], fields[8], fields[9], fields[10])
+                return .tuple11(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10])
             case 12:
-                return .tuple12(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5], fields[6], fields[7], fields[8], fields[9], fields[10], fields[11])
+                return .tuple12(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11])
             case 13:
-                return .tuple13(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5], fields[6], fields[7], fields[8], fields[9], fields[10], fields[11], fields[12])
+                return .tuple13(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12])
             case 14:
-                return .tuple14(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5], fields[6], fields[7], fields[8], fields[9], fields[10], fields[11], fields[12], fields[13])
+                return .tuple14(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13])
             case 15:
-                return .tuple15(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5], fields[6], fields[7], fields[8], fields[9], fields[10], fields[11], fields[12], fields[13], fields[14])
+                return .tuple15(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14])
             case 16:
-                return .tuple16(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5], fields[6], fields[7], fields[8], fields[9], fields[10], fields[11], fields[12], fields[13], fields[14], fields[15])
+                return .tuple16(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15])
             default:
-                return .tupleN(fields)
+                return .tupleN(values)
             }
         }
 
-        private var tupleFields: [Field]? {
+        private var tupleValues: [Value]? {
             switch self {
             case .tuple0:
                 return []
-            case let .tuple1(field0):
-                return [field0]
-            case let .tuple2(field0, field1):
-                return [field0, field1]
-            case let .tuple3(field0, field1, field2):
-                return [field0, field1, field2]
-            case let .tuple4(field0, field1, field2, field3):
-                return [field0, field1, field2, field3]
-            case let .tuple5(field0, field1, field2, field3, field4):
-                return [field0, field1, field2, field3, field4]
-            case let .tuple6(field0, field1, field2, field3, field4, field5):
-                return [field0, field1, field2, field3, field4, field5]
-            case let .tuple7(field0, field1, field2, field3, field4, field5, field6):
-                return [field0, field1, field2, field3, field4, field5, field6]
-            case let .tuple8(field0, field1, field2, field3, field4, field5, field6, field7):
-                return [field0, field1, field2, field3, field4, field5, field6, field7]
-            case let .tuple9(field0, field1, field2, field3, field4, field5, field6, field7, field8):
-                return [field0, field1, field2, field3, field4, field5, field6, field7, field8]
-            case let .tuple10(field0, field1, field2, field3, field4, field5, field6, field7, field8, field9):
-                return [field0, field1, field2, field3, field4, field5, field6, field7, field8, field9]
-            case let .tuple11(field0, field1, field2, field3, field4, field5, field6, field7, field8, field9, field10):
-                return [field0, field1, field2, field3, field4, field5, field6, field7, field8, field9, field10]
-            case let .tuple12(field0, field1, field2, field3, field4, field5, field6, field7, field8, field9, field10, field11):
-                return [field0, field1, field2, field3, field4, field5, field6, field7, field8, field9, field10, field11]
-            case let .tuple13(field0, field1, field2, field3, field4, field5, field6, field7, field8, field9, field10, field11, field12):
-                return [field0, field1, field2, field3, field4, field5, field6, field7, field8, field9, field10, field11, field12]
-            case let .tuple14(field0, field1, field2, field3, field4, field5, field6, field7, field8, field9, field10, field11, field12, field13):
-                return [field0, field1, field2, field3, field4, field5, field6, field7, field8, field9, field10, field11, field12, field13]
-            case let .tuple15(field0, field1, field2, field3, field4, field5, field6, field7, field8, field9, field10, field11, field12, field13, field14):
-                return [field0, field1, field2, field3, field4, field5, field6, field7, field8, field9, field10, field11, field12, field13, field14]
-            case let .tuple16(field0, field1, field2, field3, field4, field5, field6, field7, field8, field9, field10, field11, field12, field13, field14, field15):
-                return [field0, field1, field2, field3, field4, field5, field6, field7, field8, field9, field10, field11, field12, field13, field14, field15]
-            case let .tupleN(fields):
-                return fields
+            case let .tuple1(value0):
+                return [value0]
+            case let .tuple2(value0, value1):
+                return [value0, value1]
+            case let .tuple3(value0, value1, value2):
+                return [value0, value1, value2]
+            case let .tuple4(value0, value1, value2, value3):
+                return [value0, value1, value2, value3]
+            case let .tuple5(value0, value1, value2, value3, value4):
+                return [value0, value1, value2, value3, value4]
+            case let .tuple6(value0, value1, value2, value3, value4, value5):
+                return [value0, value1, value2, value3, value4, value5]
+            case let .tuple7(value0, value1, value2, value3, value4, value5, value6):
+                return [value0, value1, value2, value3, value4, value5, value6]
+            case let .tuple8(value0, value1, value2, value3, value4, value5, value6, value7):
+                return [value0, value1, value2, value3, value4, value5, value6, value7]
+            case let .tuple9(value0, value1, value2, value3, value4, value5, value6, value7, value8):
+                return [value0, value1, value2, value3, value4, value5, value6, value7, value8]
+            case let .tuple10(value0, value1, value2, value3, value4, value5, value6, value7, value8, value9):
+                return [value0, value1, value2, value3, value4, value5, value6, value7, value8, value9]
+            case let .tuple11(value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10):
+                return [value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10]
+            case let .tuple12(value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11):
+                return [value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11]
+            case let .tuple13(value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12):
+                return [value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12]
+            case let .tuple14(value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13):
+                return [value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13]
+            case let .tuple15(value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14):
+                return [value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14]
+            case let .tuple16(value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14, value15):
+                return [value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14, value15]
+            case let .tupleN(values):
+                return values
             default:
                 return nil
             }
@@ -715,19 +838,24 @@ public extension ABI {
         }
 
         /**
-         * Encodes the given input as ABI-encoded `Hex`.
+         * The ABI-encoded `Hex` corresponding to this `Value`
          *
-         * This method never fails, but be aware of the following edge cases:
+         * Examples:
+         * ```
+         * > .uint256(BigUInt(0x55)).encoded
+         * Hex("0x0000000000000000000000000000000000000000000000000000000000000055")
+         *
+         * > .tuple2(.uint256(BigUInt(0x55), .bool(true)).encoded
+         * Hex("0x00000000000000000000000000000000000000000000000000000000000000550000000000000000000000000000000000000000000000000000000000000001")
+         * ```
+         *
+         * Note: This method never fails, but be aware of the following edge cases:
          *   - Integer values are clamped to their bounds. For example, `.uint8(999)` will be treated as `uint8(255)`.
          *   - String values must be UTF-8 encodable; otherwise, they will be treated as an empty string `""`.
          *
-         * Example:
-         * ```
-         * let encoded: Hex = .uint256(BigUInt(0x55)).encoded
-         * // encoded -> Hex("0x0000000000000000000000000000000000000000000000000000000000000055")
-         * ```
+         * See [Solidity ABI Specification](https://docs.soliditylang.org/en/v0.8.26/abi-spec.html) for details.
          *
-         * - Returns: An ABI-encoded `Hex` representation of the input.
+         * - Returns: An ABI-encoded `Hex` representation of the value.
          */
         public var encoded: Hex {
             switch self {
@@ -833,23 +961,23 @@ public extension ABI {
                 } else {
                     return Hex(encodeVariableSizedData(data: Data()))
                 }
-            case let .arrayN(_, _, fields):
-                return Field.tupleN(fields).encoded
-            case let .array(_, fields):
+            case let .arrayN(_, _, values):
+                return Value.tupleN(values).encoded
+            case let .array(_, values):
                 // Arrays simply concat their elements
-                let encodedFields = Field.tupleN(fields).encoded
-                // Note: we'll assert that fields.count will always fit nicely into an EthWord
-                let size = EthWord(fromInt: fields.count)!.data
-                return Hex(size + encodedFields.data)
-            case let .tupleN(fields):
+                let encodedValues = Value.tupleN(values).encoded
+                // Note: we'll assert that values.count will always fit nicely into an EthWord
+                let size = EthWord(fromInt: values.count)!.data
+                return Hex(size + encodedValues.data)
+            case let .tupleN(values):
                 // For a tuple, we encode non-dynamic types in-place ("prim") and dynamic types in a "heap"
-                let primarySizeBytes = fields.map { $0.fieldType.primaryWordSize }.reduce(0) { $0 + $1 } * 0x20
-                let (prim, heap) = fields.reduce((Data(), Data())) { acc, field in
+                let primarySizeBytes = values.map { $0.schema.primaryWordSize }.reduce(0) { $0 + $1 } * 0x20
+                let (prim, heap) = values.reduce((Data(), Data())) { acc, value in
                     let (prim, heap) = acc
-                    if field.fieldType.dynamic {
-                        return (prim + EthWord(fromInt: primarySizeBytes + heap.count)!.data, heap + field.encoded.data)
+                    if value.schema.dynamic {
+                        return (prim + EthWord(fromInt: primarySizeBytes + heap.count)!.data, heap + value.encoded.data)
                     } else {
-                        return (prim + field.encoded.data, heap)
+                        return (prim + value.encoded.data, heap)
                     }
                 }
                 return Hex(prim + heap)
@@ -858,7 +986,16 @@ public extension ABI {
             }
         }
 
-        /// Returns a friendly description of a given value, e.g. `.uint256(0x55) -> "uint256(0x55)"`)
+        /// Returns a friendly description of a given value
+        ///
+        /// Examples
+        /// ```
+        /// > ABI.Value.uint256(0x55).description
+        /// "uint256(85)"
+        ///
+        /// > ABI.Value.string("hello").description
+        /// "string(hello)"
+        /// ```
         public var description: String {
             switch self {
             case let .uint8(v):
@@ -1061,12 +1198,12 @@ public extension ABI {
                 "bytes32(\(v))"
             case let .string(s):
                 "string(\(s))"
-            case let .arrayN(fieldType, n, fields):
-                "\(fieldType)[\(n)](\(fields.map { $0.description }))"
-            case let .array(fieldType, fields):
-                "\(fieldType)[](\(fields.map { $0.description }))"
-            case let .tupleN(fields):
-                "tuple(\(fields.map { $0.description }))"
+            case let .arrayN(schema, n, values):
+                "\(schema)[\(n)](\(values.map { $0.description }))"
+            case let .array(schema, values):
+                "\(schema)[](\(values.map { $0.description }))"
+            case let .tupleN(values):
+                "tuple(\(values.map { $0.description }))"
             case .tuple0, .tuple1, .tuple2, .tuple3, .tuple4, .tuple5, .tuple6, .tuple7, .tuple8, .tuple9, .tuple10, .tuple11, .tuple12, .tuple13, .tuple14, .tuple15, .tuple16:
                 asTupleN!.description
             }

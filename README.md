@@ -22,10 +22,10 @@ swift test -Xswiftc -DDEBUG_EVM
 
 ### ABI
 
-The ``ABI/Schema`` enum defines Ethereum ABI definitions and the ``ABI/Field`` enum defines an decoded value. You can use quickly encode ABI values using the ``ABI/Field/encoded`` computed property:
+The ``ABI/Schema`` enum defines Ethereum ABI definitions and the ``ABI/Value`` enum defines an decoded value. You can use quickly encode ABI values using the ``ABI/Value/encoded`` computed property:
 
 ```swift
-let data: Data = ABI.Field.tuple1(.array(.string, [.string("hello"), .string("world")])).encoded
+let data: Data = ABI.Value.tuple1(.array(.string, [.string("hello"), .string("world")])).encoded
 ```
 
 and use ``ABI/Schema/decode(_:)`` to decode values.
@@ -39,16 +39,19 @@ case let .tuple1(.array(_, words)):
 default:
   throw ABI.DecodeError.invalidResponse
 }
+```
+
+As noted above, tuples are generally represented as `.tuple2(.uint8(1), .uint8(2))` to make unwrapping easy. You can also unwrap values using helper methods such as ``ABI/Value/asString``, ``ABI/Value/asBigUInt``, ....
 
 ## Generating Swift from ABI
 
-To generate Swift files from ABI json files (e.g. the `out/` directory of forge build), run:
+To generate Swift files from ABI json files (e.g. the `out/` directory of `forge build`), run:
 
-```
-swift run Geno Tests/Solidity/out/Cool.sol/Cool.json --outDir Tests/Gen
+```sh
+swift run Geno ./out/Cool.sol/Cool.json --outDir Sources/
 ```
 
-As noted above, tuples are generally represented as `.tuple2(.uint8(1), .uint8(2))` to make unwrapping easy. You can also unwrap values using helper methods such as ``ABI/Field/asString``, ``ABI/Field/asBigUInt``, ....
+It's also suggested you run `swiftformat` on the generated file. See ``Geno`` for more information on code generation.
 
 ### EVM
 

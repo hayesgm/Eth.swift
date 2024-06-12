@@ -21,7 +21,7 @@ enum Abi {
         case let .tuple1(.bytes(var0)):
             return var0
         default:
-            throw ABI.DecodeError.mismatchedType(decoded.fieldType, abiEncodeSelectorFn.outputTuple)
+            throw ABI.DecodeError.mismatchedType(decoded.schema, abiEncodeSelectorFn.outputTuple)
         }
     }
 
@@ -40,7 +40,7 @@ enum Abi {
         case let .tuple1(.bytes(var0)):
             return var0
         default:
-            throw ABI.DecodeError.mismatchedType(decoded.fieldType, simpleAbiEncodingFn.outputTuple)
+            throw ABI.DecodeError.mismatchedType(decoded.schema, simpleAbiEncodingFn.outputTuple)
         }
     }
 
@@ -59,7 +59,7 @@ enum Abi {
         case let .tuple1(.bytes(var0)):
             return var0
         default:
-            throw ABI.DecodeError.mismatchedType(decoded.fieldType, simpleAbiEncodingPackedFn.outputTuple)
+            throw ABI.DecodeError.mismatchedType(decoded.schema, simpleAbiEncodingPackedFn.outputTuple)
         }
     }
 }

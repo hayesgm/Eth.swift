@@ -37,12 +37,12 @@ private func hexes(_ items: [Any]) -> Hex {
 
 struct CodingTest {
     let name: String
-    let input: ABI.Field
+    let input: ABI.Value
     let encoded: Hex
     let expectedDecodeError: ABI.DecodeError?
     let only: Bool
 
-    init(name: String, input: ABI.Field, encoded: Hex, only: Bool = false) {
+    init(name: String, input: ABI.Value, encoded: Hex, only: Bool = false) {
         self.name = name
         self.input = input
         self.encoded = encoded
@@ -50,7 +50,7 @@ struct CodingTest {
         self.only = only
     }
 
-    init(input: ABI.Field, encoded: Hex, only: Bool = false) {
+    init(input: ABI.Value, encoded: Hex, only: Bool = false) {
         name = input.description
         self.input = input
         self.encoded = encoded
@@ -58,7 +58,7 @@ struct CodingTest {
         self.only = only
     }
 
-    init(name _: String, input: ABI.Field, encoded: Hex, expError expectedDecodeError: ABI.DecodeError, only: Bool = false) {
+    init(name _: String, input: ABI.Value, encoded: Hex, expError expectedDecodeError: ABI.DecodeError, only: Bool = false) {
         name = "[DecodeTest] \(input.description)"
         self.input = input
         self.encoded = encoded
@@ -391,14 +391,14 @@ func showEncoded(_ encoded: Hex) -> String {
     "ABI Encoded ⬇️\n\n\t\t\(EthUtil.showChunkedWords(encoded.data))\n\n"
 }
 
-func showHelp(_ field: ABI.Field) -> String? {
-    switch field {
-    case let .tupleN(fields):
-        let fieldTypeStrings = fields.map { $0.fieldType.description }.joined(separator: ", ")
-        let fieldValueStrings = fields.map { $0.jsonValue }.joined(separator: " ")
-        return " - Compare to `cast abi-encode 'tuple(\(fieldTypeStrings))' \(fieldValueStrings)`"
+func showHelp(_ value: ABI.Value) -> String? {
+    switch value {
+    case let .tupleN(values):
+        let schemaStrings = values.map { $0.schema.description }.joined(separator: ", ")
+        let valueValueStrings = values.map { $0.jsonValue }.joined(separator: " ")
+        return " - Compare to `cast abi-encode 'tuple(\(schemaStrings))' \(valueValueStrings)`"
     case .tuple0, .tuple1, .tuple2, .tuple3, .tuple4, .tuple5, .tuple6, .tuple7, .tuple8, .tuple9, .tuple10:
-        return showHelp(field.asTupleN!)
+        return showHelp(value.asTupleN!)
     default:
         return nil
     }
@@ -407,37 +407,37 @@ func showHelp(_ field: ABI.Field) -> String? {
 struct FunctionTest {
     let name: String
     let function: ABI.Function
-    let fields: [ABI.Field]
+    let values: [ABI.Value]
     let encoded: Hex
     let expectedFunctionError: ABI.FunctionError?
     let expectedDecodeError: ABI.DecodeError?
 
-    init(name: String, function: ABI.Function, fields: [ABI.Field], encoded: Hex) {
+    init(name: String, function: ABI.Function, values: [ABI.Value], encoded: Hex) {
         self.name = name
         self.function = function
-        self.fields = fields
+        self.values = values
         self.encoded = encoded
         expectedFunctionError = nil
         expectedDecodeError = nil
     }
 
-    init(function: ABI.Function, fields: [ABI.Field], encoded: Hex) {
+    init(function: ABI.Function, values: [ABI.Value], encoded: Hex) {
         name = function.signature
         self.function = function
-        self.fields = fields
+        self.values = values
         self.encoded = encoded
         expectedFunctionError = nil
         expectedDecodeError = nil
     }
 
-    // init(input: ABI.Field, encoded: Hex) {
+    // init(input: ABI.Value, encoded: Hex) {
     //     name = input.description
     //     self.input = input
     //     self.encoded = encoded
     //     expectedDecodeError = nil
     // }
 
-    // init(name _: String, input: ABI.Field, encoded: Hex, expError expectedDecodeError: ABI.DecodeError) {
+    // init(name _: String, input: ABI.Value, encoded: Hex, expError expectedDecodeError: ABI.DecodeError) {
     //     name = "[DecodeTest] \(input.description)"
     //     self.input = input
     //     self.encoded = encoded
@@ -452,7 +452,7 @@ let functionTests = [
             inputs: [.uint8],
             outputs: []
         ),
-        fields: [.uint8(0x37)],
+        values: [.uint8(0x37)],
         encoded: "0xa8cb34810000000000000000000000000000000000000000000000000000000000000037"
     ),
     FunctionTest(
@@ -461,7 +461,7 @@ let functionTests = [
             inputs: [.uint8, .tuple([.uint8, .string, .uint8])],
             outputs: []
         ),
-        fields: [.uint8(19), .tuple3(.uint8(22), .string("hello"), .uint8(33))],
+        values: [.uint8(19), .tuple3(.uint8(22), .string("hello"), .uint8(33))],
         encoded: "0xcd4d69f600000000000000000000000000000000000000000000000000000000000000130000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000001600000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000021000000000000000000000000000000000000000000000000000000000000000568656c6c6f000000000000000000000000000000000000000000000000000000"
     ),
 ]
@@ -477,63 +477,63 @@ final class ABITests: XCTestCase {
         let invalidNSString = NSString(data: invalidUTF8Data, encoding: String.Encoding.ascii.rawValue)
         let invalidString = invalidNSString as String?
 
-        XCTAssertEqual(ABI.Field.string(invalidString!).encoded.hex, "0x0000000000000000000000000000000000000000000000000000000000000003c383280000000000000000000000000000000000000000000000000000000000")
+        XCTAssertEqual(ABI.Value.string(invalidString!).encoded.hex, "0x0000000000000000000000000000000000000000000000000000000000000003c383280000000000000000000000000000000000000000000000000000000000")
     }
 
     func testSmallUIntClamped() throws {
-        XCTAssertEqual(ABI.Field.uint8(300).encoded.hex, "0x00000000000000000000000000000000000000000000000000000000000000ff")
-        XCTAssertEqual(ABI.Field.uint16(0x10000).encoded.hex, "0x000000000000000000000000000000000000000000000000000000000000ffff")
-        XCTAssertEqual(ABI.Field.uint24(0x1000000).encoded.hex, "0x0000000000000000000000000000000000000000000000000000000000ffffff")
-        XCTAssertEqual(ABI.Field.uint32(0x1_0000_0000).encoded.hex, "0x00000000000000000000000000000000000000000000000000000000ffffffff")
+        XCTAssertEqual(ABI.Value.uint8(300).encoded.hex, "0x00000000000000000000000000000000000000000000000000000000000000ff")
+        XCTAssertEqual(ABI.Value.uint16(0x10000).encoded.hex, "0x000000000000000000000000000000000000000000000000000000000000ffff")
+        XCTAssertEqual(ABI.Value.uint24(0x1000000).encoded.hex, "0x0000000000000000000000000000000000000000000000000000000000ffffff")
+        XCTAssertEqual(ABI.Value.uint32(0x1_0000_0000).encoded.hex, "0x00000000000000000000000000000000000000000000000000000000ffffffff")
     }
 
     func testLargeUIntClamped() throws {
-        XCTAssertEqual(ABI.Field.uint40(BigUInt(1) << 39).encoded.hex, "0x0000000000000000000000000000000000000000000000000000008000000000")
-        XCTAssertEqual(ABI.Field.uint40(BigUInt(1) << 41).encoded.hex, "0x000000000000000000000000000000000000000000000000000000ffffffffff")
-        XCTAssertEqual(ABI.Field.uint256(BigUInt(1) << 257).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
+        XCTAssertEqual(ABI.Value.uint40(BigUInt(1) << 39).encoded.hex, "0x0000000000000000000000000000000000000000000000000000008000000000")
+        XCTAssertEqual(ABI.Value.uint40(BigUInt(1) << 41).encoded.hex, "0x000000000000000000000000000000000000000000000000000000ffffffffff")
+        XCTAssertEqual(ABI.Value.uint256(BigUInt(1) << 257).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
     }
 
     func testSmallIntClamped() throws {
-        XCTAssertEqual(ABI.Field.int8(100).encoded.hex, "0x0000000000000000000000000000000000000000000000000000000000000064")
-        XCTAssertEqual(ABI.Field.int8(200).encoded.hex, "0x000000000000000000000000000000000000000000000000000000000000007f")
-        XCTAssertEqual(ABI.Field.int8(-200).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80")
-        XCTAssertEqual(ABI.Field.int16(99999).encoded.hex, "0x0000000000000000000000000000000000000000000000000000000000007fff")
-        XCTAssertEqual(ABI.Field.int16(-99999).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8000")
-        XCTAssertEqual(ABI.Field.int24(0x1000000).encoded.hex, "0x00000000000000000000000000000000000000000000000000000000007fffff")
-        XCTAssertEqual(ABI.Field.int24(-0x1000000).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffff800000")
-        XCTAssertEqual(ABI.Field.int32(0x1_0000_0000).encoded.hex, "0x000000000000000000000000000000000000000000000000000000007fffffff")
-        XCTAssertEqual(ABI.Field.int32(-0x1_0000_0000).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffff80000000")
+        XCTAssertEqual(ABI.Value.int8(100).encoded.hex, "0x0000000000000000000000000000000000000000000000000000000000000064")
+        XCTAssertEqual(ABI.Value.int8(200).encoded.hex, "0x000000000000000000000000000000000000000000000000000000000000007f")
+        XCTAssertEqual(ABI.Value.int8(-200).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80")
+        XCTAssertEqual(ABI.Value.int16(99999).encoded.hex, "0x0000000000000000000000000000000000000000000000000000000000007fff")
+        XCTAssertEqual(ABI.Value.int16(-99999).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8000")
+        XCTAssertEqual(ABI.Value.int24(0x1000000).encoded.hex, "0x00000000000000000000000000000000000000000000000000000000007fffff")
+        XCTAssertEqual(ABI.Value.int24(-0x1000000).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffff800000")
+        XCTAssertEqual(ABI.Value.int32(0x1_0000_0000).encoded.hex, "0x000000000000000000000000000000000000000000000000000000007fffffff")
+        XCTAssertEqual(ABI.Value.int32(-0x1_0000_0000).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffff80000000")
     }
 
     func testLargeIntClamped() throws {
-        XCTAssertEqual(ABI.Field.int40(BigInt(1) << 38).encoded.hex, "0x0000000000000000000000000000000000000000000000000000004000000000")
-        XCTAssertEqual(ABI.Field.int40(-(BigInt(1) << 38)).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffc000000000")
-        XCTAssertEqual(ABI.Field.int40(BigInt(1) << 41).encoded.hex, "0x0000000000000000000000000000000000000000000000000000007fffffffff")
-        XCTAssertEqual(ABI.Field.int40(-(BigInt(1) << 41)).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffff8000000000")
-        XCTAssertEqual(ABI.Field.int256(BigInt(1) << 257).encoded.hex, "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
-        XCTAssertEqual(ABI.Field.int256(-(BigInt(1) << 257)).encoded.hex, "0x8000000000000000000000000000000000000000000000000000000000000000")
+        XCTAssertEqual(ABI.Value.int40(BigInt(1) << 38).encoded.hex, "0x0000000000000000000000000000000000000000000000000000004000000000")
+        XCTAssertEqual(ABI.Value.int40(-(BigInt(1) << 38)).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffc000000000")
+        XCTAssertEqual(ABI.Value.int40(BigInt(1) << 41).encoded.hex, "0x0000000000000000000000000000000000000000000000000000007fffffffff")
+        XCTAssertEqual(ABI.Value.int40(-(BigInt(1) << 41)).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffff8000000000")
+        XCTAssertEqual(ABI.Value.int256(BigInt(1) << 257).encoded.hex, "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
+        XCTAssertEqual(ABI.Value.int256(-(BigInt(1) << 257)).encoded.hex, "0x8000000000000000000000000000000000000000000000000000000000000000")
     }
 
     func testUnwrappingFunctions() throws {
-        XCTAssertEqual(ABI.Field.string("hello").asString, "hello")
-        XCTAssertEqual(ABI.Field.uint8(22).asString, nil)
-        XCTAssertEqual(ABI.Field.uint8(22).asUInt, 22)
-        XCTAssertEqual(ABI.Field.uint8(22).asInt, nil)
-        XCTAssertEqual(ABI.Field.uint8(22).asBigInt, nil)
-        XCTAssertEqual(ABI.Field.uint8(22).asBigUInt, BigUInt(22))
-        XCTAssertEqual(ABI.Field.uint256(BigUInt(22)).asBigUInt, BigUInt(22))
-        XCTAssertEqual(ABI.Field.int8(22).asInt, 22)
-        XCTAssertEqual(ABI.Field.int8(22).asUInt, nil)
-        XCTAssertEqual(ABI.Field.int8(22).asBigInt, BigInt(22))
-        XCTAssertEqual(ABI.Field.int256(BigInt(22)).asBigInt, BigInt(22))
-        XCTAssertEqual(ABI.Field.bool(true).asBool, true)
-        XCTAssertEqual(ABI.Field.address(EthAddress("0x0000000000000000000000000000000000000002")).asEthAddress, EthAddress("0x0000000000000000000000000000000000000002"))
-        XCTAssertEqual(ABI.Field.bytes1("0x11").asHex, "0x11")
-        XCTAssertEqual(ABI.Field.bytes2("0x1122").asHex, "0x1122")
-        XCTAssertEqual(ABI.Field.bytes32("0x0000000000000000000000000000000000000000000000000000000000000064").asHex, "0x0000000000000000000000000000000000000000000000000000000000000064")
-        XCTAssertEqual(ABI.Field.bytes("0x0000000000000000000000000000000000000000000000000000000000000064").asHex, "0x0000000000000000000000000000000000000000000000000000000000000064")
-        XCTAssertEqual(ABI.Field.array(.string, [.string("hi"), .string("mom")]).asArray?.map { $0.asString }, [String("hi"), String("mom")])
-        XCTAssertEqual(ABI.Field.tuple2(.string("hi"), .string("mom")).asArray?.map { $0.asString }, [String("hi"), String("mom")])
+        XCTAssertEqual(ABI.Value.string("hello").asString, "hello")
+        XCTAssertEqual(ABI.Value.uint8(22).asString, nil)
+        XCTAssertEqual(ABI.Value.uint8(22).asUInt, 22)
+        XCTAssertEqual(ABI.Value.uint8(22).asInt, nil)
+        XCTAssertEqual(ABI.Value.uint8(22).asBigInt, nil)
+        XCTAssertEqual(ABI.Value.uint8(22).asBigUInt, BigUInt(22))
+        XCTAssertEqual(ABI.Value.uint256(BigUInt(22)).asBigUInt, BigUInt(22))
+        XCTAssertEqual(ABI.Value.int8(22).asInt, 22)
+        XCTAssertEqual(ABI.Value.int8(22).asUInt, nil)
+        XCTAssertEqual(ABI.Value.int8(22).asBigInt, BigInt(22))
+        XCTAssertEqual(ABI.Value.int256(BigInt(22)).asBigInt, BigInt(22))
+        XCTAssertEqual(ABI.Value.bool(true).asBool, true)
+        XCTAssertEqual(ABI.Value.address(EthAddress("0x0000000000000000000000000000000000000002")).asEthAddress, EthAddress("0x0000000000000000000000000000000000000002"))
+        XCTAssertEqual(ABI.Value.bytes1("0x11").asHex, "0x11")
+        XCTAssertEqual(ABI.Value.bytes2("0x1122").asHex, "0x1122")
+        XCTAssertEqual(ABI.Value.bytes32("0x0000000000000000000000000000000000000000000000000000000000000064").asHex, "0x0000000000000000000000000000000000000000000000000000000000000064")
+        XCTAssertEqual(ABI.Value.bytes("0x0000000000000000000000000000000000000000000000000000000000000064").asHex, "0x0000000000000000000000000000000000000000000000000000000000000064")
+        XCTAssertEqual(ABI.Value.array(.string, [.string("hi"), .string("mom")]).asArray?.map { $0.asString }, [String("hi"), String("mom")])
+        XCTAssertEqual(ABI.Value.tuple2(.string("hi"), .string("mom")).asArray?.map { $0.asString }, [String("hi"), String("mom")])
     }
 
     func testEncodeTests() throws {
@@ -546,14 +546,14 @@ final class ABITests: XCTestCase {
         for test in getCodingTests() {
             if let expectedDecodeError = test.expectedDecodeError {
                 do {
-                    _ = try test.input.fieldType.decode(test.encoded)
+                    _ = try test.input.schema.decode(test.encoded)
                     XCTFail("\(test.name): Expected error \(expectedDecodeError.localizedDescription), none received")
                 } catch let error as ABI.DecodeError {
                     XCTAssertEqual(error.localizedDescription, expectedDecodeError.localizedDescription, test.name)
                 }
             } else {
                 do {
-                    let res = try test.input.fieldType.decode(test.encoded)
+                    let res = try test.input.schema.decode(test.encoded)
                     XCTAssertEqual(res, test.input, test.name)
                 } catch let error as ABI.DecodeError {
                     XCTFail("\(test.name): Unexpected error \(error.localizedDescription)")
@@ -564,7 +564,7 @@ final class ABITests: XCTestCase {
 
     func testFunctionEncodeTests() throws {
         for test in functionTests {
-            XCTAssertEqual(try showEncoded(test.function.encoded(with: test.fields)), showEncoded(test.encoded), test.name)
+            XCTAssertEqual(try showEncoded(test.function.encoded(with: test.values)), showEncoded(test.encoded), test.name)
         }
     }
 }

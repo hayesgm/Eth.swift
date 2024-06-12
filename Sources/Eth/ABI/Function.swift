@@ -25,6 +25,15 @@ public extension ABI {
     }
 
     /// Represents an Solidity ABI function including the function name, its input schema type and output schema type.
+    ///
+    /// Example Usage
+    /// ```
+    /// > ABI.Function(name: "cool", inputs: [.uint8], outputs: []).encoded(with: [.uint8(22)])
+    /// Hex("0xa8cb34810000000000000000000000000000000000000000000000000000000000000016")
+    ///
+    /// > ABI.Function(name: "cool", inputs: [], outputs: [.uint8]).decode(output: "0000000000000000000000000000000000000000000000000000000000000016")
+    /// ABI.Value.tuple1(.uint8(22))
+    /// ```
     struct Function: Equatable, CustomStringConvertible {
         public let name: String
         public let inputs: [ABI.Schema]
@@ -69,25 +78,37 @@ public extension ABI {
         }
 
         /// ABI encodes the function with the given values, which can then be `eth_call` or signed and submitted onchain.
-        /// - Parameter values: The field values to encode as input.
-        /// - Throws: `FunctionError.invalidFunctionInput` if the field types do not match the input tuple.
+        ///
+        /// Examples
+        /// ```
+        /// > ABI.Function(name: "cool", inputs: [.uint8], outputs: []).encoded(with: [.uint8(22)])
+        /// Hex("0xa8cb34810000000000000000000000000000000000000000000000000000000000000016")
+        /// ```
+        /// - Parameter values: The `Value`s to encode as input.
+        /// - Throws: `FunctionError.invalidFunctionInput` if the `Value` schemas do not match the input tuple.
         /// - Returns: The encoded function call.
-        public func encoded(with values: [Field]) throws -> Hex {
-            let fieldTuple = Field.tupleN(values)
-            guard fieldTuple.fieldType == inputTuple else {
-                throw FunctionError.invalidFunctionInput(fieldTuple.fieldType, inputTuple)
+        public func encoded(with values: [Value]) throws -> Hex {
+            let valueTuple = Value.tupleN(values)
+            guard valueTuple.schema == inputTuple else {
+                throw FunctionError.invalidFunctionInput(valueTuple.schema, inputTuple)
             }
-            return Hex(signatureHash.data + fieldTuple.encoded.data)
+            return Hex(signatureHash.data + valueTuple.encoded.data)
         }
 
         /// Decodes the output of the result of a function call.
+        ///
+        /// Examples
+        /// ```
+        /// > ABI.Function(name: "cool", inputs: [], outputs: [.uint8]).decode(output: "0000000000000000000000000000000000000000000000000000000000000016")
+        /// ABI.Value.tuple1(.uint8(22))
+        /// ```
         /// - Parameter hex: The hex result to decode.
-        /// - Throws: `FunctionError.invalidFunctionOutput` if the decoded field type does not match the output tuple.
+        /// - Throws: `FunctionError.invalidFunctionOutput` if the decoded `Value` schemas does not match the output tuple.
         /// - Returns: The decoded value of the function call, as a tuple.
-        public func decode(output hex: Hex) throws -> Field {
+        public func decode(output hex: Hex) throws -> Value {
             let res = try outputTuple.decode(hex)
-            guard res.fieldType == outputTuple else {
-                throw FunctionError.invalidFunctionOutput(res.fieldType, outputTuple)
+            guard res.schema == outputTuple else {
+                throw FunctionError.invalidFunctionOutput(res.schema, outputTuple)
             }
             return res
         }
