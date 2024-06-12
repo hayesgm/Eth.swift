@@ -12,7 +12,7 @@ final class GenoTests: XCTestCase {
         let contract = try! JSONDecoder().decode(Contract.self, from: jsonData)
 
         var abiTypes: [String] = []
-        for f in contract.abi {
+        for f in contract.functions {
             let schemas = f.outputs.map { parameterToValueType($0) }
             abiTypes.append(contentsOf: schemas)
         }
@@ -30,7 +30,7 @@ final class GenoTests: XCTestCase {
         let contract = try! JSONDecoder().decode(Contract.self, from: jsonData)
 
         var abiTypes: [String] = []
-        for f in contract.abi {
+        for f in contract.functions {
             let schemas = f.outputs.enumerated().map { i, p in parameterToMatchableValueType(p: p, index: i) }
             abiTypes.append(contentsOf: schemas)
         }
@@ -69,7 +69,7 @@ final class GenoTests: XCTestCase {
         let contract = try! JSONDecoder().decode(Contract.self, from: jsonData)
 
         var intializers: [String] = []
-        for f in contract.abi {
+        for f in contract.functions {
             let schemas = f.outputs.enumerated().map { _, p in structInitializer(parameter: p, structName: "Bat") }
             intializers.append(contentsOf: schemas)
         }

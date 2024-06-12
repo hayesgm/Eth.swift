@@ -19,7 +19,7 @@ func createSourceFileSyntax(from contract: Contract, name: String) -> SourceFile
             try VariableDeclSyntax("static let runtimeCode: Hex = \"\(raw: contract.deployedBytecode.object)\"").with(\.trailingTrivia, .newlines(2))
 
             // Generate a swift function and {ETH.ABI.Function} for each ABI function
-            for function in contract.abi {
+            for function in contract.functions {
                 generateETHABIFunction(f: function)
                 generateFunctionDeclaration(f: function)
             }
@@ -260,7 +260,7 @@ func generateAbiFile(input_path: URL) -> String {
 
 func generateStructs(c: Contract) -> [StructDeclSyntax] {
     var structsSoFar: [String: StructDeclSyntax] = [:]
-    for f in c.abi {
+    for f in c.functions {
         for i in f.inputs {
             makeStruccs(i, struccs: &structsSoFar)
         }
