@@ -13,8 +13,8 @@ final class GenoTests: XCTestCase {
 
         var abiTypes: [String] = []
         for f in contract.abi {
-            let fieldTypes = f.outputs.map { parameterToFieldType($0) }
-            abiTypes.append(contentsOf: fieldTypes)
+            let schemas = f.outputs.map { parameterToValueType($0) }
+            abiTypes.append(contentsOf: schemas)
         }
         let desired = [".int256", ".tuple([.uint96, .uint160, .array(Cat.schema), .string])"]
         for (i, _) in desired.enumerated() {
@@ -31,8 +31,8 @@ final class GenoTests: XCTestCase {
 
         var abiTypes: [String] = []
         for f in contract.abi {
-            let fieldTypes = f.outputs.enumerated().map { i, p in parameterToMatchableFieldType(p: p, index: i) }
-            abiTypes.append(contentsOf: fieldTypes)
+            let schemas = f.outputs.enumerated().map { i, p in parameterToMatchableValueType(p: p, index: i) }
+            abiTypes.append(contentsOf: schemas)
         }
         let desired = [".int256(var0)", ".tuple4(.uint96(a),\n .uint160(b),\n .array(Cat.schema, c),\n .string(d))"]
         for (i, _) in desired.enumerated() {
@@ -70,11 +70,11 @@ final class GenoTests: XCTestCase {
 
         var intializers: [String] = []
         for f in contract.abi {
-            let fieldTypes = f.outputs.enumerated().map { _, p in structInitializer(parameter: p, structName: "Bat") }
-            intializers.append(contentsOf: fieldTypes)
+            let schemas = f.outputs.enumerated().map { _, p in structInitializer(parameter: p, structName: "Bat") }
+            intializers.append(contentsOf: schemas)
         }
 
-        let desired = ["", "try Bat(a: a, b: b, c: c.map { try Cat.decodeField($0) }, d: d)"]
+        let desired = ["", "try Bat(a: a, b: b, c: c.map { try Cat.decodeValue($0) }, d: d)"]
         for (i, _) in desired.enumerated() {
             XCTAssertEqual(intializers[i], desired[i])
         }

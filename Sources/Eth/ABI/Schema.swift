@@ -363,12 +363,12 @@ public extension ABI {
                 return "bytes32"
             case .string:
                 return "string"
-            case let .arrayN(fieldType, size):
-                return "\(fieldType.description)[\(size)]"
-            case let .array(fieldType):
-                return "\(fieldType.description)[]"
-            case let .tuple(fields):
-                return "(\(fields.map { $0.description }.joined(separator: ",")))"
+            case let .arrayN(schema, size):
+                return "\(schema.description)[\(size)]"
+            case let .array(schema):
+                return "\(schema.description)[]"
+            case let .tuple(values):
+                return "(\(values.map { $0.description }.joined(separator: ",")))"
             }
         }
 
@@ -380,83 +380,83 @@ public extension ABI {
             switch self {
             case .string, .bytes, .array:
                 true
-            case let .arrayN(fieldType, _):
-                fieldType.dynamic
-            case let .tuple(fields):
-                fields.contains { $0.dynamic }
+            case let .arrayN(schema, _):
+                schema.dynamic
+            case let .tuple(values):
+                values.contains { $0.dynamic }
             default:
                 false
             }
         }
 
         var primaryWordSize: Int {
-            if !dynamic, case let .tuple(fields) = self {
+            if !dynamic, case let .tuple(values) = self {
                 // Tuples can have multiple values stored in the primary stack
-                return fields.map { $0.primaryWordSize }.reduce(0) { $0 + $1 }
+                return values.map { $0.primaryWordSize }.reduce(0) { $0 + $1 }
             } else {
                 return 1
             }
         }
 
-        private func decodeTupleFields(data: Data, withSchemas fieldTypes: [Schema]) throws -> [Field] {
-            // We're going to get the right data slices for each sub-field
+        private func decodeTupleValues(data: Data, withSchemas schemas: [Schema]) throws -> [Value] {
+            // We're going to get the right data slices for each sub-value
 
-            struct FieldPartial {
+            struct ValuePartial {
                 let index: Int
-                let fieldType: Schema
+                let schema: Schema
                 let primaryData: Data
                 var heapStart: Int? = nil
             }
 
-            var fieldPartials: [FieldPartial] = []
+            var valuePartials: [ValuePartial] = []
             var offset = 0
 
             // First pass, we get the primary data and heap pointer for dynamic data
             // We need these to determine the heap end marker when decoding
-            for (i, fieldType) in fieldTypes.enumerated() {
-                let primaryData = try getPrimaryData(offset: offset, fromData: data, forSchema: fieldType)
-                var fieldPartial = FieldPartial(index: i, fieldType: fieldType, primaryData: primaryData)
-                if fieldType.dynamic {
+            for (i, schema) in schemas.enumerated() {
+                let primaryData = try getPrimaryData(offset: offset, fromData: data, forSchema: schema)
+                var valuePartial = ValuePartial(index: i, schema: schema, primaryData: primaryData)
+                if schema.dynamic {
                     guard let heapStart = EthWord(fromData: primaryData)?.toInt() else {
-                        throw DecodeError.invalidDataPointer(fieldType, Hex(primaryData))
+                        throw DecodeError.invalidDataPointer(schema, Hex(primaryData))
                     }
-                    fieldPartial.heapStart = heapStart
+                    valuePartial.heapStart = heapStart
                 }
-                fieldPartials.append(fieldPartial)
+                valuePartials.append(valuePartial)
                 offset += primaryData.count
             }
 
-            var fields: [Field] = []
+            var values: [Value] = []
 
-            // Second pass, we fill in the `fieldData` fields for all fields and decode them
-            for fieldPartial in fieldPartials {
-                let fieldData: Data
+            // Second pass, we fill in the `valueData` values for all values and decode them
+            for valuePartial in valuePartials {
+                let valueData: Data
 
-                if fieldPartial.fieldType.dynamic {
-                    let nextFieldPartials = fieldPartials.dropFirst(fieldPartial.index + 1)
-                    let heapEnd = findFirst(nextFieldPartials) { $0.heapStart } ?? data.count
-                    guard let heapStart = fieldPartial.heapStart, heapEnd <= data.count, heapEnd > heapStart, heapEnd % 32 == 0 else {
-                        throw DecodeError.invalidDataHeapPointer(fieldPartial.fieldType, fieldPartial.heapStart, heapEnd, Hex(data))
+                if valuePartial.schema.dynamic {
+                    let nextValuePartials = valuePartials.dropFirst(valuePartial.index + 1)
+                    let heapEnd = findFirst(nextValuePartials) { $0.heapStart } ?? data.count
+                    guard let heapStart = valuePartial.heapStart, heapEnd <= data.count, heapEnd > heapStart, heapEnd % 32 == 0 else {
+                        throw DecodeError.invalidDataHeapPointer(valuePartial.schema, valuePartial.heapStart, heapEnd, Hex(data))
                     }
-                    fieldData = data.subdata(in: heapStart ..< heapEnd)
+                    valueData = data.subdata(in: heapStart ..< heapEnd)
                 } else {
-                    fieldData = fieldPartial.primaryData
+                    valueData = valuePartial.primaryData
                 }
 
-                try fields.append(fieldPartial.fieldType.decode(Hex(fieldData)))
+                try values.append(valuePartial.schema.decode(Hex(valueData)))
             }
 
-            return fields
+            return values
         }
 
         /**
-         Decodes the provided data into a `Field` based on the `Schema`.
+         Decodes the provided data into a `Value` based on the `Schema`.
 
          - Parameter data: The data to decode.
          - Throws: `ABI.DecodeError` if the decoding fails.
-         - Returns: A `Field` object representing the decoded data.
+         - Returns: A `Value` object representing the decoded data.
          */
-        public func decode(_ hex: Hex) throws -> Field {
+        public func decode(_ hex: Hex) throws -> Value {
             let data = hex.data
             switch self {
             case .uint8:
@@ -669,39 +669,39 @@ public extension ABI {
                 } else {
                     throw DecodeError.invalidUtf8String(Hex(utf8Data))
                 }
-            case let .arrayN(fieldType, n):
-                let fieldTypes = arraySchemas(fieldType, n)
-                let fields = try decodeTupleFields(data: data, withSchemas: fieldTypes)
+            case let .arrayN(schema, n):
+                let schemas = arraySchemas(schema, n)
+                let values = try decodeTupleValues(data: data, withSchemas: schemas)
 
-                return .arrayN(fieldType, n, fields)
-            case let .array(fieldType):
+                return .arrayN(schema, n, values)
+            case let .array(schema):
                 // We need to peek at the data size before each element
                 // This is because there's no way to know the size of an
                 // element before digging in.
                 if data.count < 32 {
-                    throw ABI.DecodeError.insufficientData(fieldType, Hex(data))
+                    throw ABI.DecodeError.insufficientData(schema, Hex(data))
                 }
                 let elementCount = try decodeUIntSmall(data.subdata(in: 0 ..< 32), inBits: 32, withSchema: self)
 
-                let fieldTypes: [Schema] = (0 ..< elementCount).map { _ in fieldType }
+                let schemas: [Schema] = (0 ..< elementCount).map { _ in schema }
                 let subdata = data.dropFirst(32)
 
-                let fields = try decodeTupleFields(data: Data(subdata), withSchemas: fieldTypes)
+                let values = try decodeTupleValues(data: Data(subdata), withSchemas: schemas)
 
-                return .array(fieldType, fields)
-            case let .tuple(fieldTypes):
-                let fields = try decodeTupleFields(data: data, withSchemas: fieldTypes)
+                return .array(schema, values)
+            case let .tuple(schemas):
+                let values = try decodeTupleValues(data: data, withSchemas: schemas)
 
-                return Field.tupleFromFields(fields)
+                return Value.tupleFromValues(values)
             }
         }
     }
 }
 
-private func getPrimaryData(offset startIndex: Int, fromData data: Data, forSchema fieldType: ABI.Schema) throws -> Data {
-    let endIndex = startIndex + fieldType.primaryWordSize * 32
+private func getPrimaryData(offset startIndex: Int, fromData data: Data, forSchema schema: ABI.Schema) throws -> Data {
+    let endIndex = startIndex + schema.primaryWordSize * 32
     if data.count < endIndex {
-        throw ABI.DecodeError.insufficientData(fieldType, Hex(data))
+        throw ABI.DecodeError.insufficientData(schema, Hex(data))
     }
     return data.subdata(in: startIndex ..< endIndex)
 }
@@ -715,10 +715,10 @@ private func findFirst<T, U>(_ array: ArraySlice<T>, _ transform: (T) -> U?) -> 
     return nil
 }
 
-private func loadVariableSizedData(data: Data, withSchema fieldType: ABI.Schema) throws -> Data {
-    let (dataLen, rest) = try readInt(data, withSchema: fieldType)
+private func loadVariableSizedData(data: Data, withSchema schema: ABI.Schema) throws -> Data {
+    let (dataLen, rest) = try readInt(data, withSchema: schema)
     let wordLen = wordsRequiredForLength(dataLen)
-    try checkDataSize(rest, words: wordLen, forSchema: fieldType)
+    try checkDataSize(rest, words: wordLen, forSchema: schema)
     return rest.prefix(dataLen)
 }
 
@@ -739,8 +739,8 @@ private func bigUIntToUInt(_ bigUInt: BigUInt) -> UInt? {
 }
 
 /** Decodes a word of data to a UInt or fails **/
-private func decodeUIntSmall(_ data: Data, inBits bits: Int, withSchema fieldType: ABI.Schema) throws -> UInt {
-    let bigUInt = try decodeUInt(data, inBits: bits, withSchema: fieldType)
+private func decodeUIntSmall(_ data: Data, inBits bits: Int, withSchema schema: ABI.Schema) throws -> UInt {
+    let bigUInt = try decodeUInt(data, inBits: bits, withSchema: schema)
     guard let int = bigUIntToUInt(bigUInt) else {
         throw ABI.DecodeError.sizedUnsignedIntegerOverflow(bits, Hex(data))
     }
@@ -748,8 +748,8 @@ private func decodeUIntSmall(_ data: Data, inBits bits: Int, withSchema fieldTyp
 }
 
 /** Decodes a word of data to an Int or fails **/
-private func decodeIntSmall(_ data: Data, inBits bits: Int, withSchema fieldType: ABI.Schema) throws -> Int {
-    let bigInt = try decodeInt(data, inBits: bits, withSchema: fieldType)
+private func decodeIntSmall(_ data: Data, inBits bits: Int, withSchema schema: ABI.Schema) throws -> Int {
+    let bigInt = try decodeInt(data, inBits: bits, withSchema: schema)
     guard let int = bigIntToInt(bigInt) else {
         throw ABI.DecodeError.sizedSignedIntegerOverflow(bits, Hex(data))
     }
@@ -757,13 +757,13 @@ private func decodeIntSmall(_ data: Data, inBits bits: Int, withSchema fieldType
 }
 
 /** Decodes a word to a BigUInt **/
-private func decodeUInt(_ data: Data, inBits bits: Int, withSchema fieldType: ABI.Schema) throws -> BigUInt {
-    try toBigUInt(readExactSingleWord(data, withSchema: fieldType), bits: bits)
+private func decodeUInt(_ data: Data, inBits bits: Int, withSchema schema: ABI.Schema) throws -> BigUInt {
+    try toBigUInt(readExactSingleWord(data, withSchema: schema), bits: bits)
 }
 
 /** Decodes a word to a BigInt **/
-private func decodeInt(_ data: Data, inBits bits: Int, withSchema fieldType: ABI.Schema) throws -> BigInt {
-    try toBigInt(readExactSingleWord(data, withSchema: fieldType), bits: bits)
+private func decodeInt(_ data: Data, inBits bits: Int, withSchema schema: ABI.Schema) throws -> BigInt {
+    try toBigInt(readExactSingleWord(data, withSchema: schema), bits: bits)
 }
 
 /** Sometimes we need to pack data into 32-byte words. This determines the minimum number of words needed
@@ -773,11 +773,11 @@ private func wordsRequiredForLength(_ length: Int) -> Int {
 }
 
 /** Reads a 32-byte word and returns back the extra data, raises if insufficient data **/
-private func readWord(_ data: Data, withSchema fieldType: ABI.Schema) throws -> (EthWord, Data) {
+private func readWord(_ data: Data, withSchema schema: ABI.Schema) throws -> (EthWord, Data) {
     if data.count >= 32, let word = EthWord(fromData: data.prefix(32)) {
         return (word, data.dropFirst(32))
     } else {
-        throw ABI.DecodeError.insufficientData(fieldType, Hex(data))
+        throw ABI.DecodeError.insufficientData(schema, Hex(data))
     }
 }
 
@@ -785,33 +785,33 @@ private func readWord(_ data: Data, withSchema fieldType: ABI.Schema) throws -> 
  *  since we only use this when things denote sizes. If something overflows even a 32-bit Int,
  *  then it's too large or a pointer that's beyond the end of the data (assuming there are not
  *  ≥4GB of data). I guess "famous last words". */
-private func readInt(_ data: Data, withSchema fieldType: ABI.Schema) throws -> (Int, Data) {
-    let (word, extra) = try readWord(data, withSchema: fieldType)
+private func readInt(_ data: Data, withSchema schema: ABI.Schema) throws -> (Int, Data) {
+    let (word, extra) = try readWord(data, withSchema: schema)
     guard let x = word.toInt() else {
-        throw ABI.DecodeError.integerOverflow(fieldType, Hex(word.data))
+        throw ABI.DecodeError.integerOverflow(schema, Hex(word.data))
     }
     return (x, extra)
 }
 
 /** Checks that the data is the exact size in 32-byte words, or raises. */
-private func checkDataSize(_ data: Data, words: Int, forSchema fieldType: ABI.Schema) throws {
+private func checkDataSize(_ data: Data, words: Int, forSchema schema: ABI.Schema) throws {
     if data.count == 32 * words {
         return
     } else if data.count < 32 * words {
-        throw ABI.DecodeError.insufficientData(fieldType, Hex(data))
+        throw ABI.DecodeError.insufficientData(schema, Hex(data))
     } else {
-        throw ABI.DecodeError.excessData(fieldType, Hex(data))
+        throw ABI.DecodeError.excessData(schema, Hex(data))
     }
 }
 
 /** Reads a single 32-byte word and returns it, iff the data is exactly 32-byte wide */
-private func readExactSingleWord(_ data: Data, withSchema fieldType: ABI.Schema) throws -> EthWord {
+private func readExactSingleWord(_ data: Data, withSchema schema: ABI.Schema) throws -> EthWord {
     if data.count == 32, let word = EthWord(fromData: data) {
         return word
     } else if data.count < 32 {
-        throw ABI.DecodeError.insufficientData(fieldType, Hex(data))
+        throw ABI.DecodeError.insufficientData(schema, Hex(data))
     } else {
-        throw ABI.DecodeError.excessData(fieldType, Hex(data))
+        throw ABI.DecodeError.excessData(schema, Hex(data))
     }
 }
 
@@ -836,20 +836,20 @@ private func toBigInt(_ word: EthWord, bits: Int) throws -> BigInt {
     return x
 }
 
-/** Reads the N most significant bytes of a 32-byte data field **/
-private func readBytesN(_ data: Data, withSchema fieldType: ABI.Schema, bytes: Int) throws -> Hex {
-    try checkDataSize(data, words: 1, forSchema: fieldType)
+/** Reads the N most significant bytes of a 32-byte data value **/
+private func readBytesN(_ data: Data, withSchema schema: ABI.Schema, bytes: Int) throws -> Hex {
+    try checkDataSize(data, words: 1, forSchema: schema)
     guard BigUInt(data.suffix(32 - bytes)) == .zero else {
-        throw ABI.DecodeError.nonEmptyDataFound(fieldType, Hex(data))
+        throw ABI.DecodeError.nonEmptyDataFound(schema, Hex(data))
     }
     return Hex(data.prefix(bytes))
 }
 
-/** Reads the N least significant bytes of a 32-byte data field **/
-private func readRightBytesN(_ data: Data, withSchema fieldType: ABI.Schema, bytes: Int) throws -> Data {
-    try checkDataSize(data, words: 1, forSchema: fieldType)
+/** Reads the N least significant bytes of a 32-byte data value **/
+private func readRightBytesN(_ data: Data, withSchema schema: ABI.Schema, bytes: Int) throws -> Data {
+    try checkDataSize(data, words: 1, forSchema: schema)
     guard BigUInt(data.prefix(32 - bytes)) == .zero else {
-        throw ABI.DecodeError.nonEmptyDataFound(fieldType, Hex(data))
+        throw ABI.DecodeError.nonEmptyDataFound(schema, Hex(data))
     }
     return data.suffix(bytes)
 }
@@ -858,35 +858,35 @@ private func readRightBytesN(_ data: Data, withSchema fieldType: ABI.Schema, byt
  *  Simply converts something that looks like an array type into something that looks like a tuple-type, e.g.
  *  for decoding. That is, a `.array(.uint8, 2)` decodes the same as a `.tuple2(.uint8, .uint8)`, so we literally
  *  construct that and decode to it. **/
-private func arraySchemas(_ fieldType: ABI.Schema, _ n: Int) -> [ABI.Schema] {
-    (1 ... n).map { _ in fieldType }
+private func arraySchemas(_ schema: ABI.Schema, _ n: Int) -> [ABI.Schema] {
+    (1 ... n).map { _ in schema }
 }
 
 extension ABI.DecodeError: LocalizedError {
     public var errorDescription: String? {
         switch self {
-        case let .insufficientData(fieldType, hex):
-            return NSLocalizedString("Insufficent data to decode field \(fieldType.description), given data \"\(hex.hex)\".", comment: "Insufficient Data Error")
-        case let .excessData(fieldType, hex):
-            return NSLocalizedString("Excess data found when decoding field \(fieldType.description), given data \"\(hex.hex)\".", comment: "Excess Data Error")
-        case let .nonEmptyDataFound(fieldType, hex):
-            return NSLocalizedString("Non-empty data found where expected empty when decoding field \(fieldType.description), given data \"\(hex.hex)\".", comment: "Non-Empty Data Error")
-        case let .integerOverflow(fieldType, hex):
-            return NSLocalizedString("Integer overflow when decoding type \(fieldType.description) with data \"\(hex.hex)\".", comment: "Integer Overflow Error")
+        case let .insufficientData(schema, hex):
+            return NSLocalizedString("Insufficent data to decode value \(schema.description), given data \"\(hex.hex)\".", comment: "Insufficient Data Error")
+        case let .excessData(schema, hex):
+            return NSLocalizedString("Excess data found when decoding value \(schema.description), given data \"\(hex.hex)\".", comment: "Excess Data Error")
+        case let .nonEmptyDataFound(schema, hex):
+            return NSLocalizedString("Non-empty data found where expected empty when decoding value \(schema.description), given data \"\(hex.hex)\".", comment: "Non-Empty Data Error")
+        case let .integerOverflow(schema, hex):
+            return NSLocalizedString("Integer overflow when decoding type \(schema.description) with data \"\(hex.hex)\".", comment: "Integer Overflow Error")
         case let .sizedUnsignedIntegerOverflow(size, hex):
             return NSLocalizedString("Overflowed integer type \"\(hex.hex)\" cannot fit into uint\(size).", comment: "Sized Unsigned Integer Overflow Error")
         case let .sizedSignedIntegerOverflow(size, hex):
             return NSLocalizedString("Overflowed signed integer type \"\(hex.hex)\" cannot fit into int\(size).", comment: "Sized Signed Integer Overflow Error")
-        case let .invalidDataPointer(fieldType, hex):
-            return NSLocalizedString("Invalid data pointer for \(fieldType.description) with data \"\(hex.hex)\".", comment: "Invalid Data Pointer Error")
-        case let .invalidDataHeapPointer(fieldType, heapStart, heapEnd, hex):
-            return NSLocalizedString("Invalid data heap pointer for \(fieldType.description) tries to read data at \(heapStart != nil ? String(heapStart!) : "nil")..<\(heapEnd) in data \"\(hex.hex)\".", comment: "Invalid Data Heap Pointer Error")
+        case let .invalidDataPointer(schema, hex):
+            return NSLocalizedString("Invalid data pointer for \(schema.description) with data \"\(hex.hex)\".", comment: "Invalid Data Pointer Error")
+        case let .invalidDataHeapPointer(schema, heapStart, heapEnd, hex):
+            return NSLocalizedString("Invalid data heap pointer for \(schema.description) tries to read data at \(heapStart != nil ? String(heapStart!) : "nil")..<\(heapEnd) in data \"\(hex.hex)\".", comment: "Invalid Data Heap Pointer Error")
         case let .invalidUtf8String(hex):
             return NSLocalizedString("Invalid utf8-encoded string with data \"\(hex)\".", comment: "Invalid UTF8 String Error")
         case let .invalidAddress(hex):
             return NSLocalizedString("Invalid address with data \"\(hex)\".", comment: "Invalid Address")
-        case let .mismatchedType(fieldType, expSchema):
-            return NSLocalizedString("Invalid field \(fieldType.description), expected to match \(expSchema.description).", comment: "Mismatched Type")
+        case let .mismatchedType(schema, expSchema):
+            return NSLocalizedString("Invalid value \(schema.description), expected to match \(expSchema.description).", comment: "Mismatched Type")
         case .invalidResponse:
             return NSLocalizedString("Invalid response or mismatch types when decoding.", comment: "Invalid Response")
         case let .unexpectedError(message):

@@ -21,7 +21,7 @@ enum Cool {
         case let .tuple1(.uint256(var0)):
             return var0
         default:
-            throw ABI.DecodeError.mismatchedType(decoded.fieldType, sumFn.outputTuple)
+            throw ABI.DecodeError.mismatchedType(decoded.schema, sumFn.outputTuple)
         }
     }
 }

@@ -8,7 +8,7 @@ struct Cat: Equatable {
     let age: UInt
 
     var encoded: Hex {
-        ABI.Field.tuple2(.string(name), .uint8(age)).encoded
+        ABI.Value.tuple2(.string(name), .uint8(age)).encoded
     }
 
     static func decode(hex: Hex) throws -> Cat {
@@ -17,7 +17,7 @@ struct Cat: Equatable {
         case let .tuple2(.string(name), .uint8(age)):
             return Cat(name: name, age: age)
         default:
-            throw ABI.DecodeError.mismatchedType(decoded.fieldType, schema)
+            throw ABI.DecodeError.mismatchedType(decoded.schema, schema)
         }
     }
 }

@@ -14,28 +14,28 @@ enum Structs {
         let f: Cat
 
         var encoded: Hex {
-            asField.encoded
+            asValue.encoded
         }
 
-        var asField: ABI.Field {
+        var asValue: ABI.Value {
             .tuple6(.uint96(a),
                     .uint160(b),
                     .array(Cat.schema, c.map {
-                        $0.asField
+                        $0.asValue
                     }),
                     .string(d),
                     .array(.uint256, e.map {
                         .uint256($0)
                     }),
-                    f.asField)
+                    f.asValue)
         }
 
         static func decode(hex: Hex) throws -> Bat {
-            try decodeField(schema.decode(hex))
+            try decodeValue(schema.decode(hex))
         }
 
-        static func decodeField(_ field: ABI.Field) throws -> Bat {
-            switch field {
+        static func decodeValue(_ value: ABI.Value) throws -> Bat {
+            switch value {
             case let .tuple6(.uint96(a),
                              .uint160(b),
                              .array(Cat.schema, c),
@@ -43,12 +43,12 @@ enum Structs {
                              .array(.uint256, e),
                              f):
                 return try Bat(a: a, b: b, c: c.map {
-                    try Cat.decodeField($0)
+                    try Cat.decodeValue($0)
                 }, d: d, e: e.map {
                     $0.asBigUInt!
-                }, f: Cat.decodeField(f))
+                }, f: Cat.decodeValue(f))
             default:
-                throw ABI.DecodeError.mismatchedType(field.fieldType, schema)
+                throw ABI.DecodeError.mismatchedType(value.schema, schema)
             }
         }
     }
@@ -61,27 +61,27 @@ enum Structs {
         let cc: Hex
 
         var encoded: Hex {
-            asField.encoded
+            asValue.encoded
         }
 
-        var asField: ABI.Field {
+        var asValue: ABI.Value {
             .tuple3(.int256(ca),
                     .bytes(cb),
                     .bytes32(cc))
         }
 
         static func decode(hex: Hex) throws -> Cat {
-            try decodeField(schema.decode(hex))
+            try decodeValue(schema.decode(hex))
         }
 
-        static func decodeField(_ field: ABI.Field) throws -> Cat {
-            switch field {
+        static func decodeValue(_ value: ABI.Value) throws -> Cat {
+            switch value {
             case let .tuple3(.int256(ca),
                              .bytes(cb),
                              .bytes32(cc)):
                 return try Cat(ca: ca, cb: cb, cc: cc)
             default:
-                throw ABI.DecodeError.mismatchedType(field.fieldType, schema)
+                throw ABI.DecodeError.mismatchedType(value.schema, schema)
             }
         }
     }
@@ -96,7 +96,7 @@ enum Structs {
     )
 
     static func acceptBat(bat: Bat) throws -> BigInt {
-        let query = try acceptBatFn.encoded(with: [bat.asField])
+        let query = try acceptBatFn.encoded(with: [bat.asValue])
         let result = try EVM.runQuery(bytecode: runtimeCode, query: query)
         let decoded = try acceptBatFn.decode(output: result)
 
@@ -104,7 +104,7 @@ enum Structs {
         case let .tuple1(.int256(var0)):
             return var0
         default:
-            throw ABI.DecodeError.mismatchedType(decoded.fieldType, acceptBatFn.outputTuple)
+            throw ABI.DecodeError.mismatchedType(decoded.schema, acceptBatFn.outputTuple)
         }
     }
 
@@ -126,9 +126,9 @@ enum Structs {
                                  .string(d),
                                  .array(.uint256, e),
                                  f)):
-            return try Bat(a: a, b: b, c: c.map { try Cat.decodeField($0) }, d: d, e: e.map { $0.asBigUInt! }, f: Cat.decodeField(f))
+            return try Bat(a: a, b: b, c: c.map { try Cat.decodeValue($0) }, d: d, e: e.map { $0.asBigUInt! }, f: Cat.decodeValue(f))
         default:
-            throw ABI.DecodeError.mismatchedType(decoded.fieldType, buildBatFn.outputTuple)
+            throw ABI.DecodeError.mismatchedType(decoded.schema, buildBatFn.outputTuple)
         }
     }
 }
