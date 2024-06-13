@@ -7,22 +7,20 @@ enum Cool {
     static let runtimeCode: Hex = "0x608060405234801561001057600080fd5b50600436106100365760003560e01c80631c809c8b1461003b578063cad0899b14610063575b600080fd5b61004e6100493660046100ed565b610084565b60405190151581526020015b60405180910390f35b610076610071366004610106565b6100d8565b60405190815260200161005a565b60006064821061009657506001919050565b60328210156100b85760405163f288492560e01b815260040160405180910390fd5b604051634b45e72760e01b81526001600482015260240160405180910390fd5b60006100e48284610128565b90505b92915050565b6000602082840312156100ff57600080fd5b5035919050565b6000806040838503121561011957600080fd5b50508035926020909101359150565b808201808211156100e757634e487b7160e01b600052601160045260246000fdfea2646970667358221220074664322626b405f6104f84adbee9f6e5bda9a4f6ee28e58ee409c2fd99efc464736f6c63430008180033"
 
     static let LukeWarmError = ABI.Function(
-            name: "LukeWarm",
-            inputs: [.bool],
-            outputs: []
+        name: "LukeWarm",
+        inputs: [.bool]
     )
 
     static let TooCoolError = ABI.Function(
-            name: "TooCool",
-            inputs: [],
-            outputs: []
+        name: "TooCool",
+        inputs: []
     )
 
-    static let errors = [LukeWarmError, TooCoolError]
+    static let errors: [ABI.Function] = [LukeWarmError, TooCoolError]
     static let sumFn = ABI.Function(
-            name: "sum",
-            inputs: [.uint256, .uint256],
-            outputs: [.uint256]
+        name: "sum",
+        inputs: [.uint256, .uint256],
+        outputs: [.uint256]
     )
 
     static func sum(x: BigUInt, y: BigUInt) throws -> BigUInt {
@@ -39,9 +37,9 @@ enum Cool {
     }
 
     static let vibeCheckFn = ABI.Function(
-            name: "vibeCheck",
-            inputs: [.uint256],
-            outputs: [.bool]
+        name: "vibeCheck",
+        inputs: [.uint256],
+        outputs: [.bool]
     )
 
     static func vibeCheck(status: BigUInt) throws -> Bool {
@@ -56,5 +54,4 @@ enum Cool {
             throw ABI.DecodeError.mismatchedType(decoded.schema, vibeCheckFn.outputTuple)
         }
     }
-
-    }
+}

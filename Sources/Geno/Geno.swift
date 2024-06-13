@@ -23,8 +23,7 @@ func createSourceFileSyntax(from contract: Contract, name: String) -> SourceFile
                 try! VariableDeclSyntax("""
                 static let \(raw: errorName(error)) = ABI.Function(
                         name: "\(raw: error.name)",
-                        inputs: [\(raw: mapToETHABITypes(error.inputs))],
-                        outputs: []
+                        inputs: [\(raw: mapToETHABITypes(error.inputs))]
                 )
                 """)
                 .with(\.trailingTrivia, .newlines(2))
