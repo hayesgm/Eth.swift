@@ -240,23 +240,39 @@ func typeMapper(for p: Contract.ABI.Function.Parameter) -> String {
         return structName(p)!
     }
 
-    switch p.internalType {
+    switch p.type {
     case "bool":
         return "Bool"
     case "string":
         return "String"
     case "address", "address payable":
-        return "String"
+        return "EthAddress"
     case "tuple":
         return "tuple"
+    case "uint8":
+        return "UInt"
+    case "uint16":
+        return "UInt"
+    case "uint24":
+        return "UInt"
+    case "uint32":
+        return "UInt"
     case let type where type.starts(with: "uint"):
         return "BigUInt"
+    case "int8":
+        return "Int"
+    case "int16":
+        return "Int"
+    case "int24":
+        return "Int"
+    case "int32":
+        return "Int"
     case let type where type.starts(with: "int"):
         return "BigInt"
     case let bytesType where bytesType.starts(with: "bytes"):
         return "Hex" // Dynamically-sized bytes sequence.
     default:
-        fatalError("TypeMapperError :Unsupported type: \(p.type)")
+        fatalError("TypeMapperError :Unsupported type: \(p.type) internally, \(p)")
     }
 }
 
