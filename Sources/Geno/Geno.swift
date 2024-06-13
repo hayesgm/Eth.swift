@@ -315,7 +315,9 @@ func baseParameter(_ p: Contract.ABI.Function.Parameter) -> Contract.ABI.Functio
 func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: StructDeclSyntax]) {
     if let structName = structName(p) {
         let equatableClause = InheritanceClauseSyntax(inheritedTypes: InheritedTypeListSyntax([InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Equatable"))]))
-        let def = try! StructDeclSyntax(leadingTrivia: .newline, name: .identifier(structName, leadingTrivia: .space), inheritanceClause: equatableClause) {
+
+        let nameParts = structName.split(separator: ".")
+        let def = try! StructDeclSyntax(leadingTrivia: .newline, name: .identifier(String(nameParts.last!), leadingTrivia: .space), inheritanceClause: equatableClause) {
             // if we find a struct nestled down in an array somewhere, pretend it is a top level thing
             let baseParameter = baseParameter(p)
             try VariableDeclSyntax("static let schema: ABI.Schema = \(raw: "ABI.Schema" + parameterToValueType(baseParameter))").with(\.trailingTrivia, .newlines(2))
@@ -354,7 +356,16 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
             }.with(\.trailingTrivia, .newlines(1))
                 .with(\.leadingTrivia, .newlines(1))
         }
-        struccs[structName] = def
+
+        if structName.contains(".") {
+            // when importing contracts in solidity, the structs become namespaced
+            let namespace = structName.split(separator: ".").first!
+            struccs[structName] = StructDeclSyntax(leadingTrivia: .newline, name: .identifier(String(namespace), leadingTrivia: .space)) {
+                def
+            }
+        } else {
+            struccs[structName] = def
+        }
     }
     if let c = p.components {
         for cp in c {
