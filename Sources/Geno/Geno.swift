@@ -30,7 +30,7 @@ func createSourceFileSyntax(from contract: Contract, name: String) -> SourceFile
                 .with(\.trailingTrivia, .newlines(2))
             }
 
-            try VariableDeclSyntax("static let errors = [\(raw: contract.errors.map { errorName($0) }.joined(separator: ", "))]")
+            try VariableDeclSyntax("static let errors: [ABI.Function] = [\(raw: contract.errors.map { errorName($0) }.joined(separator: ", "))]")
 
             // Generate a swift function and {ETH.ABI.Function} for each ABI function
             for function in contract.functions {
