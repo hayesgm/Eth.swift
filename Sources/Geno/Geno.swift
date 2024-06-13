@@ -18,6 +18,20 @@ func createSourceFileSyntax(from contract: Contract, name: String) -> SourceFile
             try VariableDeclSyntax("static let creationCode: Hex = \"\(raw: contract.bytecode.object)\"").with(\.trailingTrivia, .newline)
             try VariableDeclSyntax("static let runtimeCode: Hex = \"\(raw: contract.deployedBytecode.object)\"").with(\.trailingTrivia, .newlines(2))
 
+            // Generate ETH.ABI.Function to represent custom revert errors
+            for error in contract.errors {
+                try! VariableDeclSyntax("""
+                static let \(raw: errorName(error)) = ABI.Function(
+                        name: "\(raw: error.name)",
+                        inputs: [\(raw: mapToETHABITypes(error.inputs))],
+                        outputs: []
+                )
+                """)
+                .with(\.trailingTrivia, .newlines(2))
+            }
+
+            try VariableDeclSyntax("static let errors = [\(raw: contract.errors.map { errorName($0) }.joined(separator: ", "))]")
+
             // Generate a swift function and {ETH.ABI.Function} for each ABI function
             for function in contract.functions {
                 generateETHABIFunction(f: function)
@@ -27,13 +41,17 @@ func createSourceFileSyntax(from contract: Contract, name: String) -> SourceFile
     }
 }
 
+func errorName(_ e: Contract.ABI.Error) -> String {
+    e.name + "Error"
+}
+
+func mapToETHABITypes(_ ps: [Contract.ABI.Function.Parameter]) -> DeclSyntax {
+    let out: String = ps.map { parameterToValueType($0) }.joined(separator: ", ")
+
+    return DeclSyntax("\(raw: out)")
+}
+
 func generateETHABIFunction(f: Contract.ABI.Function) -> VariableDeclSyntax {
-    func mapToETHABITypes(_ ps: [Contract.ABI.Function.Parameter]) -> DeclSyntax {
-        let out: String = ps.map { parameterToValueType($0) }.joined(separator: ", ")
-
-        return DeclSyntax("\(raw: out)")
-    }
-
     return try! VariableDeclSyntax("""
     static let \(raw: f.name)Fn = ABI.Function(
             name: "\(raw: f.name)",
@@ -54,7 +72,7 @@ func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax
         StmtSyntax("""
 
                 let query = try \(raw: f.name)Fn.encoded(with: [\(raw: callParameters(f: f))])
-                let result = try EVM.runQuery(bytecode: runtimeCode, query: query)
+                let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors)
                 let decoded = try \(raw: f.name)Fn.decode(output: result)
 
                 switch decoded {

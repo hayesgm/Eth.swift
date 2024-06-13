@@ -20,4 +20,12 @@ final class GenTests: XCTestCase {
 
         XCTAssertEqual(r, BigInt(-2))
     }
+
+    func testErrorHandling() {
+//        do {
+        let vibe = try! Cool.vibeCheck(status: BigUInt(75))
+//        } catch EVM.QueryError.error(Cool.LukeWarmError, .bool(false)) {
+//            XCTAssertFalse(false, "vibe")
+//        }
+    }
 }
