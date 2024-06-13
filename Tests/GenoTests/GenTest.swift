@@ -22,10 +22,15 @@ final class GenTests: XCTestCase {
     }
 
     func testErrorHandling() {
-//        do {
-        let vibe = try! Cool.vibeCheck(status: BigUInt(75))
-//        } catch EVM.QueryError.error(Cool.LukeWarmError, .bool(false)) {
-//            XCTAssertFalse(false, "vibe")
-//        }
+        var vibe : Bool = false
+        do {
+            _ = try Cool.vibeCheck(status: BigUInt(75))
+        } catch let EVM.QueryError.error(Cool.LukeWarmError, .tuple1(isVibin)) {
+            vibe = isVibin.asBool!
+        } catch {
+            vibe = false
+        }
+        
+        XCTAssertTrue(vibe, "warm vibe")
     }
 }
