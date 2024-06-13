@@ -23,9 +23,31 @@ struct Contract: Decodable {
             let inputs: [Function.Parameter]
         }
 
+        struct Constructor: Decodable {
+            let inputs: [Function.Parameter]?
+            let stateMutability: String
+        }
+
+        struct Fallback: Decodable {
+            let stateMutability: String
+        }
+
+        struct Receive: Decodable {
+            let stateMutability: String
+        }
+
+        struct Event: Decodable {
+            let name: String
+            let inputs: [Function.Parameter]
+        }
+
         enum ABIEntry: Decodable {
             case function(Function)
             case error(Error)
+            case constructor(Constructor)
+            case fallback(Fallback)
+            case receive(Receive)
+            case event(Event)
 
             init(from decoder: Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -38,8 +60,20 @@ struct Contract: Decodable {
                 case "error":
                     let error = try Error(from: decoder)
                     self = .error(error)
+                case "constructor":
+                    let constructor = try Constructor(from: decoder)
+                    self = .constructor(constructor)
+                case "fallback":
+                    let fallback = try Fallback(from: decoder)
+                    self = .fallback(fallback)
+                case "receive":
+                    let receive = try Receive(from: decoder)
+                    self = .receive(receive)
+                case "event":
+                    let receive = try Event(from: decoder)
+                    self = .event(receive)
                 default:
-                    throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Unknown ABI entry type")
+                    throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Unknown ABI entry type: \(type)")
                 }
             }
 
