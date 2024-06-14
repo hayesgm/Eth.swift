@@ -1309,7 +1309,7 @@ public enum EVM {
       - error(ABI.Function, ABI.Value): A wrapped error from a revert that matched an error signature passed in the `withErrors` parameter
       - revert(Hex): For a revert that does not match any known error types.
      */
-    enum QueryError: Error, Equatable {
+    public enum QueryError: Error, Equatable {
         case invalidCode(CodeError)
         case vmError(VMError)
         case error(ABI.Function, ABI.Value)

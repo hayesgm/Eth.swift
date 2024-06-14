@@ -18,16 +18,9 @@ struct Contract: Decodable {
         }
 
         struct Error: Decodable {
-            struct Parameter: Decodable {
-                let name: String
-                let type: String
-                let internalType: String
-                let components: [Parameter]?
-            }
-
             let type: String
             let name: String
-            let inputs: [Parameter]
+            let inputs: [Function.Parameter]
         }
 
         enum ABIEntry: Decodable {
