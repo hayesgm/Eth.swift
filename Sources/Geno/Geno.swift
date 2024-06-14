@@ -144,11 +144,23 @@ func outParameters(f: Contract.ABI.Function) -> String {
 }
 
 func callParameters(f: Contract.ABI.Function) -> String {
-    return f.inputs.map { parameter in
-        if structName(parameter) != nil {
-            "\(parameter.name).asValue"
+    return f.inputs.map { p in
+        if isArray(p) {
+            if isStruct(p) {
+                let structName = structName(p)!
+                return ".array(\(structName).schema, \(p.name).map { $0.asValue })"
+            } else {
+                let baseParameter = baseParameter(p)
+                return ".array(.\(baseParameter.type), \(p.name).map { .\(baseParameter.type)($0) })"
+            }
+        } else if isStruct(p) {
+            return "\(p.name).asValue"
+        } else if isTuple(p) {
+            let componentTypes = p.components!.enumerated().map { _, p in parameterToValueType(p, allowSchema: true) }
+            return ".tuple\(componentTypes.count)(\(componentTypes.joined(separator: ",\n ")))"
         } else {
-            "\(parameterToValueType(parameter, allowSchema: true))(\(parameter.name))"
+            // turning them into the enum values, with name values
+            return ".\(p.type)(\(p.name))"
         }
     }.joined(separator: ", ")
 }
@@ -240,23 +252,39 @@ func typeMapper(for p: Contract.ABI.Function.Parameter) -> String {
         return structName(p)!
     }
 
-    switch p.internalType {
+    switch p.type {
     case "bool":
         return "Bool"
     case "string":
         return "String"
     case "address", "address payable":
-        return "String"
+        return "EthAddress"
     case "tuple":
         return "tuple"
+    case "uint8":
+        return "UInt"
+    case "uint16":
+        return "UInt"
+    case "uint24":
+        return "UInt"
+    case "uint32":
+        return "UInt"
     case let type where type.starts(with: "uint"):
         return "BigUInt"
+    case "int8":
+        return "Int"
+    case "int16":
+        return "Int"
+    case "int24":
+        return "Int"
+    case "int32":
+        return "Int"
     case let type where type.starts(with: "int"):
         return "BigInt"
     case let bytesType where bytesType.starts(with: "bytes"):
         return "Hex" // Dynamically-sized bytes sequence.
     default:
-        fatalError("TypeMapperError :Unsupported type: \(p.type)")
+        fatalError("TypeMapperError :Unsupported type: \(p.type) internally, \(p)")
     }
 }
 
@@ -299,7 +327,9 @@ func baseParameter(_ p: Contract.ABI.Function.Parameter) -> Contract.ABI.Functio
 func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: StructDeclSyntax]) {
     if let structName = structName(p) {
         let equatableClause = InheritanceClauseSyntax(inheritedTypes: InheritedTypeListSyntax([InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Equatable"))]))
-        let def = try! StructDeclSyntax(leadingTrivia: .newline, name: .identifier(structName, leadingTrivia: .space), inheritanceClause: equatableClause) {
+
+        let nameParts = structName.split(separator: ".")
+        let def = try! StructDeclSyntax(leadingTrivia: .newline, name: .identifier(String(nameParts.last!), leadingTrivia: .space), inheritanceClause: equatableClause) {
             // if we find a struct nestled down in an array somewhere, pretend it is a top level thing
             let baseParameter = baseParameter(p)
             try VariableDeclSyntax("static let schema: ABI.Schema = \(raw: "ABI.Schema" + parameterToValueType(baseParameter))").with(\.trailingTrivia, .newlines(2))
@@ -338,7 +368,16 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
             }.with(\.trailingTrivia, .newlines(1))
                 .with(\.leadingTrivia, .newlines(1))
         }
-        struccs[structName] = def
+
+        if structName.contains(".") {
+            // when importing contracts in solidity, the structs become namespaced
+            let namespace = structName.split(separator: ".").first!
+            struccs[structName] = StructDeclSyntax(leadingTrivia: .newline, name: .identifier(String(namespace), leadingTrivia: .space)) {
+                def
+            }
+        } else {
+            struccs[structName] = def
+        }
     }
     if let c = p.components {
         for cp in c {

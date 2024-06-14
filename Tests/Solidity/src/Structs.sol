@@ -17,6 +17,14 @@ struct Bat {
     Cat f;
 }
 
+
+library Animal {
+
+struct Rat {
+    address a;
+}    
+}
+
 contract Structs {
     function buildBat(uint256 x, uint256 y) pure external returns (Bat memory) {
         Cat[] memory cats = new Cat[](y);
@@ -49,5 +57,15 @@ contract Structs {
             total += int256(bat.c[i].cb.length) * bat.c[i].ca;
         }
         return total / -2;
+    }
+
+    function lookAtRat(Animal.Rat memory rat, address[] memory holes) pure external returns (address) {
+        for (uint256 i = 0; i < holes.length; i++) {
+            if (holes[i] == rat.a) {
+                return rat.a;
+            }
+        }
+
+        return address(0);
     }
 }
