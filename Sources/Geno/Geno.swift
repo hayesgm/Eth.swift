@@ -144,11 +144,23 @@ func outParameters(f: Contract.ABI.Function) -> String {
 }
 
 func callParameters(f: Contract.ABI.Function) -> String {
-    return f.inputs.map { parameter in
-        if structName(parameter) != nil {
-            "\(parameter.name).asValue"
+    return f.inputs.map { p in
+        if isArray(p) {
+            if isStruct(p) {
+                let structName = structName(p)!
+                return ".array(\(structName).schema, \(p.name).map { $0.asValue })"
+            } else {
+                let baseParameter = baseParameter(p)
+                return ".array(.\(baseParameter.type), \(p.name).map { .\(baseParameter.type)($0) })"
+            }
+        } else if isStruct(p) {
+            return "\(p.name).asValue"
+        } else if isTuple(p) {
+            let componentTypes = p.components!.enumerated().map { _, p in parameterToValueType(p, allowSchema: true) }
+            return ".tuple\(componentTypes.count)(\(componentTypes.joined(separator: ",\n ")))"
         } else {
-            "\(parameterToValueType(parameter, allowSchema: true))(\(parameter.name))"
+            // turning them into the enum values, with name values
+            return ".\(p.type)(\(p.name))"
         }
     }.joined(separator: ", ")
 }

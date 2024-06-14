@@ -19,6 +19,10 @@ final class GenTests: XCTestCase {
         let r = try! Structs.acceptBat(bat: Structs.Bat(a: BigUInt(1), b: BigUInt(2), c: [Structs.Cat(ca: BigInt(2), cb: "0x01", cc: Hex("bar".data(using: .utf8)!))], d: "Cave", e: [], f: Structs.Cat(ca: 2, cb: "0x00", cc: catData)))
 
         XCTAssertEqual(r, BigInt(-2))
+
+        let addy = EthAddress(Hex("0x673D2EBe4B6BAA946345C7b1F8d3Cc2FfB3429Bf"))!
+        let ratAddress = try! Structs.lookAtRat(rat: Structs.Animal.Rat(a: addy), holes: [addy])
+        XCTAssertEqual(ratAddress, addy)
     }
 
     func testErrorHandling() {
