@@ -432,7 +432,7 @@ func isArray(_ p: Contract.ABI.Function.Parameter) -> Bool {
 }
 
 func isStruct(_ p: Contract.ABI.Function.Parameter) -> Bool {
-    structName(p) != nil && !isArray(p)
+    structName(p) != nil
 }
 
 func asValueMapper(parameter: Contract.ABI.Function.Parameter, name: String = "$0") throws -> String {

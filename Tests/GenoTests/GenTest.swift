@@ -23,6 +23,9 @@ final class GenTests: XCTestCase {
         let addy = EthAddress(Hex("0x673D2EBe4B6BAA946345C7b1F8d3Cc2FfB3429Bf"))!
         let ratAddress = try! Structs.lookAtRat(rat: Structs.Animal.Rat(a: addy), holes: [addy])
         XCTAssertEqual(ratAddress, addy)
+        
+        let moose = try! Structs.lookAtMoose(moose: [Structs.Animal.Moose(b: 2), Structs.Animal.Moose(b: BigUInt(100000))], m: 2)
+        XCTAssertTrue(moose)
     }
 
     func testErrorHandling() {

@@ -62,10 +62,15 @@ contract Structs {
     }
 
     function lookAtMoose(
-        Animal.Moose memory moose
+        Animal.Moose[] memory moose,
+        uint m
     ) external pure returns (bool) {
-        Animal.Moose memory m = Animal.Moose({b: 1});
-        return true;
+        for (uint256 i = 0; i < moose.length; i++) {
+            if (moose[i].b == m) {
+                return true;
+            }
+        }
+        return false;
     }
 
     function lookAtRat(
