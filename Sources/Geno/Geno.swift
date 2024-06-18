@@ -315,7 +315,44 @@ func generateStructs(c: Contract) -> [StructDeclSyntax] {
         }
     }
 
-    return structsSoFar.keys.sorted().compactMap { structsSoFar[$0] }
+    // Dictionary to hold grouped structs by namespace
+    var groupedStructs: [String: [StructDeclSyntax]] = [:]
+    var ungroupedStructs: [StructDeclSyntax] = []
+
+    for (structName, structDecl) in structsSoFar {
+        let namespaceParts = structName.split(separator: ".")
+        if namespaceParts.count > 1 {
+            let namespace = String(namespaceParts.first!)
+            if groupedStructs[namespace] == nil {
+                groupedStructs[namespace] = []
+            }
+            groupedStructs[namespace]!.append(structDecl)
+        } else {
+            ungroupedStructs.append(structDecl)
+        }
+    }
+
+    // Sort the ungrouped structs alphabetically by their name
+    ungroupedStructs.sort { $0.name.text < $1.name.text }
+
+    // Sort the grouped structs and their namespaces
+    let sortedNamespaces = groupedStructs.keys.sorted()
+    var finalStructs: [StructDeclSyntax] = ungroupedStructs
+
+    for namespace in sortedNamespaces {
+        let structs = groupedStructs[namespace]!.sorted { $0.name.text < $1.name.text }
+        let wrappedStruct = StructDeclSyntax(
+            leadingTrivia: .newline,
+            name: .identifier(namespace, leadingTrivia: .space)
+        ) {
+            for structDecl in structs {
+                structDecl
+            }
+        }
+        finalStructs.append(wrappedStruct)
+    }
+
+    return finalStructs
 }
 
 func baseParameter(_ p: Contract.ABI.Function.Parameter) -> Contract.ABI.Function.Parameter {
@@ -369,15 +406,7 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
                 .with(\.leadingTrivia, .newlines(1))
         }
 
-        if structName.contains(".") {
-            // when importing contracts in solidity, the structs become namespaced
-            let namespace = structName.split(separator: ".").first!
-            struccs[structName] = StructDeclSyntax(leadingTrivia: .newline, name: .identifier(String(namespace), leadingTrivia: .space)) {
-                def
-            }
-        } else {
-            struccs[structName] = def
-        }
+        struccs[structName] = def
     }
     if let c = p.components {
         for cp in c {
@@ -403,7 +432,7 @@ func isArray(_ p: Contract.ABI.Function.Parameter) -> Bool {
 }
 
 func isStruct(_ p: Contract.ABI.Function.Parameter) -> Bool {
-    structName(p) != nil && !isArray(p)
+    structName(p) != nil
 }
 
 func asValueMapper(parameter: Contract.ABI.Function.Parameter, name: String = "$0") throws -> String {

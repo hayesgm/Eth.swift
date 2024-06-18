@@ -80,6 +80,13 @@ final class GenoTests: XCTestCase {
         }
     }
 
+    func testCallParameters() {
+        let tf = Geno.Contract.ABI.Function(type: "function", name: "lookAtMoose", inputs: [Geno.Contract.ABI.Function.Parameter(name: "moose", type: "tuple[]", internalType: "struct Animal.Moose[]", components: Optional([Geno.Contract.ABI.Function.Parameter(name: "b", type: "uint256", internalType: "uint256", components: nil)])), Geno.Contract.ABI.Function.Parameter(name: "m", type: "uint256", internalType: "uint256", components: nil)], outputs: [Geno.Contract.ABI.Function.Parameter(name: "", type: "bool", internalType: "bool", components: nil)], stateMutability: "pure")
+
+        let callParams = callParameters(f: tf)
+        XCTAssertEqual(callParams, ".array(Animal.Moose.schema, moose.map { $0.asValue }), .uint256(m)")
+    }
+
     func jsonString() -> String {
         """
         {
