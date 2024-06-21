@@ -29,6 +29,24 @@ func createSourceFileSyntax(from contract: Contract, name: String) -> SourceFile
                 .with(\.trailingTrivia, .newlines(2))
             }
 
+            try EnumDeclSyntax(leadingTrivia: .newline, name: .identifier("Revert", leadingTrivia: .space, trailingTrivia: .space)) {
+                for e in contract.errors {
+                    DeclSyntax(stringLiteral: "case \(enumCaseName(e))").with(\.leadingTrivia, .newlines(2))
+                }
+            }
+
+            try FunctionDeclSyntax("""
+            static func rewrapError(_ error: ABI.Function, value: ABI.Value -> Revert
+            """) {
+                try DeclSyntax(
+                    """
+                    case (error, value):
+                    """)
+                for error in contract.errors {
+                    generateErrorSwitchCase(error)
+                }
+            }
+
             try VariableDeclSyntax("static let errors: [ABI.Function] = [\(raw: contract.errors.map { errorName($0) }.joined(separator: ", "))]")
 
             // Generate a swift function and {ETH.ABI.Function} for each ABI function
@@ -40,8 +58,24 @@ func createSourceFileSyntax(from contract: Contract, name: String) -> SourceFile
     }
 }
 
+func generateErrorSwitchCase(_ e: Contract.ABI.Error) -> DeclSyntax {
+    return DeclSyntax("""
+    switch (\(raw: errorName(e)), \(raw: mapToETHABITypes(e.inputs))):
+        return \(raw: enumCaseName(e))
+    """)
+}
+
 func errorName(_ e: Contract.ABI.Error) -> String {
     e.name + "Error"
+}
+
+func enumCaseName(_ e: Contract.ABI.Error) -> String {
+    var out = e.name.prefix(1).lowercased() + e.name.dropFirst()
+    if e.inputs.count > 0 {
+        let inputs = e.inputs.enumerated().map { i, p in parameterToMatchableValueType(p: p, index: i) }.joined(separator: ", ")
+        out.append("(" + inputs + ")")
+    }
+    return out
 }
 
 func mapToETHABITypes(_ ps: [Contract.ABI.Function.Parameter]) -> DeclSyntax {
