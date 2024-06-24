@@ -46,8 +46,34 @@ public struct EthAddress: Codable, Equatable, Hashable, CustomStringConvertible,
         address = hex
     }
 
+    /// Decodes an `EthAddress` from a hex string
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let data = try container.decode(Hex.self)
+        if data.count != 20 {
+            throw DecodingError.dataCorruptedError(in: container, debugDescription: "EthAddress must be exactly 20-bytes")
+        }
+        address = data
+    }
+
+    /// Encodes `EthAddress` to a hex string
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(hex)
+    }
+
     /// The address represented as a hexadecimal string.
     public var description: String {
+        hex
+    }
+
+    /// The address represented as a hexadecimal string.
+    public var hex: String {
         address.hex
+    }
+
+    /// The Data represented by this address.
+    public var data: Data {
+        address.data
     }
 }

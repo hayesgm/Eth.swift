@@ -39,6 +39,18 @@ public struct Hex: Codable, Equatable, Hashable, CustomStringConvertible, Expres
         self.init(hexData)
     }
 
+    /// Decodes a `Hex` from a hex string
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        data = try Hex.parseHex(container.decode(String.self))
+    }
+
+    /// Encodes `Hex` to a hex string
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(hex)
+    }
+
     /// An empty `Hex` value
     public static var empty = Hex(Data())
 
