@@ -9,4 +9,34 @@ final class EthAddressTests: XCTestCase {
         )
         XCTAssertNil(EthAddress(fromHexString: "0xaa"))
     }
+
+    func testAddressEncodingDecoding() {
+        let address = EthAddress("0xdef1c0ded9bec7f1a1670819833240f027b25eff")
+        let encoder = JSONEncoder()
+        do {
+            let data = try encoder.encode(address)
+
+            let decoder = JSONDecoder()
+            let decodedHex = try decoder.decode(EthAddress.self, from: data)
+
+            XCTAssertEqual(address, decodedHex, "Encoded and decoded values should be equal")
+        } catch {
+            XCTFail("Encoding or decoding failed: \(error)")
+        }
+    }
+
+    func testAddressDecodeInvalidLength() {
+        let hex = Hex("0xdef1c0ded9bec7f1a1670819833240f027b25eff22334455")
+        let encoder = JSONEncoder()
+        do {
+            let data = try encoder.encode(hex)
+
+            let decoder = JSONDecoder()
+            _ = try decoder.decode(EthAddress.self, from: data)
+
+            XCTFail("Should have failed invalid address length")
+        } catch {
+            XCTAssertEqual(error.localizedDescription, "The data couldn’t be read because it isn’t in the correct format.")
+        }
+    }
 }

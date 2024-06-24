@@ -68,4 +68,19 @@ final class HexTests: XCTestCase {
         XCTAssertEqual(Hex("0x0122").shortHex, "0x122")
         XCTAssertEqual(Hex("1122").shortHex, "0x1122")
     }
+
+    func testHexEncodingDecoding() {
+        let hex = Hex("0xdef1c0ded9bec7f1a1670819833240f027b25eff")
+        let encoder = JSONEncoder()
+        do {
+            let data = try encoder.encode(hex)
+
+            let decoder = JSONDecoder()
+            let decodedHex = try decoder.decode(Hex.self, from: data)
+
+            XCTAssertEqual(hex, decodedHex, "Encoded and decoded values should be equal")
+        } catch {
+            XCTFail("Encoding or decoding failed: \(error)")
+        }
+    }
 }
