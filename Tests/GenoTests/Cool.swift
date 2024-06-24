@@ -16,6 +16,23 @@ enum Cool {
         inputs: []
     )
 
+    enum RevertReason: Error {
+        case lukeWarm(Bool)
+        case tooCool
+        case unknownRevert(String, String)
+    }
+
+    static func rewrapError(_ error: ABI.Function, value: ABI.Value) -> RevertReason {
+        switch (error, value) {
+        case (LukeWarmError, let .tuple1(.bool(var0))):
+            return .lukeWarm(var0)
+        case (TooCoolError, _):
+            return .tooCool
+        case let (e, v):
+            return .unknownRevert(e.name, String(describing: v))
+        }
+    }
+
     static let errors: [ABI.Function] = [LukeWarmError, TooCoolError]
     static let sumFn = ABI.Function(
         name: "sum",
@@ -23,16 +40,20 @@ enum Cool {
         outputs: [.uint256]
     )
 
-    static func sum(x: BigUInt, y: BigUInt) throws -> BigUInt {
-        let query = try sumFn.encoded(with: [.uint256(x), .uint256(y)])
-        let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors)
-        let decoded = try sumFn.decode(output: result)
+    static func sum(x: BigUInt, y: BigUInt) throws -> Result<BigUInt, RevertReason> {
+        do {
+            let query = try sumFn.encoded(with: [.uint256(x), .uint256(y)])
+            let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors)
+            let decoded = try sumFn.decode(output: result)
 
-        switch decoded {
-        case let .tuple1(.uint256(var0)):
-            return var0
-        default:
-            throw ABI.DecodeError.mismatchedType(decoded.schema, sumFn.outputTuple)
+            switch decoded {
+            case let .tuple1(.uint256(var0)):
+                return .success(var0)
+            default:
+                throw ABI.DecodeError.mismatchedType(decoded.schema, sumFn.outputTuple)
+            }
+        } catch let EVM.QueryError.error(e, v) {
+            return .failure(rewrapError(e, value: v))
         }
     }
 
@@ -42,16 +63,20 @@ enum Cool {
         outputs: [.bool]
     )
 
-    static func vibeCheck(status: BigUInt) throws -> Bool {
-        let query = try vibeCheckFn.encoded(with: [.uint256(status)])
-        let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors)
-        let decoded = try vibeCheckFn.decode(output: result)
+    static func vibeCheck(status: BigUInt) throws -> Result<Bool, RevertReason> {
+        do {
+            let query = try vibeCheckFn.encoded(with: [.uint256(status)])
+            let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors)
+            let decoded = try vibeCheckFn.decode(output: result)
 
-        switch decoded {
-        case let .tuple1(.bool(var0)):
-            return var0
-        default:
-            throw ABI.DecodeError.mismatchedType(decoded.schema, vibeCheckFn.outputTuple)
+            switch decoded {
+            case let .tuple1(.bool(var0)):
+                return .success(var0)
+            default:
+                throw ABI.DecodeError.mismatchedType(decoded.schema, vibeCheckFn.outputTuple)
+            }
+        } catch let EVM.QueryError.error(e, v) {
+            return .failure(rewrapError(e, value: v))
         }
     }
 }

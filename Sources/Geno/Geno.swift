@@ -29,25 +29,35 @@ func createSourceFileSyntax(from contract: Contract, name: String) -> SourceFile
                 .with(\.trailingTrivia, .newlines(2))
             }
 
-            try EnumDeclSyntax(leadingTrivia: .newline, name: .identifier("Revert", leadingTrivia: .space, trailingTrivia: .space)) {
+            // -- Begin Enums for revert errors
+            let extendingErrorClause = InheritanceClauseSyntax(inheritedTypes: InheritedTypeListSyntax([
+                InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Equatable,")),
+                InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Error")),
+            ]))
+            EnumDeclSyntax(leadingTrivia: .newline, name: .identifier("RevertReason", leadingTrivia: .space, trailingTrivia: .space), inheritanceClause: extendingErrorClause) {
                 for e in contract.errors {
-                    DeclSyntax(stringLiteral: "case \(enumCaseName(e))").with(\.leadingTrivia, .newlines(2))
+                    try! EnumCaseDeclSyntax("case \(raw: errorEnumCaseName(e))").with(\.leadingTrivia, .newline)
                 }
+                try! EnumCaseDeclSyntax("case unknownRevert(String, String)").with(\.leadingTrivia, .newline)
             }
 
             try FunctionDeclSyntax("""
-            static func rewrapError(_ error: ABI.Function, value: ABI.Value -> Revert
+            static func rewrapError(_ error: ABI.Function, value: ABI.Value) -> RevertReason
             """) {
-                try DeclSyntax(
-                    """
-                    case (error, value):
-                    """)
-                for error in contract.errors {
-                    generateErrorSwitchCase(error)
+                SwitchExprSyntax(subject: ExprSyntax("(error, value)")) {
+                    for error in contract.errors {
+                        generateErrorSwitchCase(error)
+                    }
+
+                    SwitchCaseSyntax("""
+                    case let (e, v):
+                        return .unknownRevert(e.name, String(describing: v))
+                    """).with(\.trailingTrivia, .newline)
                 }
-            }
+            }.with(\.trailingTrivia, .newline)
 
             try VariableDeclSyntax("static let errors: [ABI.Function] = [\(raw: contract.errors.map { errorName($0) }.joined(separator: ", "))]")
+            // -- End Enums for revert errors
 
             // Generate a swift function and {ETH.ABI.Function} for each ABI function
             for function in contract.functions {
@@ -58,26 +68,56 @@ func createSourceFileSyntax(from contract: Contract, name: String) -> SourceFile
     }
 }
 
-func generateErrorSwitchCase(_ e: Contract.ABI.Error) -> DeclSyntax {
-    return DeclSyntax("""
-    switch (\(raw: errorName(e)), \(raw: mapToETHABITypes(e.inputs))):
-        return \(raw: enumCaseName(e))
-    """)
+/// Generates the matching case statement for mapping the ErrorFn to the error enum to return the error enum
+/// swift> generateErrorSwitchCase(Geno.Contract.ABI.Error(type: "error", name: "JustOneArg", inputs: [Geno.Contract.ABI.Function.Parameter(name: "", type: "bool", internalType: "bool", components: nil)]))
+///          SwitchCaseSyntax("""
+///          case (JustOneArgError, let .bool(value) ):
+///             return .justOneArgError(value)
+///          """)
+func generateErrorSwitchCase(_ e: Contract.ABI.Error) -> SwitchCaseSyntax {
+    let outBindings = if e.inputs.count == 0 {
+        "_"
+    } else {
+        "let \(outParameters(ps: e.inputs))"
+    }
+    return SwitchCaseSyntax("""
+    case (\(raw: errorName(e)), \(raw: outBindings)):
+        return .\(raw: errorEnumWithBoundOutputs(e, namedOutputs: outValues(ps: e.inputs)))
+    """).with(\.trailingTrivia, .newline)
 }
 
+/// Simply appends "Error" to the name given by the solc abi creator
+///  swift> errorName(Geno.Contract.ABI.Error(type: "error", name: "JustOneArg", inputs: [Geno.Contract.ABI.Function.Parameter(name: "", type: "bool", internalType: "bool", components: nil)]))
+///  > JustOneArgError
 func errorName(_ e: Contract.ABI.Error) -> String {
     e.name + "Error"
 }
 
-func enumCaseName(_ e: Contract.ABI.Error) -> String {
+/// Turns an error into the enum case name for the enum definition.
+/// swift> enumCaseName(Geno.Contract.ABI.Error(type: "error", name: "JustOneArg", inputs: [Geno.Contract.ABI.Function.Parameter(name: "", type: "bool", internalType: "bool", components: nil)]))
+/// "justOneArg(Bool)"
+func errorEnumCaseName(_ e: Contract.ABI.Error) -> String {
     var out = e.name.prefix(1).lowercased() + e.name.dropFirst()
     if e.inputs.count > 0 {
-        let inputs = e.inputs.enumerated().map { i, p in parameterToMatchableValueType(p: p, index: i) }.joined(separator: ", ")
+        let inputs = e.inputs.map { p in typeMapper(for: p) }.joined(separator: ", ")
         out.append("(" + inputs + ")")
     }
     return out
 }
 
+/// Turns an error into the enum case which has bound over an attached variable
+/// swift> enumCaseName(Geno.Contract.ABI.Error(type: "error", name: "JustOneArg", inputs: [Geno.Contract.ABI.Function.Parameter(name: "", type: "bool", internalType: "bool", components: nil)]), namedOutputs: "var0")
+/// "justOneArg(var0)"
+func errorEnumWithBoundOutputs(_ e: Contract.ABI.Error, namedOutputs: String?) -> String {
+    var out = e.name.prefix(1).lowercased() + e.name.dropFirst()
+    if e.inputs.count > 0, let outputNames = namedOutputs {
+        // for when we are cases instances with bound values e.g. .justOneArg(someBoundBoolean) or .noArgs
+        out.append("(" + outputNames + ")")
+    }
+    return out
+}
+
+/// eg. ["string", "address[]"] -> [.string, .array(.address)]
 func mapToETHABITypes(_ ps: [Contract.ABI.Function.Parameter]) -> DeclSyntax {
     let out: String = ps.map { parameterToValueType($0) }.joined(separator: ", ")
 
@@ -100,19 +140,22 @@ func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax
     let outputs = returnValue(f: f)
 
     return try! FunctionDeclSyntax("""
-    static func \(raw: f.name)(\(raw: parameters.joined(separator: ", "))) throws -> \(raw: outputs)
+    static func \(raw: f.name)(\(raw: parameters.joined(separator: ", "))) throws -> Result<\(raw: outputs), RevertReason>
     """) {
         StmtSyntax("""
+                do {
+                    let query = try \(raw: f.name)Fn.encoded(with: [\(raw: callParameters(f: f))])
+                    let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors)
+                    let decoded = try \(raw: f.name)Fn.decode(output: result)
 
-                let query = try \(raw: f.name)Fn.encoded(with: [\(raw: callParameters(f: f))])
-                let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors)
-                let decoded = try \(raw: f.name)Fn.decode(output: result)
-
-                switch decoded {
-                case let \(raw: outParameters(f: f)):
-                    return \(raw: outValues(f: f))
-                default:
-                    throw ABI.DecodeError.mismatchedType(decoded.schema, \(raw: f.name)Fn.outputTuple)
+                    switch decoded {
+                    case let \(raw: outParameters(ps: f.outputs)):
+                        return .success(\(raw: outValues(ps: f.outputs)))
+                    default:
+                        throw ABI.DecodeError.mismatchedType(decoded.schema, \(raw: f.name)Fn.outputTuple)
+                    }
+                } catch let EVM.QueryError.error(e, v) {
+                    return .failure(rewrapError(e, value: v))
                 }
         """)
     }
@@ -120,8 +163,8 @@ func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax
     .with(\.trailingTrivia, .newlines(2))
 }
 
-func outValues(f: Contract.ABI.Function) -> String {
-    f.outputs.enumerated().map { index, p in
+func outValues(ps: [Contract.ABI.Function.Parameter]) -> String {
+    ps.enumerated().map { index, p in
         namedParameterToOutValue(p: p, index: index)
     }.joined(separator: ", ")
 }
@@ -156,25 +199,28 @@ func fieldValue(parameter: Contract.ABI.Function.Parameter, index _: Int) -> Str
     }
 }
 
+/// swiftt> structInitializer(parameter: Geno.Contract.ABI.Function.Parameter(name: "c", type: "tuple", internalType: "struct Cat", components: Optional([Geno.Contract.ABI.Function.Parameter(name: "ca", type: "int256", internalType: "int256", components: nil), Geno.Contract.ABI.Function.Parameter(name: "cb", type: "bytes", internalType: "bytes", components: nil), Geno.Contract.ABI.Function.Parameter(name: "cc", type: "bytes32", internalType: "bytes32", components: nil)]), structName: "Cat)
+/// > "Cat(ca: ca, cb: cb, cc: cc)"
 func structInitializer(parameter p: Contract.ABI.Function.Parameter, structName: String) -> String {
     if let c = p.components {
         let args = c.enumerated().map { "\($0.1.name): \(fieldValue(parameter: $0.1, index: $0.0))" }.joined(separator: ", ")
+
         return "try \(structName)(\(args))"
     } else {
         return p.name
     }
 }
 
-func outParameters(f: Contract.ABI.Function) -> String {
-    let inner = f.outputs.enumerated().map { index, o in
+func outParameters(ps: [Contract.ABI.Function.Parameter]) -> String {
+    let inner = ps.enumerated().map { index, o in
         parameterToMatchableValueType(p: o, index: index)
     }.joined(separator: ", ")
 
-    guard f.outputs.count <= 16 else {
+    guard ps.count <= 16 else {
         // Note the count constraint could be expanded by adding more tuple{n} cases to the ABI.Value enum. 16 is chosen as a reasonable max until expansion is needed.
         fatalError("Geno cannot decode tuples with more than 16 values")
     }
-    return ".tuple\(f.outputs.count)(\(inner))"
+    return ".tuple\(ps.count)(\(inner))"
 }
 
 func callParameters(f: Contract.ABI.Function) -> String {
