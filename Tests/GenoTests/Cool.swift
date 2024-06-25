@@ -16,7 +16,7 @@ enum Cool {
         inputs: []
     )
 
-    enum RevertReason: Error {
+    enum RevertReason: Equatable, Error {
         case lukeWarm(Bool)
         case tooCool
         case unknownRevert(String, String)

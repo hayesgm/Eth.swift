@@ -3,8 +3,11 @@ import Foundation
 import SwiftSyntax
 import SwiftSyntaxBuilder
 
+var contractName: String = ""
 // Create the struct declaration syntax
 func createSourceFileSyntax(from contract: Contract, name: String) -> SourceFileSyntax {
+    contractName = name // for ensuring structs aren't namespaced under the same name as the contract
+
     return SourceFileSyntax {
         try! ImportDeclSyntax("import BigInt").with(\.trailingTrivia, .newline)
         try! ImportDeclSyntax("import Eth").with(\.trailingTrivia, .newline)
@@ -205,7 +208,14 @@ func structInitializer(parameter p: Contract.ABI.Function.Parameter, structName:
     if let c = p.components {
         let args = c.enumerated().map { "\($0.1.name): \(fieldValue(parameter: $0.1, index: $0.0))" }.joined(separator: ", ")
 
-        return "try \(structName)(\(args))"
+        if args.range(of: "try") != nil {
+            // Struct initialization with nested fields may contain decodes that throw, so we need the `try` keyword in many but not all cases
+            // This conditional makes the generator less prone to generating warnings for unused `try`
+            return "try \(structName)(\(args))"
+        } else {
+            return "\(structName)(\(args))"
+        }
+
     } else {
         return p.name
     }
@@ -401,6 +411,7 @@ func generateStructs(c: Contract) -> [StructDeclSyntax] {
 
     for (structName, structDecl) in structsSoFar {
         let namespaceParts = structName.split(separator: ".")
+
         if namespaceParts.count > 1 {
             let namespace = String(namespaceParts.first!)
             if groupedStructs[namespace] == nil {
@@ -497,7 +508,9 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
 
 func structName(_ p: Contract.ABI.Function.Parameter) -> String? {
     if p.internalType.starts(with: "struct") {
-        baseParameter(p).internalType.replacingOccurrences(of: "struct ", with: "")
+        baseParameter(p).internalType
+            .replacingOccurrences(of: "struct \(contractName).", with: "")
+            .replacingOccurrences(of: "struct ", with: "")
     } else {
         nil
     }

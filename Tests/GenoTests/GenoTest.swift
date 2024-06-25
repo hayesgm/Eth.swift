@@ -53,12 +53,15 @@ final class GenoTests: XCTestCase {
         let regex = try! NSRegularExpression(pattern: "struct Bat: Equatable\\{static let schema: ABI\\.Schema = ABI.Schema\\.tuple")
 
         // Perform the matching
-        let testString = structDefs[0].description
+        let testString = structDefs[1].description
         let range = NSRange(location: 0, length: testString.description.utf16.count)
         let match = regex.firstMatch(in: testString, options: [], range: range)
 
         // Assert that a match was found
-        XCTAssertNotNil(match, "The string does not match the regex")
+        XCTAssertNotNil(match, "Bat struct not here")
+
+        let animalRegex = try! NSRegularExpression(pattern: "struct Animal")
+        XCTAssertNotNil(animalRegex.firstMatch(in: structDefs[1].description, options: [], range: range), "NameSpace exists")
     }
 
     func testConstructorForStruct() {
@@ -78,6 +81,9 @@ final class GenoTests: XCTestCase {
         for (i, _) in desired.enumerated() {
             XCTAssertEqual(intializers[i], desired[i])
         }
+
+        let noDangerousChildren = Geno.Contract.ABI.Function.Parameter(name: "", type: "tuple", internalType: "struct Animal.Bat", components: [])
+        XCTAssertEqual(structInitializer(parameter: noDangerousChildren, structName: "Bat"), "Bat()")
     }
 
     func testCallParameters() {
@@ -98,7 +104,7 @@ final class GenoTests: XCTestCase {
                         {
                             "name": "bat",
                             "type": "tuple",
-                            "internalType": "struct Bat",
+                            "internalType": "struct Animal.Bat",
                             "components": [
                                 {
                                     "name": "a",
@@ -168,7 +174,7 @@ final class GenoTests: XCTestCase {
                         {
                             "name": "",
                             "type": "tuple",
-                            "internalType": "struct Bat",
+                            "internalType": "struct Animal.Bat",
                             "components": [
                                 {
                                     "name": "a",

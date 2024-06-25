@@ -79,7 +79,7 @@ enum Structs {
             case let .tuple3(.int256(ca),
                              .bytes(cb),
                              .bytes32(cc)):
-                return try Cat(ca: ca, cb: cb, cc: cc)
+                return Cat(ca: ca, cb: cb, cc: cc)
             default:
                 throw ABI.DecodeError.mismatchedType(value.schema, schema)
             }
@@ -107,7 +107,7 @@ enum Structs {
             static func decodeValue(_ value: ABI.Value) throws -> Animal.Moose {
                 switch value {
                 case let .tuple1(.uint256(b)):
-                    return try Animal.Moose(b: b)
+                    return Animal.Moose(b: b)
                 default:
                     throw ABI.DecodeError.mismatchedType(value.schema, schema)
                 }
@@ -134,7 +134,7 @@ enum Structs {
             static func decodeValue(_ value: ABI.Value) throws -> Animal.Rat {
                 switch value {
                 case let .tuple1(.address(a)):
-                    return try Animal.Rat(a: a)
+                    return Animal.Rat(a: a)
                 default:
                     throw ABI.DecodeError.mismatchedType(value.schema, schema)
                 }
@@ -155,7 +155,7 @@ enum Structs {
         inputs: [.bool]
     )
 
-    enum RevertReason: Error {
+    enum RevertReason: Equatable, Error {
         case justAName
         case justOneArg(Bool)
         case unknownRevert(String, String)
