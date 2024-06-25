@@ -16,6 +16,8 @@ struct Bat {
     Cat f;
 }
 
+
+
 library Animal {
     struct Rat {
         address a;
@@ -27,6 +29,9 @@ library Animal {
 }
 
 contract Structs {
+    error JustAName();
+    error JustOneArg(bool);
+    
     function buildBat(uint256 x, uint256 y) external pure returns (Bat memory) {
         Cat[] memory cats = new Cat[](y);
         for (uint256 i = 0; i < y; i++) {
@@ -64,7 +69,7 @@ contract Structs {
     function lookAtMoose(
         Animal.Moose[] memory moose,
         uint m
-    ) external pure returns (bool) {
+    ) external pure returns (bool)  
         for (uint256 i = 0; i < moose.length; i++) {
             if (moose[i].b == m) {
                 return true;
