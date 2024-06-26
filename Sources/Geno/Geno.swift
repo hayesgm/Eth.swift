@@ -194,7 +194,8 @@ func namedParameterToOutValue(p: Contract.ABI.Function.Parameter, index: Int) ->
 
 func fieldValue(parameter: Contract.ABI.Function.Parameter, index _: Int) -> String {
     if isArray(parameter) {
-        return "\(parameter.name).map { \(try! asValueMapper(parameter: parameter)) }"
+        let bp = baseParameter(parameter)
+        return "\(parameter.name).map { \(try! asValueMapper(parameter: bp)) }"
     } else if structName(parameter) != nil {
         return try! asValueMapper(parameter: parameter, name: parameter.name)
     } else {
@@ -538,7 +539,7 @@ func asValueMapper(parameter: Contract.ABI.Function.Parameter, name: String = "$
         case "string":
             return "$0.asString!"
         case "address", "address payable":
-            return "$0.asAddress!"
+            return "$0.asEthAddress!"
         case let type where type.starts(with: "uint"):
             return "$0.asBigUInt!"
         case let type where type.starts(with: "int"):
