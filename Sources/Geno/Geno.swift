@@ -476,7 +476,14 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
             static func decode(hex: Hex) throws -> \(raw: typeMapper(for: baseParameter))
             """) {
                 ExprSyntax("""
-                try decodeValue(schema.decode(hex))
+
+                  if let value = try? schema.decode(hex) { return try decodeValue(value) }
+                  // both versions are valid encodings of tuples with dynamic fields ( bytes or string ), so try both decodings
+                  if case let .tuple1(wrappedValue) = try? ABI.Schema.tuple([schema]).decode(hex) {
+                      return try decodeValue(wrappedValue)
+                  }
+                  // retry original to throw the error
+                  return try decodeValue(schema.decode(hex))
                 """).with(\.trailingTrivia, .newlines(2))
                     .with(\.leadingTrivia, .newlines(1))
 
