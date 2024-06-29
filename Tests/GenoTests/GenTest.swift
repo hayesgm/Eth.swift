@@ -33,6 +33,11 @@ final class GenTests: XCTestCase {
         XCTAssertTrue(moose)
     }
 
+    func testGoose() {
+        XCTAssertNoThrow(try Structs.emptyGoose())
+        XCTAssertNoThrow(try Structs.anotherEmptyGoose())
+    }
+
     func testErrorHandling() {
         switch try! Cool.vibeCheck(status: BigUInt(75)) {
         case let .failure(.lukeWarm(isLukeWarm)):

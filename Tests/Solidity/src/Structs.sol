@@ -26,6 +26,11 @@ library Animal {
     struct Moose {
         uint b;
     }
+    
+    struct Goose {
+        uint b;
+        string c;
+    }
 }
 
 contract Structs {
@@ -69,7 +74,7 @@ contract Structs {
     function lookAtMoose(
         Animal.Moose[] memory moose,
         uint m
-    ) external pure returns (bool)  
+    ) external pure returns (bool)  {
         for (uint256 i = 0; i < moose.length; i++) {
             if (moose[i].b == m) {
                 return true;
@@ -89,5 +94,18 @@ contract Structs {
         }
 
         return address(0);
+    }
+    
+    function emptyGoose() external pure returns (Animal.Goose memory) {
+        Animal.Goose[] memory rs = new Animal.Goose[](1);
+        rs[0].c = "USDC";
+        return rs[0];
+    }
+
+    
+    function anotherEmptyGoose() external pure returns (bytes memory) {
+       // when "manually" abi encoding to bytes the return value is slightly different, so testing both
+        Animal.Goose[] memory rs = new Animal.Goose[](1);
+        return abi.encode(rs[0]);
     }
 }
