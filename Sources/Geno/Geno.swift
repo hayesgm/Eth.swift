@@ -5,7 +5,7 @@ import SwiftSyntaxBuilder
 
 var contractName: String = ""
 // Create the struct declaration syntax
-func createSourceFileSyntax(from contract: Contract, name: String) -> SourceFileSyntax {
+func createSourceFileSyntax(from contract: Contract, name: String, structsOnly: Bool) -> SourceFileSyntax {
     contractName = name // for ensuring structs aren't namespaced under the same name as the contract
 
     return SourceFileSyntax {
@@ -18,54 +18,56 @@ func createSourceFileSyntax(from contract: Contract, name: String) -> SourceFile
                 s
             }
 
-            try VariableDeclSyntax("static let creationCode: Hex = \"\(raw: contract.bytecode.object)\"").with(\.trailingTrivia, .newline)
-            try VariableDeclSyntax("static let runtimeCode: Hex = \"\(raw: contract.deployedBytecode.object)\"").with(\.trailingTrivia, .newlines(2))
+            if !structsOnly {
+                try VariableDeclSyntax("static let creationCode: Hex = \"\(raw: contract.bytecode.object)\"").with(\.trailingTrivia, .newline)
+                try VariableDeclSyntax("static let runtimeCode: Hex = \"\(raw: contract.deployedBytecode.object)\"").with(\.trailingTrivia, .newlines(2))
 
-            // Generate ETH.ABI.Function to represent custom revert errors
-            for error in contract.errors {
-                try! VariableDeclSyntax("""
-                static let \(raw: errorName(error)) = ABI.Function(
-                        name: "\(raw: error.name)",
-                        inputs: [\(raw: mapToETHABITypes(error.inputs))]
-                )
-                """)
-                .with(\.trailingTrivia, .newlines(2))
-            }
-
-            // -- Begin Enums for revert errors
-            let extendingErrorClause = InheritanceClauseSyntax(inheritedTypes: InheritedTypeListSyntax([
-                InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Equatable,")),
-                InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Error")),
-            ]))
-            EnumDeclSyntax(leadingTrivia: .newline, name: .identifier("RevertReason", leadingTrivia: .space, trailingTrivia: .space), inheritanceClause: extendingErrorClause) {
-                for e in contract.errors {
-                    try! EnumCaseDeclSyntax("case \(raw: errorEnumCaseName(e))").with(\.leadingTrivia, .newline)
+                // Generate ETH.ABI.Function to represent custom revert errors
+                for error in contract.errors {
+                    try! VariableDeclSyntax("""
+                    static let \(raw: errorName(error)) = ABI.Function(
+                            name: "\(raw: error.name)",
+                            inputs: [\(raw: mapToETHABITypes(error.inputs))]
+                    )
+                    """)
+                    .with(\.trailingTrivia, .newlines(2))
                 }
-                try! EnumCaseDeclSyntax("case unknownRevert(String, String)").with(\.leadingTrivia, .newline)
-            }
 
-            try FunctionDeclSyntax("""
-            static func rewrapError(_ error: ABI.Function, value: ABI.Value) -> RevertReason
-            """) {
-                SwitchExprSyntax(subject: ExprSyntax("(error, value)")) {
-                    for error in contract.errors {
-                        generateErrorSwitchCase(error)
+                // -- Begin Enums for revert errors
+                let extendingErrorClause = InheritanceClauseSyntax(inheritedTypes: InheritedTypeListSyntax([
+                    InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Equatable,")),
+                    InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Error")),
+                ]))
+                EnumDeclSyntax(leadingTrivia: .newline, name: .identifier("RevertReason", leadingTrivia: .space, trailingTrivia: .space), inheritanceClause: extendingErrorClause) {
+                    for e in contract.errors {
+                        try! EnumCaseDeclSyntax("case \(raw: errorEnumCaseName(e))").with(\.leadingTrivia, .newline)
                     }
-
-                    SwitchCaseSyntax("""
-                    case let (e, v):
-                        return .unknownRevert(e.name, String(describing: v))
-                    """).with(\.trailingTrivia, .newline)
+                    try! EnumCaseDeclSyntax("case unknownRevert(String, String)").with(\.leadingTrivia, .newline)
                 }
-            }.with(\.trailingTrivia, .newline)
 
-            try VariableDeclSyntax("static let errors: [ABI.Function] = [\(raw: contract.errors.map { errorName($0) }.joined(separator: ", "))]")
-            // -- End Enums for revert errors
+                try FunctionDeclSyntax("""
+                static func rewrapError(_ error: ABI.Function, value: ABI.Value) -> RevertReason
+                """) {
+                    SwitchExprSyntax(subject: ExprSyntax("(error, value)")) {
+                        for error in contract.errors {
+                            generateErrorSwitchCase(error)
+                        }
 
-            // Generate a swift function and {ETH.ABI.Function} for each ABI function
-            for function in contract.functions {
-                generateETHABIFunction(f: function)
-                generateFunctionDeclaration(f: function)
+                        SwitchCaseSyntax("""
+                        case let (e, v):
+                            return .unknownRevert(e.name, String(describing: v))
+                        """).with(\.trailingTrivia, .newline)
+                    }
+                }.with(\.trailingTrivia, .newline)
+
+                try VariableDeclSyntax("static let errors: [ABI.Function] = [\(raw: contract.errors.map { errorName($0) }.joined(separator: ", "))]")
+                // -- End Enums for revert errors
+
+                // Generate a swift function and {ETH.ABI.Function} for each ABI function
+                for function in contract.functions {
+                    generateETHABIFunction(f: function)
+                    generateFunctionDeclaration(f: function)
+                }
             }
         }
     }
@@ -379,12 +381,12 @@ func typeMapper(for p: Contract.ABI.Function.Parameter) -> String {
     }
 }
 
-func generateAbiFile(input_path: URL) -> String {
+func generateAbiFile(input_path: URL, structsOnly: Bool) -> String {
     let data = try! Data(contentsOf: input_path)
     let contract = try! JSONDecoder().decode(Contract.self, from: data)
 
     // Create the struct syntax node
-    let structNode = createSourceFileSyntax(from: contract, name: String(input_path.lastPathComponent.split(separator: ".").first!))
+    let structNode = createSourceFileSyntax(from: contract, name: String(input_path.lastPathComponent.split(separator: ".").first!), structsOnly: structsOnly)
 
     // Generate source code from the syntax node
     let sourceCode = structNode.formatted().description
