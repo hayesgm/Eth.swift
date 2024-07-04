@@ -11,6 +11,7 @@ func generateSwiftFromAbi() throws {
     var filePath: String?
     var outDir: String?
     var prefix: String?
+    var structsOnly = false
 
     var i = 1
     while i < arguments.count {
@@ -23,6 +24,9 @@ func generateSwiftFromAbi() throws {
                 print("Error: --outDir requires a value")
                 return
             }
+        case "--structs-only":
+            structsOnly = true
+
         case "--prefix":
             if i + 1 < arguments.count {
                 prefix = arguments[i + 1]
@@ -65,7 +69,7 @@ func generateSwiftFromAbi() throws {
     let outFile = outputFullPath.appendingPathComponent(outFileName)
     print("outFile: \(outFile)")
 
-    let text = generateAbiFile(input_path: inputFullPath)
+    let text = generateAbiFile(input_path: inputFullPath, structsOnly: structsOnly)
     try! text.write(to: outFile, atomically: true, encoding: .utf8)
 }
 
