@@ -2,7 +2,7 @@ import BigInt
 import Foundation
 
 /// A ``Network`` represents different Ethereum networks (e.g. `Mainnet` or `Base`).
-enum Network: Codable, Equatable, Hashable, Identifiable {
+public enum Network: Codable, Equatable, Hashable, Identifiable {
     case arbitrum
     case avalanche
     case base
@@ -17,11 +17,11 @@ enum Network: Codable, Equatable, Hashable, Identifiable {
     case sepolia
     case unknown(BigInt)
 
-    var id: String {
+    public var id: String {
         description
     }
 
-    var description: String {
+    public var description: String {
         switch self {
         case .arbitrum:
             "Arbitrum"
@@ -53,7 +53,7 @@ enum Network: Codable, Equatable, Hashable, Identifiable {
     }
 
     /// Decodes from either an Int or an Int-String
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         do {
             let value = try container.decode(String.self)
@@ -67,22 +67,22 @@ enum Network: Codable, Equatable, Hashable, Identifiable {
         }
     }
 
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(chainId.description)
     }
 
-    static func fromChainId(_ chainId: Int) -> Self {
+    public static func fromChainId(_ chainId: Int) -> Self {
         fromChainId(BigInt(chainId))
     }
 
     /// Create `Network` from BigInt. `Unknown` is returned
     /// if the chainId  is not supported
-    static func fromChainId(_ chainId: BigInt) -> Self {
+    public static func fromChainId(_ chainId: BigInt) -> Self {
         switch chainId {
         case Network.arbitrum.chainId:
             .arbitrum
@@ -113,7 +113,7 @@ enum Network: Codable, Equatable, Hashable, Identifiable {
         }
     }
 
-    var chainId: BigInt {
+    public var chainId: BigInt {
         switch self {
         case .arbitrum:
             BigInt(42161)
@@ -144,7 +144,7 @@ enum Network: Codable, Equatable, Hashable, Identifiable {
         }
     }
 
-    var explorerName: String? {
+    public var explorerName: String? {
         switch self {
         case .arbitrum:
             "Arbiscan"
@@ -175,7 +175,7 @@ enum Network: Codable, Equatable, Hashable, Identifiable {
         }
     }
 
-    var explorerUrl: URL? {
+    public var explorerUrl: URL? {
         switch self {
         case .arbitrum:
             URL(string: "https://arbiscan.io")
