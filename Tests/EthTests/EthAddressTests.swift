@@ -39,4 +39,9 @@ final class EthAddressTests: XCTestCase {
             XCTAssertEqual(error.localizedDescription, "The data couldn’t be read because it isn’t in the correct format.")
         }
     }
+
+    func testChecksumAddress() {
+        let address = EthAddress("0xdef1c0ded9bec7f1a1670819833240f027b25eff")
+        XCTAssertEqual(address.checksum, "0xDef1C0ded9bec7F1a1670819833240f027b25EfF", "Should be checksummed address")
+    }
 }

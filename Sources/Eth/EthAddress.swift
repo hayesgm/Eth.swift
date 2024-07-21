@@ -1,4 +1,5 @@
 import Foundation
+import SwiftKeccak
 
 /// `EthAddress` represents a 20-byte Ethereum address
 public struct EthAddress: Codable, Equatable, Hashable, CustomStringConvertible, ExpressibleByStringLiteral {
@@ -75,5 +76,29 @@ public struct EthAddress: Codable, Equatable, Hashable, CustomStringConvertible,
     /// The Data represented by this address.
     public var data: Data {
         address.data
+    }
+
+    public var checksum: String {
+        // Remove the '0x' prefix
+        let cleanAddress = String(hex.dropFirst(2))
+
+        // Get the hash of the clean address
+        let hashData = SwiftKeccak.keccak256(cleanAddress)
+
+        // Convert hash to hexadecimal string
+        let hashHex = hashData.map { String(format: "%02x", $0) }.joined()
+
+        // Iterate over each character in the address and apply checksum
+        var checksumAddress = "0x"
+        for (index, char) in cleanAddress.enumerated() {
+            let hashChar = hashHex[hashHex.index(hashHex.startIndex, offsetBy: index)]
+            if let hashValue = Int(String(hashChar), radix: 16), hashValue >= 8 {
+                checksumAddress.append(char.uppercased())
+            } else {
+                checksumAddress.append(char.lowercased())
+            }
+        }
+
+        return checksumAddress
     }
 }
