@@ -13,19 +13,19 @@ func createSourceFileSyntax(from contract: Contract, name: String, structsOnly: 
         try! ImportDeclSyntax("import Eth").with(\.trailingTrivia, .newline)
         try! ImportDeclSyntax("import Foundation").with(\.trailingTrivia, .newline)
 
-        try! EnumDeclSyntax(leadingTrivia: .newline, name: .identifier(name, leadingTrivia: .space)) {
+        try! EnumDeclSyntax(leadingTrivia: .newline, modifiers: [DeclModifierSyntax(name: .keyword(.public))], name: .identifier(name, leadingTrivia: .space)) {
             for s in generateStructs(c: contract) {
                 s
             }
 
             if !structsOnly {
-                try VariableDeclSyntax("static let creationCode: Hex = \"\(raw: contract.bytecode.object)\"").with(\.trailingTrivia, .newline)
-                try VariableDeclSyntax("static let runtimeCode: Hex = \"\(raw: contract.deployedBytecode.object)\"").with(\.trailingTrivia, .newlines(2))
+                try VariableDeclSyntax("public static let creationCode: Hex = \"\(raw: contract.bytecode.object)\"").with(\.trailingTrivia, .newline)
+                try VariableDeclSyntax("public static let runtimeCode: Hex = \"\(raw: contract.deployedBytecode.object)\"").with(\.trailingTrivia, .newlines(2))
 
                 // Generate ETH.ABI.Function to represent custom revert errors
                 for error in contract.errors {
                     try! VariableDeclSyntax("""
-                    static let \(raw: errorName(error)) = ABI.Function(
+                    public static let \(raw: errorName(error)) = ABI.Function(
                             name: "\(raw: error.name)",
                             inputs: [\(raw: mapToETHABITypes(error.inputs))]
                     )
@@ -38,7 +38,7 @@ func createSourceFileSyntax(from contract: Contract, name: String, structsOnly: 
                     InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Equatable,")),
                     InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Error")),
                 ]))
-                EnumDeclSyntax(leadingTrivia: .newline, name: .identifier("RevertReason", leadingTrivia: .space, trailingTrivia: .space), inheritanceClause: extendingErrorClause) {
+                EnumDeclSyntax(leadingTrivia: .newline, modifiers: [DeclModifierSyntax(name: .keyword(.public))], name: .identifier("RevertReason", leadingTrivia: .space, trailingTrivia: .space), inheritanceClause: extendingErrorClause) {
                     for e in contract.errors {
                         try! EnumCaseDeclSyntax("case \(raw: errorEnumCaseName(e))").with(\.leadingTrivia, .newline)
                     }
@@ -46,7 +46,7 @@ func createSourceFileSyntax(from contract: Contract, name: String, structsOnly: 
                 }
 
                 try FunctionDeclSyntax("""
-                static func rewrapError(_ error: ABI.Function, value: ABI.Value) -> RevertReason
+                public static func rewrapError(_ error: ABI.Function, value: ABI.Value) -> RevertReason
                 """) {
                     SwitchExprSyntax(subject: ExprSyntax("(error, value)")) {
                         for error in contract.errors {
@@ -60,7 +60,7 @@ func createSourceFileSyntax(from contract: Contract, name: String, structsOnly: 
                     }
                 }.with(\.trailingTrivia, .newline)
 
-                try VariableDeclSyntax("static let errors: [ABI.Function] = [\(raw: contract.errors.map { errorName($0) }.joined(separator: ", "))]")
+                try VariableDeclSyntax("public static let errors: [ABI.Function] = [\(raw: contract.errors.map { errorName($0) }.joined(separator: ", "))]")
                 // -- End Enums for revert errors
 
                 // Generate a swift function and {ETH.ABI.Function} for each ABI function
@@ -131,7 +131,7 @@ func mapToETHABITypes(_ ps: [Contract.ABI.Function.Parameter]) -> DeclSyntax {
 
 func generateETHABIFunction(f: Contract.ABI.Function) -> VariableDeclSyntax {
     return try! VariableDeclSyntax("""
-    static let \(raw: f.name)Fn = ABI.Function(
+    public static let \(raw: f.name)Fn = ABI.Function(
             name: "\(raw: f.name)",
             inputs: [\(raw: mapToETHABITypes(f.inputs))],
             outputs: [\(raw: mapToETHABITypes(f.outputs))]
@@ -145,7 +145,7 @@ func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax
     let outputs = returnValue(f: f)
 
     return try! FunctionDeclSyntax("""
-    static func \(raw: f.name)(\(raw: parameters.joined(separator: ", "))) throws -> Result<\(raw: outputs), RevertReason>
+    public static func \(raw: f.name)(\(raw: parameters.joined(separator: ", "))) throws -> Result<\(raw: outputs), RevertReason>
     """) {
         StmtSyntax("""
                 do {
@@ -460,20 +460,27 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
         let equatableClause = InheritanceClauseSyntax(inheritedTypes: InheritedTypeListSyntax([InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Equatable"))]))
 
         let nameParts = structName.split(separator: ".")
-        let def = try! StructDeclSyntax(leadingTrivia: .newline, name: .identifier(String(nameParts.last!), leadingTrivia: .space), inheritanceClause: equatableClause) {
+        let def = try! StructDeclSyntax(leadingTrivia: .newline, modifiers: [DeclModifierSyntax(name: .keyword(.public))], name: .identifier(String(nameParts.last!), leadingTrivia: .space), inheritanceClause: equatableClause) {
             // if we find a struct nestled down in an array somewhere, pretend it is a top level thing
             let baseParameter = baseParameter(p)
-            try VariableDeclSyntax("static let schema: ABI.Schema = \(raw: "ABI.Schema" + parameterToValueType(baseParameter))").with(\.trailingTrivia, .newlines(2))
+            try VariableDeclSyntax("public static let schema: ABI.Schema = \(raw: "ABI.Schema" + parameterToValueType(baseParameter))").with(\.trailingTrivia, .newlines(2))
 
             for c in p.components! {
-                try VariableDeclSyntax("let \(raw: c.name): \(raw: typeMapper(for: c))")
+                try VariableDeclSyntax("public let \(raw: c.name): \(raw: typeMapper(for: c))")
             }
 
-            try VariableDeclSyntax("var encoded: Hex { asValue.encoded }").with(\.trailingTrivia, .newlines(2)).with(\.leadingTrivia, .newlines(2))
-            try VariableDeclSyntax("var asValue: ABI.Value { \(raw: parameterToMatchableValueType(p: baseParameter, index: 0, asValue: true)) }").with(\.trailingTrivia, .newlines(1))
+            let initArgs = p.components!.map { "\($0.name): \(typeMapper(for: $0))" }.joined(separator: ", ")
+            let initBody = p.components!.map { "self.\($0.name) = \($0.name)" }.joined(separator: "\n ")
+            DeclSyntax("""
+            public init(\(raw: initArgs)) {
+              \(raw: initBody)
+            }
+            """).with(\.leadingTrivia, .newlines(2))
+            try VariableDeclSyntax("public var encoded: Hex { asValue.encoded }").with(\.trailingTrivia, .newlines(2)).with(\.leadingTrivia, .newlines(2))
+            try VariableDeclSyntax("public var asValue: ABI.Value { \(raw: parameterToMatchableValueType(p: baseParameter, index: 0, asValue: true)) }").with(\.trailingTrivia, .newlines(1))
 
             try! FunctionDeclSyntax("""
-            static func decode(hex: Hex) throws -> \(raw: typeMapper(for: baseParameter))
+            public static func decode(hex: Hex) throws -> \(raw: typeMapper(for: baseParameter))
             """) {
                 ExprSyntax("""
 
@@ -491,7 +498,7 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
                 .with(\.leadingTrivia, .newlines(1))
 
             try! FunctionDeclSyntax("""
-            static func decodeValue(_ value: ABI.Value) throws -> \(raw: typeMapper(for: baseParameter))
+            public static func decodeValue(_ value: ABI.Value) throws -> \(raw: typeMapper(for: baseParameter))
             """) {
                 StmtSyntax("""
 
