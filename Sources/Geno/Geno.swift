@@ -437,6 +437,7 @@ func generateStructs(c: Contract) -> [StructDeclSyntax] {
         let structs = groupedStructs[namespace]!.sorted { $0.name.text < $1.name.text }
         let wrappedStruct = StructDeclSyntax(
             leadingTrivia: .newline,
+            modifiers: [DeclModifierSyntax(name: .keyword(.public))],
             name: .identifier(namespace, leadingTrivia: .space)
         ) {
             for structDecl in structs {
