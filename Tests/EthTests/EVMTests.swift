@@ -1163,6 +1163,52 @@ let tests: [EvmTest] =
             ]
         ),
         EvmTest(
+            name: "MStore -> MCopy",
+            withCode: [
+                .push(32, "0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
+                .push(32, word(100)),
+                .mstore,
+                .push(32, word(4)),
+                .push(32, word(109)),
+                .push(32, word(106)),
+                .mcopy,
+                .push(32, word(100)),
+                .mload,
+                .stop,
+            ],
+            expStack: [
+                "0x112233445566aabbccddbbccddeeff112233445566778899aabbccddeeff1122",
+            ]
+        ),
+        EvmTest(
+            name: "TStore -> TLoad",
+            withCode: [
+                .push(32, "0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
+                .push(32, word(1)),
+                .tstore,
+                .push(32, word(1)),
+                .tload,
+                .stop,
+            ],
+            expStack: [
+                "0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122",
+            ]
+        ),
+        EvmTest(
+            name: "TStore -> TLoad Other",
+            withCode: [
+                .push(32, "0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff1122"),
+                .push(32, word(1)),
+                .tstore,
+                .push(32, word(2)),
+                .tload,
+                .stop,
+            ],
+            expStack: [
+                word(0),
+            ]
+        ),
+        EvmTest(
             name: "Direct Jump - First Path",
             withCode: [
                 .push(1, word(3)), // pc = 0
