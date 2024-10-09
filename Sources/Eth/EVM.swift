@@ -1027,6 +1027,14 @@ public enum EVM {
             try context.memoryWrite(offset: offset_, value: Data([value.data.last!]))
         }
 
+        static func mcopy(destOffset: EthWord, offset: EthWord, size: EthWord, context: inout Context) throws {
+            guard let destOffset_ = destOffset.toInt(), let offset_ = offset.toInt(), let size_ = size.toInt() else {
+                throw VMError.outOfMemory
+            }
+            let data = try context.memoryRead(offset: offset_, bytes: size_)
+            try context.memoryWrite(offset: destOffset_, value: data)
+        }
+
         static func mload(offset: EthWord, context: inout Context) throws -> EthWord {
             guard let offset_ = offset.toInt() else {
                 throw VMError.outOfMemory
@@ -1234,6 +1242,9 @@ public enum EVM {
         case .mstore8:
             let (offset, value) = try context.pop2()
             try Op.mstore8(offset: offset, value: value, context: &context)
+        case .mcopy:
+            let (destOffset, offset, size) = try context.pop3()
+            try Op.mcopy(destOffset: destOffset, offset: offset, size: size, context: &context)
         case .jump:
             showContextDescription = false
             debugShowContext(context)
@@ -1250,6 +1261,13 @@ public enum EVM {
             try Op.msize(context: &context)
         case .jumpdest:
             break
+        case .tstore:
+            let (key, value) = try context.pop2()
+            context.tStorage[key] = value
+        case .tload:
+            let key = try context.pop()
+            let value = context.tStorage[key] ?? EthWord(fromInt: 0)!
+            try context.push(value)
         case let .push(_, v):
             try context.push(v)
         case let .dup(n):
@@ -1266,8 +1284,6 @@ public enum EVM {
             throw VMError.invalidOperation
         case .address, .balance, .origin, .caller, .gasprice, .extcodesize, .extcodecopy, .returndatasize, .returndatacopy, .extcodehash, .blockhash, .coinbase, .timestamp, .number, .prevrandao, .gaslimit, .chainid, .selfbalance, .basefee, .blobhash, .blobbasefee, .sload, .sstore, .gas, .log, .create, .call, .callcode, .delegatecall, .create2, .staticcall, .selfdestruct:
             throw VMError.impure(operation)
-        case .tload, .tstore, .mcopy:
-            throw VMError.notImplemented(operation)
         }
         if showContextDescription {
             debugShowContext(context)
