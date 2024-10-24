@@ -141,16 +141,18 @@ func generateETHABIFunction(f: Contract.ABI.Function) -> VariableDeclSyntax {
 }
 
 func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax {
-    let parameters = functionParameters(f: f)
+    var parameters = functionParameters(f: f)
     let outputs = returnValue(f: f)
 
+    parameters.append("withFunctions ffis: EVM.FFIMap = [:]")
+
     return try! FunctionDeclSyntax("""
-    public static func \(raw: f.name)(\(raw: parameters.joined(separator: ", "))) throws -> Result<\(raw: outputs), RevertReason>
+    public static func \(raw: f.name)(\(raw: parameters.joined(separator: ", "))) async throws -> Result<\(raw: outputs), RevertReason>
     """) {
         StmtSyntax("""
                 do {
                     let query = try \(raw: f.name)Fn.encoded(with: [\(raw: callParameters(f: f))])
-                    let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors)
+                    let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
                     let decoded = try \(raw: f.name)Fn.decode(output: result)
 
                     switch decoded {

@@ -37,7 +37,7 @@ struct ComplianceTest: Decodable {
 }
 
 final class ComplianceTests: XCTestCase {
-    func testRunComplianceTests() throws {
+    func testRunComplianceTests() async throws {
         // Load all tests from `Tests/ComplianceJson/*.json` as a `ComplianceTest` struct
         let directoryPath = "./Tests/ComplianceJson/"
         let fileManager = FileManager.default
@@ -58,7 +58,7 @@ final class ComplianceTests: XCTestCase {
         }
 
         for test in complianceTests {
-            let resp: Hex = try EVM.runQuery(bytecode: test.bytecode, query: test.query)
+            let resp: Hex = try await EVM.runQuery(bytecode: test.bytecode, query: test.query)
             XCTAssertEqual(resp, test.expResp, test.name)
         }
     }
