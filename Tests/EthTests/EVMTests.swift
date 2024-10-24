@@ -77,17 +77,17 @@ struct EvmTest {
         self.expError = expError
     }
 
-    func runTest() throws {
+    func runTest() async throws {
         if let expError {
             do {
-                _ = try EVM.execVm(code: code, withInput: input, withFunctions: ffis)
+                _ = try await EVM.execVm(code: code, withInput: input, withFunctions: ffis)
                 XCTFail("\(name): Expected error \(expError.localizedDescription), none received")
             } catch let error as EVM.VMError {
                 XCTAssertEqual(error, expError)
             }
         } else {
             do {
-                let executionResult = try EVM.execVm(code: code, withInput: input, withFunctions: ffis)
+                let executionResult = try await EVM.execVm(code: code, withInput: input, withFunctions: ffis)
                 if let stack = expStack {
                     XCTAssertEqual(executionResult.stack, stack, name)
                 }
@@ -1752,9 +1752,9 @@ let encodingTests: [CodeEncodeTest] =
     ]
 
 final class EVMTests: XCTestCase {
-    func testRunEvmTests() throws {
+    func testRunEvmTests() async throws {
         for test in tests {
-            try test.runTest()
+            try await test.runTest()
         }
     }
 
@@ -1772,7 +1772,7 @@ final class EVMTests: XCTestCase {
         }
     }
 
-    func testRunQueryRevert() throws {
+    func testRunQueryRevert() async throws {
         let errors = [ABI.Function(name: "myError", inputs: [.uint8])]
         let code: EVM.Code = [
             .push(4, "0x0000000000000000000000000000000000000000000000000000000011223344"),
@@ -1783,10 +1783,11 @@ final class EVMTests: XCTestCase {
             .revert,
         ]
 
-        XCTAssertEqual(try unwrapError(EVM.runQuery(bytecode: EVM.encodeCode(code), query: "0x", withErrors: errors), as: EVM.QueryError.self), EVM.QueryError.revert("0x11223344"))
+        let error = try await unwrapErrorAsync(await EVM.runQuery(bytecode: EVM.encodeCode(code), query: "0x", withErrors: errors), as: EVM.QueryError.self)
+        XCTAssertEqual(error, EVM.QueryError.revert("0x11223344"))
     }
 
-    func testRunQueryError() throws {
+    func testRunQueryError() async throws {
         let errors = [ABI.Function(name: "myError", inputs: [.uint8])]
         let code: EVM.Code = [
             .push(32, "0x10ff10dd00000000000000000000000000000000000000000000000000000000"),
@@ -1800,13 +1801,15 @@ final class EVMTests: XCTestCase {
             .revert,
         ]
 
+        let error = try await unwrapErrorAsync(await EVM.runQuery(bytecode: EVM.encodeCode(code), query: "0x", withErrors: errors), as: EVM.QueryError.self)
+
         XCTAssertEqual(
-            try unwrapError(EVM.runQuery(bytecode: EVM.encodeCode(code), query: "0x", withErrors: errors), as: EVM.QueryError.self),
+            error,
             EVM.QueryError.error(ABI.Function(name: "myError", inputs: [.uint8]), .tuple1(.uint8(0x55)))
         )
     }
 
-    func testRunQueryErrorRepeating() throws {
+    func testRunQueryErrorRepeating() async throws {
         let errors = [ABI.Function(name: "myError", inputs: [.uint8]), ABI.Function(name: "myError", inputs: [.uint8])]
         let code: EVM.Code = [
             .push(32, "0x10ff10dd00000000000000000000000000000000000000000000000000000000"),
@@ -1820,8 +1823,10 @@ final class EVMTests: XCTestCase {
             .revert,
         ]
 
+        let error = try await unwrapErrorAsync(await EVM.runQuery(bytecode: EVM.encodeCode(code), query: "0x", withErrors: errors), as: EVM.QueryError.self)
+
         XCTAssertEqual(
-            try unwrapError(EVM.runQuery(bytecode: EVM.encodeCode(code), query: "0x", withErrors: errors), as: EVM.QueryError.self),
+            error,
             EVM.QueryError.error(ABI.Function(name: "myError", inputs: [.uint8]), .tuple1(.uint8(0x55)))
         )
     }

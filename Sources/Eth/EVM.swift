@@ -92,7 +92,7 @@ public enum EVM {
     /// A structure to store the VM stack during execution of an EVM program.
     public typealias Stack = [EthWord]
 
-    public typealias FFIMap = [EthAddress: (Hex) -> FFIResult]
+    public typealias FFIMap = [EthAddress: (Hex) async -> FFIResult]
 
     struct Context {
         var pc: Int = 0
@@ -1174,7 +1174,7 @@ public enum EVM {
             return hashWord
         }
 
-        static func staticCall(context: inout Context) throws {
+        static func staticCall(context: inout Context) async throws {
             _ = try context.pop() // gas
             let addressWord = try context.pop()
             let argsOffset_ = try context.pop()
@@ -1200,7 +1200,7 @@ public enum EVM {
                 throw VMError.noSuchFFI(address)
             }
 
-            switch ffi(Hex(args)) {
+            switch await ffi(Hex(args)) {
             case let .ok(resultData):
                 var returnDataToCopy: Data
 
@@ -1227,7 +1227,7 @@ public enum EVM {
         }
     }
 
-    private static func runSingleOp(withInput input: CallInput, withContext context: inout Context) throws {
+    private static func runSingleOp(withInput input: CallInput, withContext context: inout Context) async throws {
         var showContextDescription = true
         var shouldIncrementPC = true
         guard let operation = context.getOperation() else {
@@ -1366,7 +1366,7 @@ public enum EVM {
             throw VMError.invalidOperation
 
         case .staticcall:
-            try Op.staticCall(context: &context)
+            try await Op.staticCall(context: &context)
 
         case .returndatasize:
             guard let codeSize = EthWord(fromInt: context.returnData.count) else {
@@ -1402,10 +1402,10 @@ public enum EVM {
     ///   - input: The input data for the execution.
     ///   - ffis: A dictionary of addresses to FFI (natively implemented) functions available to the VM.
     /// - Returns: The result of the execution.
-    public static func execVm(code: Code, withInput input: CallInput, withFunctions ffis: FFIMap = [:]) throws -> ExecutionResult {
+    public static func execVm(code: Code, withInput input: CallInput, withFunctions ffis: FFIMap = [:]) async throws -> ExecutionResult {
         var context = Context(withCode: code, withFunctions: ffis)
         while !context.halted {
-            try runSingleOp(withInput: input, withContext: &context)
+            try await runSingleOp(withInput: input, withContext: &context)
         }
         return ExecutionResult(
             stack: context.stack,
@@ -1436,7 +1436,7 @@ public enum EVM {
     ///   - errors: A dictionary of known errors which we will attempt to decode from during a revert and throw a `QueryError.error`
     ///   - ffis: A dictionary of addresses to FFI (natively implemented) functions available to the VM.
     /// - Returns: The hex result of the execution of program successfully `RETURN`ed.
-    public static func runQuery(bytecode: Hex, query: Hex, withValue value: BigUInt = BigUInt(0), withErrors errors: [ABI.Function] = [], withFunctions ffis: FFIMap = [:]) throws -> Hex {
+    public static func runQuery(bytecode: Hex, query: Hex, withValue value: BigUInt = BigUInt(0), withErrors errors: [ABI.Function] = [], withFunctions ffis: FFIMap = [:]) async throws -> Hex {
         let code: Code
         do {
             code = try EVM.decodeCode(fromHex: bytecode)
@@ -1448,7 +1448,7 @@ public enum EVM {
         let input = CallInput(calldata: query, value: value)
         let executionResult: ExecutionResult
         do {
-            executionResult = try EVM.execVm(code: code, withInput: input, withFunctions: ffis)
+            executionResult = try await EVM.execVm(code: code, withInput: input, withFunctions: ffis)
         } catch let error as VMError {
             throw QueryError.vmError(error)
         } catch {

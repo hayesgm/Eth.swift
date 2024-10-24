@@ -3,8 +3,9 @@ import BigInt
 import XCTest
 
 final class ExampleTests: XCTestCase {
-    func testCoolAddition() throws {
-        XCTAssertEqual(try Cool.additionVmCall(x: BigUInt(5)), BigUInt(60), "additionVmCall(5)")
+    func testDrollAddition() async throws {
+        let error = try await Drool.additionVmCall(x: BigUInt(5))
+        XCTAssertEqual(error, BigUInt(60), "additionVmCall(5)")
     }
 
     func testCatEncode() throws {
