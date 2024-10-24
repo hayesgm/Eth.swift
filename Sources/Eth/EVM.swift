@@ -9,6 +9,7 @@ public enum EVM {
     static let sZero = BigInt(0)
     static let sOne = BigInt(1)
     static let wordZero = EthWord(fromBigInt: .zero)!
+    static let gasAmount = EthWord(fromInt: 4_000_000)!
 
     /**
      An enumeration of errors that can occur during VM execution.
@@ -32,7 +33,19 @@ public enum EVM {
         case invalidOperation
         case impure(Operation)
         case notImplemented(Operation)
+        case noSuchFFI(EthAddress)
         case unexpectedError(String)
+    }
+
+    /**
+     An enumeration of possible results from an FFI function call
+
+     - ok: The FFI succeeded and returned the given bytes
+     - revert: The FFI reverted and returned the given error bytes
+     */
+    public enum FFIResult: Error, Equatable {
+        case ok(Hex)
+        case revert(Hex)
     }
 
     /**
@@ -79,6 +92,8 @@ public enum EVM {
     /// A structure to store the VM stack during execution of an EVM program.
     public typealias Stack = [EthWord]
 
+    public typealias FFIMap = [EthAddress: (Hex) -> FFIResult]
+
     struct Context {
         var pc: Int = 0
         var stack: Stack = []
@@ -89,11 +104,14 @@ public enum EVM {
         var tStorage: [EthWord: EthWord] = [:]
         let code: Code
         var opMap: [Int: Operation]
+        var ffis: FFIMap
 
         /// Initializes the EVM context with the provided code.
         /// - Parameter code: The code to execute in the EVM.
-        init(withCode code: Code) {
+        /// - Parameter ffis: The FFIs avaiable to the runtime environment
+        init(withCode code: Code, withFunctions ffis: FFIMap) {
             self.code = code
+            self.ffis = ffis
             opMap = Context.buildOpMap(code: code)
         }
 
@@ -1088,6 +1106,16 @@ public enum EVM {
             try context.memoryWrite(offset: destOffset_, value: data)
         }
 
+        static func returnDataCopy(destOffset: EthWord, offset: EthWord, size: EthWord, context: inout Context) throws {
+            guard let destOffset_ = destOffset.toInt() else {
+                throw VMError.outOfMemory
+            }
+            let data = try performRead(offset: offset, size: size) { offset, bytes in
+                readZeroPaddedData(offset: offset, bytes: bytes, fromData: context.returnData)
+            }
+            try context.memoryWrite(offset: destOffset_, value: data)
+        }
+
         static func jump(counter: EthWord, context: inout Context) throws {
             guard let counter_ = counter.toInt() else {
                 throw VMError.invalidJumpDest
@@ -1144,6 +1172,58 @@ public enum EVM {
                 throw VMError.unexpectedError("hash does not fit in word")
             }
             return hashWord
+        }
+
+        static func staticCall(context: inout Context) throws {
+            _ = try context.pop() // gas
+            let addressWord = try context.pop()
+            let argsOffset_ = try context.pop()
+            let argsSize_ = try context.pop()
+            let retOffset_ = try context.pop()
+            let retSize_ = try context.pop()
+
+            guard let address = EthAddress(fromData: addressWord.data.subdata(in: 12 ..< 32)) else {
+                throw VMError.unexpectedError("Invalid eth address: \(addressWord.description)")
+            }
+
+            guard
+                let argsOffset = argsOffset_.toInt(),
+                let argsSize = argsSize_.toInt(),
+                let retOffset = retOffset_.toInt(),
+                let retSize = retSize_.toInt()
+            else {
+                throw VMError.outOfMemory
+            }
+            let args = try context.memoryRead(offset: argsOffset, bytes: argsSize)
+
+            guard let ffi = context.ffis[address] else {
+                throw VMError.noSuchFFI(address)
+            }
+
+            switch ffi(Hex(args)) {
+            case let .ok(resultData):
+                var returnDataToCopy: Data
+
+                if resultData.count >= retSize {
+                    // Take the first `retSize` bytes
+                    returnDataToCopy = Data(resultData.data.prefix(retSize))
+                } else {
+                    // Pad the data with zeros on the right
+                    var paddedData: Data = resultData.data
+                    let zerosNeeded = retSize - paddedData.count
+                    let zeros = Data(repeating: 0x00, count: zerosNeeded)
+                    paddedData.append(zeros)
+                    returnDataToCopy = paddedData
+                }
+
+                try context.memoryWrite(offset: retOffset, value: returnDataToCopy)
+                context.returnData = resultData.data
+
+            case let .revert(revertData):
+                context.halted = true
+                context.reverted = true
+                context.returnData = revertData.data
+            }
         }
     }
 
@@ -1259,6 +1339,8 @@ public enum EVM {
             try Op.pc(context: &context)
         case .msize:
             try Op.msize(context: &context)
+        case .gas:
+            try context.push(gasAmount)
         case .jumpdest:
             break
         case .tstore:
@@ -1282,7 +1364,21 @@ public enum EVM {
             try Op.revert(offset: offset, size: size, context: &context)
         case .invalid:
             throw VMError.invalidOperation
-        case .address, .balance, .origin, .caller, .gasprice, .extcodesize, .extcodecopy, .returndatasize, .returndatacopy, .extcodehash, .blockhash, .coinbase, .timestamp, .number, .prevrandao, .gaslimit, .chainid, .selfbalance, .basefee, .blobhash, .blobbasefee, .sload, .sstore, .gas, .log, .create, .call, .callcode, .delegatecall, .create2, .staticcall, .selfdestruct:
+
+        case .staticcall:
+            try Op.staticCall(context: &context)
+
+        case .returndatasize:
+            guard let codeSize = EthWord(fromInt: context.returnData.count) else {
+                throw VMError.unexpectedError("Invalid return data size")
+            }
+            try context.push(codeSize)
+
+        case .returndatacopy:
+            let (destOffset, offset, size) = try context.pop3()
+            try Op.returnDataCopy(destOffset: destOffset, offset: offset, size: size, context: &context)
+
+        case .address, .balance, .origin, .caller, .gasprice, .extcodesize, .extcodecopy, .extcodehash, .blockhash, .coinbase, .timestamp, .number, .prevrandao, .gaslimit, .chainid, .selfbalance, .basefee, .blobhash, .blobbasefee, .sload, .sstore, .log, .create, .call, .callcode, .delegatecall, .create2, .selfdestruct:
             throw VMError.impure(operation)
         }
         if showContextDescription {
@@ -1304,9 +1400,10 @@ public enum EVM {
     /// - Parameters:
     ///   - code: The bytecode to be executed.
     ///   - input: The input data for the execution.
+    ///   - ffis: A dictionary of addresses to FFI (natively implemented) functions available to the VM.
     /// - Returns: The result of the execution.
-    public static func execVm(code: Code, withInput input: CallInput) throws -> ExecutionResult {
-        var context = Context(withCode: code)
+    public static func execVm(code: Code, withInput input: CallInput, withFunctions ffis: FFIMap = [:]) throws -> ExecutionResult {
+        var context = Context(withCode: code, withFunctions: ffis)
         while !context.halted {
             try runSingleOp(withInput: input, withContext: &context)
         }
@@ -1336,9 +1433,10 @@ public enum EVM {
     /// - Parameters:
     ///   - bytecode: The bytecode to be executed.
     ///   - query: The ABI-encoded function call to execute.
-    ///   - withErrors: A dictionary of known errors which we will attempt to decode from during a revert and throw a `QueryError.error`
+    ///   - errors: A dictionary of known errors which we will attempt to decode from during a revert and throw a `QueryError.error`
+    ///   - ffis: A dictionary of addresses to FFI (natively implemented) functions available to the VM.
     /// - Returns: The hex result of the execution of program successfully `RETURN`ed.
-    public static func runQuery(bytecode: Hex, query: Hex, withValue value: BigUInt = BigUInt(0), withErrors errors: [ABI.Function] = []) throws -> Hex {
+    public static func runQuery(bytecode: Hex, query: Hex, withValue value: BigUInt = BigUInt(0), withErrors errors: [ABI.Function] = [], withFunctions ffis: FFIMap = [:]) throws -> Hex {
         let code: Code
         do {
             code = try EVM.decodeCode(fromHex: bytecode)
@@ -1350,7 +1448,7 @@ public enum EVM {
         let input = CallInput(calldata: query, value: value)
         let executionResult: ExecutionResult
         do {
-            executionResult = try EVM.execVm(code: code, withInput: input)
+            executionResult = try EVM.execVm(code: code, withInput: input, withFunctions: ffis)
         } catch let error as VMError {
             throw QueryError.vmError(error)
         } catch {
@@ -1391,6 +1489,8 @@ extension EVM.VMError: LocalizedError {
             return NSLocalizedString("Failed to execute impure operation \(operation.description)", comment: "Impure Operation")
         case let .notImplemented(operation):
             return NSLocalizedString("Unimplemented operation \(operation.description)", comment: "Not Implemented Operation")
+        case let .noSuchFFI(address):
+            return NSLocalizedString("No such FFI at \(address.description)", comment: "No such FFI")
         case let .unexpectedError(message):
             return String(format: NSLocalizedString("An unexpected error occurred: %@", comment: "Unexpected Error"), message)
         }
