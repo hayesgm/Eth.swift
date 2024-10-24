@@ -9,18 +9,67 @@ private func word(_ x: Int) -> EthWord {
     return ethWord
 }
 
+private func simpleFFI(args: Hex) -> EVM.FFIResult {
+    if args.count != 4 {
+        return .revert(ABI.Value.string("invalid ABI input").encoded)
+    } else {
+        if args == "0x11223344" {
+            return .ok(ABI.Value.bool(true).encoded)
+        } else if args == "0xdeadbeef" {
+            return .revert(Hex("0xdeadbeef"))
+        } else {
+            return .revert(ABI.Value.string("unknown function call").encoded)
+        }
+    }
+}
+
+private func addFFI(args: Hex) -> EVM.FFIResult {
+    if args.count != 0x44 {
+        return .revert(ABI.Value.string("invalid ABI input").encoded)
+    } else {
+        let f = Hex(args.data.subdata(in: 0 ..< 4))
+        let aData = args.data.subdata(in: 4 ..< 36)
+        let bData = args.data.subdata(in: 36 ..< 68)
+
+        if f == "0x771602f7" {
+            let a = BigUInt(aData)
+            let b = BigUInt(bData)
+            let sum = a + b
+            return .ok(ABI.Value.uint256(sum).encoded)
+        } else if args == "0xdeadbeef" {
+            return .revert(Hex("0xdeadbeef"))
+        } else {
+            return .revert(ABI.Value.string("unknown function call").encoded)
+        }
+    }
+}
+
+private func longFFI(args: Hex) -> EVM.FFIResult {
+    if args.count != 4 {
+        return .revert(ABI.Value.string("invalid ABI input").encoded)
+    } else {
+        if args == "0x11223344" {
+            return .ok("0x112233445566778899aabbccddeeff112233445566778899aabbccddeeff112233445566778899aabbccddeeff112233445566778899aabbccddeeff112233445566778899aabbccddeeff112233445566778899aabbccddeeff")
+        } else {
+            return .revert(ABI.Value.string("unknown function call").encoded)
+        }
+    }
+}
+
 struct EvmTest {
     let name: String
     let code: EVM.Code
     let input: EVM.CallInput
+    let ffis: EVM.FFIMap
     let expStack: EVM.Stack?
     let expReturn: Hex?
     let expRevert: Hex?
     let expError: EVM.VMError?
 
-    init(name: String, withCode code: EVM.Code, expStack: EVM.Stack? = nil, expReturn: Hex? = nil, expRevert: Hex? = nil, expError: EVM.VMError? = nil, withCallData callData: Hex = .empty, withCallValue callValue: BigUInt = BigUInt(0)) {
+    init(name: String, withCode code: EVM.Code, expStack: EVM.Stack? = nil, expReturn: Hex? = nil, expRevert: Hex? = nil, expError: EVM.VMError? = nil, withCallData callData: Hex = .empty, withCallValue callValue: BigUInt = BigUInt(0), withFunctions ffis: EVM.FFIMap = [:]) {
         self.name = name
         self.code = code
+        self.ffis = ffis
         input = EVM.CallInput(calldata: callData, value: callValue)
         self.expStack = expStack
         self.expReturn = expReturn
@@ -28,17 +77,17 @@ struct EvmTest {
         self.expError = expError
     }
 
-    func runTest() throws {
+    func runTest() async throws {
         if let expError {
             do {
-                _ = try EVM.execVm(code: code, withInput: input)
+                _ = try await EVM.execVm(code: code, withInput: input, withFunctions: ffis)
                 XCTFail("\(name): Expected error \(expError.localizedDescription), none received")
             } catch let error as EVM.VMError {
                 XCTAssertEqual(error, expError)
             }
         } else {
             do {
-                let executionResult = try EVM.execVm(code: code, withInput: input)
+                let executionResult = try await EVM.execVm(code: code, withInput: input, withFunctions: ffis)
                 if let stack = expStack {
                     XCTAssertEqual(executionResult.stack, stack, name)
                 }
@@ -1459,6 +1508,193 @@ let tests: [EvmTest] =
             expRevert: "0xbbccddeeff1122334455"
         ),
         EvmTest(
+            name: "Static Call",
+            withCode: [
+                .push(32, "0x1122334400000000000000000000000000000000000000000000000000000000"),
+                .push(32, word(100)),
+                .mstore,
+                // ret_size
+                .push(32, word(32)),
+                // ret_offset
+                .push(32, word(0)),
+                // args_size
+                .push(32, word(4)),
+                // args_offset
+                .push(32, word(100)),
+                // ffi address
+                .push(32, "0x0000000000000000000000000000000000000000000000000000000000000001"),
+                .gas,
+                .staticcall,
+                .push(32, word(0)),
+                .mload,
+                .stop,
+            ],
+            expStack: [
+                word(0x1),
+            ],
+            withFunctions: [
+                "0x0000000000000000000000000000000000000001": simpleFFI,
+            ]
+        ),
+        EvmTest(
+            name: "Static Call - Reverts",
+            withCode: [
+                .push(32, "0xdeadbeef00000000000000000000000000000000000000000000000000000000"),
+                .push(32, word(100)),
+                .mstore,
+                // ret_size
+                .push(32, word(32)),
+                // ret_offset
+                .push(32, word(0)),
+                // args_size
+                .push(32, word(4)),
+                // args_offset
+                .push(32, word(100)),
+                // ffi address
+                .push(32, "0x0000000000000000000000000000000000000000000000000000000000000001"),
+                .gas,
+                .staticcall,
+                .push(32, word(0)),
+                .mload,
+                .stop,
+            ],
+            expRevert: "0xdeadbeef",
+            withFunctions: [
+                "0x0000000000000000000000000000000000000001": simpleFFI,
+            ]
+        ),
+
+        EvmTest(
+            name: "Static Call - No FFI",
+            withCode: [
+                // ret_size
+                .push(32, word(0)),
+                // ret_offset
+                .push(32, word(0)),
+                // args_size
+                .push(32, word(0)),
+                // args_offset
+                .push(32, word(0)),
+                // ffi address
+                .push(32, "0x0000000000000000000000000000000000000000000000000000000000000001"),
+                .gas,
+                .staticcall,
+                .push(32, word(0)),
+                .mload,
+                .stop,
+            ],
+            expError: .noSuchFFI("0x0000000000000000000000000000000000000001"),
+            withFunctions: [:]
+        ),
+
+        EvmTest(
+            name: "Static Call - Add",
+            withCode: [
+                .push(32, "0x771602f700000000000000000000000000000000000000000000000000000000"),
+                .push(32, word(0x100)),
+                .mstore,
+                .push(32, "0x0000000000000000000000000000000000000000000000000000000000000010"),
+                .push(32, word(0x104)),
+                .mstore,
+                .push(32, "0x000000000000000000000000000000000000000000000000000000000000002a"),
+                .push(32, word(0x124)),
+                .mstore,
+                // ret_size
+                .push(32, word(32)),
+                // ret_offset
+                .push(32, word(0)),
+                // args_size
+                .push(32, word(0x44)),
+                // args_offset
+                .push(32, word(0x100)),
+                // ffi address
+                .push(32, "0x0000000000000000000000000000000000000000000000000000000000000002"),
+                .gas,
+                .staticcall,
+                .push(32, word(0)),
+                .mload,
+                .stop,
+            ],
+            expStack: [
+                word(0x3A),
+            ],
+            withFunctions: [
+                "0x0000000000000000000000000000000000000002": addFFI,
+            ]
+        ),
+
+        EvmTest(
+            name: "Return Data Size",
+            withCode: [
+                .push(32, "0x1122334400000000000000000000000000000000000000000000000000000000"),
+                .push(32, word(100)),
+                .mstore,
+                // ret_size
+                .push(32, word(32)),
+                // ret_offset
+                .push(32, word(0)),
+                // args_size
+                .push(32, word(4)),
+                // args_offset
+                .push(32, word(100)),
+                // ffi address
+                .push(32, "0x0000000000000000000000000000000000000000000000000000000000000003"),
+                .gas,
+                .staticcall,
+                .returndatasize,
+                .stop,
+            ],
+            expStack: [
+                word(90),
+            ],
+            withFunctions: [
+                "0x0000000000000000000000000000000000000003": longFFI,
+            ]
+        ),
+
+        EvmTest(
+            name: "Return Data Copy",
+            withCode: [
+                .push(32, "0x1122334400000000000000000000000000000000000000000000000000000000"),
+                .push(32, word(100)),
+                .mstore,
+                // ret_size
+                .push(32, word(32)),
+                // ret_offset
+                .push(32, word(0)),
+                // args_size
+                .push(32, word(4)),
+                // args_offset
+                .push(32, word(100)),
+                // ffi address
+                .push(32, "0x0000000000000000000000000000000000000000000000000000000000000003"),
+                .gas,
+                .staticcall,
+                // size
+                .push(1, word(90)),
+                // offset
+                .push(1, word(1)),
+                // dest_offset
+                .push(1, word(200)),
+                .returndatacopy,
+                .push(32, word(200)),
+                .mload,
+                .push(32, word(232)),
+                .mload,
+                .push(32, word(264)),
+                .mload,
+                .stop,
+            ],
+            expStack: [
+                "0x66778899aabbccddeeff112233445566778899aabbccddeeff00000000000000",
+                "0x445566778899aabbccddeeff112233445566778899aabbccddeeff1122334455",
+                "0x2233445566778899aabbccddeeff112233445566778899aabbccddeeff112233",
+            ],
+            withFunctions: [
+                "0x0000000000000000000000000000000000000003": longFFI,
+            ]
+        ),
+        EvmTest(
             name: "Invalid",
             withCode: [
                 .invalid(Hex(Data([11]))),
@@ -1516,9 +1752,9 @@ let encodingTests: [CodeEncodeTest] =
     ]
 
 final class EVMTests: XCTestCase {
-    func testRunEvmTests() throws {
+    func testRunEvmTests() async throws {
         for test in tests {
-            try test.runTest()
+            try await test.runTest()
         }
     }
 
@@ -1536,7 +1772,7 @@ final class EVMTests: XCTestCase {
         }
     }
 
-    func testRunQueryRevert() throws {
+    func testRunQueryRevert() async throws {
         let errors = [ABI.Function(name: "myError", inputs: [.uint8])]
         let code: EVM.Code = [
             .push(4, "0x0000000000000000000000000000000000000000000000000000000011223344"),
@@ -1547,10 +1783,11 @@ final class EVMTests: XCTestCase {
             .revert,
         ]
 
-        XCTAssertEqual(try unwrapError(EVM.runQuery(bytecode: EVM.encodeCode(code), query: "0x", withErrors: errors), as: EVM.QueryError.self), EVM.QueryError.revert("0x11223344"))
+        let error = try await unwrapErrorAsync(await EVM.runQuery(bytecode: EVM.encodeCode(code), query: "0x", withErrors: errors), as: EVM.QueryError.self)
+        XCTAssertEqual(error, EVM.QueryError.revert("0x11223344"))
     }
 
-    func testRunQueryError() throws {
+    func testRunQueryError() async throws {
         let errors = [ABI.Function(name: "myError", inputs: [.uint8])]
         let code: EVM.Code = [
             .push(32, "0x10ff10dd00000000000000000000000000000000000000000000000000000000"),
@@ -1564,13 +1801,15 @@ final class EVMTests: XCTestCase {
             .revert,
         ]
 
+        let error = try await unwrapErrorAsync(await EVM.runQuery(bytecode: EVM.encodeCode(code), query: "0x", withErrors: errors), as: EVM.QueryError.self)
+
         XCTAssertEqual(
-            try unwrapError(EVM.runQuery(bytecode: EVM.encodeCode(code), query: "0x", withErrors: errors), as: EVM.QueryError.self),
+            error,
             EVM.QueryError.error(ABI.Function(name: "myError", inputs: [.uint8]), .tuple1(.uint8(0x55)))
         )
     }
 
-    func testRunQueryErrorRepeating() throws {
+    func testRunQueryErrorRepeating() async throws {
         let errors = [ABI.Function(name: "myError", inputs: [.uint8]), ABI.Function(name: "myError", inputs: [.uint8])]
         let code: EVM.Code = [
             .push(32, "0x10ff10dd00000000000000000000000000000000000000000000000000000000"),
@@ -1584,8 +1823,10 @@ final class EVMTests: XCTestCase {
             .revert,
         ]
 
+        let error = try await unwrapErrorAsync(await EVM.runQuery(bytecode: EVM.encodeCode(code), query: "0x", withErrors: errors), as: EVM.QueryError.self)
+
         XCTAssertEqual(
-            try unwrapError(EVM.runQuery(bytecode: EVM.encodeCode(code), query: "0x", withErrors: errors), as: EVM.QueryError.self),
+            error,
             EVM.QueryError.error(ABI.Function(name: "myError", inputs: [.uint8]), .tuple1(.uint8(0x55)))
         )
     }
