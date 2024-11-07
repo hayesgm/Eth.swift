@@ -1218,11 +1218,13 @@ public enum EVM {
 
                 try context.memoryWrite(offset: retOffset, value: returnDataToCopy)
                 context.returnData = resultData.data
+                try context.push(EthWord(fromUInt: 1)!)
 
             case let .revert(revertData):
                 context.halted = true
                 context.reverted = true
                 context.returnData = revertData.data
+                try context.push(EthWord(fromUInt: 0)!)
             }
         }
     }

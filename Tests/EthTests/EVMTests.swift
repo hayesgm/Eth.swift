@@ -1531,6 +1531,7 @@ let tests: [EvmTest] =
             ],
             expStack: [
                 word(0x1),
+                word(0x1) // success
             ],
             withFunctions: [
                 "0x0000000000000000000000000000000000000001": simpleFFI,
@@ -1617,6 +1618,7 @@ let tests: [EvmTest] =
             ],
             expStack: [
                 word(0x3A),
+                word(0x1)
             ],
             withFunctions: [
                 "0x0000000000000000000000000000000000000002": addFFI,
@@ -1646,6 +1648,7 @@ let tests: [EvmTest] =
             ],
             expStack: [
                 word(90),
+                word(0x1)
             ],
             withFunctions: [
                 "0x0000000000000000000000000000000000000003": longFFI,
@@ -1689,6 +1692,7 @@ let tests: [EvmTest] =
                 "0x66778899aabbccddeeff112233445566778899aabbccddeeff00000000000000",
                 "0x445566778899aabbccddeeff112233445566778899aabbccddeeff1122334455",
                 "0x2233445566778899aabbccddeeff112233445566778899aabbccddeeff112233",
+                word(0x1)
             ],
             withFunctions: [
                 "0x0000000000000000000000000000000000000003": longFFI,
