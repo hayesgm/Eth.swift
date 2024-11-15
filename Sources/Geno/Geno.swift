@@ -63,14 +63,42 @@ func createSourceFileSyntax(from contract: Contract, name: String, structsOnly: 
                 try VariableDeclSyntax("public static let errors: [ABI.Function] = [\(raw: contract.errors.map { errorName($0) }.joined(separator: ", "))]")
                 // -- End Enums for revert errors
 
+                let renamedFunctions: [(Contract.ABI.Function, String)] = renameFunctions(contract.functions)
+                try VariableDeclSyntax("public static let functions: [ABI.Function] = [\(raw: renamedFunctions.map { "\($0.0.name)Fn" }.joined(separator: ", "))]")
+
                 // Generate a swift function and {ETH.ABI.Function} for each ABI function
-                for function in contract.functions {
-                    generateETHABIFunction(f: function)
+                for (function, functionName) in renamedFunctions {
+                    generateETHABIFunction(f: function, name: functionName)
                     generateFunctionDeclaration(f: function)
                 }
             }
         }
     }
+}
+
+func renameFunctions(_ contractFunctions: [Contract.ABI.Function]) -> [(Contract.ABI.Function, String)] {
+    var seenFunctions: [String: Int] = [:]
+    var res: [(Contract.ABI.Function, String)] = []
+
+    for functionPre in contractFunctions {
+        let function: Contract.ABI.Function
+        let count = seenFunctions[functionPre.name, default: 0]
+        if count > 0 {
+            function = Contract.ABI.Function(
+                type: functionPre.type,
+                name: "\(functionPre.name)\(count)",
+                inputs: functionPre.inputs,
+                outputs: functionPre.outputs,
+                stateMutability: functionPre.stateMutability
+            )
+        } else {
+            function = functionPre
+        }
+        seenFunctions[functionPre.name] = count + 1
+        res.append((function, functionPre.name))
+    }
+
+    return res
 }
 
 /// Generates the matching case statement for mapping the ErrorFn to the error enum to return the error enum
@@ -129,10 +157,10 @@ func mapToETHABITypes(_ ps: [Contract.ABI.Function.Parameter]) -> DeclSyntax {
     return DeclSyntax("\(raw: out)")
 }
 
-func generateETHABIFunction(f: Contract.ABI.Function) -> VariableDeclSyntax {
+func generateETHABIFunction(f: Contract.ABI.Function, name: String) -> VariableDeclSyntax {
     return try! VariableDeclSyntax("""
     public static let \(raw: f.name)Fn = ABI.Function(
-            name: "\(raw: f.name)",
+            name: "\(raw: name)",
             inputs: [\(raw: mapToETHABITypes(f.inputs))],
             outputs: [\(raw: mapToETHABITypes(f.outputs))]
     )
@@ -145,6 +173,12 @@ func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax
     let outputs = returnValue(f: f)
 
     parameters.append("withFunctions ffis: EVM.FFIMap = [:]")
+    let letExpr: String
+    if f.outputs.count > 0 {
+        letExpr = "let"
+    } else {
+        letExpr = ""
+    }
 
     return try! FunctionDeclSyntax("""
     public static func \(raw: f.name)(\(raw: parameters.joined(separator: ", "))) async throws -> Result<\(raw: outputs), RevertReason>
@@ -156,7 +190,7 @@ func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax
                     let decoded = try \(raw: f.name)Fn.decode(output: result)
 
                     switch decoded {
-                    case let \(raw: outParameters(ps: f.outputs)):
+                    case \(raw: letExpr) \(raw: outParameters(ps: f.outputs)):
                         return .success(\(raw: outValues(ps: f.outputs)))
                     default:
                         throw ABI.DecodeError.mismatchedType(decoded.schema, \(raw: f.name)Fn.outputTuple)
@@ -171,9 +205,13 @@ func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax
 }
 
 func outValues(ps: [Contract.ABI.Function.Parameter]) -> String {
-    ps.enumerated().map { index, p in
-        namedParameterToOutValue(p: p, index: index)
-    }.joined(separator: ", ")
+    if ps.count == 0 {
+        return "()"
+    } else {
+        return ps.enumerated().map { index, p in
+            namedParameterToOutValue(p: p, index: index)
+        }.joined(separator: ", ")
+    }
 }
 
 func namedParameterToOutValue(p: Contract.ABI.Function.Parameter, index: Int) -> String {
@@ -227,15 +265,19 @@ func structInitializer(parameter p: Contract.ABI.Function.Parameter, structName:
 }
 
 func outParameters(ps: [Contract.ABI.Function.Parameter]) -> String {
-    let inner = ps.enumerated().map { index, o in
-        parameterToMatchableValueType(p: o, index: index)
-    }.joined(separator: ", ")
+    if ps.count == 0 {
+        return ".tuple0"
+    } else {
+        let inner = ps.enumerated().map { index, o in
+            parameterToMatchableValueType(p: o, index: index)
+        }.joined(separator: ", ")
 
-    guard ps.count <= 16 else {
-        // Note the count constraint could be expanded by adding more tuple{n} cases to the ABI.Value enum. 16 is chosen as a reasonable max until expansion is needed.
-        fatalError("Geno cannot decode tuples with more than 16 values")
+        guard ps.count <= 16 else {
+            // Note the count constraint could be expanded by adding more tuple{n} cases to the ABI.Value enum. 16 is chosen as a reasonable max until expansion is needed.
+            fatalError("Geno cannot decode tuples with more than 16 values")
+        }
+        return ".tuple\(ps.count)(\(inner))"
     }
-    return ".tuple\(ps.count)(\(inner))"
 }
 
 func callParameters(f: Contract.ABI.Function) -> String {
@@ -265,7 +307,11 @@ func functionParameters(f: Contract.ABI.Function) -> [String] {
 }
 
 func returnValue(f: Contract.ABI.Function) -> String {
-    f.outputs.map { typeMapper(for: $0) }.joined(separator: ", ")
+    if f.outputs.count == 0 {
+        return "()"
+    } else {
+        return f.outputs.map { typeMapper(for: $0) }.joined(separator: ", ")
+    }
 }
 
 func parameterToValueType(_ parameter: Contract.ABI.Function.Parameter, allowSchema: Bool = false) -> String {
