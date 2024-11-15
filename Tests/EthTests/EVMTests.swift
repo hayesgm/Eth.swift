@@ -1531,10 +1531,37 @@ let tests: [EvmTest] =
             ],
             expStack: [
                 word(0x1),
-                word(0x1) // success
+                word(0x1), // success
             ],
             withFunctions: [
                 "0x0000000000000000000000000000000000000001": simpleFFI,
+            ]
+        ),
+        EvmTest(
+            name: "Static Call - Console Log",
+            withCode: [
+                .push(32, "0x000000000000000000000000000000000000000000000000000000009905b744"),
+                .push(32, word(100 - 28)),
+                .mstore,
+                .push(32, "0x0000000000000000000000000000000000000000000000000000000000000037"),
+                .push(32, word(104)),
+                .mstore,
+                // ret_size
+                .push(32, word(0)),
+                // ret_offset
+                .push(32, word(0)),
+                // args_size
+                .push(32, word(0x24)),
+                // args_offset
+                .push(32, word(100)),
+                // ffi address
+                .push(32, "0x000000000000000000000000000000000000000000636F6e736F6c652e6c6f67"),
+                .gas,
+                .staticcall,
+                .stop,
+            ],
+            expStack: [
+                word(0x1),
             ]
         ),
         EvmTest(
@@ -1618,7 +1645,7 @@ let tests: [EvmTest] =
             ],
             expStack: [
                 word(0x3A),
-                word(0x1)
+                word(0x1),
             ],
             withFunctions: [
                 "0x0000000000000000000000000000000000000002": addFFI,
@@ -1648,7 +1675,7 @@ let tests: [EvmTest] =
             ],
             expStack: [
                 word(90),
-                word(0x1)
+                word(0x1),
             ],
             withFunctions: [
                 "0x0000000000000000000000000000000000000003": longFFI,
@@ -1692,7 +1719,7 @@ let tests: [EvmTest] =
                 "0x66778899aabbccddeeff112233445566778899aabbccddeeff00000000000000",
                 "0x445566778899aabbccddeeff112233445566778899aabbccddeeff1122334455",
                 "0x2233445566778899aabbccddeeff112233445566778899aabbccddeeff112233",
-                word(0x1)
+                word(0x1),
             ],
             withFunctions: [
                 "0x0000000000000000000000000000000000000003": longFFI,
