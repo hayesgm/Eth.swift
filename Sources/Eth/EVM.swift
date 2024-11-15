@@ -9,7 +9,25 @@ public enum EVM {
     static let sZero = BigInt(0)
     static let sOne = BigInt(1)
     static let wordZero = EthWord(fromBigInt: .zero)!
+    static let wordOne = EthWord(fromBigUInt: one)!
     static let gasAmount = EthWord(fromInt: 4_000_000)!
+
+    private static func consoleFFI(args: Hex) -> EVM.FFIResult {
+        let consoleFns: [ABI.Function] = IConsole.functions
+        let logFnDict = Dictionary(consoleFns.map { ($0.signatureHash, $0) }, uniquingKeysWith: { first, _ in first })
+        if args.count >= 4, let logCall = logFnDict[Hex(args.data.subdata(in: 0 ..< 4))] {
+            // Note: this decoding shouldn't fail if the contract is from proper Solidity, but it's always possible,
+            //       and so we'll default to a standard revert in such a case.
+            if let value = try? logCall.decodeInput(input: args) {
+                print("Console.log: \(value.description)")
+            }
+        }
+        return .ok("0x")
+    }
+
+    static let defaultFFIs: FFIMap = [
+        "0x000000000000000000636F6e736F6c652e6c6f67": consoleFFI,
+    ]
 
     /**
      An enumeration of errors that can occur during VM execution.
@@ -1218,13 +1236,13 @@ public enum EVM {
 
                 try context.memoryWrite(offset: retOffset, value: returnDataToCopy)
                 context.returnData = resultData.data
-                try context.push(EthWord(fromUInt: 1)!)
+                try context.push(wordOne)
 
             case let .revert(revertData):
                 context.halted = true
                 context.reverted = true
                 context.returnData = revertData.data
-                try context.push(EthWord(fromUInt: 0)!)
+                try context.push(wordZero)
             }
         }
     }
@@ -1405,7 +1423,8 @@ public enum EVM {
     ///   - ffis: A dictionary of addresses to FFI (natively implemented) functions available to the VM.
     /// - Returns: The result of the execution.
     public static func execVm(code: Code, withInput input: CallInput, withFunctions ffis: FFIMap = [:]) async throws -> ExecutionResult {
-        var context = Context(withCode: code, withFunctions: ffis)
+        let mergedFFIs = defaultFFIs.merging(ffis) { _, new in new }
+        var context = Context(withCode: code, withFunctions: mergedFFIs)
         while !context.halted {
             try await runSingleOp(withInput: input, withContext: &context)
         }
