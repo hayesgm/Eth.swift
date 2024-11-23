@@ -86,7 +86,7 @@ func renameFunctions(_ contractFunctions: [Contract.ABI.Function]) -> [(Contract
         if count > 0 {
             function = Contract.ABI.Function(
                 type: functionPre.type,
-                name: "\(functionPre.name)\(count)",
+                name: "\(functionPre.name)__\(count)",
                 inputs: functionPre.inputs,
                 outputs: functionPre.outputs,
                 stateMutability: functionPre.stateMutability
