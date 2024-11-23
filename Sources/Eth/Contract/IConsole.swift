@@ -17,7 +17,7 @@ public enum IConsole {
     }
 
     public static let errors: [ABI.Function] = []
-    public static let functions: [ABI.Function] = [logFn, log1Fn, log2Fn, log3Fn, log4Fn, log5Fn, log6Fn, log7Fn, log8Fn, log9Fn, log10Fn, log11Fn, log12Fn, log13Fn, log14Fn, log15Fn, log16Fn, log17Fn, log18Fn, log19Fn, log20Fn, log21Fn, log22Fn, log23Fn, log24Fn, log25Fn, log26Fn, log27Fn, log28Fn, log29Fn, log30Fn, log31Fn, log32Fn, log33Fn, log34Fn, log35Fn, log36Fn, log37Fn, log38Fn, log39Fn, log40Fn, log41Fn, log42Fn, log43Fn, log44Fn, log45Fn, log46Fn, log47Fn, log48Fn, log49Fn, log50Fn, log51Fn, log52Fn, log53Fn, log54Fn, log55Fn, log56Fn, log57Fn, log58Fn, log59Fn, log60Fn, log61Fn, log62Fn, log63Fn, log64Fn, log65Fn, log66Fn, log67Fn, log68Fn, log69Fn, log70Fn, log71Fn, log72Fn, log73Fn, log74Fn, log75Fn, log76Fn, log77Fn, log78Fn, log79Fn, log80Fn, log81Fn, log82Fn, log83Fn, log84Fn, log85Fn, log86Fn, log87Fn, log88Fn, log89Fn, log90Fn, log91Fn, log92Fn, log93Fn, log94Fn, log95Fn, log96Fn, log97Fn, log98Fn, log99Fn, log100Fn, log101Fn, log102Fn, log103Fn, log104Fn, log105Fn, log106Fn, log107Fn, log108Fn, log109Fn, log110Fn, log111Fn, log112Fn, log113Fn, log114Fn, log115Fn, log116Fn, log117Fn, log118Fn, log119Fn, log120Fn, log121Fn, log122Fn, log123Fn, log124Fn, log125Fn, log126Fn, log127Fn, log128Fn, log129Fn, log130Fn, log131Fn, log132Fn, log133Fn, log134Fn, log135Fn, log136Fn, log137Fn, log138Fn, log139Fn, log140Fn, log141Fn, log142Fn, log143Fn, log144Fn, log145Fn, log146Fn, log147Fn, log148Fn, log149Fn, log150Fn, log151Fn, log152Fn, log153Fn, log154Fn, log155Fn, log156Fn, log157Fn, log158Fn, log159Fn, log160Fn, log161Fn, log162Fn, log163Fn, log164Fn, log165Fn, log166Fn, log167Fn, log168Fn, log169Fn, log170Fn, log171Fn, log172Fn, log173Fn, log174Fn, log175Fn, log176Fn, log177Fn, log178Fn, log179Fn, log180Fn, log181Fn, log182Fn, log183Fn, log184Fn, log185Fn, log186Fn, log187Fn, log188Fn, log189Fn, log190Fn, log191Fn, log192Fn, log193Fn, log194Fn, log195Fn, log196Fn, log197Fn, log198Fn, log199Fn, log200Fn, log201Fn, log202Fn, log203Fn, log204Fn, log205Fn, log206Fn, log207Fn, log208Fn, log209Fn, log210Fn, log211Fn, log212Fn, log213Fn, log214Fn, log215Fn, log216Fn, log217Fn, log218Fn, log219Fn, log220Fn, log221Fn, log222Fn, log223Fn, log224Fn, log225Fn, log226Fn, log227Fn, log228Fn, log229Fn, log230Fn, log231Fn, log232Fn, log233Fn, log234Fn, log235Fn, log236Fn, log237Fn, log238Fn, log239Fn, log240Fn, log241Fn, log242Fn, log243Fn, log244Fn, log245Fn, log246Fn, log247Fn, log248Fn, log249Fn, log250Fn, log251Fn, log252Fn, log253Fn, log254Fn, log255Fn, log256Fn, log257Fn, log258Fn, log259Fn, log260Fn, log261Fn, log262Fn, log263Fn, log264Fn, log265Fn, log266Fn, log267Fn, log268Fn, log269Fn, log270Fn, log271Fn, log272Fn, log273Fn, log274Fn, log275Fn, log276Fn, log277Fn, log278Fn, log279Fn, log280Fn, log281Fn, log282Fn, log283Fn, log284Fn, log285Fn, log286Fn, log287Fn, log288Fn, log289Fn, log290Fn, log291Fn, log292Fn, log293Fn, log294Fn, log295Fn, log296Fn, log297Fn, log298Fn, log299Fn, log300Fn, log301Fn, log302Fn, log303Fn, log304Fn, log305Fn, log306Fn, log307Fn, log308Fn, log309Fn, log310Fn, log311Fn, log312Fn, log313Fn, log314Fn, log315Fn, log316Fn, log317Fn, log318Fn, log319Fn, log320Fn, log321Fn, log322Fn, log323Fn, log324Fn, log325Fn, log326Fn, log327Fn, log328Fn, log329Fn, log330Fn, log331Fn, log332Fn, log333Fn, log334Fn, log335Fn, log336Fn, log337Fn, log338Fn, log339Fn, log340Fn, log341Fn, log342Fn, logAddressFn, logBoolFn, logBytesFn, logBytes1Fn, logBytes10Fn, logBytes11Fn, logBytes12Fn, logBytes13Fn, logBytes14Fn, logBytes15Fn, logBytes16Fn, logBytes17Fn, logBytes18Fn, logBytes19Fn, logBytes2Fn, logBytes20Fn, logBytes21Fn, logBytes22Fn, logBytes23Fn, logBytes24Fn, logBytes25Fn, logBytes26Fn, logBytes27Fn, logBytes28Fn, logBytes29Fn, logBytes3Fn, logBytes30Fn, logBytes31Fn, logBytes32Fn, logBytes4Fn, logBytes5Fn, logBytes6Fn, logBytes7Fn, logBytes8Fn, logBytes9Fn, logIntFn, logStringFn, logUintFn]
+    public static let functions: [ABI.Function] = [logFn, log__1Fn, log__2Fn, log__3Fn, log__4Fn, log__5Fn, log__6Fn, log__7Fn, log__8Fn, log__9Fn, log__10Fn, log__11Fn, log__12Fn, log__13Fn, log__14Fn, log__15Fn, log__16Fn, log__17Fn, log__18Fn, log__19Fn, log__20Fn, log__21Fn, log__22Fn, log__23Fn, log__24Fn, log__25Fn, log__26Fn, log__27Fn, log__28Fn, log__29Fn, log__30Fn, log__31Fn, log__32Fn, log__33Fn, log__34Fn, log__35Fn, log__36Fn, log__37Fn, log__38Fn, log__39Fn, log__40Fn, log__41Fn, log__42Fn, log__43Fn, log__44Fn, log__45Fn, log__46Fn, log__47Fn, log__48Fn, log__49Fn, log__50Fn, log__51Fn, log__52Fn, log__53Fn, log__54Fn, log__55Fn, log__56Fn, log__57Fn, log__58Fn, log__59Fn, log__60Fn, log__61Fn, log__62Fn, log__63Fn, log__64Fn, log__65Fn, log__66Fn, log__67Fn, log__68Fn, log__69Fn, log__70Fn, log__71Fn, log__72Fn, log__73Fn, log__74Fn, log__75Fn, log__76Fn, log__77Fn, log__78Fn, log__79Fn, log__80Fn, log__81Fn, log__82Fn, log__83Fn, log__84Fn, log__85Fn, log__86Fn, log__87Fn, log__88Fn, log__89Fn, log__90Fn, log__91Fn, log__92Fn, log__93Fn, log__94Fn, log__95Fn, log__96Fn, log__97Fn, log__98Fn, log__99Fn, log__100Fn, log__101Fn, log__102Fn, log__103Fn, log__104Fn, log__105Fn, log__106Fn, log__107Fn, log__108Fn, log__109Fn, log__110Fn, log__111Fn, log__112Fn, log__113Fn, log__114Fn, log__115Fn, log__116Fn, log__117Fn, log__118Fn, log__119Fn, log__120Fn, log__121Fn, log__122Fn, log__123Fn, log__124Fn, log__125Fn, log__126Fn, log__127Fn, log__128Fn, log__129Fn, log__130Fn, log__131Fn, log__132Fn, log__133Fn, log__134Fn, log__135Fn, log__136Fn, log__137Fn, log__138Fn, log__139Fn, log__140Fn, log__141Fn, log__142Fn, log__143Fn, log__144Fn, log__145Fn, log__146Fn, log__147Fn, log__148Fn, log__149Fn, log__150Fn, log__151Fn, log__152Fn, log__153Fn, log__154Fn, log__155Fn, log__156Fn, log__157Fn, log__158Fn, log__159Fn, log__160Fn, log__161Fn, log__162Fn, log__163Fn, log__164Fn, log__165Fn, log__166Fn, log__167Fn, log__168Fn, log__169Fn, log__170Fn, log__171Fn, log__172Fn, log__173Fn, log__174Fn, log__175Fn, log__176Fn, log__177Fn, log__178Fn, log__179Fn, log__180Fn, log__181Fn, log__182Fn, log__183Fn, log__184Fn, log__185Fn, log__186Fn, log__187Fn, log__188Fn, log__189Fn, log__190Fn, log__191Fn, log__192Fn, log__193Fn, log__194Fn, log__195Fn, log__196Fn, log__197Fn, log__198Fn, log__199Fn, log__200Fn, log__201Fn, log__202Fn, log__203Fn, log__204Fn, log__205Fn, log__206Fn, log__207Fn, log__208Fn, log__209Fn, log__210Fn, log__211Fn, log__212Fn, log__213Fn, log__214Fn, log__215Fn, log__216Fn, log__217Fn, log__218Fn, log__219Fn, log__220Fn, log__221Fn, log__222Fn, log__223Fn, log__224Fn, log__225Fn, log__226Fn, log__227Fn, log__228Fn, log__229Fn, log__230Fn, log__231Fn, log__232Fn, log__233Fn, log__234Fn, log__235Fn, log__236Fn, log__237Fn, log__238Fn, log__239Fn, log__240Fn, log__241Fn, log__242Fn, log__243Fn, log__244Fn, log__245Fn, log__246Fn, log__247Fn, log__248Fn, log__249Fn, log__250Fn, log__251Fn, log__252Fn, log__253Fn, log__254Fn, log__255Fn, log__256Fn, log__257Fn, log__258Fn, log__259Fn, log__260Fn, log__261Fn, log__262Fn, log__263Fn, log__264Fn, log__265Fn, log__266Fn, log__267Fn, log__268Fn, log__269Fn, log__270Fn, log__271Fn, log__272Fn, log__273Fn, log__274Fn, log__275Fn, log__276Fn, log__277Fn, log__278Fn, log__279Fn, log__280Fn, log__281Fn, log__282Fn, log__283Fn, log__284Fn, log__285Fn, log__286Fn, log__287Fn, log__288Fn, log__289Fn, log__290Fn, log__291Fn, log__292Fn, log__293Fn, log__294Fn, log__295Fn, log__296Fn, log__297Fn, log__298Fn, log__299Fn, log__300Fn, log__301Fn, log__302Fn, log__303Fn, log__304Fn, log__305Fn, log__306Fn, log__307Fn, log__308Fn, log__309Fn, log__310Fn, log__311Fn, log__312Fn, log__313Fn, log__314Fn, log__315Fn, log__316Fn, log__317Fn, log__318Fn, log__319Fn, log__320Fn, log__321Fn, log__322Fn, log__323Fn, log__324Fn, log__325Fn, log__326Fn, log__327Fn, log__328Fn, log__329Fn, log__330Fn, log__331Fn, log__332Fn, log__333Fn, log__334Fn, log__335Fn, log__336Fn, log__337Fn, log__338Fn, log__339Fn, log__340Fn, log__341Fn, log__342Fn, logAddressFn, logBoolFn, logBytesFn, logBytes1Fn, logBytes10Fn, logBytes11Fn, logBytes12Fn, logBytes13Fn, logBytes14Fn, logBytes15Fn, logBytes16Fn, logBytes17Fn, logBytes18Fn, logBytes19Fn, logBytes2Fn, logBytes20Fn, logBytes21Fn, logBytes22Fn, logBytes23Fn, logBytes24Fn, logBytes25Fn, logBytes26Fn, logBytes27Fn, logBytes28Fn, logBytes29Fn, logBytes3Fn, logBytes30Fn, logBytes31Fn, logBytes32Fn, logBytes4Fn, logBytes5Fn, logBytes6Fn, logBytes7Fn, logBytes8Fn, logBytes9Fn, logIntFn, logStringFn, logUintFn]
     public static let logFn = ABI.Function(
         name: "log",
         inputs: [.address, .address, .string],
@@ -41,7866 +41,7866 @@ public enum IConsole {
         }
     }
 
-    public static let log1Fn = ABI.Function(
+    public static let log__1Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256, .uint256, .address],
         outputs: []
     )
 
-    public static func log1(p0: Bool, p1: BigUInt, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__1(p0: Bool, p1: BigUInt, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log1Fn.encoded(with: [.bool(p0), .uint256(p1), .uint256(p2), .address(p3)])
+            let query = try log__1Fn.encoded(with: [.bool(p0), .uint256(p1), .uint256(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log1Fn.decode(output: result)
+            let decoded = try log__1Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log1Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__1Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log2Fn = ABI.Function(
+    public static let log__2Fn = ABI.Function(
         name: "log",
         inputs: [.address, .address, .address],
         outputs: []
     )
 
-    public static func log2(p0: EthAddress, p1: EthAddress, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__2(p0: EthAddress, p1: EthAddress, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log2Fn.encoded(with: [.address(p0), .address(p1), .address(p2)])
+            let query = try log__2Fn.encoded(with: [.address(p0), .address(p1), .address(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log2Fn.decode(output: result)
+            let decoded = try log__2Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log2Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__2Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log3Fn = ABI.Function(
+    public static let log__3Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address, .address, .string],
         outputs: []
     )
 
-    public static func log3(p0: BigUInt, p1: EthAddress, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__3(p0: BigUInt, p1: EthAddress, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log3Fn.encoded(with: [.uint256(p0), .address(p1), .address(p2), .string(p3)])
+            let query = try log__3Fn.encoded(with: [.uint256(p0), .address(p1), .address(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log3Fn.decode(output: result)
+            let decoded = try log__3Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log3Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__3Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log4Fn = ABI.Function(
+    public static let log__4Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address, .bool, .string],
         outputs: []
     )
 
-    public static func log4(p0: String, p1: EthAddress, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__4(p0: String, p1: EthAddress, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log4Fn.encoded(with: [.string(p0), .address(p1), .bool(p2), .string(p3)])
+            let query = try log__4Fn.encoded(with: [.string(p0), .address(p1), .bool(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log4Fn.decode(output: result)
+            let decoded = try log__4Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log4Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__4Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log5Fn = ABI.Function(
+    public static let log__5Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool, .address, .uint256],
         outputs: []
     )
 
-    public static func log5(p0: BigUInt, p1: Bool, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__5(p0: BigUInt, p1: Bool, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log5Fn.encoded(with: [.uint256(p0), .bool(p1), .address(p2), .uint256(p3)])
+            let query = try log__5Fn.encoded(with: [.uint256(p0), .bool(p1), .address(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log5Fn.decode(output: result)
+            let decoded = try log__5Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log5Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__5Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log6Fn = ABI.Function(
+    public static let log__6Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address, .bool, .uint256],
         outputs: []
     )
 
-    public static func log6(p0: Bool, p1: EthAddress, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__6(p0: Bool, p1: EthAddress, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log6Fn.encoded(with: [.bool(p0), .address(p1), .bool(p2), .uint256(p3)])
+            let query = try log__6Fn.encoded(with: [.bool(p0), .address(p1), .bool(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log6Fn.decode(output: result)
+            let decoded = try log__6Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log6Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__6Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log7Fn = ABI.Function(
+    public static let log__7Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256, .address],
         outputs: []
     )
 
-    public static func log7(p0: Bool, p1: BigUInt, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__7(p0: Bool, p1: BigUInt, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log7Fn.encoded(with: [.bool(p0), .uint256(p1), .address(p2)])
+            let query = try log__7Fn.encoded(with: [.bool(p0), .uint256(p1), .address(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log7Fn.decode(output: result)
+            let decoded = try log__7Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log7Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__7Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log8Fn = ABI.Function(
+    public static let log__8Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address, .address, .bool],
         outputs: []
     )
 
-    public static func log8(p0: BigUInt, p1: EthAddress, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__8(p0: BigUInt, p1: EthAddress, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log8Fn.encoded(with: [.uint256(p0), .address(p1), .address(p2), .bool(p3)])
+            let query = try log__8Fn.encoded(with: [.uint256(p0), .address(p1), .address(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log8Fn.decode(output: result)
+            let decoded = try log__8Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log8Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__8Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log9Fn = ABI.Function(
+    public static let log__9Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool, .uint256, .string],
         outputs: []
     )
 
-    public static func log9(p0: EthAddress, p1: Bool, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__9(p0: EthAddress, p1: Bool, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log9Fn.encoded(with: [.address(p0), .bool(p1), .uint256(p2), .string(p3)])
+            let query = try log__9Fn.encoded(with: [.address(p0), .bool(p1), .uint256(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log9Fn.decode(output: result)
+            let decoded = try log__9Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log9Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__9Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log10Fn = ABI.Function(
+    public static let log__10Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool, .uint256, .uint256],
         outputs: []
     )
 
-    public static func log10(p0: Bool, p1: Bool, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__10(p0: Bool, p1: Bool, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log10Fn.encoded(with: [.bool(p0), .bool(p1), .uint256(p2), .uint256(p3)])
+            let query = try log__10Fn.encoded(with: [.bool(p0), .bool(p1), .uint256(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log10Fn.decode(output: result)
+            let decoded = try log__10Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log10Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__10Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log11Fn = ABI.Function(
+    public static let log__11Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address, .address, .uint256],
         outputs: []
     )
 
-    public static func log11(p0: Bool, p1: EthAddress, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__11(p0: Bool, p1: EthAddress, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log11Fn.encoded(with: [.bool(p0), .address(p1), .address(p2), .uint256(p3)])
+            let query = try log__11Fn.encoded(with: [.bool(p0), .address(p1), .address(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log11Fn.decode(output: result)
+            let decoded = try log__11Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log11Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__11Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log12Fn = ABI.Function(
+    public static let log__12Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address, .uint256, .uint256],
         outputs: []
     )
 
-    public static func log12(p0: BigUInt, p1: EthAddress, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__12(p0: BigUInt, p1: EthAddress, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log12Fn.encoded(with: [.uint256(p0), .address(p1), .uint256(p2), .uint256(p3)])
+            let query = try log__12Fn.encoded(with: [.uint256(p0), .address(p1), .uint256(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log12Fn.decode(output: result)
+            let decoded = try log__12Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log12Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__12Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log13Fn = ABI.Function(
+    public static let log__13Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address, .uint256],
         outputs: []
     )
 
-    public static func log13(p0: String, p1: EthAddress, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__13(p0: String, p1: EthAddress, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log13Fn.encoded(with: [.string(p0), .address(p1), .uint256(p2)])
+            let query = try log__13Fn.encoded(with: [.string(p0), .address(p1), .uint256(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log13Fn.decode(output: result)
+            let decoded = try log__13Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log13Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__13Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log14Fn = ABI.Function(
+    public static let log__14Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string, .address, .address],
         outputs: []
     )
 
-    public static func log14(p0: EthAddress, p1: String, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__14(p0: EthAddress, p1: String, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log14Fn.encoded(with: [.address(p0), .string(p1), .address(p2), .address(p3)])
+            let query = try log__14Fn.encoded(with: [.address(p0), .string(p1), .address(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log14Fn.decode(output: result)
+            let decoded = try log__14Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log14Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__14Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log15Fn = ABI.Function(
+    public static let log__15Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string, .address, .bool],
         outputs: []
     )
 
-    public static func log15(p0: EthAddress, p1: String, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__15(p0: EthAddress, p1: String, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log15Fn.encoded(with: [.address(p0), .string(p1), .address(p2), .bool(p3)])
+            let query = try log__15Fn.encoded(with: [.address(p0), .string(p1), .address(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log15Fn.decode(output: result)
+            let decoded = try log__15Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log15Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__15Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log16Fn = ABI.Function(
+    public static let log__16Fn = ABI.Function(
         name: "log",
         inputs: [.address, .address, .address, .bool],
         outputs: []
     )
 
-    public static func log16(p0: EthAddress, p1: EthAddress, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__16(p0: EthAddress, p1: EthAddress, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log16Fn.encoded(with: [.address(p0), .address(p1), .address(p2), .bool(p3)])
+            let query = try log__16Fn.encoded(with: [.address(p0), .address(p1), .address(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log16Fn.decode(output: result)
+            let decoded = try log__16Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log16Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__16Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log17Fn = ABI.Function(
+    public static let log__17Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string, .uint256, .bool],
         outputs: []
     )
 
-    public static func log17(p0: EthAddress, p1: String, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__17(p0: EthAddress, p1: String, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log17Fn.encoded(with: [.address(p0), .string(p1), .uint256(p2), .bool(p3)])
+            let query = try log__17Fn.encoded(with: [.address(p0), .string(p1), .uint256(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log17Fn.decode(output: result)
+            let decoded = try log__17Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log17Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__17Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log18Fn = ABI.Function(
+    public static let log__18Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256, .address, .uint256],
         outputs: []
     )
 
-    public static func log18(p0: EthAddress, p1: BigUInt, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__18(p0: EthAddress, p1: BigUInt, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log18Fn.encoded(with: [.address(p0), .uint256(p1), .address(p2), .uint256(p3)])
+            let query = try log__18Fn.encoded(with: [.address(p0), .uint256(p1), .address(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log18Fn.decode(output: result)
+            let decoded = try log__18Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log18Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__18Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log19Fn = ABI.Function(
+    public static let log__19Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string, .uint256, .address],
         outputs: []
     )
 
-    public static func log19(p0: String, p1: String, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__19(p0: String, p1: String, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log19Fn.encoded(with: [.string(p0), .string(p1), .uint256(p2), .address(p3)])
+            let query = try log__19Fn.encoded(with: [.string(p0), .string(p1), .uint256(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log19Fn.decode(output: result)
+            let decoded = try log__19Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log19Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__19Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log20Fn = ABI.Function(
+    public static let log__20Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool, .address],
         outputs: []
     )
 
-    public static func log20(p0: Bool, p1: Bool, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__20(p0: Bool, p1: Bool, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log20Fn.encoded(with: [.bool(p0), .bool(p1), .address(p2)])
+            let query = try log__20Fn.encoded(with: [.bool(p0), .bool(p1), .address(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log20Fn.decode(output: result)
+            let decoded = try log__20Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log20Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__20Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log21Fn = ABI.Function(
+    public static let log__21Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string, .uint256],
         outputs: []
     )
 
-    public static func log21(p0: Bool, p1: String, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__21(p0: Bool, p1: String, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log21Fn.encoded(with: [.bool(p0), .string(p1), .uint256(p2)])
+            let query = try log__21Fn.encoded(with: [.bool(p0), .string(p1), .uint256(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log21Fn.decode(output: result)
+            let decoded = try log__21Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log21Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__21Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log22Fn = ABI.Function(
+    public static let log__22Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string, .address, .string],
         outputs: []
     )
 
-    public static func log22(p0: Bool, p1: String, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__22(p0: Bool, p1: String, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log22Fn.encoded(with: [.bool(p0), .string(p1), .address(p2), .string(p3)])
+            let query = try log__22Fn.encoded(with: [.bool(p0), .string(p1), .address(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log22Fn.decode(output: result)
+            let decoded = try log__22Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log22Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__22Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log23Fn = ABI.Function(
+    public static let log__23Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool, .uint256],
         outputs: []
     )
 
-    public static func log23(p0: Bool, p1: Bool, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__23(p0: Bool, p1: Bool, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log23Fn.encoded(with: [.bool(p0), .bool(p1), .uint256(p2)])
+            let query = try log__23Fn.encoded(with: [.bool(p0), .bool(p1), .uint256(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log23Fn.decode(output: result)
+            let decoded = try log__23Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log23Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__23Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log24Fn = ABI.Function(
+    public static let log__24Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address, .uint256, .address],
         outputs: []
     )
 
-    public static func log24(p0: Bool, p1: EthAddress, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__24(p0: Bool, p1: EthAddress, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log24Fn.encoded(with: [.bool(p0), .address(p1), .uint256(p2), .address(p3)])
+            let query = try log__24Fn.encoded(with: [.bool(p0), .address(p1), .uint256(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log24Fn.decode(output: result)
+            let decoded = try log__24Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log24Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__24Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log25Fn = ABI.Function(
+    public static let log__25Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256, .address, .uint256],
         outputs: []
     )
 
-    public static func log25(p0: Bool, p1: BigUInt, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__25(p0: Bool, p1: BigUInt, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log25Fn.encoded(with: [.bool(p0), .uint256(p1), .address(p2), .uint256(p3)])
+            let query = try log__25Fn.encoded(with: [.bool(p0), .uint256(p1), .address(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log25Fn.decode(output: result)
+            let decoded = try log__25Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log25Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__25Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log26Fn = ABI.Function(
+    public static let log__26Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string, .uint256, .address],
         outputs: []
     )
 
-    public static func log26(p0: Bool, p1: String, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__26(p0: Bool, p1: String, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log26Fn.encoded(with: [.bool(p0), .string(p1), .uint256(p2), .address(p3)])
+            let query = try log__26Fn.encoded(with: [.bool(p0), .string(p1), .uint256(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log26Fn.decode(output: result)
+            let decoded = try log__26Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log26Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__26Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log27Fn = ABI.Function(
+    public static let log__27Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string, .string, .uint256],
         outputs: []
     )
 
-    public static func log27(p0: EthAddress, p1: String, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__27(p0: EthAddress, p1: String, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log27Fn.encoded(with: [.address(p0), .string(p1), .string(p2), .uint256(p3)])
+            let query = try log__27Fn.encoded(with: [.address(p0), .string(p1), .string(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log27Fn.decode(output: result)
+            let decoded = try log__27Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log27Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__27Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log28Fn = ABI.Function(
+    public static let log__28Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address, .uint256, .address],
         outputs: []
     )
 
-    public static func log28(p0: BigUInt, p1: EthAddress, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__28(p0: BigUInt, p1: EthAddress, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log28Fn.encoded(with: [.uint256(p0), .address(p1), .uint256(p2), .address(p3)])
+            let query = try log__28Fn.encoded(with: [.uint256(p0), .address(p1), .uint256(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log28Fn.decode(output: result)
+            let decoded = try log__28Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log28Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__28Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log29Fn = ABI.Function(
+    public static let log__29Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256, .address, .bool],
         outputs: []
     )
 
-    public static func log29(p0: BigUInt, p1: BigUInt, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__29(p0: BigUInt, p1: BigUInt, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log29Fn.encoded(with: [.uint256(p0), .uint256(p1), .address(p2), .bool(p3)])
+            let query = try log__29Fn.encoded(with: [.uint256(p0), .uint256(p1), .address(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log29Fn.decode(output: result)
+            let decoded = try log__29Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log29Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__29Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log30Fn = ABI.Function(
+    public static let log__30Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string, .bool, .uint256],
         outputs: []
     )
 
-    public static func log30(p0: Bool, p1: String, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__30(p0: Bool, p1: String, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log30Fn.encoded(with: [.bool(p0), .string(p1), .bool(p2), .uint256(p3)])
+            let query = try log__30Fn.encoded(with: [.bool(p0), .string(p1), .bool(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log30Fn.decode(output: result)
+            let decoded = try log__30Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log30Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__30Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log31Fn = ABI.Function(
+    public static let log__31Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string, .string, .string],
         outputs: []
     )
 
-    public static func log31(p0: Bool, p1: String, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__31(p0: Bool, p1: String, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log31Fn.encoded(with: [.bool(p0), .string(p1), .string(p2), .string(p3)])
+            let query = try log__31Fn.encoded(with: [.bool(p0), .string(p1), .string(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log31Fn.decode(output: result)
+            let decoded = try log__31Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log31Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__31Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log32Fn = ABI.Function(
+    public static let log__32Fn = ABI.Function(
         name: "log",
         inputs: [.address, .address, .uint256],
         outputs: []
     )
 
-    public static func log32(p0: EthAddress, p1: EthAddress, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__32(p0: EthAddress, p1: EthAddress, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log32Fn.encoded(with: [.address(p0), .address(p1), .uint256(p2)])
+            let query = try log__32Fn.encoded(with: [.address(p0), .address(p1), .uint256(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log32Fn.decode(output: result)
+            let decoded = try log__32Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log32Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__32Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log33Fn = ABI.Function(
+    public static let log__33Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address, .bool],
         outputs: []
     )
 
-    public static func log33(p0: Bool, p1: EthAddress, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__33(p0: Bool, p1: EthAddress, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log33Fn.encoded(with: [.bool(p0), .address(p1), .bool(p2)])
+            let query = try log__33Fn.encoded(with: [.bool(p0), .address(p1), .bool(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log33Fn.decode(output: result)
+            let decoded = try log__33Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log33Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__33Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log34Fn = ABI.Function(
+    public static let log__34Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256, .uint256, .uint256],
         outputs: []
     )
 
-    public static func log34(p0: BigUInt, p1: BigUInt, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__34(p0: BigUInt, p1: BigUInt, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log34Fn.encoded(with: [.uint256(p0), .uint256(p1), .uint256(p2), .uint256(p3)])
+            let query = try log__34Fn.encoded(with: [.uint256(p0), .uint256(p1), .uint256(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log34Fn.decode(output: result)
+            let decoded = try log__34Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log34Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__34Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log35Fn = ABI.Function(
+    public static let log__35Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool, .string, .address],
         outputs: []
     )
 
-    public static func log35(p0: EthAddress, p1: Bool, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__35(p0: EthAddress, p1: Bool, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log35Fn.encoded(with: [.address(p0), .bool(p1), .string(p2), .address(p3)])
+            let query = try log__35Fn.encoded(with: [.address(p0), .bool(p1), .string(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log35Fn.decode(output: result)
+            let decoded = try log__35Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log35Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__35Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log36Fn = ABI.Function(
+    public static let log__36Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string, .uint256, .string],
         outputs: []
     )
 
-    public static func log36(p0: Bool, p1: String, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__36(p0: Bool, p1: String, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log36Fn.encoded(with: [.bool(p0), .string(p1), .uint256(p2), .string(p3)])
+            let query = try log__36Fn.encoded(with: [.bool(p0), .string(p1), .uint256(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log36Fn.decode(output: result)
+            let decoded = try log__36Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log36Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__36Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log37Fn = ABI.Function(
+    public static let log__37Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256, .address, .string],
         outputs: []
     )
 
-    public static func log37(p0: Bool, p1: BigUInt, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__37(p0: Bool, p1: BigUInt, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log37Fn.encoded(with: [.bool(p0), .uint256(p1), .address(p2), .string(p3)])
+            let query = try log__37Fn.encoded(with: [.bool(p0), .uint256(p1), .address(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log37Fn.decode(output: result)
+            let decoded = try log__37Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log37Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__37Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log38Fn = ABI.Function(
+    public static let log__38Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address, .bool, .address],
         outputs: []
     )
 
-    public static func log38(p0: Bool, p1: EthAddress, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__38(p0: Bool, p1: EthAddress, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log38Fn.encoded(with: [.bool(p0), .address(p1), .bool(p2), .address(p3)])
+            let query = try log__38Fn.encoded(with: [.bool(p0), .address(p1), .bool(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log38Fn.decode(output: result)
+            let decoded = try log__38Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log38Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__38Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log39Fn = ABI.Function(
+    public static let log__39Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256, .address],
         outputs: []
     )
 
-    public static func log39(p0: String, p1: BigUInt, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__39(p0: String, p1: BigUInt, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log39Fn.encoded(with: [.string(p0), .uint256(p1), .address(p2)])
+            let query = try log__39Fn.encoded(with: [.string(p0), .uint256(p1), .address(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log39Fn.decode(output: result)
+            let decoded = try log__39Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log39Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__39Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log40Fn = ABI.Function(
+    public static let log__40Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool],
         outputs: []
     )
 
-    public static func log40(p0: BigUInt, p1: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__40(p0: BigUInt, p1: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log40Fn.encoded(with: [.uint256(p0), .bool(p1)])
+            let query = try log__40Fn.encoded(with: [.uint256(p0), .bool(p1)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log40Fn.decode(output: result)
+            let decoded = try log__40Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log40Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__40Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log41Fn = ABI.Function(
+    public static let log__41Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address, .address, .address],
         outputs: []
     )
 
-    public static func log41(p0: Bool, p1: EthAddress, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__41(p0: Bool, p1: EthAddress, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log41Fn.encoded(with: [.bool(p0), .address(p1), .address(p2), .address(p3)])
+            let query = try log__41Fn.encoded(with: [.bool(p0), .address(p1), .address(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log41Fn.decode(output: result)
+            let decoded = try log__41Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log41Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__41Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log42Fn = ABI.Function(
+    public static let log__42Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256, .address, .string],
         outputs: []
     )
 
-    public static func log42(p0: EthAddress, p1: BigUInt, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__42(p0: EthAddress, p1: BigUInt, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log42Fn.encoded(with: [.address(p0), .uint256(p1), .address(p2), .string(p3)])
+            let query = try log__42Fn.encoded(with: [.address(p0), .uint256(p1), .address(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log42Fn.decode(output: result)
+            let decoded = try log__42Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log42Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__42Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log43Fn = ABI.Function(
+    public static let log__43Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string, .uint256, .uint256],
         outputs: []
     )
 
-    public static func log43(p0: EthAddress, p1: String, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__43(p0: EthAddress, p1: String, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log43Fn.encoded(with: [.address(p0), .string(p1), .uint256(p2), .uint256(p3)])
+            let query = try log__43Fn.encoded(with: [.address(p0), .string(p1), .uint256(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log43Fn.decode(output: result)
+            let decoded = try log__43Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log43Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__43Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log44Fn = ABI.Function(
+    public static let log__44Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string, .string, .bool],
         outputs: []
     )
 
-    public static func log44(p0: Bool, p1: String, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__44(p0: Bool, p1: String, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log44Fn.encoded(with: [.bool(p0), .string(p1), .string(p2), .bool(p3)])
+            let query = try log__44Fn.encoded(with: [.bool(p0), .string(p1), .string(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log44Fn.decode(output: result)
+            let decoded = try log__44Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log44Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__44Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log45Fn = ABI.Function(
+    public static let log__45Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool, .uint256],
         outputs: []
     )
 
-    public static func log45(p0: BigUInt, p1: Bool, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__45(p0: BigUInt, p1: Bool, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log45Fn.encoded(with: [.uint256(p0), .bool(p1), .uint256(p2)])
+            let query = try log__45Fn.encoded(with: [.uint256(p0), .bool(p1), .uint256(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log45Fn.decode(output: result)
+            let decoded = try log__45Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log45Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__45Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log46Fn = ABI.Function(
+    public static let log__46Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string, .bool, .address],
         outputs: []
     )
 
-    public static func log46(p0: EthAddress, p1: String, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__46(p0: EthAddress, p1: String, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log46Fn.encoded(with: [.address(p0), .string(p1), .bool(p2), .address(p3)])
+            let query = try log__46Fn.encoded(with: [.address(p0), .string(p1), .bool(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log46Fn.decode(output: result)
+            let decoded = try log__46Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log46Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__46Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log47Fn = ABI.Function(
+    public static let log__47Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool, .bool],
         outputs: []
     )
 
-    public static func log47(p0: BigUInt, p1: Bool, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__47(p0: BigUInt, p1: Bool, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log47Fn.encoded(with: [.uint256(p0), .bool(p1), .bool(p2)])
+            let query = try log__47Fn.encoded(with: [.uint256(p0), .bool(p1), .bool(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log47Fn.decode(output: result)
+            let decoded = try log__47Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log47Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__47Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log48Fn = ABI.Function(
+    public static let log__48Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256, .uint256, .address],
         outputs: []
     )
 
-    public static func log48(p0: EthAddress, p1: BigUInt, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__48(p0: EthAddress, p1: BigUInt, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log48Fn.encoded(with: [.address(p0), .uint256(p1), .uint256(p2), .address(p3)])
+            let query = try log__48Fn.encoded(with: [.address(p0), .uint256(p1), .uint256(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log48Fn.decode(output: result)
+            let decoded = try log__48Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log48Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__48Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log49Fn = ABI.Function(
+    public static let log__49Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool, .string],
         outputs: []
     )
 
-    public static func log49(p0: EthAddress, p1: Bool, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__49(p0: EthAddress, p1: Bool, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log49Fn.encoded(with: [.address(p0), .bool(p1), .string(p2)])
+            let query = try log__49Fn.encoded(with: [.address(p0), .bool(p1), .string(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log49Fn.decode(output: result)
+            let decoded = try log__49Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log49Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__49Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log50Fn = ABI.Function(
+    public static let log__50Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string, .string, .string],
         outputs: []
     )
 
-    public static func log50(p0: BigUInt, p1: String, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__50(p0: BigUInt, p1: String, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log50Fn.encoded(with: [.uint256(p0), .string(p1), .string(p2), .string(p3)])
+            let query = try log__50Fn.encoded(with: [.uint256(p0), .string(p1), .string(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log50Fn.decode(output: result)
+            let decoded = try log__50Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log50Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__50Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log51Fn = ABI.Function(
+    public static let log__51Fn = ABI.Function(
         name: "log",
         inputs: [.address, .address, .string, .string],
         outputs: []
     )
 
-    public static func log51(p0: EthAddress, p1: EthAddress, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__51(p0: EthAddress, p1: EthAddress, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log51Fn.encoded(with: [.address(p0), .address(p1), .string(p2), .string(p3)])
+            let query = try log__51Fn.encoded(with: [.address(p0), .address(p1), .string(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log51Fn.decode(output: result)
+            let decoded = try log__51Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log51Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__51Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log52Fn = ABI.Function(
+    public static let log__52Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address, .bool, .address],
         outputs: []
     )
 
-    public static func log52(p0: String, p1: EthAddress, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__52(p0: String, p1: EthAddress, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log52Fn.encoded(with: [.string(p0), .address(p1), .bool(p2), .address(p3)])
+            let query = try log__52Fn.encoded(with: [.string(p0), .address(p1), .bool(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log52Fn.decode(output: result)
+            let decoded = try log__52Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log52Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__52Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log53Fn = ABI.Function(
+    public static let log__53Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256, .bool, .uint256],
         outputs: []
     )
 
-    public static func log53(p0: EthAddress, p1: BigUInt, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__53(p0: EthAddress, p1: BigUInt, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log53Fn.encoded(with: [.address(p0), .uint256(p1), .bool(p2), .uint256(p3)])
+            let query = try log__53Fn.encoded(with: [.address(p0), .uint256(p1), .bool(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log53Fn.decode(output: result)
+            let decoded = try log__53Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log53Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__53Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log54Fn = ABI.Function(
+    public static let log__54Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address, .string, .string],
         outputs: []
     )
 
-    public static func log54(p0: String, p1: EthAddress, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__54(p0: String, p1: EthAddress, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log54Fn.encoded(with: [.string(p0), .address(p1), .string(p2), .string(p3)])
+            let query = try log__54Fn.encoded(with: [.string(p0), .address(p1), .string(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log54Fn.decode(output: result)
+            let decoded = try log__54Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log54Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__54Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log55Fn = ABI.Function(
+    public static let log__55Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address, .address, .address],
         outputs: []
     )
 
-    public static func log55(p0: BigUInt, p1: EthAddress, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__55(p0: BigUInt, p1: EthAddress, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log55Fn.encoded(with: [.uint256(p0), .address(p1), .address(p2), .address(p3)])
+            let query = try log__55Fn.encoded(with: [.uint256(p0), .address(p1), .address(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log55Fn.decode(output: result)
+            let decoded = try log__55Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log55Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__55Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log56Fn = ABI.Function(
+    public static let log__56Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool, .string, .uint256],
         outputs: []
     )
 
-    public static func log56(p0: String, p1: Bool, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__56(p0: String, p1: Bool, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log56Fn.encoded(with: [.string(p0), .bool(p1), .string(p2), .uint256(p3)])
+            let query = try log__56Fn.encoded(with: [.string(p0), .bool(p1), .string(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log56Fn.decode(output: result)
+            let decoded = try log__56Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log56Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__56Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log57Fn = ABI.Function(
+    public static let log__57Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool, .string],
         outputs: []
     )
 
-    public static func log57(p0: Bool, p1: Bool, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__57(p0: Bool, p1: Bool, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log57Fn.encoded(with: [.bool(p0), .bool(p1), .string(p2)])
+            let query = try log__57Fn.encoded(with: [.bool(p0), .bool(p1), .string(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log57Fn.decode(output: result)
+            let decoded = try log__57Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log57Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__57Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log58Fn = ABI.Function(
+    public static let log__58Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256, .address, .address],
         outputs: []
     )
 
-    public static func log58(p0: Bool, p1: BigUInt, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__58(p0: Bool, p1: BigUInt, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log58Fn.encoded(with: [.bool(p0), .uint256(p1), .address(p2), .address(p3)])
+            let query = try log__58Fn.encoded(with: [.bool(p0), .uint256(p1), .address(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log58Fn.decode(output: result)
+            let decoded = try log__58Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log58Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__58Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log59Fn = ABI.Function(
+    public static let log__59Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256, .string, .string],
         outputs: []
     )
 
-    public static func log59(p0: BigUInt, p1: BigUInt, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__59(p0: BigUInt, p1: BigUInt, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log59Fn.encoded(with: [.uint256(p0), .uint256(p1), .string(p2), .string(p3)])
+            let query = try log__59Fn.encoded(with: [.uint256(p0), .uint256(p1), .string(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log59Fn.decode(output: result)
+            let decoded = try log__59Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log59Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__59Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log60Fn = ABI.Function(
+    public static let log__60Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string, .uint256, .uint256],
         outputs: []
     )
 
-    public static func log60(p0: Bool, p1: String, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__60(p0: Bool, p1: String, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log60Fn.encoded(with: [.bool(p0), .string(p1), .uint256(p2), .uint256(p3)])
+            let query = try log__60Fn.encoded(with: [.bool(p0), .string(p1), .uint256(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log60Fn.decode(output: result)
+            let decoded = try log__60Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log60Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__60Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log61Fn = ABI.Function(
+    public static let log__61Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool],
         outputs: []
     )
 
-    public static func log61(p0: Bool, p1: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__61(p0: Bool, p1: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log61Fn.encoded(with: [.bool(p0), .bool(p1)])
+            let query = try log__61Fn.encoded(with: [.bool(p0), .bool(p1)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log61Fn.decode(output: result)
+            let decoded = try log__61Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log61Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__61Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log62Fn = ABI.Function(
+    public static let log__62Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool, .bool, .string],
         outputs: []
     )
 
-    public static func log62(p0: Bool, p1: Bool, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__62(p0: Bool, p1: Bool, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log62Fn.encoded(with: [.bool(p0), .bool(p1), .bool(p2), .string(p3)])
+            let query = try log__62Fn.encoded(with: [.bool(p0), .bool(p1), .bool(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log62Fn.decode(output: result)
+            let decoded = try log__62Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log62Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__62Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log63Fn = ABI.Function(
+    public static let log__63Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string, .address, .address],
         outputs: []
     )
 
-    public static func log63(p0: Bool, p1: String, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__63(p0: Bool, p1: String, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log63Fn.encoded(with: [.bool(p0), .string(p1), .address(p2), .address(p3)])
+            let query = try log__63Fn.encoded(with: [.bool(p0), .string(p1), .address(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log63Fn.decode(output: result)
+            let decoded = try log__63Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log63Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__63Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log64Fn = ABI.Function(
+    public static let log__64Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string, .string, .bool],
         outputs: []
     )
 
-    public static func log64(p0: String, p1: String, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__64(p0: String, p1: String, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log64Fn.encoded(with: [.string(p0), .string(p1), .string(p2), .bool(p3)])
+            let query = try log__64Fn.encoded(with: [.string(p0), .string(p1), .string(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log64Fn.decode(output: result)
+            let decoded = try log__64Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log64Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__64Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log65Fn = ABI.Function(
+    public static let log__65Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool, .string, .uint256],
         outputs: []
     )
 
-    public static func log65(p0: BigUInt, p1: Bool, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__65(p0: BigUInt, p1: Bool, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log65Fn.encoded(with: [.uint256(p0), .bool(p1), .string(p2), .uint256(p3)])
+            let query = try log__65Fn.encoded(with: [.uint256(p0), .bool(p1), .string(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log65Fn.decode(output: result)
+            let decoded = try log__65Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log65Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__65Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log66Fn = ABI.Function(
+    public static let log__66Fn = ABI.Function(
         name: "log",
         inputs: [.address],
         outputs: []
     )
 
-    public static func log66(p0: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__66(p0: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log66Fn.encoded(with: [.address(p0)])
+            let query = try log__66Fn.encoded(with: [.address(p0)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log66Fn.decode(output: result)
+            let decoded = try log__66Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log66Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__66Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log67Fn = ABI.Function(
+    public static let log__67Fn = ABI.Function(
         name: "log",
         inputs: [.address, .address, .bool, .bool],
         outputs: []
     )
 
-    public static func log67(p0: EthAddress, p1: EthAddress, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__67(p0: EthAddress, p1: EthAddress, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log67Fn.encoded(with: [.address(p0), .address(p1), .bool(p2), .bool(p3)])
+            let query = try log__67Fn.encoded(with: [.address(p0), .address(p1), .bool(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log67Fn.decode(output: result)
+            let decoded = try log__67Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log67Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__67Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log68Fn = ABI.Function(
+    public static let log__68Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string, .string],
         outputs: []
     )
 
-    public static func log68(p0: String, p1: String, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__68(p0: String, p1: String, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log68Fn.encoded(with: [.string(p0), .string(p1), .string(p2)])
+            let query = try log__68Fn.encoded(with: [.string(p0), .string(p1), .string(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log68Fn.decode(output: result)
+            let decoded = try log__68Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log68Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__68Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log69Fn = ABI.Function(
+    public static let log__69Fn = ABI.Function(
         name: "log",
         inputs: [.int256],
         outputs: []
     )
 
-    public static func log69(p0: BigInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__69(p0: BigInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log69Fn.encoded(with: [.int256(p0)])
+            let query = try log__69Fn.encoded(with: [.int256(p0)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log69Fn.decode(output: result)
+            let decoded = try log__69Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log69Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__69Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log70Fn = ABI.Function(
+    public static let log__70Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool, .address, .string],
         outputs: []
     )
 
-    public static func log70(p0: String, p1: Bool, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__70(p0: String, p1: Bool, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log70Fn.encoded(with: [.string(p0), .bool(p1), .address(p2), .string(p3)])
+            let query = try log__70Fn.encoded(with: [.string(p0), .bool(p1), .address(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log70Fn.decode(output: result)
+            let decoded = try log__70Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log70Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__70Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log71Fn = ABI.Function(
+    public static let log__71Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool, .address, .string],
         outputs: []
     )
 
-    public static func log71(p0: EthAddress, p1: Bool, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__71(p0: EthAddress, p1: Bool, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log71Fn.encoded(with: [.address(p0), .bool(p1), .address(p2), .string(p3)])
+            let query = try log__71Fn.encoded(with: [.address(p0), .bool(p1), .address(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log71Fn.decode(output: result)
+            let decoded = try log__71Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log71Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__71Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log72Fn = ABI.Function(
+    public static let log__72Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address],
         outputs: []
     )
 
-    public static func log72(p0: String, p1: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__72(p0: String, p1: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log72Fn.encoded(with: [.string(p0), .address(p1)])
+            let query = try log__72Fn.encoded(with: [.string(p0), .address(p1)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log72Fn.decode(output: result)
+            let decoded = try log__72Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log72Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__72Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log73Fn = ABI.Function(
+    public static let log__73Fn = ABI.Function(
         name: "log",
         inputs: [.bool],
         outputs: []
     )
 
-    public static func log73(p0: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__73(p0: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log73Fn.encoded(with: [.bool(p0)])
+            let query = try log__73Fn.encoded(with: [.bool(p0)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log73Fn.decode(output: result)
+            let decoded = try log__73Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log73Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__73Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log74Fn = ABI.Function(
+    public static let log__74Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool, .address, .address],
         outputs: []
     )
 
-    public static func log74(p0: String, p1: Bool, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__74(p0: String, p1: Bool, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log74Fn.encoded(with: [.string(p0), .bool(p1), .address(p2), .address(p3)])
+            let query = try log__74Fn.encoded(with: [.string(p0), .bool(p1), .address(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log74Fn.decode(output: result)
+            let decoded = try log__74Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log74Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__74Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log75Fn = ABI.Function(
+    public static let log__75Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256, .uint256, .uint256],
         outputs: []
     )
 
-    public static func log75(p0: EthAddress, p1: BigUInt, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__75(p0: EthAddress, p1: BigUInt, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log75Fn.encoded(with: [.address(p0), .uint256(p1), .uint256(p2), .uint256(p3)])
+            let query = try log__75Fn.encoded(with: [.address(p0), .uint256(p1), .uint256(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log75Fn.decode(output: result)
+            let decoded = try log__75Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log75Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__75Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log76Fn = ABI.Function(
+    public static let log__76Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool, .address],
         outputs: []
     )
 
-    public static func log76(p0: BigUInt, p1: Bool, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__76(p0: BigUInt, p1: Bool, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log76Fn.encoded(with: [.uint256(p0), .bool(p1), .address(p2)])
+            let query = try log__76Fn.encoded(with: [.uint256(p0), .bool(p1), .address(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log76Fn.decode(output: result)
+            let decoded = try log__76Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log76Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__76Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log77Fn = ABI.Function(
+    public static let log__77Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256, .bool, .bool],
         outputs: []
     )
 
-    public static func log77(p0: String, p1: BigUInt, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__77(p0: String, p1: BigUInt, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log77Fn.encoded(with: [.string(p0), .uint256(p1), .bool(p2), .bool(p3)])
+            let query = try log__77Fn.encoded(with: [.string(p0), .uint256(p1), .bool(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log77Fn.decode(output: result)
+            let decoded = try log__77Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log77Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__77Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log78Fn = ABI.Function(
+    public static let log__78Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string, .string, .bool],
         outputs: []
     )
 
-    public static func log78(p0: EthAddress, p1: String, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__78(p0: EthAddress, p1: String, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log78Fn.encoded(with: [.address(p0), .string(p1), .string(p2), .bool(p3)])
+            let query = try log__78Fn.encoded(with: [.address(p0), .string(p1), .string(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log78Fn.decode(output: result)
+            let decoded = try log__78Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log78Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__78Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log79Fn = ABI.Function(
+    public static let log__79Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256, .uint256],
         outputs: []
     )
 
-    public static func log79(p0: Bool, p1: BigUInt, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__79(p0: Bool, p1: BigUInt, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log79Fn.encoded(with: [.bool(p0), .uint256(p1), .uint256(p2)])
+            let query = try log__79Fn.encoded(with: [.bool(p0), .uint256(p1), .uint256(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log79Fn.decode(output: result)
+            let decoded = try log__79Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log79Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__79Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log80Fn = ABI.Function(
+    public static let log__80Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256, .uint256, .uint256],
         outputs: []
     )
 
-    public static func log80(p0: Bool, p1: BigUInt, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__80(p0: Bool, p1: BigUInt, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log80Fn.encoded(with: [.bool(p0), .uint256(p1), .uint256(p2), .uint256(p3)])
+            let query = try log__80Fn.encoded(with: [.bool(p0), .uint256(p1), .uint256(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log80Fn.decode(output: result)
+            let decoded = try log__80Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log80Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__80Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log81Fn = ABI.Function(
+    public static let log__81Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string, .uint256],
         outputs: []
     )
 
-    public static func log81(p0: BigUInt, p1: String, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__81(p0: BigUInt, p1: String, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log81Fn.encoded(with: [.uint256(p0), .string(p1), .uint256(p2)])
+            let query = try log__81Fn.encoded(with: [.uint256(p0), .string(p1), .uint256(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log81Fn.decode(output: result)
+            let decoded = try log__81Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log81Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__81Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log82Fn = ABI.Function(
+    public static let log__82Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool, .uint256, .uint256],
         outputs: []
     )
 
-    public static func log82(p0: EthAddress, p1: Bool, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__82(p0: EthAddress, p1: Bool, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log82Fn.encoded(with: [.address(p0), .bool(p1), .uint256(p2), .uint256(p3)])
+            let query = try log__82Fn.encoded(with: [.address(p0), .bool(p1), .uint256(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log82Fn.decode(output: result)
+            let decoded = try log__82Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log82Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__82Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log83Fn = ABI.Function(
+    public static let log__83Fn = ABI.Function(
         name: "log",
         inputs: [.address, .address, .bool, .uint256],
         outputs: []
     )
 
-    public static func log83(p0: EthAddress, p1: EthAddress, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__83(p0: EthAddress, p1: EthAddress, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log83Fn.encoded(with: [.address(p0), .address(p1), .bool(p2), .uint256(p3)])
+            let query = try log__83Fn.encoded(with: [.address(p0), .address(p1), .bool(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log83Fn.decode(output: result)
+            let decoded = try log__83Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log83Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__83Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log84Fn = ABI.Function(
+    public static let log__84Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256],
         outputs: []
     )
 
-    public static func log84(p0: Bool, p1: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__84(p0: Bool, p1: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log84Fn.encoded(with: [.bool(p0), .uint256(p1)])
+            let query = try log__84Fn.encoded(with: [.bool(p0), .uint256(p1)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log84Fn.decode(output: result)
+            let decoded = try log__84Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log84Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__84Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log85Fn = ABI.Function(
+    public static let log__85Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string, .uint256, .address],
         outputs: []
     )
 
-    public static func log85(p0: BigUInt, p1: String, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__85(p0: BigUInt, p1: String, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log85Fn.encoded(with: [.uint256(p0), .string(p1), .uint256(p2), .address(p3)])
+            let query = try log__85Fn.encoded(with: [.uint256(p0), .string(p1), .uint256(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log85Fn.decode(output: result)
+            let decoded = try log__85Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log85Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__85Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log86Fn = ABI.Function(
+    public static let log__86Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool, .bool, .bool],
         outputs: []
     )
 
-    public static func log86(p0: Bool, p1: Bool, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__86(p0: Bool, p1: Bool, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log86Fn.encoded(with: [.bool(p0), .bool(p1), .bool(p2), .bool(p3)])
+            let query = try log__86Fn.encoded(with: [.bool(p0), .bool(p1), .bool(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log86Fn.decode(output: result)
+            let decoded = try log__86Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log86Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__86Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log87Fn = ABI.Function(
+    public static let log__87Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256, .bool, .bool],
         outputs: []
     )
 
-    public static func log87(p0: EthAddress, p1: BigUInt, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__87(p0: EthAddress, p1: BigUInt, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log87Fn.encoded(with: [.address(p0), .uint256(p1), .bool(p2), .bool(p3)])
+            let query = try log__87Fn.encoded(with: [.address(p0), .uint256(p1), .bool(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log87Fn.decode(output: result)
+            let decoded = try log__87Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log87Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__87Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log88Fn = ABI.Function(
+    public static let log__88Fn = ABI.Function(
         name: "log",
         inputs: [.string, .int256],
         outputs: []
     )
 
-    public static func log88(p0: String, p1: BigInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__88(p0: String, p1: BigInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log88Fn.encoded(with: [.string(p0), .int256(p1)])
+            let query = try log__88Fn.encoded(with: [.string(p0), .int256(p1)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log88Fn.decode(output: result)
+            let decoded = try log__88Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log88Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__88Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log89Fn = ABI.Function(
+    public static let log__89Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address, .string, .string],
         outputs: []
     )
 
-    public static func log89(p0: BigUInt, p1: EthAddress, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__89(p0: BigUInt, p1: EthAddress, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log89Fn.encoded(with: [.uint256(p0), .address(p1), .string(p2), .string(p3)])
+            let query = try log__89Fn.encoded(with: [.uint256(p0), .address(p1), .string(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log89Fn.decode(output: result)
+            let decoded = try log__89Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log89Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__89Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log90Fn = ABI.Function(
+    public static let log__90Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address, .bool, .uint256],
         outputs: []
     )
 
-    public static func log90(p0: String, p1: EthAddress, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__90(p0: String, p1: EthAddress, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log90Fn.encoded(with: [.string(p0), .address(p1), .bool(p2), .uint256(p3)])
+            let query = try log__90Fn.encoded(with: [.string(p0), .address(p1), .bool(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log90Fn.decode(output: result)
+            let decoded = try log__90Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log90Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__90Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log91Fn = ABI.Function(
+    public static let log__91Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool, .string, .bool],
         outputs: []
     )
 
-    public static func log91(p0: String, p1: Bool, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__91(p0: String, p1: Bool, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log91Fn.encoded(with: [.string(p0), .bool(p1), .string(p2), .bool(p3)])
+            let query = try log__91Fn.encoded(with: [.string(p0), .bool(p1), .string(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log91Fn.decode(output: result)
+            let decoded = try log__91Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log91Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__91Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log92Fn = ABI.Function(
+    public static let log__92Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string, .bool, .bool],
         outputs: []
     )
 
-    public static func log92(p0: String, p1: String, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__92(p0: String, p1: String, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log92Fn.encoded(with: [.string(p0), .string(p1), .bool(p2), .bool(p3)])
+            let query = try log__92Fn.encoded(with: [.string(p0), .string(p1), .bool(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log92Fn.decode(output: result)
+            let decoded = try log__92Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log92Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__92Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log93Fn = ABI.Function(
+    public static let log__93Fn = ABI.Function(
         name: "log",
         inputs: [.string],
         outputs: []
     )
 
-    public static func log93(p0: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__93(p0: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log93Fn.encoded(with: [.string(p0)])
+            let query = try log__93Fn.encoded(with: [.string(p0)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log93Fn.decode(output: result)
+            let decoded = try log__93Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log93Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__93Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log94Fn = ABI.Function(
+    public static let log__94Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256, .string, .address],
         outputs: []
     )
 
-    public static func log94(p0: BigUInt, p1: BigUInt, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__94(p0: BigUInt, p1: BigUInt, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log94Fn.encoded(with: [.uint256(p0), .uint256(p1), .string(p2), .address(p3)])
+            let query = try log__94Fn.encoded(with: [.uint256(p0), .uint256(p1), .string(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log94Fn.decode(output: result)
+            let decoded = try log__94Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log94Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__94Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log95Fn = ABI.Function(
+    public static let log__95Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string, .address, .address],
         outputs: []
     )
 
-    public static func log95(p0: String, p1: String, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__95(p0: String, p1: String, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log95Fn.encoded(with: [.string(p0), .string(p1), .address(p2), .address(p3)])
+            let query = try log__95Fn.encoded(with: [.string(p0), .string(p1), .address(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log95Fn.decode(output: result)
+            let decoded = try log__95Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log95Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__95Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log96Fn = ABI.Function(
+    public static let log__96Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string, .uint256, .string],
         outputs: []
     )
 
-    public static func log96(p0: EthAddress, p1: String, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__96(p0: EthAddress, p1: String, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log96Fn.encoded(with: [.address(p0), .string(p1), .uint256(p2), .string(p3)])
+            let query = try log__96Fn.encoded(with: [.address(p0), .string(p1), .uint256(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log96Fn.decode(output: result)
+            let decoded = try log__96Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log96Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__96Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log97Fn = ABI.Function(
+    public static let log__97Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool, .address, .bool],
         outputs: []
     )
 
-    public static func log97(p0: BigUInt, p1: Bool, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__97(p0: BigUInt, p1: Bool, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log97Fn.encoded(with: [.uint256(p0), .bool(p1), .address(p2), .bool(p3)])
+            let query = try log__97Fn.encoded(with: [.uint256(p0), .bool(p1), .address(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log97Fn.decode(output: result)
+            let decoded = try log__97Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log97Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__97Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log98Fn = ABI.Function(
+    public static let log__98Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string, .address, .uint256],
         outputs: []
     )
 
-    public static func log98(p0: EthAddress, p1: String, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__98(p0: EthAddress, p1: String, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log98Fn.encoded(with: [.address(p0), .string(p1), .address(p2), .uint256(p3)])
+            let query = try log__98Fn.encoded(with: [.address(p0), .string(p1), .address(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log98Fn.decode(output: result)
+            let decoded = try log__98Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log98Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__98Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log99Fn = ABI.Function(
+    public static let log__99Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address, .address, .bool],
         outputs: []
     )
 
-    public static func log99(p0: Bool, p1: EthAddress, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__99(p0: Bool, p1: EthAddress, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log99Fn.encoded(with: [.bool(p0), .address(p1), .address(p2), .bool(p3)])
+            let query = try log__99Fn.encoded(with: [.bool(p0), .address(p1), .address(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log99Fn.decode(output: result)
+            let decoded = try log__99Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log99Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__99Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log100Fn = ABI.Function(
+    public static let log__100Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address, .string, .uint256],
         outputs: []
     )
 
-    public static func log100(p0: BigUInt, p1: EthAddress, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__100(p0: BigUInt, p1: EthAddress, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log100Fn.encoded(with: [.uint256(p0), .address(p1), .string(p2), .uint256(p3)])
+            let query = try log__100Fn.encoded(with: [.uint256(p0), .address(p1), .string(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log100Fn.decode(output: result)
+            let decoded = try log__100Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log100Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__100Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log101Fn = ABI.Function(
+    public static let log__101Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool, .string, .string],
         outputs: []
     )
 
-    public static func log101(p0: EthAddress, p1: Bool, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__101(p0: EthAddress, p1: Bool, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log101Fn.encoded(with: [.address(p0), .bool(p1), .string(p2), .string(p3)])
+            let query = try log__101Fn.encoded(with: [.address(p0), .bool(p1), .string(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log101Fn.decode(output: result)
+            let decoded = try log__101Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log101Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__101Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log102Fn = ABI.Function(
+    public static let log__102Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256, .bool],
         outputs: []
     )
 
-    public static func log102(p0: BigUInt, p1: BigUInt, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__102(p0: BigUInt, p1: BigUInt, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log102Fn.encoded(with: [.uint256(p0), .uint256(p1), .bool(p2)])
+            let query = try log__102Fn.encoded(with: [.uint256(p0), .uint256(p1), .bool(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log102Fn.decode(output: result)
+            let decoded = try log__102Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log102Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__102Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log103Fn = ABI.Function(
+    public static let log__103Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256, .address, .address],
         outputs: []
     )
 
-    public static func log103(p0: EthAddress, p1: BigUInt, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__103(p0: EthAddress, p1: BigUInt, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log103Fn.encoded(with: [.address(p0), .uint256(p1), .address(p2), .address(p3)])
+            let query = try log__103Fn.encoded(with: [.address(p0), .uint256(p1), .address(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log103Fn.decode(output: result)
+            let decoded = try log__103Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log103Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__103Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log104Fn = ABI.Function(
+    public static let log__104Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string, .bool, .string],
         outputs: []
     )
 
-    public static func log104(p0: Bool, p1: String, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__104(p0: Bool, p1: String, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log104Fn.encoded(with: [.bool(p0), .string(p1), .bool(p2), .string(p3)])
+            let query = try log__104Fn.encoded(with: [.bool(p0), .string(p1), .bool(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log104Fn.decode(output: result)
+            let decoded = try log__104Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log104Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__104Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log105Fn = ABI.Function(
+    public static let log__105Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256, .uint256, .string],
         outputs: []
     )
 
-    public static func log105(p0: EthAddress, p1: BigUInt, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__105(p0: EthAddress, p1: BigUInt, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log105Fn.encoded(with: [.address(p0), .uint256(p1), .uint256(p2), .string(p3)])
+            let query = try log__105Fn.encoded(with: [.address(p0), .uint256(p1), .uint256(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log105Fn.decode(output: result)
+            let decoded = try log__105Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log105Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__105Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log106Fn = ABI.Function(
+    public static let log__106Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address, .bool, .string],
         outputs: []
     )
 
-    public static func log106(p0: Bool, p1: EthAddress, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__106(p0: Bool, p1: EthAddress, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log106Fn.encoded(with: [.bool(p0), .address(p1), .bool(p2), .string(p3)])
+            let query = try log__106Fn.encoded(with: [.bool(p0), .address(p1), .bool(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log106Fn.decode(output: result)
+            let decoded = try log__106Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log106Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__106Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log107Fn = ABI.Function(
+    public static let log__107Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string],
         outputs: []
     )
 
-    public static func log107(p0: String, p1: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__107(p0: String, p1: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log107Fn.encoded(with: [.string(p0), .string(p1)])
+            let query = try log__107Fn.encoded(with: [.string(p0), .string(p1)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log107Fn.decode(output: result)
+            let decoded = try log__107Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log107Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__107Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log108Fn = ABI.Function(
+    public static let log__108Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool, .address, .uint256],
         outputs: []
     )
 
-    public static func log108(p0: Bool, p1: Bool, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__108(p0: Bool, p1: Bool, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log108Fn.encoded(with: [.bool(p0), .bool(p1), .address(p2), .uint256(p3)])
+            let query = try log__108Fn.encoded(with: [.bool(p0), .bool(p1), .address(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log108Fn.decode(output: result)
+            let decoded = try log__108Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log108Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__108Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log109Fn = ABI.Function(
+    public static let log__109Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string, .bool],
         outputs: []
     )
 
-    public static func log109(p0: BigUInt, p1: String, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__109(p0: BigUInt, p1: String, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log109Fn.encoded(with: [.uint256(p0), .string(p1), .bool(p2)])
+            let query = try log__109Fn.encoded(with: [.uint256(p0), .string(p1), .bool(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log109Fn.decode(output: result)
+            let decoded = try log__109Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log109Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__109Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log110Fn = ABI.Function(
+    public static let log__110Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256, .address, .uint256],
         outputs: []
     )
 
-    public static func log110(p0: String, p1: BigUInt, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__110(p0: String, p1: BigUInt, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log110Fn.encoded(with: [.string(p0), .uint256(p1), .address(p2), .uint256(p3)])
+            let query = try log__110Fn.encoded(with: [.string(p0), .uint256(p1), .address(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log110Fn.decode(output: result)
+            let decoded = try log__110Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log110Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__110Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log111Fn = ABI.Function(
+    public static let log__111Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool, .bool],
         outputs: []
     )
 
-    public static func log111(p0: Bool, p1: Bool, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__111(p0: Bool, p1: Bool, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log111Fn.encoded(with: [.bool(p0), .bool(p1), .bool(p2)])
+            let query = try log__111Fn.encoded(with: [.bool(p0), .bool(p1), .bool(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log111Fn.decode(output: result)
+            let decoded = try log__111Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log111Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__111Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log112Fn = ABI.Function(
+    public static let log__112Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool, .string, .bool],
         outputs: []
     )
 
-    public static func log112(p0: EthAddress, p1: Bool, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__112(p0: EthAddress, p1: Bool, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log112Fn.encoded(with: [.address(p0), .bool(p1), .string(p2), .bool(p3)])
+            let query = try log__112Fn.encoded(with: [.address(p0), .bool(p1), .string(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log112Fn.decode(output: result)
+            let decoded = try log__112Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log112Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__112Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log113Fn = ABI.Function(
+    public static let log__113Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string, .bool, .uint256],
         outputs: []
     )
 
-    public static func log113(p0: EthAddress, p1: String, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__113(p0: EthAddress, p1: String, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log113Fn.encoded(with: [.address(p0), .string(p1), .bool(p2), .uint256(p3)])
+            let query = try log__113Fn.encoded(with: [.address(p0), .string(p1), .bool(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log113Fn.decode(output: result)
+            let decoded = try log__113Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log113Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__113Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log114Fn = ABI.Function(
+    public static let log__114Fn = ABI.Function(
         name: "log",
         inputs: [],
         outputs: []
     )
 
-    public static func log114(withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__114(withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log114Fn.encoded(with: [])
+            let query = try log__114Fn.encoded(with: [])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log114Fn.decode(output: result)
+            let decoded = try log__114Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log114Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__114Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log115Fn = ABI.Function(
+    public static let log__115Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address, .uint256, .string],
         outputs: []
     )
 
-    public static func log115(p0: Bool, p1: EthAddress, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__115(p0: Bool, p1: EthAddress, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log115Fn.encoded(with: [.bool(p0), .address(p1), .uint256(p2), .string(p3)])
+            let query = try log__115Fn.encoded(with: [.bool(p0), .address(p1), .uint256(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log115Fn.decode(output: result)
+            let decoded = try log__115Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log115Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__115Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log116Fn = ABI.Function(
+    public static let log__116Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string, .bool, .address],
         outputs: []
     )
 
-    public static func log116(p0: Bool, p1: String, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__116(p0: Bool, p1: String, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log116Fn.encoded(with: [.bool(p0), .string(p1), .bool(p2), .address(p3)])
+            let query = try log__116Fn.encoded(with: [.bool(p0), .string(p1), .bool(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log116Fn.decode(output: result)
+            let decoded = try log__116Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log116Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__116Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log117Fn = ABI.Function(
+    public static let log__117Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool, .uint256, .address],
         outputs: []
     )
 
-    public static func log117(p0: Bool, p1: Bool, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__117(p0: Bool, p1: Bool, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log117Fn.encoded(with: [.bool(p0), .bool(p1), .uint256(p2), .address(p3)])
+            let query = try log__117Fn.encoded(with: [.bool(p0), .bool(p1), .uint256(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log117Fn.decode(output: result)
+            let decoded = try log__117Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log117Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__117Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log118Fn = ABI.Function(
+    public static let log__118Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256, .address, .address],
         outputs: []
     )
 
-    public static func log118(p0: BigUInt, p1: BigUInt, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__118(p0: BigUInt, p1: BigUInt, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log118Fn.encoded(with: [.uint256(p0), .uint256(p1), .address(p2), .address(p3)])
+            let query = try log__118Fn.encoded(with: [.uint256(p0), .uint256(p1), .address(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log118Fn.decode(output: result)
+            let decoded = try log__118Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log118Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__118Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log119Fn = ABI.Function(
+    public static let log__119Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string, .uint256],
         outputs: []
     )
 
-    public static func log119(p0: String, p1: String, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__119(p0: String, p1: String, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log119Fn.encoded(with: [.string(p0), .string(p1), .uint256(p2)])
+            let query = try log__119Fn.encoded(with: [.string(p0), .string(p1), .uint256(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log119Fn.decode(output: result)
+            let decoded = try log__119Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log119Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__119Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log120Fn = ABI.Function(
+    public static let log__120Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256, .string],
         outputs: []
     )
 
-    public static func log120(p0: String, p1: BigUInt, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__120(p0: String, p1: BigUInt, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log120Fn.encoded(with: [.string(p0), .uint256(p1), .string(p2)])
+            let query = try log__120Fn.encoded(with: [.string(p0), .uint256(p1), .string(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log120Fn.decode(output: result)
+            let decoded = try log__120Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log120Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__120Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log121Fn = ABI.Function(
+    public static let log__121Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256, .uint256, .string],
         outputs: []
     )
 
-    public static func log121(p0: BigUInt, p1: BigUInt, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__121(p0: BigUInt, p1: BigUInt, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log121Fn.encoded(with: [.uint256(p0), .uint256(p1), .uint256(p2), .string(p3)])
+            let query = try log__121Fn.encoded(with: [.uint256(p0), .uint256(p1), .uint256(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log121Fn.decode(output: result)
+            let decoded = try log__121Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log121Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__121Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log122Fn = ABI.Function(
+    public static let log__122Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address, .uint256, .string],
         outputs: []
     )
 
-    public static func log122(p0: String, p1: EthAddress, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__122(p0: String, p1: EthAddress, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log122Fn.encoded(with: [.string(p0), .address(p1), .uint256(p2), .string(p3)])
+            let query = try log__122Fn.encoded(with: [.string(p0), .address(p1), .uint256(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log122Fn.decode(output: result)
+            let decoded = try log__122Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log122Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__122Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log123Fn = ABI.Function(
+    public static let log__123Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address, .uint256],
         outputs: []
     )
 
-    public static func log123(p0: BigUInt, p1: EthAddress, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__123(p0: BigUInt, p1: EthAddress, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log123Fn.encoded(with: [.uint256(p0), .address(p1), .uint256(p2)])
+            let query = try log__123Fn.encoded(with: [.uint256(p0), .address(p1), .uint256(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log123Fn.decode(output: result)
+            let decoded = try log__123Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log123Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__123Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log124Fn = ABI.Function(
+    public static let log__124Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256, .string, .string],
         outputs: []
     )
 
-    public static func log124(p0: String, p1: BigUInt, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__124(p0: String, p1: BigUInt, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log124Fn.encoded(with: [.string(p0), .uint256(p1), .string(p2), .string(p3)])
+            let query = try log__124Fn.encoded(with: [.string(p0), .uint256(p1), .string(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log124Fn.decode(output: result)
+            let decoded = try log__124Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log124Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__124Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log125Fn = ABI.Function(
+    public static let log__125Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address, .bool, .uint256],
         outputs: []
     )
 
-    public static func log125(p0: BigUInt, p1: EthAddress, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__125(p0: BigUInt, p1: EthAddress, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log125Fn.encoded(with: [.uint256(p0), .address(p1), .bool(p2), .uint256(p3)])
+            let query = try log__125Fn.encoded(with: [.uint256(p0), .address(p1), .bool(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log125Fn.decode(output: result)
+            let decoded = try log__125Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log125Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__125Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log126Fn = ABI.Function(
+    public static let log__126Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256, .string, .address],
         outputs: []
     )
 
-    public static func log126(p0: EthAddress, p1: BigUInt, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__126(p0: EthAddress, p1: BigUInt, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log126Fn.encoded(with: [.address(p0), .uint256(p1), .string(p2), .address(p3)])
+            let query = try log__126Fn.encoded(with: [.address(p0), .uint256(p1), .string(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log126Fn.decode(output: result)
+            let decoded = try log__126Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log126Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__126Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log127Fn = ABI.Function(
+    public static let log__127Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256, .address],
         outputs: []
     )
 
-    public static func log127(p0: BigUInt, p1: BigUInt, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__127(p0: BigUInt, p1: BigUInt, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log127Fn.encoded(with: [.uint256(p0), .uint256(p1), .address(p2)])
+            let query = try log__127Fn.encoded(with: [.uint256(p0), .uint256(p1), .address(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log127Fn.decode(output: result)
+            let decoded = try log__127Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log127Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__127Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log128Fn = ABI.Function(
+    public static let log__128Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string, .address, .bool],
         outputs: []
     )
 
-    public static func log128(p0: String, p1: String, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__128(p0: String, p1: String, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log128Fn.encoded(with: [.string(p0), .string(p1), .address(p2), .bool(p3)])
+            let query = try log__128Fn.encoded(with: [.string(p0), .string(p1), .address(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log128Fn.decode(output: result)
+            let decoded = try log__128Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log128Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__128Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log129Fn = ABI.Function(
+    public static let log__129Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string, .string, .string],
         outputs: []
     )
 
-    public static func log129(p0: EthAddress, p1: String, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__129(p0: EthAddress, p1: String, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log129Fn.encoded(with: [.address(p0), .string(p1), .string(p2), .string(p3)])
+            let query = try log__129Fn.encoded(with: [.address(p0), .string(p1), .string(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log129Fn.decode(output: result)
+            let decoded = try log__129Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log129Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__129Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log130Fn = ABI.Function(
+    public static let log__130Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool, .address, .uint256],
         outputs: []
     )
 
-    public static func log130(p0: String, p1: Bool, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__130(p0: String, p1: Bool, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log130Fn.encoded(with: [.string(p0), .bool(p1), .address(p2), .uint256(p3)])
+            let query = try log__130Fn.encoded(with: [.string(p0), .bool(p1), .address(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log130Fn.decode(output: result)
+            let decoded = try log__130Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log130Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__130Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log131Fn = ABI.Function(
+    public static let log__131Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string, .uint256, .string],
         outputs: []
     )
 
-    public static func log131(p0: String, p1: String, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__131(p0: String, p1: String, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log131Fn.encoded(with: [.string(p0), .string(p1), .uint256(p2), .string(p3)])
+            let query = try log__131Fn.encoded(with: [.string(p0), .string(p1), .uint256(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log131Fn.decode(output: result)
+            let decoded = try log__131Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log131Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__131Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log132Fn = ABI.Function(
+    public static let log__132Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256, .string, .uint256],
         outputs: []
     )
 
-    public static func log132(p0: BigUInt, p1: BigUInt, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__132(p0: BigUInt, p1: BigUInt, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log132Fn.encoded(with: [.uint256(p0), .uint256(p1), .string(p2), .uint256(p3)])
+            let query = try log__132Fn.encoded(with: [.uint256(p0), .uint256(p1), .string(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log132Fn.decode(output: result)
+            let decoded = try log__132Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log132Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__132Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log133Fn = ABI.Function(
+    public static let log__133Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string, .bool, .string],
         outputs: []
     )
 
-    public static func log133(p0: String, p1: String, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__133(p0: String, p1: String, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log133Fn.encoded(with: [.string(p0), .string(p1), .bool(p2), .string(p3)])
+            let query = try log__133Fn.encoded(with: [.string(p0), .string(p1), .bool(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log133Fn.decode(output: result)
+            let decoded = try log__133Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log133Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__133Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log134Fn = ABI.Function(
+    public static let log__134Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256, .address, .address],
         outputs: []
     )
 
-    public static func log134(p0: String, p1: BigUInt, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__134(p0: String, p1: BigUInt, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log134Fn.encoded(with: [.string(p0), .uint256(p1), .address(p2), .address(p3)])
+            let query = try log__134Fn.encoded(with: [.string(p0), .uint256(p1), .address(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log134Fn.decode(output: result)
+            let decoded = try log__134Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log134Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__134Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log135Fn = ABI.Function(
+    public static let log__135Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address, .string, .bool],
         outputs: []
     )
 
-    public static func log135(p0: String, p1: EthAddress, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__135(p0: String, p1: EthAddress, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log135Fn.encoded(with: [.string(p0), .address(p1), .string(p2), .bool(p3)])
+            let query = try log__135Fn.encoded(with: [.string(p0), .address(p1), .string(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log135Fn.decode(output: result)
+            let decoded = try log__135Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log135Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__135Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log136Fn = ABI.Function(
+    public static let log__136Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string, .bool, .bool],
         outputs: []
     )
 
-    public static func log136(p0: EthAddress, p1: String, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__136(p0: EthAddress, p1: String, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log136Fn.encoded(with: [.address(p0), .string(p1), .bool(p2), .bool(p3)])
+            let query = try log__136Fn.encoded(with: [.address(p0), .string(p1), .bool(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log136Fn.decode(output: result)
+            let decoded = try log__136Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log136Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__136Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log137Fn = ABI.Function(
+    public static let log__137Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address, .uint256, .bool],
         outputs: []
     )
 
-    public static func log137(p0: BigUInt, p1: EthAddress, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__137(p0: BigUInt, p1: EthAddress, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log137Fn.encoded(with: [.uint256(p0), .address(p1), .uint256(p2), .bool(p3)])
+            let query = try log__137Fn.encoded(with: [.uint256(p0), .address(p1), .uint256(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log137Fn.decode(output: result)
+            let decoded = try log__137Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log137Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__137Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log138Fn = ABI.Function(
+    public static let log__138Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address, .uint256],
         outputs: []
     )
 
-    public static func log138(p0: Bool, p1: EthAddress, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__138(p0: Bool, p1: EthAddress, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log138Fn.encoded(with: [.bool(p0), .address(p1), .uint256(p2)])
+            let query = try log__138Fn.encoded(with: [.bool(p0), .address(p1), .uint256(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log138Fn.decode(output: result)
+            let decoded = try log__138Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log138Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__138Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log139Fn = ABI.Function(
+    public static let log__139Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string, .address, .address],
         outputs: []
     )
 
-    public static func log139(p0: BigUInt, p1: String, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__139(p0: BigUInt, p1: String, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log139Fn.encoded(with: [.uint256(p0), .string(p1), .address(p2), .address(p3)])
+            let query = try log__139Fn.encoded(with: [.uint256(p0), .string(p1), .address(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log139Fn.decode(output: result)
+            let decoded = try log__139Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log139Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__139Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log140Fn = ABI.Function(
+    public static let log__140Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool, .uint256, .bool],
         outputs: []
     )
 
-    public static func log140(p0: Bool, p1: Bool, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__140(p0: Bool, p1: Bool, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log140Fn.encoded(with: [.bool(p0), .bool(p1), .uint256(p2), .bool(p3)])
+            let query = try log__140Fn.encoded(with: [.bool(p0), .bool(p1), .uint256(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log140Fn.decode(output: result)
+            let decoded = try log__140Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log140Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__140Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log141Fn = ABI.Function(
+    public static let log__141Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string, .uint256, .address],
         outputs: []
     )
 
-    public static func log141(p0: EthAddress, p1: String, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__141(p0: EthAddress, p1: String, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log141Fn.encoded(with: [.address(p0), .string(p1), .uint256(p2), .address(p3)])
+            let query = try log__141Fn.encoded(with: [.address(p0), .string(p1), .uint256(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log141Fn.decode(output: result)
+            let decoded = try log__141Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log141Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__141Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log142Fn = ABI.Function(
+    public static let log__142Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address, .string],
         outputs: []
     )
 
-    public static func log142(p0: BigUInt, p1: EthAddress, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__142(p0: BigUInt, p1: EthAddress, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log142Fn.encoded(with: [.uint256(p0), .address(p1), .string(p2)])
+            let query = try log__142Fn.encoded(with: [.uint256(p0), .address(p1), .string(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log142Fn.decode(output: result)
+            let decoded = try log__142Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log142Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__142Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log143Fn = ABI.Function(
+    public static let log__143Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address, .uint256, .address],
         outputs: []
     )
 
-    public static func log143(p0: String, p1: EthAddress, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__143(p0: String, p1: EthAddress, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log143Fn.encoded(with: [.string(p0), .address(p1), .uint256(p2), .address(p3)])
+            let query = try log__143Fn.encoded(with: [.string(p0), .address(p1), .uint256(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log143Fn.decode(output: result)
+            let decoded = try log__143Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log143Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__143Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log144Fn = ABI.Function(
+    public static let log__144Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string],
         outputs: []
     )
 
-    public static func log144(p0: BigUInt, p1: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__144(p0: BigUInt, p1: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log144Fn.encoded(with: [.uint256(p0), .string(p1)])
+            let query = try log__144Fn.encoded(with: [.uint256(p0), .string(p1)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log144Fn.decode(output: result)
+            let decoded = try log__144Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log144Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__144Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log145Fn = ABI.Function(
+    public static let log__145Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool, .uint256, .uint256],
         outputs: []
     )
 
-    public static func log145(p0: String, p1: Bool, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__145(p0: String, p1: Bool, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log145Fn.encoded(with: [.string(p0), .bool(p1), .uint256(p2), .uint256(p3)])
+            let query = try log__145Fn.encoded(with: [.string(p0), .bool(p1), .uint256(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log145Fn.decode(output: result)
+            let decoded = try log__145Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log145Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__145Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log146Fn = ABI.Function(
+    public static let log__146Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool, .address, .address],
         outputs: []
     )
 
-    public static func log146(p0: EthAddress, p1: Bool, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__146(p0: EthAddress, p1: Bool, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log146Fn.encoded(with: [.address(p0), .bool(p1), .address(p2), .address(p3)])
+            let query = try log__146Fn.encoded(with: [.address(p0), .bool(p1), .address(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log146Fn.decode(output: result)
+            let decoded = try log__146Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log146Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__146Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log147Fn = ABI.Function(
+    public static let log__147Fn = ABI.Function(
         name: "log",
         inputs: [.address, .address, .address, .address],
         outputs: []
     )
 
-    public static func log147(p0: EthAddress, p1: EthAddress, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__147(p0: EthAddress, p1: EthAddress, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log147Fn.encoded(with: [.address(p0), .address(p1), .address(p2), .address(p3)])
+            let query = try log__147Fn.encoded(with: [.address(p0), .address(p1), .address(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log147Fn.decode(output: result)
+            let decoded = try log__147Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log147Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__147Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log148Fn = ABI.Function(
+    public static let log__148Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256, .uint256, .bool],
         outputs: []
     )
 
-    public static func log148(p0: EthAddress, p1: BigUInt, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__148(p0: EthAddress, p1: BigUInt, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log148Fn.encoded(with: [.address(p0), .uint256(p1), .uint256(p2), .bool(p3)])
+            let query = try log__148Fn.encoded(with: [.address(p0), .uint256(p1), .uint256(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log148Fn.decode(output: result)
+            let decoded = try log__148Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log148Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__148Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log149Fn = ABI.Function(
+    public static let log__149Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256, .bool],
         outputs: []
     )
 
-    public static func log149(p0: EthAddress, p1: BigUInt, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__149(p0: EthAddress, p1: BigUInt, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log149Fn.encoded(with: [.address(p0), .uint256(p1), .bool(p2)])
+            let query = try log__149Fn.encoded(with: [.address(p0), .uint256(p1), .bool(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log149Fn.decode(output: result)
+            let decoded = try log__149Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log149Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__149Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log150Fn = ABI.Function(
+    public static let log__150Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string, .uint256],
         outputs: []
     )
 
-    public static func log150(p0: EthAddress, p1: String, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__150(p0: EthAddress, p1: String, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log150Fn.encoded(with: [.address(p0), .string(p1), .uint256(p2)])
+            let query = try log__150Fn.encoded(with: [.address(p0), .string(p1), .uint256(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log150Fn.decode(output: result)
+            let decoded = try log__150Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log150Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__150Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log151Fn = ABI.Function(
+    public static let log__151Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool, .string, .string],
         outputs: []
     )
 
-    public static func log151(p0: BigUInt, p1: Bool, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__151(p0: BigUInt, p1: Bool, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log151Fn.encoded(with: [.uint256(p0), .bool(p1), .string(p2), .string(p3)])
+            let query = try log__151Fn.encoded(with: [.uint256(p0), .bool(p1), .string(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log151Fn.decode(output: result)
+            let decoded = try log__151Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log151Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__151Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log152Fn = ABI.Function(
+    public static let log__152Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string, .uint256, .bool],
         outputs: []
     )
 
-    public static func log152(p0: BigUInt, p1: String, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__152(p0: BigUInt, p1: String, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log152Fn.encoded(with: [.uint256(p0), .string(p1), .uint256(p2), .bool(p3)])
+            let query = try log__152Fn.encoded(with: [.uint256(p0), .string(p1), .uint256(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log152Fn.decode(output: result)
+            let decoded = try log__152Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log152Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__152Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log153Fn = ABI.Function(
+    public static let log__153Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address],
         outputs: []
     )
 
-    public static func log153(p0: BigUInt, p1: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__153(p0: BigUInt, p1: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log153Fn.encoded(with: [.uint256(p0), .address(p1)])
+            let query = try log__153Fn.encoded(with: [.uint256(p0), .address(p1)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log153Fn.decode(output: result)
+            let decoded = try log__153Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log153Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__153Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log154Fn = ABI.Function(
+    public static let log__154Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool, .bool, .address],
         outputs: []
     )
 
-    public static func log154(p0: BigUInt, p1: Bool, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__154(p0: BigUInt, p1: Bool, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log154Fn.encoded(with: [.uint256(p0), .bool(p1), .bool(p2), .address(p3)])
+            let query = try log__154Fn.encoded(with: [.uint256(p0), .bool(p1), .bool(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log154Fn.decode(output: result)
+            let decoded = try log__154Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log154Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__154Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log155Fn = ABI.Function(
+    public static let log__155Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256, .string, .uint256],
         outputs: []
     )
 
-    public static func log155(p0: Bool, p1: BigUInt, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__155(p0: Bool, p1: BigUInt, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log155Fn.encoded(with: [.bool(p0), .uint256(p1), .string(p2), .uint256(p3)])
+            let query = try log__155Fn.encoded(with: [.bool(p0), .uint256(p1), .string(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log155Fn.decode(output: result)
+            let decoded = try log__155Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log155Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__155Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log156Fn = ABI.Function(
+    public static let log__156Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address, .bool, .bool],
         outputs: []
     )
 
-    public static func log156(p0: Bool, p1: EthAddress, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__156(p0: Bool, p1: EthAddress, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log156Fn.encoded(with: [.bool(p0), .address(p1), .bool(p2), .bool(p3)])
+            let query = try log__156Fn.encoded(with: [.bool(p0), .address(p1), .bool(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log156Fn.decode(output: result)
+            let decoded = try log__156Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log156Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__156Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log157Fn = ABI.Function(
+    public static let log__157Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string, .uint256, .bool],
         outputs: []
     )
 
-    public static func log157(p0: Bool, p1: String, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__157(p0: Bool, p1: String, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log157Fn.encoded(with: [.bool(p0), .string(p1), .uint256(p2), .bool(p3)])
+            let query = try log__157Fn.encoded(with: [.bool(p0), .string(p1), .uint256(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log157Fn.decode(output: result)
+            let decoded = try log__157Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log157Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__157Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log158Fn = ABI.Function(
+    public static let log__158Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256, .address, .string],
         outputs: []
     )
 
-    public static func log158(p0: BigUInt, p1: BigUInt, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__158(p0: BigUInt, p1: BigUInt, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log158Fn.encoded(with: [.uint256(p0), .uint256(p1), .address(p2), .string(p3)])
+            let query = try log__158Fn.encoded(with: [.uint256(p0), .uint256(p1), .address(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log158Fn.decode(output: result)
+            let decoded = try log__158Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log158Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__158Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log159Fn = ABI.Function(
+    public static let log__159Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool, .string, .string],
         outputs: []
     )
 
-    public static func log159(p0: Bool, p1: Bool, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__159(p0: Bool, p1: Bool, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log159Fn.encoded(with: [.bool(p0), .bool(p1), .string(p2), .string(p3)])
+            let query = try log__159Fn.encoded(with: [.bool(p0), .bool(p1), .string(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log159Fn.decode(output: result)
+            let decoded = try log__159Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log159Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__159Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log160Fn = ABI.Function(
+    public static let log__160Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string, .string, .address],
         outputs: []
     )
 
-    public static func log160(p0: String, p1: String, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__160(p0: String, p1: String, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log160Fn.encoded(with: [.string(p0), .string(p1), .string(p2), .address(p3)])
+            let query = try log__160Fn.encoded(with: [.string(p0), .string(p1), .string(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log160Fn.decode(output: result)
+            let decoded = try log__160Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log160Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__160Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log161Fn = ABI.Function(
+    public static let log__161Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool, .bool, .uint256],
         outputs: []
     )
 
-    public static func log161(p0: Bool, p1: Bool, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__161(p0: Bool, p1: Bool, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log161Fn.encoded(with: [.bool(p0), .bool(p1), .bool(p2), .uint256(p3)])
+            let query = try log__161Fn.encoded(with: [.bool(p0), .bool(p1), .bool(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log161Fn.decode(output: result)
+            let decoded = try log__161Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log161Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__161Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log162Fn = ABI.Function(
+    public static let log__162Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string, .address, .bool],
         outputs: []
     )
 
-    public static func log162(p0: Bool, p1: String, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__162(p0: Bool, p1: String, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log162Fn.encoded(with: [.bool(p0), .string(p1), .address(p2), .bool(p3)])
+            let query = try log__162Fn.encoded(with: [.bool(p0), .string(p1), .address(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log162Fn.decode(output: result)
+            let decoded = try log__162Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log162Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__162Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log163Fn = ABI.Function(
+    public static let log__163Fn = ABI.Function(
         name: "log",
         inputs: [.address, .address, .string, .bool],
         outputs: []
     )
 
-    public static func log163(p0: EthAddress, p1: EthAddress, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__163(p0: EthAddress, p1: EthAddress, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log163Fn.encoded(with: [.address(p0), .address(p1), .string(p2), .bool(p3)])
+            let query = try log__163Fn.encoded(with: [.address(p0), .address(p1), .string(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log163Fn.decode(output: result)
+            let decoded = try log__163Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log163Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__163Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log164Fn = ABI.Function(
+    public static let log__164Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address, .string, .address],
         outputs: []
     )
 
-    public static func log164(p0: Bool, p1: EthAddress, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__164(p0: Bool, p1: EthAddress, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log164Fn.encoded(with: [.bool(p0), .address(p1), .string(p2), .address(p3)])
+            let query = try log__164Fn.encoded(with: [.bool(p0), .address(p1), .string(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log164Fn.decode(output: result)
+            let decoded = try log__164Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log164Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__164Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log165Fn = ABI.Function(
+    public static let log__165Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool, .bool, .address],
         outputs: []
     )
 
-    public static func log165(p0: String, p1: Bool, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__165(p0: String, p1: Bool, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log165Fn.encoded(with: [.string(p0), .bool(p1), .bool(p2), .address(p3)])
+            let query = try log__165Fn.encoded(with: [.string(p0), .bool(p1), .bool(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log165Fn.decode(output: result)
+            let decoded = try log__165Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log165Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__165Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log166Fn = ABI.Function(
+    public static let log__166Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256, .string],
         outputs: []
     )
 
-    public static func log166(p0: BigUInt, p1: BigUInt, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__166(p0: BigUInt, p1: BigUInt, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log166Fn.encoded(with: [.uint256(p0), .uint256(p1), .string(p2)])
+            let query = try log__166Fn.encoded(with: [.uint256(p0), .uint256(p1), .string(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log166Fn.decode(output: result)
+            let decoded = try log__166Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log166Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__166Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log167Fn = ABI.Function(
+    public static let log__167Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address, .address, .uint256],
         outputs: []
     )
 
-    public static func log167(p0: BigUInt, p1: EthAddress, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__167(p0: BigUInt, p1: EthAddress, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log167Fn.encoded(with: [.uint256(p0), .address(p1), .address(p2), .uint256(p3)])
+            let query = try log__167Fn.encoded(with: [.uint256(p0), .address(p1), .address(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log167Fn.decode(output: result)
+            let decoded = try log__167Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log167Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__167Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log168Fn = ABI.Function(
+    public static let log__168Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool, .uint256, .string],
         outputs: []
     )
 
-    public static func log168(p0: String, p1: Bool, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__168(p0: String, p1: Bool, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log168Fn.encoded(with: [.string(p0), .bool(p1), .uint256(p2), .string(p3)])
+            let query = try log__168Fn.encoded(with: [.string(p0), .bool(p1), .uint256(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log168Fn.decode(output: result)
+            let decoded = try log__168Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log168Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__168Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log169Fn = ABI.Function(
+    public static let log__169Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool, .bool, .uint256],
         outputs: []
     )
 
-    public static func log169(p0: BigUInt, p1: Bool, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__169(p0: BigUInt, p1: Bool, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log169Fn.encoded(with: [.uint256(p0), .bool(p1), .bool(p2), .uint256(p3)])
+            let query = try log__169Fn.encoded(with: [.uint256(p0), .bool(p1), .bool(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log169Fn.decode(output: result)
+            let decoded = try log__169Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log169Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__169Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log170Fn = ABI.Function(
+    public static let log__170Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string],
         outputs: []
     )
 
-    public static func log170(p0: EthAddress, p1: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__170(p0: EthAddress, p1: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log170Fn.encoded(with: [.address(p0), .string(p1)])
+            let query = try log__170Fn.encoded(with: [.address(p0), .string(p1)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log170Fn.decode(output: result)
+            let decoded = try log__170Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log170Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__170Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log171Fn = ABI.Function(
+    public static let log__171Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool],
         outputs: []
     )
 
-    public static func log171(p0: EthAddress, p1: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__171(p0: EthAddress, p1: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log171Fn.encoded(with: [.address(p0), .bool(p1)])
+            let query = try log__171Fn.encoded(with: [.address(p0), .bool(p1)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log171Fn.decode(output: result)
+            let decoded = try log__171Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log171Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__171Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log172Fn = ABI.Function(
+    public static let log__172Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256, .uint256, .bool],
         outputs: []
     )
 
-    public static func log172(p0: String, p1: BigUInt, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__172(p0: String, p1: BigUInt, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log172Fn.encoded(with: [.string(p0), .uint256(p1), .uint256(p2), .bool(p3)])
+            let query = try log__172Fn.encoded(with: [.string(p0), .uint256(p1), .uint256(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log172Fn.decode(output: result)
+            let decoded = try log__172Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log172Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__172Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log173Fn = ABI.Function(
+    public static let log__173Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address, .bool, .bool],
         outputs: []
     )
 
-    public static func log173(p0: String, p1: EthAddress, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__173(p0: String, p1: EthAddress, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log173Fn.encoded(with: [.string(p0), .address(p1), .bool(p2), .bool(p3)])
+            let query = try log__173Fn.encoded(with: [.string(p0), .address(p1), .bool(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log173Fn.decode(output: result)
+            let decoded = try log__173Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log173Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__173Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log174Fn = ABI.Function(
+    public static let log__174Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256, .string, .bool],
         outputs: []
     )
 
-    public static func log174(p0: BigUInt, p1: BigUInt, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__174(p0: BigUInt, p1: BigUInt, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log174Fn.encoded(with: [.uint256(p0), .uint256(p1), .string(p2), .bool(p3)])
+            let query = try log__174Fn.encoded(with: [.uint256(p0), .uint256(p1), .string(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log174Fn.decode(output: result)
+            let decoded = try log__174Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log174Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__174Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log175Fn = ABI.Function(
+    public static let log__175Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string, .address],
         outputs: []
     )
 
-    public static func log175(p0: BigUInt, p1: String, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__175(p0: BigUInt, p1: String, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log175Fn.encoded(with: [.uint256(p0), .string(p1), .address(p2)])
+            let query = try log__175Fn.encoded(with: [.uint256(p0), .string(p1), .address(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log175Fn.decode(output: result)
+            let decoded = try log__175Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log175Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__175Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log176Fn = ABI.Function(
+    public static let log__176Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256, .address],
         outputs: []
     )
 
-    public static func log176(p0: EthAddress, p1: BigUInt, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__176(p0: EthAddress, p1: BigUInt, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log176Fn.encoded(with: [.address(p0), .uint256(p1), .address(p2)])
+            let query = try log__176Fn.encoded(with: [.address(p0), .uint256(p1), .address(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log176Fn.decode(output: result)
+            let decoded = try log__176Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log176Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__176Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log177Fn = ABI.Function(
+    public static let log__177Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string, .string, .uint256],
         outputs: []
     )
 
-    public static func log177(p0: Bool, p1: String, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__177(p0: Bool, p1: String, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log177Fn.encoded(with: [.bool(p0), .string(p1), .string(p2), .uint256(p3)])
+            let query = try log__177Fn.encoded(with: [.bool(p0), .string(p1), .string(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log177Fn.decode(output: result)
+            let decoded = try log__177Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log177Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__177Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log178Fn = ABI.Function(
+    public static let log__178Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address, .uint256, .uint256],
         outputs: []
     )
 
-    public static func log178(p0: Bool, p1: EthAddress, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__178(p0: Bool, p1: EthAddress, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log178Fn.encoded(with: [.bool(p0), .address(p1), .uint256(p2), .uint256(p3)])
+            let query = try log__178Fn.encoded(with: [.bool(p0), .address(p1), .uint256(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log178Fn.decode(output: result)
+            let decoded = try log__178Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log178Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__178Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log179Fn = ABI.Function(
+    public static let log__179Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256, .string, .address],
         outputs: []
     )
 
-    public static func log179(p0: String, p1: BigUInt, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__179(p0: String, p1: BigUInt, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log179Fn.encoded(with: [.string(p0), .uint256(p1), .string(p2), .address(p3)])
+            let query = try log__179Fn.encoded(with: [.string(p0), .uint256(p1), .string(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log179Fn.decode(output: result)
+            let decoded = try log__179Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log179Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__179Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log180Fn = ABI.Function(
+    public static let log__180Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string, .address, .uint256],
         outputs: []
     )
 
-    public static func log180(p0: String, p1: String, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__180(p0: String, p1: String, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log180Fn.encoded(with: [.string(p0), .string(p1), .address(p2), .uint256(p3)])
+            let query = try log__180Fn.encoded(with: [.string(p0), .string(p1), .address(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log180Fn.decode(output: result)
+            let decoded = try log__180Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log180Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__180Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log181Fn = ABI.Function(
+    public static let log__181Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256, .string, .bool],
         outputs: []
     )
 
-    public static func log181(p0: String, p1: BigUInt, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__181(p0: String, p1: BigUInt, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log181Fn.encoded(with: [.string(p0), .uint256(p1), .string(p2), .bool(p3)])
+            let query = try log__181Fn.encoded(with: [.string(p0), .uint256(p1), .string(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log181Fn.decode(output: result)
+            let decoded = try log__181Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log181Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__181Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log182Fn = ABI.Function(
+    public static let log__182Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool, .uint256, .string],
         outputs: []
     )
 
-    public static func log182(p0: Bool, p1: Bool, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__182(p0: Bool, p1: Bool, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log182Fn.encoded(with: [.bool(p0), .bool(p1), .uint256(p2), .string(p3)])
+            let query = try log__182Fn.encoded(with: [.bool(p0), .bool(p1), .uint256(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log182Fn.decode(output: result)
+            let decoded = try log__182Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log182Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__182Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log183Fn = ABI.Function(
+    public static let log__183Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256, .bool, .uint256],
         outputs: []
     )
 
-    public static func log183(p0: Bool, p1: BigUInt, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__183(p0: Bool, p1: BigUInt, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log183Fn.encoded(with: [.bool(p0), .uint256(p1), .bool(p2), .uint256(p3)])
+            let query = try log__183Fn.encoded(with: [.bool(p0), .uint256(p1), .bool(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log183Fn.decode(output: result)
+            let decoded = try log__183Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log183Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__183Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log184Fn = ABI.Function(
+    public static let log__184Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address, .address, .string],
         outputs: []
     )
 
-    public static func log184(p0: String, p1: EthAddress, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__184(p0: String, p1: EthAddress, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log184Fn.encoded(with: [.string(p0), .address(p1), .address(p2), .string(p3)])
+            let query = try log__184Fn.encoded(with: [.string(p0), .address(p1), .address(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log184Fn.decode(output: result)
+            let decoded = try log__184Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log184Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__184Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log185Fn = ABI.Function(
+    public static let log__185Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool, .string, .uint256],
         outputs: []
     )
 
-    public static func log185(p0: EthAddress, p1: Bool, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__185(p0: EthAddress, p1: Bool, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log185Fn.encoded(with: [.address(p0), .bool(p1), .string(p2), .uint256(p3)])
+            let query = try log__185Fn.encoded(with: [.address(p0), .bool(p1), .string(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log185Fn.decode(output: result)
+            let decoded = try log__185Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log185Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__185Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log186Fn = ABI.Function(
+    public static let log__186Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256, .address, .bool],
         outputs: []
     )
 
-    public static func log186(p0: String, p1: BigUInt, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__186(p0: String, p1: BigUInt, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log186Fn.encoded(with: [.string(p0), .uint256(p1), .address(p2), .bool(p3)])
+            let query = try log__186Fn.encoded(with: [.string(p0), .uint256(p1), .address(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log186Fn.decode(output: result)
+            let decoded = try log__186Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log186Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__186Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log187Fn = ABI.Function(
+    public static let log__187Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string, .uint256, .uint256],
         outputs: []
     )
 
-    public static func log187(p0: BigUInt, p1: String, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__187(p0: BigUInt, p1: String, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log187Fn.encoded(with: [.uint256(p0), .string(p1), .uint256(p2), .uint256(p3)])
+            let query = try log__187Fn.encoded(with: [.uint256(p0), .string(p1), .uint256(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log187Fn.decode(output: result)
+            let decoded = try log__187Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log187Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__187Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log188Fn = ABI.Function(
+    public static let log__188Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256],
         outputs: []
     )
 
-    public static func log188(p0: EthAddress, p1: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__188(p0: EthAddress, p1: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log188Fn.encoded(with: [.address(p0), .uint256(p1)])
+            let query = try log__188Fn.encoded(with: [.address(p0), .uint256(p1)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log188Fn.decode(output: result)
+            let decoded = try log__188Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log188Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__188Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log189Fn = ABI.Function(
+    public static let log__189Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool, .bool],
         outputs: []
     )
 
-    public static func log189(p0: String, p1: Bool, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__189(p0: String, p1: Bool, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log189Fn.encoded(with: [.string(p0), .bool(p1), .bool(p2)])
+            let query = try log__189Fn.encoded(with: [.string(p0), .bool(p1), .bool(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log189Fn.decode(output: result)
+            let decoded = try log__189Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log189Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__189Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log190Fn = ABI.Function(
+    public static let log__190Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address],
         outputs: []
     )
 
-    public static func log190(p0: Bool, p1: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__190(p0: Bool, p1: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log190Fn.encoded(with: [.bool(p0), .address(p1)])
+            let query = try log__190Fn.encoded(with: [.bool(p0), .address(p1)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log190Fn.decode(output: result)
+            let decoded = try log__190Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log190Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__190Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log191Fn = ABI.Function(
+    public static let log__191Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256, .uint256, .string],
         outputs: []
     )
 
-    public static func log191(p0: String, p1: BigUInt, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__191(p0: String, p1: BigUInt, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log191Fn.encoded(with: [.string(p0), .uint256(p1), .uint256(p2), .string(p3)])
+            let query = try log__191Fn.encoded(with: [.string(p0), .uint256(p1), .uint256(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log191Fn.decode(output: result)
+            let decoded = try log__191Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log191Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__191Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log192Fn = ABI.Function(
+    public static let log__192Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool, .string],
         outputs: []
     )
 
-    public static func log192(p0: BigUInt, p1: Bool, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__192(p0: BigUInt, p1: Bool, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log192Fn.encoded(with: [.uint256(p0), .bool(p1), .string(p2)])
+            let query = try log__192Fn.encoded(with: [.uint256(p0), .bool(p1), .string(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log192Fn.decode(output: result)
+            let decoded = try log__192Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log192Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__192Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log193Fn = ABI.Function(
+    public static let log__193Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256, .string, .string],
         outputs: []
     )
 
-    public static func log193(p0: EthAddress, p1: BigUInt, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__193(p0: EthAddress, p1: BigUInt, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log193Fn.encoded(with: [.address(p0), .uint256(p1), .string(p2), .string(p3)])
+            let query = try log__193Fn.encoded(with: [.address(p0), .uint256(p1), .string(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log193Fn.decode(output: result)
+            let decoded = try log__193Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log193Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__193Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log194Fn = ABI.Function(
+    public static let log__194Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool, .uint256, .address],
         outputs: []
     )
 
-    public static func log194(p0: BigUInt, p1: Bool, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__194(p0: BigUInt, p1: Bool, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log194Fn.encoded(with: [.uint256(p0), .bool(p1), .uint256(p2), .address(p3)])
+            let query = try log__194Fn.encoded(with: [.uint256(p0), .bool(p1), .uint256(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log194Fn.decode(output: result)
+            let decoded = try log__194Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log194Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__194Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log195Fn = ABI.Function(
+    public static let log__195Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256, .address, .uint256],
         outputs: []
     )
 
-    public static func log195(p0: BigUInt, p1: BigUInt, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__195(p0: BigUInt, p1: BigUInt, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log195Fn.encoded(with: [.uint256(p0), .uint256(p1), .address(p2), .uint256(p3)])
+            let query = try log__195Fn.encoded(with: [.uint256(p0), .uint256(p1), .address(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log195Fn.decode(output: result)
+            let decoded = try log__195Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log195Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__195Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log196Fn = ABI.Function(
+    public static let log__196Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool, .bool, .bool],
         outputs: []
     )
 
-    public static func log196(p0: String, p1: Bool, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__196(p0: String, p1: Bool, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log196Fn.encoded(with: [.string(p0), .bool(p1), .bool(p2), .bool(p3)])
+            let query = try log__196Fn.encoded(with: [.string(p0), .bool(p1), .bool(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log196Fn.decode(output: result)
+            let decoded = try log__196Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log196Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__196Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log197Fn = ABI.Function(
+    public static let log__197Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool, .uint256, .bool],
         outputs: []
     )
 
-    public static func log197(p0: String, p1: Bool, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__197(p0: String, p1: Bool, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log197Fn.encoded(with: [.string(p0), .bool(p1), .uint256(p2), .bool(p3)])
+            let query = try log__197Fn.encoded(with: [.string(p0), .bool(p1), .uint256(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log197Fn.decode(output: result)
+            let decoded = try log__197Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log197Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__197Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log198Fn = ABI.Function(
+    public static let log__198Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool, .bool, .address],
         outputs: []
     )
 
-    public static func log198(p0: Bool, p1: Bool, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__198(p0: Bool, p1: Bool, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log198Fn.encoded(with: [.bool(p0), .bool(p1), .bool(p2), .address(p3)])
+            let query = try log__198Fn.encoded(with: [.bool(p0), .bool(p1), .bool(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log198Fn.decode(output: result)
+            let decoded = try log__198Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log198Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__198Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log199Fn = ABI.Function(
+    public static let log__199Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool, .bool, .uint256],
         outputs: []
     )
 
-    public static func log199(p0: EthAddress, p1: Bool, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__199(p0: EthAddress, p1: Bool, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log199Fn.encoded(with: [.address(p0), .bool(p1), .bool(p2), .uint256(p3)])
+            let query = try log__199Fn.encoded(with: [.address(p0), .bool(p1), .bool(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log199Fn.decode(output: result)
+            let decoded = try log__199Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log199Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__199Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log200Fn = ABI.Function(
+    public static let log__200Fn = ABI.Function(
         name: "log",
         inputs: [.address, .address, .uint256, .address],
         outputs: []
     )
 
-    public static func log200(p0: EthAddress, p1: EthAddress, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__200(p0: EthAddress, p1: EthAddress, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log200Fn.encoded(with: [.address(p0), .address(p1), .uint256(p2), .address(p3)])
+            let query = try log__200Fn.encoded(with: [.address(p0), .address(p1), .uint256(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log200Fn.decode(output: result)
+            let decoded = try log__200Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log200Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__200Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log201Fn = ABI.Function(
+    public static let log__201Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool, .bool, .uint256],
         outputs: []
     )
 
-    public static func log201(p0: String, p1: Bool, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__201(p0: String, p1: Bool, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log201Fn.encoded(with: [.string(p0), .bool(p1), .bool(p2), .uint256(p3)])
+            let query = try log__201Fn.encoded(with: [.string(p0), .bool(p1), .bool(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log201Fn.decode(output: result)
+            let decoded = try log__201Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log201Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__201Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log202Fn = ABI.Function(
+    public static let log__202Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256, .uint256, .string],
         outputs: []
     )
 
-    public static func log202(p0: Bool, p1: BigUInt, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__202(p0: Bool, p1: BigUInt, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log202Fn.encoded(with: [.bool(p0), .uint256(p1), .uint256(p2), .string(p3)])
+            let query = try log__202Fn.encoded(with: [.bool(p0), .uint256(p1), .uint256(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log202Fn.decode(output: result)
+            let decoded = try log__202Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log202Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__202Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log203Fn = ABI.Function(
+    public static let log__203Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string, .string, .uint256],
         outputs: []
     )
 
-    public static func log203(p0: String, p1: String, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__203(p0: String, p1: String, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log203Fn.encoded(with: [.string(p0), .string(p1), .string(p2), .uint256(p3)])
+            let query = try log__203Fn.encoded(with: [.string(p0), .string(p1), .string(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log203Fn.decode(output: result)
+            let decoded = try log__203Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log203Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__203Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log204Fn = ABI.Function(
+    public static let log__204Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address, .address, .uint256],
         outputs: []
     )
 
-    public static func log204(p0: String, p1: EthAddress, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__204(p0: String, p1: EthAddress, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log204Fn.encoded(with: [.string(p0), .address(p1), .address(p2), .uint256(p3)])
+            let query = try log__204Fn.encoded(with: [.string(p0), .address(p1), .address(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log204Fn.decode(output: result)
+            let decoded = try log__204Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log204Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__204Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log205Fn = ABI.Function(
+    public static let log__205Fn = ABI.Function(
         name: "log",
         inputs: [.address, .address, .string, .address],
         outputs: []
     )
 
-    public static func log205(p0: EthAddress, p1: EthAddress, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__205(p0: EthAddress, p1: EthAddress, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log205Fn.encoded(with: [.address(p0), .address(p1), .string(p2), .address(p3)])
+            let query = try log__205Fn.encoded(with: [.address(p0), .address(p1), .string(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log205Fn.decode(output: result)
+            let decoded = try log__205Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log205Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__205Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log206Fn = ABI.Function(
+    public static let log__206Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string],
         outputs: []
     )
 
-    public static func log206(p0: Bool, p1: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__206(p0: Bool, p1: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log206Fn.encoded(with: [.bool(p0), .string(p1)])
+            let query = try log__206Fn.encoded(with: [.bool(p0), .string(p1)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log206Fn.decode(output: result)
+            let decoded = try log__206Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log206Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__206Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log207Fn = ABI.Function(
+    public static let log__207Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string, .address, .bool],
         outputs: []
     )
 
-    public static func log207(p0: BigUInt, p1: String, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__207(p0: BigUInt, p1: String, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log207Fn.encoded(with: [.uint256(p0), .string(p1), .address(p2), .bool(p3)])
+            let query = try log__207Fn.encoded(with: [.uint256(p0), .string(p1), .address(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log207Fn.decode(output: result)
+            let decoded = try log__207Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log207Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__207Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log208Fn = ABI.Function(
+    public static let log__208Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address, .bool, .string],
         outputs: []
     )
 
-    public static func log208(p0: BigUInt, p1: EthAddress, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__208(p0: BigUInt, p1: EthAddress, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log208Fn.encoded(with: [.uint256(p0), .address(p1), .bool(p2), .string(p3)])
+            let query = try log__208Fn.encoded(with: [.uint256(p0), .address(p1), .bool(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log208Fn.decode(output: result)
+            let decoded = try log__208Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log208Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__208Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log209Fn = ABI.Function(
+    public static let log__209Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256, .bool, .string],
         outputs: []
     )
 
-    public static func log209(p0: Bool, p1: BigUInt, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__209(p0: Bool, p1: BigUInt, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log209Fn.encoded(with: [.bool(p0), .uint256(p1), .bool(p2), .string(p3)])
+            let query = try log__209Fn.encoded(with: [.bool(p0), .uint256(p1), .bool(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log209Fn.decode(output: result)
+            let decoded = try log__209Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log209Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__209Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log210Fn = ABI.Function(
+    public static let log__210Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool, .uint256, .bool],
         outputs: []
     )
 
-    public static func log210(p0: BigUInt, p1: Bool, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__210(p0: BigUInt, p1: Bool, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log210Fn.encoded(with: [.uint256(p0), .bool(p1), .uint256(p2), .bool(p3)])
+            let query = try log__210Fn.encoded(with: [.uint256(p0), .bool(p1), .uint256(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log210Fn.decode(output: result)
+            let decoded = try log__210Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log210Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__210Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log211Fn = ABI.Function(
+    public static let log__211Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address, .string, .uint256],
         outputs: []
     )
 
-    public static func log211(p0: String, p1: EthAddress, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__211(p0: String, p1: EthAddress, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log211Fn.encoded(with: [.string(p0), .address(p1), .string(p2), .uint256(p3)])
+            let query = try log__211Fn.encoded(with: [.string(p0), .address(p1), .string(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log211Fn.decode(output: result)
+            let decoded = try log__211Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log211Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__211Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log212Fn = ABI.Function(
+    public static let log__212Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool, .address],
         outputs: []
     )
 
-    public static func log212(p0: String, p1: Bool, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__212(p0: String, p1: Bool, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log212Fn.encoded(with: [.string(p0), .bool(p1), .address(p2)])
+            let query = try log__212Fn.encoded(with: [.string(p0), .bool(p1), .address(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log212Fn.decode(output: result)
+            let decoded = try log__212Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log212Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__212Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log213Fn = ABI.Function(
+    public static let log__213Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool, .uint256, .address],
         outputs: []
     )
 
-    public static func log213(p0: String, p1: Bool, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__213(p0: String, p1: Bool, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log213Fn.encoded(with: [.string(p0), .bool(p1), .uint256(p2), .address(p3)])
+            let query = try log__213Fn.encoded(with: [.string(p0), .bool(p1), .uint256(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log213Fn.decode(output: result)
+            let decoded = try log__213Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log213Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__213Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log214Fn = ABI.Function(
+    public static let log__214Fn = ABI.Function(
         name: "log",
         inputs: [.address, .address, .address, .uint256],
         outputs: []
     )
 
-    public static func log214(p0: EthAddress, p1: EthAddress, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__214(p0: EthAddress, p1: EthAddress, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log214Fn.encoded(with: [.address(p0), .address(p1), .address(p2), .uint256(p3)])
+            let query = try log__214Fn.encoded(with: [.address(p0), .address(p1), .address(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log214Fn.decode(output: result)
+            let decoded = try log__214Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log214Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__214Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log215Fn = ABI.Function(
+    public static let log__215Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool, .address, .bool],
         outputs: []
     )
 
-    public static func log215(p0: String, p1: Bool, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__215(p0: String, p1: Bool, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log215Fn.encoded(with: [.string(p0), .bool(p1), .address(p2), .bool(p3)])
+            let query = try log__215Fn.encoded(with: [.string(p0), .bool(p1), .address(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log215Fn.decode(output: result)
+            let decoded = try log__215Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log215Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__215Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log216Fn = ABI.Function(
+    public static let log__216Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string, .address],
         outputs: []
     )
 
-    public static func log216(p0: Bool, p1: String, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__216(p0: Bool, p1: String, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log216Fn.encoded(with: [.bool(p0), .string(p1), .address(p2)])
+            let query = try log__216Fn.encoded(with: [.bool(p0), .string(p1), .address(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log216Fn.decode(output: result)
+            let decoded = try log__216Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log216Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__216Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log217Fn = ABI.Function(
+    public static let log__217Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string, .address],
         outputs: []
     )
 
-    public static func log217(p0: String, p1: String, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__217(p0: String, p1: String, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log217Fn.encoded(with: [.string(p0), .string(p1), .address(p2)])
+            let query = try log__217Fn.encoded(with: [.string(p0), .string(p1), .address(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log217Fn.decode(output: result)
+            let decoded = try log__217Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log217Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__217Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log218Fn = ABI.Function(
+    public static let log__218Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string, .string, .address],
         outputs: []
     )
 
-    public static func log218(p0: Bool, p1: String, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__218(p0: Bool, p1: String, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log218Fn.encoded(with: [.bool(p0), .string(p1), .string(p2), .address(p3)])
+            let query = try log__218Fn.encoded(with: [.bool(p0), .string(p1), .string(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log218Fn.decode(output: result)
+            let decoded = try log__218Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log218Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__218Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log219Fn = ABI.Function(
+    public static let log__219Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256, .bool, .address],
         outputs: []
     )
 
-    public static func log219(p0: BigUInt, p1: BigUInt, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__219(p0: BigUInt, p1: BigUInt, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log219Fn.encoded(with: [.uint256(p0), .uint256(p1), .bool(p2), .address(p3)])
+            let query = try log__219Fn.encoded(with: [.uint256(p0), .uint256(p1), .bool(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log219Fn.decode(output: result)
+            let decoded = try log__219Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log219Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__219Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log220Fn = ABI.Function(
+    public static let log__220Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256, .bool, .address],
         outputs: []
     )
 
-    public static func log220(p0: Bool, p1: BigUInt, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__220(p0: Bool, p1: BigUInt, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log220Fn.encoded(with: [.bool(p0), .uint256(p1), .bool(p2), .address(p3)])
+            let query = try log__220Fn.encoded(with: [.bool(p0), .uint256(p1), .bool(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log220Fn.decode(output: result)
+            let decoded = try log__220Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log220Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__220Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log221Fn = ABI.Function(
+    public static let log__221Fn = ABI.Function(
         name: "log",
         inputs: [.address, .address, .uint256, .bool],
         outputs: []
     )
 
-    public static func log221(p0: EthAddress, p1: EthAddress, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__221(p0: EthAddress, p1: EthAddress, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log221Fn.encoded(with: [.address(p0), .address(p1), .uint256(p2), .bool(p3)])
+            let query = try log__221Fn.encoded(with: [.address(p0), .address(p1), .uint256(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log221Fn.decode(output: result)
+            let decoded = try log__221Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log221Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__221Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log222Fn = ABI.Function(
+    public static let log__222Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address, .bool],
         outputs: []
     )
 
-    public static func log222(p0: BigUInt, p1: EthAddress, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__222(p0: BigUInt, p1: EthAddress, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log222Fn.encoded(with: [.uint256(p0), .address(p1), .bool(p2)])
+            let query = try log__222Fn.encoded(with: [.uint256(p0), .address(p1), .bool(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log222Fn.decode(output: result)
+            let decoded = try log__222Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log222Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__222Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log223Fn = ABI.Function(
+    public static let log__223Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string, .address, .string],
         outputs: []
     )
 
-    public static func log223(p0: BigUInt, p1: String, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__223(p0: BigUInt, p1: String, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log223Fn.encoded(with: [.uint256(p0), .string(p1), .address(p2), .string(p3)])
+            let query = try log__223Fn.encoded(with: [.uint256(p0), .string(p1), .address(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log223Fn.decode(output: result)
+            let decoded = try log__223Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log223Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__223Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log224Fn = ABI.Function(
+    public static let log__224Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool, .uint256],
         outputs: []
     )
 
-    public static func log224(p0: EthAddress, p1: Bool, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__224(p0: EthAddress, p1: Bool, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log224Fn.encoded(with: [.address(p0), .bool(p1), .uint256(p2)])
+            let query = try log__224Fn.encoded(with: [.address(p0), .bool(p1), .uint256(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log224Fn.decode(output: result)
+            let decoded = try log__224Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log224Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__224Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log225Fn = ABI.Function(
+    public static let log__225Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address, .string, .address],
         outputs: []
     )
 
-    public static func log225(p0: BigUInt, p1: EthAddress, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__225(p0: BigUInt, p1: EthAddress, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log225Fn.encoded(with: [.uint256(p0), .address(p1), .string(p2), .address(p3)])
+            let query = try log__225Fn.encoded(with: [.uint256(p0), .address(p1), .string(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log225Fn.decode(output: result)
+            let decoded = try log__225Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log225Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__225Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log226Fn = ABI.Function(
+    public static let log__226Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool, .bool, .string],
         outputs: []
     )
 
-    public static func log226(p0: String, p1: Bool, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__226(p0: String, p1: Bool, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log226Fn.encoded(with: [.string(p0), .bool(p1), .bool(p2), .string(p3)])
+            let query = try log__226Fn.encoded(with: [.string(p0), .bool(p1), .bool(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log226Fn.decode(output: result)
+            let decoded = try log__226Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log226Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__226Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log227Fn = ABI.Function(
+    public static let log__227Fn = ABI.Function(
         name: "log",
         inputs: [.address, .address, .bool, .address],
         outputs: []
     )
 
-    public static func log227(p0: EthAddress, p1: EthAddress, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__227(p0: EthAddress, p1: EthAddress, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log227Fn.encoded(with: [.address(p0), .address(p1), .bool(p2), .address(p3)])
+            let query = try log__227Fn.encoded(with: [.address(p0), .address(p1), .bool(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log227Fn.decode(output: result)
+            let decoded = try log__227Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log227Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__227Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log228Fn = ABI.Function(
+    public static let log__228Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256, .address, .string],
         outputs: []
     )
 
-    public static func log228(p0: String, p1: BigUInt, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__228(p0: String, p1: BigUInt, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log228Fn.encoded(with: [.string(p0), .uint256(p1), .address(p2), .string(p3)])
+            let query = try log__228Fn.encoded(with: [.string(p0), .uint256(p1), .address(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log228Fn.decode(output: result)
+            let decoded = try log__228Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log228Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__228Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log229Fn = ABI.Function(
+    public static let log__229Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string, .string, .address],
         outputs: []
     )
 
-    public static func log229(p0: EthAddress, p1: String, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__229(p0: EthAddress, p1: String, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log229Fn.encoded(with: [.address(p0), .string(p1), .string(p2), .address(p3)])
+            let query = try log__229Fn.encoded(with: [.address(p0), .string(p1), .string(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log229Fn.decode(output: result)
+            let decoded = try log__229Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log229Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__229Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log230Fn = ABI.Function(
+    public static let log__230Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool, .address, .string],
         outputs: []
     )
 
-    public static func log230(p0: Bool, p1: Bool, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__230(p0: Bool, p1: Bool, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log230Fn.encoded(with: [.bool(p0), .bool(p1), .address(p2), .string(p3)])
+            let query = try log__230Fn.encoded(with: [.bool(p0), .bool(p1), .address(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log230Fn.decode(output: result)
+            let decoded = try log__230Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log230Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__230Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log231Fn = ABI.Function(
+    public static let log__231Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256, .address, .bool],
         outputs: []
     )
 
-    public static func log231(p0: EthAddress, p1: BigUInt, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__231(p0: EthAddress, p1: BigUInt, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log231Fn.encoded(with: [.address(p0), .uint256(p1), .address(p2), .bool(p3)])
+            let query = try log__231Fn.encoded(with: [.address(p0), .uint256(p1), .address(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log231Fn.decode(output: result)
+            let decoded = try log__231Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log231Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__231Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log232Fn = ABI.Function(
+    public static let log__232Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool, .address, .address],
         outputs: []
     )
 
-    public static func log232(p0: BigUInt, p1: Bool, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__232(p0: BigUInt, p1: Bool, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log232Fn.encoded(with: [.uint256(p0), .bool(p1), .address(p2), .address(p3)])
+            let query = try log__232Fn.encoded(with: [.uint256(p0), .bool(p1), .address(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log232Fn.decode(output: result)
+            let decoded = try log__232Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log232Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__232Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log233Fn = ABI.Function(
+    public static let log__233Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256, .string],
         outputs: []
     )
 
-    public static func log233(p0: EthAddress, p1: BigUInt, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__233(p0: EthAddress, p1: BigUInt, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log233Fn.encoded(with: [.address(p0), .uint256(p1), .string(p2)])
+            let query = try log__233Fn.encoded(with: [.address(p0), .uint256(p1), .string(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log233Fn.decode(output: result)
+            let decoded = try log__233Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log233Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__233Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log234Fn = ABI.Function(
+    public static let log__234Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256, .bool, .address],
         outputs: []
     )
 
-    public static func log234(p0: EthAddress, p1: BigUInt, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__234(p0: EthAddress, p1: BigUInt, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log234Fn.encoded(with: [.address(p0), .uint256(p1), .bool(p2), .address(p3)])
+            let query = try log__234Fn.encoded(with: [.address(p0), .uint256(p1), .bool(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log234Fn.decode(output: result)
+            let decoded = try log__234Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log234Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__234Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log235Fn = ABI.Function(
+    public static let log__235Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256, .bool, .string],
         outputs: []
     )
 
-    public static func log235(p0: BigUInt, p1: BigUInt, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__235(p0: BigUInt, p1: BigUInt, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log235Fn.encoded(with: [.uint256(p0), .uint256(p1), .bool(p2), .string(p3)])
+            let query = try log__235Fn.encoded(with: [.uint256(p0), .uint256(p1), .bool(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log235Fn.decode(output: result)
+            let decoded = try log__235Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log235Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__235Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log236Fn = ABI.Function(
+    public static let log__236Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string, .address, .uint256],
         outputs: []
     )
 
-    public static func log236(p0: Bool, p1: String, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__236(p0: Bool, p1: String, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log236Fn.encoded(with: [.bool(p0), .string(p1), .address(p2), .uint256(p3)])
+            let query = try log__236Fn.encoded(with: [.bool(p0), .string(p1), .address(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log236Fn.decode(output: result)
+            let decoded = try log__236Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log236Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__236Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log237Fn = ABI.Function(
+    public static let log__237Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool, .address, .bool],
         outputs: []
     )
 
-    public static func log237(p0: EthAddress, p1: Bool, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__237(p0: EthAddress, p1: Bool, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log237Fn.encoded(with: [.address(p0), .bool(p1), .address(p2), .bool(p3)])
+            let query = try log__237Fn.encoded(with: [.address(p0), .bool(p1), .address(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log237Fn.decode(output: result)
+            let decoded = try log__237Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log237Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__237Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log238Fn = ABI.Function(
+    public static let log__238Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address, .string, .string],
         outputs: []
     )
 
-    public static func log238(p0: Bool, p1: EthAddress, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__238(p0: Bool, p1: EthAddress, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log238Fn.encoded(with: [.bool(p0), .address(p1), .string(p2), .string(p3)])
+            let query = try log__238Fn.encoded(with: [.bool(p0), .address(p1), .string(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log238Fn.decode(output: result)
+            let decoded = try log__238Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log238Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__238Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log239Fn = ABI.Function(
+    public static let log__239Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool, .address, .uint256],
         outputs: []
     )
 
-    public static func log239(p0: EthAddress, p1: Bool, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__239(p0: EthAddress, p1: Bool, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log239Fn.encoded(with: [.address(p0), .bool(p1), .address(p2), .uint256(p3)])
+            let query = try log__239Fn.encoded(with: [.address(p0), .bool(p1), .address(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log239Fn.decode(output: result)
+            let decoded = try log__239Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log239Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__239Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log240Fn = ABI.Function(
+    public static let log__240Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256, .uint256, .uint256],
         outputs: []
     )
 
-    public static func log240(p0: String, p1: BigUInt, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__240(p0: String, p1: BigUInt, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log240Fn.encoded(with: [.string(p0), .uint256(p1), .uint256(p2), .uint256(p3)])
+            let query = try log__240Fn.encoded(with: [.string(p0), .uint256(p1), .uint256(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log240Fn.decode(output: result)
+            let decoded = try log__240Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log240Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__240Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log241Fn = ABI.Function(
+    public static let log__241Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool, .string, .string],
         outputs: []
     )
 
-    public static func log241(p0: String, p1: Bool, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__241(p0: String, p1: Bool, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log241Fn.encoded(with: [.string(p0), .bool(p1), .string(p2), .string(p3)])
+            let query = try log__241Fn.encoded(with: [.string(p0), .bool(p1), .string(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log241Fn.decode(output: result)
+            let decoded = try log__241Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log241Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__241Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log242Fn = ABI.Function(
+    public static let log__242Fn = ABI.Function(
         name: "log",
         inputs: [.address, .address, .bool, .string],
         outputs: []
     )
 
-    public static func log242(p0: EthAddress, p1: EthAddress, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__242(p0: EthAddress, p1: EthAddress, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log242Fn.encoded(with: [.address(p0), .address(p1), .bool(p2), .string(p3)])
+            let query = try log__242Fn.encoded(with: [.address(p0), .address(p1), .bool(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log242Fn.decode(output: result)
+            let decoded = try log__242Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log242Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__242Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log243Fn = ABI.Function(
+    public static let log__243Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address, .string, .address],
         outputs: []
     )
 
-    public static func log243(p0: String, p1: EthAddress, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__243(p0: String, p1: EthAddress, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log243Fn.encoded(with: [.string(p0), .address(p1), .string(p2), .address(p3)])
+            let query = try log__243Fn.encoded(with: [.string(p0), .address(p1), .string(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log243Fn.decode(output: result)
+            let decoded = try log__243Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log243Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__243Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log244Fn = ABI.Function(
+    public static let log__244Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256, .bool, .bool],
         outputs: []
     )
 
-    public static func log244(p0: BigUInt, p1: BigUInt, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__244(p0: BigUInt, p1: BigUInt, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log244Fn.encoded(with: [.uint256(p0), .uint256(p1), .bool(p2), .bool(p3)])
+            let query = try log__244Fn.encoded(with: [.uint256(p0), .uint256(p1), .bool(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log244Fn.decode(output: result)
+            let decoded = try log__244Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log244Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__244Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log245Fn = ABI.Function(
+    public static let log__245Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256, .bool, .string],
         outputs: []
     )
 
-    public static func log245(p0: String, p1: BigUInt, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__245(p0: String, p1: BigUInt, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log245Fn.encoded(with: [.string(p0), .uint256(p1), .bool(p2), .string(p3)])
+            let query = try log__245Fn.encoded(with: [.string(p0), .uint256(p1), .bool(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log245Fn.decode(output: result)
+            let decoded = try log__245Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log245Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__245Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log246Fn = ABI.Function(
+    public static let log__246Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool, .address, .string],
         outputs: []
     )
 
-    public static func log246(p0: BigUInt, p1: Bool, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__246(p0: BigUInt, p1: Bool, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log246Fn.encoded(with: [.uint256(p0), .bool(p1), .address(p2), .string(p3)])
+            let query = try log__246Fn.encoded(with: [.uint256(p0), .bool(p1), .address(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log246Fn.decode(output: result)
+            let decoded = try log__246Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log246Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__246Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log247Fn = ABI.Function(
+    public static let log__247Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string, .bool, .address],
         outputs: []
     )
 
-    public static func log247(p0: BigUInt, p1: String, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__247(p0: BigUInt, p1: String, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log247Fn.encoded(with: [.uint256(p0), .string(p1), .bool(p2), .address(p3)])
+            let query = try log__247Fn.encoded(with: [.uint256(p0), .string(p1), .bool(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log247Fn.decode(output: result)
+            let decoded = try log__247Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log247Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__247Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log248Fn = ABI.Function(
+    public static let log__248Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string, .string, .uint256],
         outputs: []
     )
 
-    public static func log248(p0: BigUInt, p1: String, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__248(p0: BigUInt, p1: String, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log248Fn.encoded(with: [.uint256(p0), .string(p1), .string(p2), .uint256(p3)])
+            let query = try log__248Fn.encoded(with: [.uint256(p0), .string(p1), .string(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log248Fn.decode(output: result)
+            let decoded = try log__248Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log248Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__248Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log249Fn = ABI.Function(
+    public static let log__249Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string, .string],
         outputs: []
     )
 
-    public static func log249(p0: Bool, p1: String, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__249(p0: Bool, p1: String, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log249Fn.encoded(with: [.bool(p0), .string(p1), .string(p2)])
+            let query = try log__249Fn.encoded(with: [.bool(p0), .string(p1), .string(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log249Fn.decode(output: result)
+            let decoded = try log__249Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log249Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__249Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log250Fn = ABI.Function(
+    public static let log__250Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string, .bool],
         outputs: []
     )
 
-    public static func log250(p0: String, p1: String, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__250(p0: String, p1: String, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log250Fn.encoded(with: [.string(p0), .string(p1), .bool(p2)])
+            let query = try log__250Fn.encoded(with: [.string(p0), .string(p1), .bool(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log250Fn.decode(output: result)
+            let decoded = try log__250Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log250Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__250Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log251Fn = ABI.Function(
+    public static let log__251Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string, .string],
         outputs: []
     )
 
-    public static func log251(p0: BigUInt, p1: String, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__251(p0: BigUInt, p1: String, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log251Fn.encoded(with: [.uint256(p0), .string(p1), .string(p2)])
+            let query = try log__251Fn.encoded(with: [.uint256(p0), .string(p1), .string(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log251Fn.decode(output: result)
+            let decoded = try log__251Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log251Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__251Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log252Fn = ABI.Function(
+    public static let log__252Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string, .string, .bool],
         outputs: []
     )
 
-    public static func log252(p0: BigUInt, p1: String, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__252(p0: BigUInt, p1: String, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log252Fn.encoded(with: [.uint256(p0), .string(p1), .string(p2), .bool(p3)])
+            let query = try log__252Fn.encoded(with: [.uint256(p0), .string(p1), .string(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log252Fn.decode(output: result)
+            let decoded = try log__252Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log252Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__252Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log253Fn = ABI.Function(
+    public static let log__253Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256, .address, .bool],
         outputs: []
     )
 
-    public static func log253(p0: Bool, p1: BigUInt, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__253(p0: Bool, p1: BigUInt, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log253Fn.encoded(with: [.bool(p0), .uint256(p1), .address(p2), .bool(p3)])
+            let query = try log__253Fn.encoded(with: [.bool(p0), .uint256(p1), .address(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log253Fn.decode(output: result)
+            let decoded = try log__253Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log253Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__253Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log254Fn = ABI.Function(
+    public static let log__254Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address, .address, .bool],
         outputs: []
     )
 
-    public static func log254(p0: String, p1: EthAddress, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__254(p0: String, p1: EthAddress, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log254Fn.encoded(with: [.string(p0), .address(p1), .address(p2), .bool(p3)])
+            let query = try log__254Fn.encoded(with: [.string(p0), .address(p1), .address(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log254Fn.decode(output: result)
+            let decoded = try log__254Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log254Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__254Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log255Fn = ABI.Function(
+    public static let log__255Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256],
         outputs: []
     )
 
-    public static func log255(p0: String, p1: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__255(p0: String, p1: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log255Fn.encoded(with: [.string(p0), .uint256(p1)])
+            let query = try log__255Fn.encoded(with: [.string(p0), .uint256(p1)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log255Fn.decode(output: result)
+            let decoded = try log__255Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log255Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__255Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log256Fn = ABI.Function(
+    public static let log__256Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256, .uint256],
         outputs: []
     )
 
-    public static func log256(p0: EthAddress, p1: BigUInt, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__256(p0: EthAddress, p1: BigUInt, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log256Fn.encoded(with: [.address(p0), .uint256(p1), .uint256(p2)])
+            let query = try log__256Fn.encoded(with: [.address(p0), .uint256(p1), .uint256(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log256Fn.decode(output: result)
+            let decoded = try log__256Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log256Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__256Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log257Fn = ABI.Function(
+    public static let log__257Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool, .bool, .bool],
         outputs: []
     )
 
-    public static func log257(p0: BigUInt, p1: Bool, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__257(p0: BigUInt, p1: Bool, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log257Fn.encoded(with: [.uint256(p0), .bool(p1), .bool(p2), .bool(p3)])
+            let query = try log__257Fn.encoded(with: [.uint256(p0), .bool(p1), .bool(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log257Fn.decode(output: result)
+            let decoded = try log__257Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log257Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__257Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log258Fn = ABI.Function(
+    public static let log__258Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string, .uint256, .string],
         outputs: []
     )
 
-    public static func log258(p0: BigUInt, p1: String, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__258(p0: BigUInt, p1: String, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log258Fn.encoded(with: [.uint256(p0), .string(p1), .uint256(p2), .string(p3)])
+            let query = try log__258Fn.encoded(with: [.uint256(p0), .string(p1), .uint256(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log258Fn.decode(output: result)
+            let decoded = try log__258Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log258Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__258Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log259Fn = ABI.Function(
+    public static let log__259Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool, .string, .bool],
         outputs: []
     )
 
-    public static func log259(p0: Bool, p1: Bool, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__259(p0: Bool, p1: Bool, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log259Fn.encoded(with: [.bool(p0), .bool(p1), .string(p2), .bool(p3)])
+            let query = try log__259Fn.encoded(with: [.bool(p0), .bool(p1), .string(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log259Fn.decode(output: result)
+            let decoded = try log__259Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log259Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__259Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log260Fn = ABI.Function(
+    public static let log__260Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string, .bool, .bool],
         outputs: []
     )
 
-    public static func log260(p0: BigUInt, p1: String, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__260(p0: BigUInt, p1: String, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log260Fn.encoded(with: [.uint256(p0), .string(p1), .bool(p2), .bool(p3)])
+            let query = try log__260Fn.encoded(with: [.uint256(p0), .string(p1), .bool(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log260Fn.decode(output: result)
+            let decoded = try log__260Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log260Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__260Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log261Fn = ABI.Function(
+    public static let log__261Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string, .bool, .string],
         outputs: []
     )
 
-    public static func log261(p0: EthAddress, p1: String, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__261(p0: EthAddress, p1: String, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log261Fn.encoded(with: [.address(p0), .string(p1), .bool(p2), .string(p3)])
+            let query = try log__261Fn.encoded(with: [.address(p0), .string(p1), .bool(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log261Fn.decode(output: result)
+            let decoded = try log__261Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log261Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__261Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log262Fn = ABI.Function(
+    public static let log__262Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address, .address],
         outputs: []
     )
 
-    public static func log262(p0: BigUInt, p1: EthAddress, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__262(p0: BigUInt, p1: EthAddress, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log262Fn.encoded(with: [.uint256(p0), .address(p1), .address(p2)])
+            let query = try log__262Fn.encoded(with: [.uint256(p0), .address(p1), .address(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log262Fn.decode(output: result)
+            let decoded = try log__262Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log262Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__262Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log263Fn = ABI.Function(
+    public static let log__263Fn = ABI.Function(
         name: "log",
         inputs: [.address, .address, .uint256, .uint256],
         outputs: []
     )
 
-    public static func log263(p0: EthAddress, p1: EthAddress, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__263(p0: EthAddress, p1: EthAddress, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log263Fn.encoded(with: [.address(p0), .address(p1), .uint256(p2), .uint256(p3)])
+            let query = try log__263Fn.encoded(with: [.address(p0), .address(p1), .uint256(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log263Fn.decode(output: result)
+            let decoded = try log__263Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log263Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__263Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log264Fn = ABI.Function(
+    public static let log__264Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256, .uint256, .bool],
         outputs: []
     )
 
-    public static func log264(p0: Bool, p1: BigUInt, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__264(p0: Bool, p1: BigUInt, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log264Fn.encoded(with: [.bool(p0), .uint256(p1), .uint256(p2), .bool(p3)])
+            let query = try log__264Fn.encoded(with: [.bool(p0), .uint256(p1), .uint256(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log264Fn.decode(output: result)
+            let decoded = try log__264Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log264Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__264Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log265Fn = ABI.Function(
+    public static let log__265Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256, .string, .uint256],
         outputs: []
     )
 
-    public static func log265(p0: EthAddress, p1: BigUInt, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__265(p0: EthAddress, p1: BigUInt, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log265Fn.encoded(with: [.address(p0), .uint256(p1), .string(p2), .uint256(p3)])
+            let query = try log__265Fn.encoded(with: [.address(p0), .uint256(p1), .string(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log265Fn.decode(output: result)
+            let decoded = try log__265Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log265Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__265Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log266Fn = ABI.Function(
+    public static let log__266Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool, .address, .bool],
         outputs: []
     )
 
-    public static func log266(p0: Bool, p1: Bool, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__266(p0: Bool, p1: Bool, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log266Fn.encoded(with: [.bool(p0), .bool(p1), .address(p2), .bool(p3)])
+            let query = try log__266Fn.encoded(with: [.bool(p0), .bool(p1), .address(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log266Fn.decode(output: result)
+            let decoded = try log__266Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log266Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__266Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log267Fn = ABI.Function(
+    public static let log__267Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address, .string, .uint256],
         outputs: []
     )
 
-    public static func log267(p0: Bool, p1: EthAddress, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__267(p0: Bool, p1: EthAddress, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log267Fn.encoded(with: [.bool(p0), .address(p1), .string(p2), .uint256(p3)])
+            let query = try log__267Fn.encoded(with: [.bool(p0), .address(p1), .string(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log267Fn.decode(output: result)
+            let decoded = try log__267Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log267Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__267Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log268Fn = ABI.Function(
+    public static let log__268Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string, .bool, .address],
         outputs: []
     )
 
-    public static func log268(p0: String, p1: String, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__268(p0: String, p1: String, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log268Fn.encoded(with: [.string(p0), .string(p1), .bool(p2), .address(p3)])
+            let query = try log__268Fn.encoded(with: [.string(p0), .string(p1), .bool(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log268Fn.decode(output: result)
+            let decoded = try log__268Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log268Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__268Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log269Fn = ABI.Function(
+    public static let log__269Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string, .uint256, .bool],
         outputs: []
     )
 
-    public static func log269(p0: String, p1: String, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__269(p0: String, p1: String, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log269Fn.encoded(with: [.string(p0), .string(p1), .uint256(p2), .bool(p3)])
+            let query = try log__269Fn.encoded(with: [.string(p0), .string(p1), .uint256(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log269Fn.decode(output: result)
+            let decoded = try log__269Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log269Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__269Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log270Fn = ABI.Function(
+    public static let log__270Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool],
         outputs: []
     )
 
-    public static func log270(p0: String, p1: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__270(p0: String, p1: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log270Fn.encoded(with: [.string(p0), .bool(p1)])
+            let query = try log__270Fn.encoded(with: [.string(p0), .bool(p1)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log270Fn.decode(output: result)
+            let decoded = try log__270Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log270Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__270Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log271Fn = ABI.Function(
+    public static let log__271Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256, .string],
         outputs: []
     )
 
-    public static func log271(p0: Bool, p1: BigUInt, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__271(p0: Bool, p1: BigUInt, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log271Fn.encoded(with: [.bool(p0), .uint256(p1), .string(p2)])
+            let query = try log__271Fn.encoded(with: [.bool(p0), .uint256(p1), .string(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log271Fn.decode(output: result)
+            let decoded = try log__271Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log271Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__271Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log272Fn = ABI.Function(
+    public static let log__272Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool, .uint256, .bool],
         outputs: []
     )
 
-    public static func log272(p0: EthAddress, p1: Bool, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__272(p0: EthAddress, p1: Bool, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log272Fn.encoded(with: [.address(p0), .bool(p1), .uint256(p2), .bool(p3)])
+            let query = try log__272Fn.encoded(with: [.address(p0), .bool(p1), .uint256(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log272Fn.decode(output: result)
+            let decoded = try log__272Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log272Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__272Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log273Fn = ABI.Function(
+    public static let log__273Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256, .uint256, .bool],
         outputs: []
     )
 
-    public static func log273(p0: BigUInt, p1: BigUInt, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__273(p0: BigUInt, p1: BigUInt, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log273Fn.encoded(with: [.uint256(p0), .uint256(p1), .uint256(p2), .bool(p3)])
+            let query = try log__273Fn.encoded(with: [.uint256(p0), .uint256(p1), .uint256(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log273Fn.decode(output: result)
+            let decoded = try log__273Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log273Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__273Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log274Fn = ABI.Function(
+    public static let log__274Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256, .bool, .string],
         outputs: []
     )
 
-    public static func log274(p0: EthAddress, p1: BigUInt, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__274(p0: EthAddress, p1: BigUInt, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log274Fn.encoded(with: [.address(p0), .uint256(p1), .bool(p2), .string(p3)])
+            let query = try log__274Fn.encoded(with: [.address(p0), .uint256(p1), .bool(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log274Fn.decode(output: result)
+            let decoded = try log__274Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log274Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__274Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log275Fn = ABI.Function(
+    public static let log__275Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256, .string, .uint256],
         outputs: []
     )
 
-    public static func log275(p0: String, p1: BigUInt, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__275(p0: String, p1: BigUInt, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log275Fn.encoded(with: [.string(p0), .uint256(p1), .string(p2), .uint256(p3)])
+            let query = try log__275Fn.encoded(with: [.string(p0), .uint256(p1), .string(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log275Fn.decode(output: result)
+            let decoded = try log__275Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log275Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__275Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log276Fn = ABI.Function(
+    public static let log__276Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool, .uint256, .uint256],
         outputs: []
     )
 
-    public static func log276(p0: BigUInt, p1: Bool, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__276(p0: BigUInt, p1: Bool, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log276Fn.encoded(with: [.uint256(p0), .bool(p1), .uint256(p2), .uint256(p3)])
+            let query = try log__276Fn.encoded(with: [.uint256(p0), .bool(p1), .uint256(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log276Fn.decode(output: result)
+            let decoded = try log__276Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log276Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__276Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log277Fn = ABI.Function(
+    public static let log__277Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address, .bool],
         outputs: []
     )
 
-    public static func log277(p0: String, p1: EthAddress, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__277(p0: String, p1: EthAddress, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log277Fn.encoded(with: [.string(p0), .address(p1), .bool(p2)])
+            let query = try log__277Fn.encoded(with: [.string(p0), .address(p1), .bool(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log277Fn.decode(output: result)
+            let decoded = try log__277Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log277Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__277Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log278Fn = ABI.Function(
+    public static let log__278Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool, .uint256],
         outputs: []
     )
 
-    public static func log278(p0: String, p1: Bool, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__278(p0: String, p1: Bool, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log278Fn.encoded(with: [.string(p0), .bool(p1), .uint256(p2)])
+            let query = try log__278Fn.encoded(with: [.string(p0), .bool(p1), .uint256(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log278Fn.decode(output: result)
+            let decoded = try log__278Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log278Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__278Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log279Fn = ABI.Function(
+    public static let log__279Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256, .uint256],
         outputs: []
     )
 
-    public static func log279(p0: String, p1: BigUInt, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__279(p0: String, p1: BigUInt, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log279Fn.encoded(with: [.string(p0), .uint256(p1), .uint256(p2)])
+            let query = try log__279Fn.encoded(with: [.string(p0), .uint256(p1), .uint256(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log279Fn.decode(output: result)
+            let decoded = try log__279Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log279Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__279Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log280Fn = ABI.Function(
+    public static let log__280Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256, .bool],
         outputs: []
     )
 
-    public static func log280(p0: String, p1: BigUInt, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__280(p0: String, p1: BigUInt, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log280Fn.encoded(with: [.string(p0), .uint256(p1), .bool(p2)])
+            let query = try log__280Fn.encoded(with: [.string(p0), .uint256(p1), .bool(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log280Fn.decode(output: result)
+            let decoded = try log__280Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log280Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__280Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log281Fn = ABI.Function(
+    public static let log__281Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool, .bool, .bool],
         outputs: []
     )
 
-    public static func log281(p0: EthAddress, p1: Bool, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__281(p0: EthAddress, p1: Bool, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log281Fn.encoded(with: [.address(p0), .bool(p1), .bool(p2), .bool(p3)])
+            let query = try log__281Fn.encoded(with: [.address(p0), .bool(p1), .bool(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log281Fn.decode(output: result)
+            let decoded = try log__281Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log281Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__281Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log282Fn = ABI.Function(
+    public static let log__282Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address, .string, .bool],
         outputs: []
     )
 
-    public static func log282(p0: BigUInt, p1: EthAddress, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__282(p0: BigUInt, p1: EthAddress, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log282Fn.encoded(with: [.uint256(p0), .address(p1), .string(p2), .bool(p3)])
+            let query = try log__282Fn.encoded(with: [.uint256(p0), .address(p1), .string(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log282Fn.decode(output: result)
+            let decoded = try log__282Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log282Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__282Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log283Fn = ABI.Function(
+    public static let log__283Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool, .uint256, .address],
         outputs: []
     )
 
-    public static func log283(p0: EthAddress, p1: Bool, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__283(p0: EthAddress, p1: Bool, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log283Fn.encoded(with: [.address(p0), .bool(p1), .uint256(p2), .address(p3)])
+            let query = try log__283Fn.encoded(with: [.address(p0), .bool(p1), .uint256(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log283Fn.decode(output: result)
+            let decoded = try log__283Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log283Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__283Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log284Fn = ABI.Function(
+    public static let log__284Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256, .bool, .bool],
         outputs: []
     )
 
-    public static func log284(p0: Bool, p1: BigUInt, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__284(p0: Bool, p1: BigUInt, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log284Fn.encoded(with: [.bool(p0), .uint256(p1), .bool(p2), .bool(p3)])
+            let query = try log__284Fn.encoded(with: [.bool(p0), .uint256(p1), .bool(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log284Fn.decode(output: result)
+            let decoded = try log__284Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log284Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__284Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log285Fn = ABI.Function(
+    public static let log__285Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string, .bool, .uint256],
         outputs: []
     )
 
-    public static func log285(p0: BigUInt, p1: String, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__285(p0: BigUInt, p1: String, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log285Fn.encoded(with: [.uint256(p0), .string(p1), .bool(p2), .uint256(p3)])
+            let query = try log__285Fn.encoded(with: [.uint256(p0), .string(p1), .bool(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log285Fn.decode(output: result)
+            let decoded = try log__285Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log285Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__285Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log286Fn = ABI.Function(
+    public static let log__286Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string, .bool],
         outputs: []
     )
 
-    public static func log286(p0: EthAddress, p1: String, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__286(p0: EthAddress, p1: String, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log286Fn.encoded(with: [.address(p0), .string(p1), .bool(p2)])
+            let query = try log__286Fn.encoded(with: [.address(p0), .string(p1), .bool(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log286Fn.decode(output: result)
+            let decoded = try log__286Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log286Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__286Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log287Fn = ABI.Function(
+    public static let log__287Fn = ABI.Function(
         name: "log",
         inputs: [.address, .uint256, .string, .bool],
         outputs: []
     )
 
-    public static func log287(p0: EthAddress, p1: BigUInt, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__287(p0: EthAddress, p1: BigUInt, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log287Fn.encoded(with: [.address(p0), .uint256(p1), .string(p2), .bool(p3)])
+            let query = try log__287Fn.encoded(with: [.address(p0), .uint256(p1), .string(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log287Fn.decode(output: result)
+            let decoded = try log__287Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log287Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__287Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log288Fn = ABI.Function(
+    public static let log__288Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool, .bool, .address],
         outputs: []
     )
 
-    public static func log288(p0: EthAddress, p1: Bool, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__288(p0: EthAddress, p1: Bool, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log288Fn.encoded(with: [.address(p0), .bool(p1), .bool(p2), .address(p3)])
+            let query = try log__288Fn.encoded(with: [.address(p0), .bool(p1), .bool(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log288Fn.decode(output: result)
+            let decoded = try log__288Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log288Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__288Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log289Fn = ABI.Function(
+    public static let log__289Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256, .uint256],
         outputs: []
     )
 
-    public static func log289(p0: BigUInt, p1: BigUInt, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__289(p0: BigUInt, p1: BigUInt, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log289Fn.encoded(with: [.uint256(p0), .uint256(p1), .uint256(p2)])
+            let query = try log__289Fn.encoded(with: [.uint256(p0), .uint256(p1), .uint256(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log289Fn.decode(output: result)
+            let decoded = try log__289Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log289Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__289Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log290Fn = ABI.Function(
+    public static let log__290Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address, .address],
         outputs: []
     )
 
-    public static func log290(p0: Bool, p1: EthAddress, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__290(p0: Bool, p1: EthAddress, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log290Fn.encoded(with: [.bool(p0), .address(p1), .address(p2)])
+            let query = try log__290Fn.encoded(with: [.bool(p0), .address(p1), .address(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log290Fn.decode(output: result)
+            let decoded = try log__290Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log290Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__290Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log291Fn = ABI.Function(
+    public static let log__291Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string, .bool, .string],
         outputs: []
     )
 
-    public static func log291(p0: BigUInt, p1: String, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__291(p0: BigUInt, p1: String, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log291Fn.encoded(with: [.uint256(p0), .string(p1), .bool(p2), .string(p3)])
+            let query = try log__291Fn.encoded(with: [.uint256(p0), .string(p1), .bool(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log291Fn.decode(output: result)
+            let decoded = try log__291Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log291Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__291Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log292Fn = ABI.Function(
+    public static let log__292Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string, .string, .address],
         outputs: []
     )
 
-    public static func log292(p0: BigUInt, p1: String, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__292(p0: BigUInt, p1: String, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log292Fn.encoded(with: [.uint256(p0), .string(p1), .string(p2), .address(p3)])
+            let query = try log__292Fn.encoded(with: [.uint256(p0), .string(p1), .string(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log292Fn.decode(output: result)
+            let decoded = try log__292Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log292Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__292Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log293Fn = ABI.Function(
+    public static let log__293Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address, .uint256, .bool],
         outputs: []
     )
 
-    public static func log293(p0: Bool, p1: EthAddress, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__293(p0: Bool, p1: EthAddress, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log293Fn.encoded(with: [.bool(p0), .address(p1), .uint256(p2), .bool(p3)])
+            let query = try log__293Fn.encoded(with: [.bool(p0), .address(p1), .uint256(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log293Fn.decode(output: result)
+            let decoded = try log__293Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log293Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__293Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log294Fn = ABI.Function(
+    public static let log__294Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string, .bool, .uint256],
         outputs: []
     )
 
-    public static func log294(p0: String, p1: String, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__294(p0: String, p1: String, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log294Fn.encoded(with: [.string(p0), .string(p1), .bool(p2), .uint256(p3)])
+            let query = try log__294Fn.encoded(with: [.string(p0), .string(p1), .bool(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log294Fn.decode(output: result)
+            let decoded = try log__294Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log294Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__294Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log295Fn = ABI.Function(
+    public static let log__295Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address, .address, .string],
         outputs: []
     )
 
-    public static func log295(p0: Bool, p1: EthAddress, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__295(p0: Bool, p1: EthAddress, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log295Fn.encoded(with: [.bool(p0), .address(p1), .address(p2), .string(p3)])
+            let query = try log__295Fn.encoded(with: [.bool(p0), .address(p1), .address(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log295Fn.decode(output: result)
+            let decoded = try log__295Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log295Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__295Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log296Fn = ABI.Function(
+    public static let log__296Fn = ABI.Function(
         name: "log",
         inputs: [.address, .address],
         outputs: []
     )
 
-    public static func log296(p0: EthAddress, p1: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__296(p0: EthAddress, p1: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log296Fn.encoded(with: [.address(p0), .address(p1)])
+            let query = try log__296Fn.encoded(with: [.address(p0), .address(p1)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log296Fn.decode(output: result)
+            let decoded = try log__296Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log296Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__296Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log297Fn = ABI.Function(
+    public static let log__297Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string, .bool],
         outputs: []
     )
 
-    public static func log297(p0: Bool, p1: String, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__297(p0: Bool, p1: String, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log297Fn.encoded(with: [.bool(p0), .string(p1), .bool(p2)])
+            let query = try log__297Fn.encoded(with: [.bool(p0), .string(p1), .bool(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log297Fn.decode(output: result)
+            let decoded = try log__297Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log297Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__297Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log298Fn = ABI.Function(
+    public static let log__298Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .string, .bool, .bool],
         outputs: []
     )
 
-    public static func log298(p0: Bool, p1: String, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__298(p0: Bool, p1: String, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log298Fn.encoded(with: [.bool(p0), .string(p1), .bool(p2), .bool(p3)])
+            let query = try log__298Fn.encoded(with: [.bool(p0), .string(p1), .bool(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log298Fn.decode(output: result)
+            let decoded = try log__298Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log298Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__298Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log299Fn = ABI.Function(
+    public static let log__299Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address, .uint256, .string],
         outputs: []
     )
 
-    public static func log299(p0: BigUInt, p1: EthAddress, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__299(p0: BigUInt, p1: EthAddress, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log299Fn.encoded(with: [.uint256(p0), .address(p1), .uint256(p2), .string(p3)])
+            let query = try log__299Fn.encoded(with: [.uint256(p0), .address(p1), .uint256(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log299Fn.decode(output: result)
+            let decoded = try log__299Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log299Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__299Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log300Fn = ABI.Function(
+    public static let log__300Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool, .bool, .string],
         outputs: []
     )
 
-    public static func log300(p0: BigUInt, p1: Bool, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__300(p0: BigUInt, p1: Bool, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log300Fn.encoded(with: [.uint256(p0), .bool(p1), .bool(p2), .string(p3)])
+            let query = try log__300Fn.encoded(with: [.uint256(p0), .bool(p1), .bool(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log300Fn.decode(output: result)
+            let decoded = try log__300Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log300Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__300Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log301Fn = ABI.Function(
+    public static let log__301Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool, .uint256, .string],
         outputs: []
     )
 
-    public static func log301(p0: BigUInt, p1: Bool, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__301(p0: BigUInt, p1: Bool, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log301Fn.encoded(with: [.uint256(p0), .bool(p1), .uint256(p2), .string(p3)])
+            let query = try log__301Fn.encoded(with: [.uint256(p0), .bool(p1), .uint256(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log301Fn.decode(output: result)
+            let decoded = try log__301Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log301Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__301Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log302Fn = ABI.Function(
+    public static let log__302Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string, .string, .string],
         outputs: []
     )
 
-    public static func log302(p0: String, p1: String, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__302(p0: String, p1: String, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log302Fn.encoded(with: [.string(p0), .string(p1), .string(p2), .string(p3)])
+            let query = try log__302Fn.encoded(with: [.string(p0), .string(p1), .string(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log302Fn.decode(output: result)
+            let decoded = try log__302Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log302Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__302Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log303Fn = ABI.Function(
+    public static let log__303Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address, .string],
         outputs: []
     )
 
-    public static func log303(p0: Bool, p1: EthAddress, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__303(p0: Bool, p1: EthAddress, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log303Fn.encoded(with: [.bool(p0), .address(p1), .string(p2)])
+            let query = try log__303Fn.encoded(with: [.bool(p0), .address(p1), .string(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log303Fn.decode(output: result)
+            let decoded = try log__303Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log303Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__303Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log304Fn = ABI.Function(
+    public static let log__304Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool, .bool, .string],
         outputs: []
     )
 
-    public static func log304(p0: EthAddress, p1: Bool, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__304(p0: EthAddress, p1: Bool, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log304Fn.encoded(with: [.address(p0), .bool(p1), .bool(p2), .string(p3)])
+            let query = try log__304Fn.encoded(with: [.address(p0), .bool(p1), .bool(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log304Fn.decode(output: result)
+            let decoded = try log__304Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log304Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__304Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log305Fn = ABI.Function(
+    public static let log__305Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool, .string, .address],
         outputs: []
     )
 
-    public static func log305(p0: String, p1: Bool, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__305(p0: String, p1: Bool, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log305Fn.encoded(with: [.string(p0), .bool(p1), .string(p2), .address(p3)])
+            let query = try log__305Fn.encoded(with: [.string(p0), .bool(p1), .string(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log305Fn.decode(output: result)
+            let decoded = try log__305Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log305Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__305Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log306Fn = ABI.Function(
+    public static let log__306Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256, .bool, .address],
         outputs: []
     )
 
-    public static func log306(p0: String, p1: BigUInt, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__306(p0: String, p1: BigUInt, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log306Fn.encoded(with: [.string(p0), .uint256(p1), .bool(p2), .address(p3)])
+            let query = try log__306Fn.encoded(with: [.string(p0), .uint256(p1), .bool(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log306Fn.decode(output: result)
+            let decoded = try log__306Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log306Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__306Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log307Fn = ABI.Function(
+    public static let log__307Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address, .string],
         outputs: []
     )
 
-    public static func log307(p0: String, p1: EthAddress, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__307(p0: String, p1: EthAddress, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log307Fn.encoded(with: [.string(p0), .address(p1), .string(p2)])
+            let query = try log__307Fn.encoded(with: [.string(p0), .address(p1), .string(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log307Fn.decode(output: result)
+            let decoded = try log__307Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log307Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__307Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log308Fn = ABI.Function(
+    public static let log__308Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256, .uint256, .address],
         outputs: []
     )
 
-    public static func log308(p0: String, p1: BigUInt, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__308(p0: String, p1: BigUInt, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log308Fn.encoded(with: [.string(p0), .uint256(p1), .uint256(p2), .address(p3)])
+            let query = try log__308Fn.encoded(with: [.string(p0), .uint256(p1), .uint256(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log308Fn.decode(output: result)
+            let decoded = try log__308Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log308Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__308Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log309Fn = ABI.Function(
+    public static let log__309Fn = ABI.Function(
         name: "log",
         inputs: [.string, .bool, .string],
         outputs: []
     )
 
-    public static func log309(p0: String, p1: Bool, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__309(p0: String, p1: Bool, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log309Fn.encoded(with: [.string(p0), .bool(p1), .string(p2)])
+            let query = try log__309Fn.encoded(with: [.string(p0), .bool(p1), .string(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log309Fn.decode(output: result)
+            let decoded = try log__309Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log309Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__309Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log310Fn = ABI.Function(
+    public static let log__310Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .address, .string, .bool],
         outputs: []
     )
 
-    public static func log310(p0: Bool, p1: EthAddress, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__310(p0: Bool, p1: EthAddress, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log310Fn.encoded(with: [.bool(p0), .address(p1), .string(p2), .bool(p3)])
+            let query = try log__310Fn.encoded(with: [.bool(p0), .address(p1), .string(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log310Fn.decode(output: result)
+            let decoded = try log__310Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log310Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__310Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log311Fn = ABI.Function(
+    public static let log__311Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address, .bool, .bool],
         outputs: []
     )
 
-    public static func log311(p0: BigUInt, p1: EthAddress, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__311(p0: BigUInt, p1: EthAddress, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log311Fn.encoded(with: [.uint256(p0), .address(p1), .bool(p2), .bool(p3)])
+            let query = try log__311Fn.encoded(with: [.uint256(p0), .address(p1), .bool(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log311Fn.decode(output: result)
+            let decoded = try log__311Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log311Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__311Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log312Fn = ABI.Function(
+    public static let log__312Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool, .string, .uint256],
         outputs: []
     )
 
-    public static func log312(p0: Bool, p1: Bool, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__312(p0: Bool, p1: Bool, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log312Fn.encoded(with: [.bool(p0), .bool(p1), .string(p2), .uint256(p3)])
+            let query = try log__312Fn.encoded(with: [.bool(p0), .bool(p1), .string(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log312Fn.decode(output: result)
+            let decoded = try log__312Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log312Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__312Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log313Fn = ABI.Function(
+    public static let log__313Fn = ABI.Function(
         name: "log",
         inputs: [.string, .uint256, .bool, .uint256],
         outputs: []
     )
 
-    public static func log313(p0: String, p1: BigUInt, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__313(p0: String, p1: BigUInt, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log313Fn.encoded(with: [.string(p0), .uint256(p1), .bool(p2), .uint256(p3)])
+            let query = try log__313Fn.encoded(with: [.string(p0), .uint256(p1), .bool(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log313Fn.decode(output: result)
+            let decoded = try log__313Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log313Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__313Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log314Fn = ABI.Function(
+    public static let log__314Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256, .string, .bool],
         outputs: []
     )
 
-    public static func log314(p0: Bool, p1: BigUInt, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__314(p0: Bool, p1: BigUInt, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log314Fn.encoded(with: [.bool(p0), .uint256(p1), .string(p2), .bool(p3)])
+            let query = try log__314Fn.encoded(with: [.bool(p0), .uint256(p1), .string(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log314Fn.decode(output: result)
+            let decoded = try log__314Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log314Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__314Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log315Fn = ABI.Function(
+    public static let log__315Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .string, .address, .uint256],
         outputs: []
     )
 
-    public static func log315(p0: BigUInt, p1: String, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__315(p0: BigUInt, p1: String, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log315Fn.encoded(with: [.uint256(p0), .string(p1), .address(p2), .uint256(p3)])
+            let query = try log__315Fn.encoded(with: [.uint256(p0), .string(p1), .address(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log315Fn.decode(output: result)
+            let decoded = try log__315Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log315Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__315Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log316Fn = ABI.Function(
+    public static let log__316Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256, .bool],
         outputs: []
     )
 
-    public static func log316(p0: Bool, p1: BigUInt, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__316(p0: Bool, p1: BigUInt, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log316Fn.encoded(with: [.bool(p0), .uint256(p1), .bool(p2)])
+            let query = try log__316Fn.encoded(with: [.bool(p0), .uint256(p1), .bool(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log316Fn.decode(output: result)
+            let decoded = try log__316Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log316Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__316Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log317Fn = ABI.Function(
+    public static let log__317Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string, .address, .string],
         outputs: []
     )
 
-    public static func log317(p0: String, p1: String, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__317(p0: String, p1: String, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log317Fn.encoded(with: [.string(p0), .string(p1), .address(p2), .string(p3)])
+            let query = try log__317Fn.encoded(with: [.string(p0), .string(p1), .address(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log317Fn.decode(output: result)
+            let decoded = try log__317Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log317Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__317Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log318Fn = ABI.Function(
+    public static let log__318Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256, .bool, .uint256],
         outputs: []
     )
 
-    public static func log318(p0: BigUInt, p1: BigUInt, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__318(p0: BigUInt, p1: BigUInt, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log318Fn.encoded(with: [.uint256(p0), .uint256(p1), .bool(p2), .uint256(p3)])
+            let query = try log__318Fn.encoded(with: [.uint256(p0), .uint256(p1), .bool(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log318Fn.decode(output: result)
+            let decoded = try log__318Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log318Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__318Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log319Fn = ABI.Function(
+    public static let log__319Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool, .bool],
         outputs: []
     )
 
-    public static func log319(p0: EthAddress, p1: Bool, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__319(p0: EthAddress, p1: Bool, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log319Fn.encoded(with: [.address(p0), .bool(p1), .bool(p2)])
+            let query = try log__319Fn.encoded(with: [.address(p0), .bool(p1), .bool(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log319Fn.decode(output: result)
+            let decoded = try log__319Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log319Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__319Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log320Fn = ABI.Function(
+    public static let log__320Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool, .string, .bool],
         outputs: []
     )
 
-    public static func log320(p0: BigUInt, p1: Bool, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__320(p0: BigUInt, p1: Bool, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log320Fn.encoded(with: [.uint256(p0), .bool(p1), .string(p2), .bool(p3)])
+            let query = try log__320Fn.encoded(with: [.uint256(p0), .bool(p1), .string(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log320Fn.decode(output: result)
+            let decoded = try log__320Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log320Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__320Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log321Fn = ABI.Function(
+    public static let log__321Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address, .address, .address],
         outputs: []
     )
 
-    public static func log321(p0: String, p1: EthAddress, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__321(p0: String, p1: EthAddress, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log321Fn.encoded(with: [.string(p0), .address(p1), .address(p2), .address(p3)])
+            let query = try log__321Fn.encoded(with: [.string(p0), .address(p1), .address(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log321Fn.decode(output: result)
+            let decoded = try log__321Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log321Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__321Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log322Fn = ABI.Function(
+    public static let log__322Fn = ABI.Function(
         name: "log",
         inputs: [.address, .address, .string, .uint256],
         outputs: []
     )
 
-    public static func log322(p0: EthAddress, p1: EthAddress, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__322(p0: EthAddress, p1: EthAddress, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log322Fn.encoded(with: [.address(p0), .address(p1), .string(p2), .uint256(p3)])
+            let query = try log__322Fn.encoded(with: [.address(p0), .address(p1), .string(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log322Fn.decode(output: result)
+            let decoded = try log__322Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log322Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__322Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log323Fn = ABI.Function(
+    public static let log__323Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .bool, .string, .address],
         outputs: []
     )
 
-    public static func log323(p0: BigUInt, p1: Bool, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__323(p0: BigUInt, p1: Bool, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log323Fn.encoded(with: [.uint256(p0), .bool(p1), .string(p2), .address(p3)])
+            let query = try log__323Fn.encoded(with: [.uint256(p0), .bool(p1), .string(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log323Fn.decode(output: result)
+            let decoded = try log__323Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log323Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__323Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log324Fn = ABI.Function(
+    public static let log__324Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .address, .bool, .address],
         outputs: []
     )
 
-    public static func log324(p0: BigUInt, p1: EthAddress, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__324(p0: BigUInt, p1: EthAddress, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log324Fn.encoded(with: [.uint256(p0), .address(p1), .bool(p2), .address(p3)])
+            let query = try log__324Fn.encoded(with: [.uint256(p0), .address(p1), .bool(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log324Fn.decode(output: result)
+            let decoded = try log__324Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log324Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__324Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log325Fn = ABI.Function(
+    public static let log__325Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string, .address],
         outputs: []
     )
 
-    public static func log325(p0: EthAddress, p1: String, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__325(p0: EthAddress, p1: String, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log325Fn.encoded(with: [.address(p0), .string(p1), .address(p2)])
+            let query = try log__325Fn.encoded(with: [.address(p0), .string(p1), .address(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log325Fn.decode(output: result)
+            let decoded = try log__325Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log325Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__325Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log326Fn = ABI.Function(
+    public static let log__326Fn = ABI.Function(
         name: "log",
         inputs: [.address, .bool, .address],
         outputs: []
     )
 
-    public static func log326(p0: EthAddress, p1: Bool, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__326(p0: EthAddress, p1: Bool, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log326Fn.encoded(with: [.address(p0), .bool(p1), .address(p2)])
+            let query = try log__326Fn.encoded(with: [.address(p0), .bool(p1), .address(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log326Fn.decode(output: result)
+            let decoded = try log__326Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log326Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__326Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log327Fn = ABI.Function(
+    public static let log__327Fn = ABI.Function(
         name: "log",
         inputs: [.address, .address, .bool],
         outputs: []
     )
 
-    public static func log327(p0: EthAddress, p1: EthAddress, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__327(p0: EthAddress, p1: EthAddress, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log327Fn.encoded(with: [.address(p0), .address(p1), .bool(p2)])
+            let query = try log__327Fn.encoded(with: [.address(p0), .address(p1), .bool(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log327Fn.decode(output: result)
+            let decoded = try log__327Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log327Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__327Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log328Fn = ABI.Function(
+    public static let log__328Fn = ABI.Function(
         name: "log",
         inputs: [.string, .string, .uint256, .uint256],
         outputs: []
     )
 
-    public static func log328(p0: String, p1: String, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__328(p0: String, p1: String, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log328Fn.encoded(with: [.string(p0), .string(p1), .uint256(p2), .uint256(p3)])
+            let query = try log__328Fn.encoded(with: [.string(p0), .string(p1), .uint256(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log328Fn.decode(output: result)
+            let decoded = try log__328Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log328Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__328Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log329Fn = ABI.Function(
+    public static let log__329Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool, .address, .address],
         outputs: []
     )
 
-    public static func log329(p0: Bool, p1: Bool, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__329(p0: Bool, p1: Bool, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log329Fn.encoded(with: [.bool(p0), .bool(p1), .address(p2), .address(p3)])
+            let query = try log__329Fn.encoded(with: [.bool(p0), .bool(p1), .address(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log329Fn.decode(output: result)
+            let decoded = try log__329Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log329Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__329Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log330Fn = ABI.Function(
+    public static let log__330Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256, .string, .string],
         outputs: []
     )
 
-    public static func log330(p0: Bool, p1: BigUInt, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__330(p0: Bool, p1: BigUInt, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log330Fn.encoded(with: [.bool(p0), .uint256(p1), .string(p2), .string(p3)])
+            let query = try log__330Fn.encoded(with: [.bool(p0), .uint256(p1), .string(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log330Fn.decode(output: result)
+            let decoded = try log__330Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log330Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__330Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log331Fn = ABI.Function(
+    public static let log__331Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256],
         outputs: []
     )
 
-    public static func log331(p0: BigUInt, p1: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__331(p0: BigUInt, p1: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log331Fn.encoded(with: [.uint256(p0), .uint256(p1)])
+            let query = try log__331Fn.encoded(with: [.uint256(p0), .uint256(p1)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log331Fn.decode(output: result)
+            let decoded = try log__331Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log331Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__331Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log332Fn = ABI.Function(
+    public static let log__332Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string, .address, .string],
         outputs: []
     )
 
-    public static func log332(p0: EthAddress, p1: String, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__332(p0: EthAddress, p1: String, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log332Fn.encoded(with: [.address(p0), .string(p1), .address(p2), .string(p3)])
+            let query = try log__332Fn.encoded(with: [.address(p0), .string(p1), .address(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log332Fn.decode(output: result)
+            let decoded = try log__332Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log332Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__332Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log333Fn = ABI.Function(
+    public static let log__333Fn = ABI.Function(
         name: "log",
         inputs: [.address, .address, .address, .string],
         outputs: []
     )
 
-    public static func log333(p0: EthAddress, p1: EthAddress, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__333(p0: EthAddress, p1: EthAddress, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log333Fn.encoded(with: [.address(p0), .address(p1), .address(p2), .string(p3)])
+            let query = try log__333Fn.encoded(with: [.address(p0), .address(p1), .address(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log333Fn.decode(output: result)
+            let decoded = try log__333Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log333Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__333Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log334Fn = ABI.Function(
+    public static let log__334Fn = ABI.Function(
         name: "log",
         inputs: [.uint256],
         outputs: []
     )
 
-    public static func log334(p0: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__334(p0: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log334Fn.encoded(with: [.uint256(p0)])
+            let query = try log__334Fn.encoded(with: [.uint256(p0)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log334Fn.decode(output: result)
+            let decoded = try log__334Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log334Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__334Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log335Fn = ABI.Function(
+    public static let log__335Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address, .uint256, .uint256],
         outputs: []
     )
 
-    public static func log335(p0: String, p1: EthAddress, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__335(p0: String, p1: EthAddress, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log335Fn.encoded(with: [.string(p0), .address(p1), .uint256(p2), .uint256(p3)])
+            let query = try log__335Fn.encoded(with: [.string(p0), .address(p1), .uint256(p2), .uint256(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log335Fn.decode(output: result)
+            let decoded = try log__335Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log335Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__335Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log336Fn = ABI.Function(
+    public static let log__336Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .bool, .string, .address],
         outputs: []
     )
 
-    public static func log336(p0: Bool, p1: Bool, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__336(p0: Bool, p1: Bool, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log336Fn.encoded(with: [.bool(p0), .bool(p1), .string(p2), .address(p3)])
+            let query = try log__336Fn.encoded(with: [.bool(p0), .bool(p1), .string(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log336Fn.decode(output: result)
+            let decoded = try log__336Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log336Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__336Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log337Fn = ABI.Function(
+    public static let log__337Fn = ABI.Function(
         name: "log",
         inputs: [.uint256, .uint256, .uint256, .address],
         outputs: []
     )
 
-    public static func log337(p0: BigUInt, p1: BigUInt, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__337(p0: BigUInt, p1: BigUInt, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log337Fn.encoded(with: [.uint256(p0), .uint256(p1), .uint256(p2), .address(p3)])
+            let query = try log__337Fn.encoded(with: [.uint256(p0), .uint256(p1), .uint256(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log337Fn.decode(output: result)
+            let decoded = try log__337Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log337Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__337Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log338Fn = ABI.Function(
+    public static let log__338Fn = ABI.Function(
         name: "log",
         inputs: [.address, .string, .string],
         outputs: []
     )
 
-    public static func log338(p0: EthAddress, p1: String, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__338(p0: EthAddress, p1: String, p2: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log338Fn.encoded(with: [.address(p0), .string(p1), .string(p2)])
+            let query = try log__338Fn.encoded(with: [.address(p0), .string(p1), .string(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log338Fn.decode(output: result)
+            let decoded = try log__338Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log338Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__338Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log339Fn = ABI.Function(
+    public static let log__339Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address, .uint256, .bool],
         outputs: []
     )
 
-    public static func log339(p0: String, p1: EthAddress, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__339(p0: String, p1: EthAddress, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log339Fn.encoded(with: [.string(p0), .address(p1), .uint256(p2), .bool(p3)])
+            let query = try log__339Fn.encoded(with: [.string(p0), .address(p1), .uint256(p2), .bool(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log339Fn.decode(output: result)
+            let decoded = try log__339Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log339Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__339Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log340Fn = ABI.Function(
+    public static let log__340Fn = ABI.Function(
         name: "log",
         inputs: [.string, .address, .address],
         outputs: []
     )
 
-    public static func log340(p0: String, p1: EthAddress, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__340(p0: String, p1: EthAddress, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log340Fn.encoded(with: [.string(p0), .address(p1), .address(p2)])
+            let query = try log__340Fn.encoded(with: [.string(p0), .address(p1), .address(p2)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log340Fn.decode(output: result)
+            let decoded = try log__340Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log340Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__340Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log341Fn = ABI.Function(
+    public static let log__341Fn = ABI.Function(
         name: "log",
         inputs: [.address, .address, .uint256, .string],
         outputs: []
     )
 
-    public static func log341(p0: EthAddress, p1: EthAddress, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__341(p0: EthAddress, p1: EthAddress, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log341Fn.encoded(with: [.address(p0), .address(p1), .uint256(p2), .string(p3)])
+            let query = try log__341Fn.encoded(with: [.address(p0), .address(p1), .uint256(p2), .string(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log341Fn.decode(output: result)
+            let decoded = try log__341Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log341Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__341Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
         }
     }
 
-    public static let log342Fn = ABI.Function(
+    public static let log__342Fn = ABI.Function(
         name: "log",
         inputs: [.bool, .uint256, .string, .address],
         outputs: []
     )
 
-    public static func log342(p0: Bool, p1: BigUInt, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
+    public static func log__342(p0: Bool, p1: BigUInt, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Void, RevertReason> {
         do {
-            let query = try log342Fn.encoded(with: [.bool(p0), .uint256(p1), .string(p2), .address(p3)])
+            let query = try log__342Fn.encoded(with: [.bool(p0), .uint256(p1), .string(p2), .address(p3)])
             let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
-            let decoded = try log342Fn.decode(output: result)
+            let decoded = try log__342Fn.decode(output: result)
 
             switch decoded {
             case .tuple0:
                 return .success(())
             default:
-                throw ABI.DecodeError.mismatchedType(decoded.schema, log342Fn.outputTuple)
+                throw ABI.DecodeError.mismatchedType(decoded.schema, log__342Fn.outputTuple)
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))

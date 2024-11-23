@@ -1,3 +1,4 @@
+// Generated from swift run Geno ./Tests/Solidity/out/Structs.sol/Structs.json --outDir Tests/GenoTests
 import BigInt
 import Eth
 import Foundation
@@ -271,6 +272,7 @@ public enum Structs {
     }
 
     public static let errors: [ABI.Function] = [JustANameError, JustOneArgError]
+    public static let functions: [ABI.Function] = [acceptBatFn, anotherEmptyGooseFn, buildBatFn, emptyGooseFn, lookAtMooseFn, lookAtRatFn]
     public static let acceptBatFn = ABI.Function(
         name: "acceptBat",
         inputs: [.tuple([.uint96, .uint160, .array(Cat.schema), .string, .array(.uint256), Cat.schema])],

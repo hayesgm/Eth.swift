@@ -1,3 +1,4 @@
+// Geneated from swift run Geno ./Tests/Solidity/out/Cool.sol/Cool.json --outDir Tests/GenoTests
 import BigInt
 import Eth
 import Foundation
@@ -34,6 +35,7 @@ public enum Cool {
     }
 
     public static let errors: [ABI.Function] = [LukeWarmError, TooCoolError]
+    public static let functions: [ABI.Function] = [sumFn, vibeCheckFn]
     public static let sumFn = ABI.Function(
         name: "sum",
         inputs: [.uint256, .uint256],
