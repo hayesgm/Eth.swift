@@ -4,6 +4,7 @@ import Foundation
 /// A ``Network`` represents different Ethereum networks (e.g. `Mainnet` or `Base`).
 public enum Network: Codable, Equatable, Hashable, Identifiable {
     case arbitrum
+    case arbitrumSepolia
     case avalanche
     case base
     case baseSepolia
@@ -25,6 +26,8 @@ public enum Network: Codable, Equatable, Hashable, Identifiable {
         switch self {
         case .arbitrum:
             "Arbitrum"
+        case .arbitrumSepolia:
+            "Arbitrum (Sepolia)"
         case .avalanche:
             "Avalanche"
         case .base:
@@ -86,6 +89,8 @@ public enum Network: Codable, Equatable, Hashable, Identifiable {
         switch chainId {
         case Network.arbitrum.chainId:
             .arbitrum
+        case Network.arbitrumSepolia.chainId:
+            .arbitrumSepolia
         case Network.avalanche.chainId:
             .avalanche
         case Network.base.chainId:
@@ -117,6 +122,8 @@ public enum Network: Codable, Equatable, Hashable, Identifiable {
         switch self {
         case .arbitrum:
             BigInt(42161)
+        case .arbitrumSepolia:
+            BigInt(421_614)
         case .avalanche:
             BigInt(43114)
         case .base:
@@ -148,6 +155,8 @@ public enum Network: Codable, Equatable, Hashable, Identifiable {
         switch self {
         case .arbitrum:
             "Arbiscan"
+        case .arbitrumSepolia:
+            "Arbiscan (Sepolia)"
         case .avalanche:
             "Snowtrace"
         case .base:
@@ -179,6 +188,8 @@ public enum Network: Codable, Equatable, Hashable, Identifiable {
         switch self {
         case .arbitrum:
             URL(string: "https://arbiscan.io")
+        case .arbitrumSepolia:
+            URL(string: "https://sepolia.arbiscan.io")
         case .avalanche:
             URL(string: "https://snowtrace.io")
         case .base:
