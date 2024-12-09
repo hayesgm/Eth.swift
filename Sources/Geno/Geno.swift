@@ -9,8 +9,8 @@ func createSourceFileSyntax(from contract: Contract, name: String, structsOnly: 
     contractName = name // for ensuring structs aren't namespaced under the same name as the contract
 
     return SourceFileSyntax {
-        try! ImportDeclSyntax("import BigInt").with(\.trailingTrivia, .newline)
-        try! ImportDeclSyntax("import Eth").with(\.trailingTrivia, .newline)
+        try! ImportDeclSyntax("@preconcurrency import BigInt").with(\.trailingTrivia, .newline)
+        try! ImportDeclSyntax("@preconcurrency import Eth").with(\.trailingTrivia, .newline)
         try! ImportDeclSyntax("import Foundation").with(\.trailingTrivia, .newline)
 
         try! EnumDeclSyntax(leadingTrivia: .newline, modifiers: [DeclModifierSyntax(name: .keyword(.public))], name: .identifier(name, leadingTrivia: .space)) {
@@ -220,7 +220,8 @@ func namedParameterToOutValue(p: Contract.ABI.Function.Parameter, index: Int) ->
             let componentTypes = p.components!.enumerated().map { i, p in parameterToMatchableValueType(p: p, index: i) }
             return ".array(.tuple([\(componentTypes.joined(separator: ", "))]))"
         } else {
-            return ".array(\(baseParameter(p)))"
+            return "\(fieldValue(parameter: p, index: 0, name: parameterVar(parameter: p, index: index, withPrefix: "var")))"
+            // return "\(parameterToMatchableValueType(p: p, index: 0, asValue: true))"
         }
     } else if isTuple(p) {
         if let structName = structName(p) {
@@ -234,10 +235,10 @@ func namedParameterToOutValue(p: Contract.ABI.Function.Parameter, index: Int) ->
     }
 }
 
-func fieldValue(parameter: Contract.ABI.Function.Parameter, index _: Int) -> String {
+func fieldValue(parameter: Contract.ABI.Function.Parameter, index _: Int, name: String? = nil) -> String {
     if isArray(parameter) {
         let bp = baseParameter(parameter)
-        return "\(parameter.name).map { \(try! asValueMapper(parameter: bp)) }"
+        return "\(name ?? parameter.name).map { \(try! asValueMapper(parameter: bp)) }"
     } else if structName(parameter) != nil {
         return try! asValueMapper(parameter: parameter, name: parameter.name)
     } else {
