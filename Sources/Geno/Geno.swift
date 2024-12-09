@@ -10,7 +10,7 @@ func createSourceFileSyntax(from contract: Contract, name: String, structsOnly: 
 
     return SourceFileSyntax {
         try! ImportDeclSyntax("@preconcurrency import BigInt").with(\.trailingTrivia, .newline)
-        try! ImportDeclSyntax("@preconcurrency import Eth").with(\.trailingTrivia, .newline)
+        try! ImportDeclSyntax("import Eth").with(\.trailingTrivia, .newline)
         try! ImportDeclSyntax("import Foundation").with(\.trailingTrivia, .newline)
 
         try! EnumDeclSyntax(leadingTrivia: .newline, modifiers: [DeclModifierSyntax(name: .keyword(.public))], name: .identifier(name, leadingTrivia: .space)) {
