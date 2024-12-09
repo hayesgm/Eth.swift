@@ -10,7 +10,7 @@ func createSourceFileSyntax(from contract: Contract, name: String, structsOnly: 
 
     return SourceFileSyntax {
         try! ImportDeclSyntax("@preconcurrency import BigInt").with(\.trailingTrivia, .newline)
-        try! ImportDeclSyntax("import Eth").with(\.trailingTrivia, .newline)
+        try! ImportDeclSyntax("@preconcurrency import Eth").with(\.trailingTrivia, .newline)
         try! ImportDeclSyntax("import Foundation").with(\.trailingTrivia, .newline)
 
         try! EnumDeclSyntax(leadingTrivia: .newline, modifiers: [DeclModifierSyntax(name: .keyword(.public))], name: .identifier(name, leadingTrivia: .space)) {
@@ -70,6 +70,7 @@ func createSourceFileSyntax(from contract: Contract, name: String, structsOnly: 
                 for (function, functionName) in renamedFunctions {
                     generateETHABIFunction(f: function, name: functionName)
                     generateFunctionDeclaration(f: function)
+                    generateFunctionDecodeDeclaration(f: function)
                 }
             }
         }
@@ -204,6 +205,41 @@ func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax
     .with(\.trailingTrivia, .newlines(2))
 }
 
+func generateFunctionDecodeDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax {
+    var parameters = f.inputs.map { p in typeMapper(for: p) }
+
+    let letExpr: String
+    if f.inputs.count > 0 {
+        letExpr = "let"
+    } else {
+        letExpr = ""
+    }
+
+    let maybeTry: String
+    if f.inputs.contains(where: { isOrHasStruct($0) }) {
+        maybeTry = "try"
+    } else {
+        maybeTry = ""
+    }
+
+    return try! FunctionDeclSyntax("""
+    public static func \(raw: f.name)Decode(input: Hex) throws -> (\(raw: parameters.joined(separator: ", ")))
+    """) {
+        StmtSyntax("""
+
+                let decodedInput = try \(raw: f.name)Fn.decodeInput(input: input)
+                switch decodedInput {
+                case \(raw: letExpr) \(raw: outParameters(ps: f.inputs)):
+                    return \(raw: maybeTry) (\(raw: outValues(ps: f.inputs)))
+                default:
+                    throw ABI.DecodeError.mismatchedType(decodedInput.schema, \(raw: f.name)Fn.inputTuple)
+                }
+        """)
+    }
+    .with(\.leadingTrivia, .newline)
+    .with(\.trailingTrivia, .newlines(2))
+}
+
 func outValues(ps: [Contract.ABI.Function.Parameter]) -> String {
     if ps.count == 0 {
         return "()"
@@ -216,13 +252,7 @@ func outValues(ps: [Contract.ABI.Function.Parameter]) -> String {
 
 func namedParameterToOutValue(p: Contract.ABI.Function.Parameter, index: Int) -> String {
     if isArray(p) {
-        if isTuple(p) {
-            let componentTypes = p.components!.enumerated().map { i, p in parameterToMatchableValueType(p: p, index: i) }
-            return ".array(.tuple([\(componentTypes.joined(separator: ", "))]))"
-        } else {
-            return "\(fieldValue(parameter: p, index: 0, name: parameterVar(parameter: p, index: index, withPrefix: "var")))"
-            // return "\(parameterToMatchableValueType(p: p, index: 0, asValue: true))"
-        }
+        return "\(fieldValue(parameter: p, index: 0, name: parameterVar(parameter: p, index: index, withPrefix: "var")))"
     } else if isTuple(p) {
         if let structName = structName(p) {
             return structInitializer(parameter: p, structName: structName)
@@ -592,6 +622,10 @@ func isArray(_ p: Contract.ABI.Function.Parameter) -> Bool {
 }
 
 func isStruct(_ p: Contract.ABI.Function.Parameter) -> Bool {
+    structName(p) != nil
+}
+
+func isOrHasStruct(_ p: Contract.ABI.Function.Parameter) -> Bool {
     structName(p) != nil
 }
 
