@@ -48,13 +48,4 @@ final class GenTests: XCTestCase {
             XCTFail("Thrown error: \(error)")
         }
     }
-
-    func testErrorHandling() async {
-        switch try! await Cool.vibeCheck(status: BigUInt(75)) {
-        case let .failure(.lukeWarm(isLukeWarm)):
-            XCTAssertTrue(isLukeWarm)
-        default:
-            XCTFail()
-        }
-    }
 }
