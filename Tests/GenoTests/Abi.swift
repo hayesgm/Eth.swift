@@ -1,5 +1,6 @@
-import BigInt
-import Eth
+// Generated from swift run Geno ./Tests/Solidity/out/Abi.sol/Abi.json --outDir Tests/GenoTests
+@preconcurrency import BigInt
+@preconcurrency import Eth
 import Foundation
 
 public enum Abi {
@@ -18,6 +19,7 @@ public enum Abi {
     }
 
     public static let errors: [ABI.Function] = []
+    public static let functions: [ABI.Function] = [abiEncodeSelectorFn, simpleAbiEncodingFn, simpleAbiEncodingPackedFn]
     public static let abiEncodeSelectorFn = ABI.Function(
         name: "abiEncodeSelector",
         inputs: [.uint256],
@@ -38,6 +40,16 @@ public enum Abi {
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
+        }
+    }
+
+    public static func abiEncodeSelectorDecode(input: Hex) throws -> (BigUInt) {
+        let decodedInput = try abiEncodeSelectorFn.decodeInput(input: input)
+        switch decodedInput {
+        case let .tuple1(.uint256(x)):
+            return x
+        default:
+            throw ABI.DecodeError.mismatchedType(decodedInput.schema, abiEncodeSelectorFn.inputTuple)
         }
     }
 
@@ -64,6 +76,16 @@ public enum Abi {
         }
     }
 
+    public static func simpleAbiEncodingDecode(input: Hex) throws -> (BigUInt, String) {
+        let decodedInput = try simpleAbiEncodingFn.decodeInput(input: input)
+        switch decodedInput {
+        case let .tuple2(.uint256(x), .string(y)):
+            return (x, y)
+        default:
+            throw ABI.DecodeError.mismatchedType(decodedInput.schema, simpleAbiEncodingFn.inputTuple)
+        }
+    }
+
     public static let simpleAbiEncodingPackedFn = ABI.Function(
         name: "simpleAbiEncodingPacked",
         inputs: [.uint256, .string],
@@ -84,6 +106,16 @@ public enum Abi {
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
+        }
+    }
+
+    public static func simpleAbiEncodingPackedDecode(input: Hex) throws -> (BigUInt, String) {
+        let decodedInput = try simpleAbiEncodingPackedFn.decodeInput(input: input)
+        switch decodedInput {
+        case let .tuple2(.uint256(x), .string(y)):
+            return (x, y)
+        default:
+            throw ABI.DecodeError.mismatchedType(decodedInput.schema, simpleAbiEncodingPackedFn.inputTuple)
         }
     }
 }
