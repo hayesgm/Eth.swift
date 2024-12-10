@@ -15,16 +15,14 @@ func unwrapError<T: Error, U>(_ expression: @autoclosure () throws -> U, as expe
     }
 }
 
-func unwrapErrorAsync<T: Error, U>(_ expression: @autoclosure () async throws -> U, as expectedErrorType: T.Type) async -> T? {
+func unwrapErrorAsync<T: Error, U>(_ expression: @autoclosure () async throws -> U, as expectedErrorType: T.Type) async throws -> T {
     do {
         _ = try await expression()
-        XCTFail("Expected error of type \(expectedErrorType) but no error was thrown")
-        return nil
+        throw XCTestError(.failureWhileWaiting, userInfo: ["message": "Expected error of type \(expectedErrorType) but no error was thrown"])
     } catch let error as T {
         return error
     } catch {
-        XCTFail("Expected error of type \(expectedErrorType) but got different error: \(error)")
-        return nil
+        throw XCTestError(.failureWhileWaiting, userInfo: ["message": "Expected error of type \(expectedErrorType) but got different error: \(error)"])
     }
 }
 

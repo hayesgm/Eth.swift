@@ -1,6 +1,6 @@
 // Generated from swift run Geno ./Tests/Solidity/out/Structs.sol/Structs.json --outDir Tests/GenoTests
-import BigInt
-import Eth
+@preconcurrency import BigInt
+@preconcurrency import Eth
 import Foundation
 
 public enum Structs {
@@ -296,6 +296,21 @@ public enum Structs {
         }
     }
 
+    public static func acceptBatDecode(input: Hex) throws -> (Bat) {
+        let decodedInput = try acceptBatFn.decodeInput(input: input)
+        switch decodedInput {
+        case let .tuple1(.tuple6(.uint96(a),
+                                 .uint160(b),
+                                 .array(Cat.schema, c),
+                                 .string(d),
+                                 .array(.uint256, e),
+                                 f)):
+            return try (Bat(a: a, b: b, c: c.map { try Cat.decodeValue($0) }, d: d, e: e.map { $0.asBigUInt! }, f: Cat.decodeValue(f)))
+        default:
+            throw ABI.DecodeError.mismatchedType(decodedInput.schema, acceptBatFn.inputTuple)
+        }
+    }
+
     public static let anotherEmptyGooseFn = ABI.Function(
         name: "anotherEmptyGoose",
         inputs: [],
@@ -316,6 +331,16 @@ public enum Structs {
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
+        }
+    }
+
+    public static func anotherEmptyGooseDecode(input: Hex) throws {
+        let decodedInput = try anotherEmptyGooseFn.decodeInput(input: input)
+        switch decodedInput {
+        case .tuple0:
+            return ()
+        default:
+            throw ABI.DecodeError.mismatchedType(decodedInput.schema, anotherEmptyGooseFn.inputTuple)
         }
     }
 
@@ -351,6 +376,16 @@ public enum Structs {
         }
     }
 
+    public static func buildBatDecode(input: Hex) throws -> (BigUInt, BigUInt) {
+        let decodedInput = try buildBatFn.decodeInput(input: input)
+        switch decodedInput {
+        case let .tuple2(.uint256(x), .uint256(y)):
+            return (x, y)
+        default:
+            throw ABI.DecodeError.mismatchedType(decodedInput.schema, buildBatFn.inputTuple)
+        }
+    }
+
     public static let emptyGooseFn = ABI.Function(
         name: "emptyGoose",
         inputs: [],
@@ -372,6 +407,16 @@ public enum Structs {
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
+        }
+    }
+
+    public static func emptyGooseDecode(input: Hex) throws {
+        let decodedInput = try emptyGooseFn.decodeInput(input: input)
+        switch decodedInput {
+        case .tuple0:
+            return ()
+        default:
+            throw ABI.DecodeError.mismatchedType(decodedInput.schema, emptyGooseFn.inputTuple)
         }
     }
 
@@ -400,6 +445,16 @@ public enum Structs {
         }
     }
 
+    public static func lookAtMooseDecode(input: Hex) throws -> ([Animal.Moose], BigUInt) {
+        let decodedInput = try lookAtMooseFn.decodeInput(input: input)
+        switch decodedInput {
+        case let .tuple2(.array(Animal.Moose.schema, moose), .uint256(m)):
+            return try (moose.map { try Animal.Moose.decodeValue($0) }, m)
+        default:
+            throw ABI.DecodeError.mismatchedType(decodedInput.schema, lookAtMooseFn.inputTuple)
+        }
+    }
+
     public static let lookAtRatFn = ABI.Function(
         name: "lookAtRat",
         inputs: [.tuple([.address]), .array(.address)],
@@ -422,6 +477,16 @@ public enum Structs {
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
+        }
+    }
+
+    public static func lookAtRatDecode(input: Hex) throws -> (Animal.Rat, [EthAddress]) {
+        let decodedInput = try lookAtRatFn.decodeInput(input: input)
+        switch decodedInput {
+        case let .tuple2(.tuple1(.address(a)), .array(.address, holes)):
+            return try (Animal.Rat(a: a), holes.map { $0.asEthAddress! })
+        default:
+            throw ABI.DecodeError.mismatchedType(decodedInput.schema, lookAtRatFn.inputTuple)
         }
     }
 }
