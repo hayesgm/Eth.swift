@@ -1424,51 +1424,15 @@ public enum EVM {
     /// - Returns: The result of the execution.
     public static func execVm(code: Code, withInput input: CallInput, withFunctions ffis: FFIMap = [:]) async throws -> ExecutionResult {
         let mergedFFIs = defaultFFIs.merging(ffis) { _, new in new }
-
-        // Create isolated context to prevent data races
-        actor VMContext {
-            var context: Context
-            let input: CallInput
-
-            init(code: Code, input: CallInput, ffis: FFIMap) {
-                context = Context(withCode: code, withFunctions: ffis)
-                self.input = input
-            }
-
-            func runOperation() async throws -> Bool {
-                if context.halted {
-                    return false
-                }
-
-                // Create a local copy of context that can be passed as inout
-                var localContext = context
-                try await Self.runSingleOp(withInput: input, withContext: &localContext)
-                // Update the actor's context with the modified local copy
-                context = localContext
-
-                return true
-            }
-
-            func getResult() -> ExecutionResult {
-                ExecutionResult(
-                    stack: context.stack,
-                    reverted: context.reverted,
-                    returnData: Hex(context.returnData)
-                )
-            }
-
-            // Move runSingleOp inside the actor
-            private static func runSingleOp(withInput input: CallInput, withContext context: inout Context) async throws {
-                // Original runSingleOp implementation
-                try await EVM.runSingleOp(withInput: input, withContext: &context)
-            }
+        var context = Context(withCode: code, withFunctions: mergedFFIs)
+        while !context.halted {
+            try await runSingleOp(withInput: input, withContext: &context)
         }
-
-        let vmContext = VMContext(code: code, input: input, ffis: mergedFFIs)
-
-        while try await vmContext.runOperation() {}
-
-        return await vmContext.getResult()
+        return ExecutionResult(
+            stack: context.stack,
+            reverted: context.reverted,
+            returnData: Hex(context.returnData)
+        )
     }
 
     /**
