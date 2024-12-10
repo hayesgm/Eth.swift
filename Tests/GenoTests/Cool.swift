@@ -1,6 +1,6 @@
-// Geneated from swift run Geno ./Tests/Solidity/out/Cool.sol/Cool.json --outDir Tests/GenoTests
-import BigInt
-import Eth
+// Generated from swift run Geno ./Tests/Solidity/out/Cool.sol/Cool.json --outDir Tests/GenoTests
+@preconcurrency import BigInt
+@preconcurrency import Eth
 import Foundation
 
 public enum Cool {
@@ -59,6 +59,16 @@ public enum Cool {
         }
     }
 
+    public static func sumDecode(input: Hex) throws -> (BigUInt, BigUInt) {
+        let decodedInput = try sumFn.decodeInput(input: input)
+        switch decodedInput {
+        case let .tuple2(.uint256(x), .uint256(y)):
+            return (x, y)
+        default:
+            throw ABI.DecodeError.mismatchedType(decodedInput.schema, sumFn.inputTuple)
+        }
+    }
+
     public static let vibeCheckFn = ABI.Function(
         name: "vibeCheck",
         inputs: [.uint256],
@@ -79,6 +89,16 @@ public enum Cool {
             }
         } catch let EVM.QueryError.error(e, v) {
             return .failure(rewrapError(e, value: v))
+        }
+    }
+
+    public static func vibeCheckDecode(input: Hex) throws -> (BigUInt) {
+        let decodedInput = try vibeCheckFn.decodeInput(input: input)
+        switch decodedInput {
+        case let .tuple1(.uint256(status)):
+            return status
+        default:
+            throw ABI.DecodeError.mismatchedType(decodedInput.schema, vibeCheckFn.inputTuple)
         }
     }
 }

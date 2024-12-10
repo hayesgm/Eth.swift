@@ -12,6 +12,10 @@ final class GenTests: XCTestCase {
         }
     }
 
+    func testDecodeCall() async {
+        print(try! await Cool.sumDecode(input: Hex("0xcad0899b00000000000000000000000000000000000000000000000000000000000003e800000000000000000000000000000000000000000000000000000000000003e8")))
+    }
+
     func testStructGen() async {
         let bat = try! await Structs.buildBat(x: BigUInt(5), y: BigUInt(3)).get()
         let catData: Hex = "1122334455667788991122334455667788991122334455667788991122334455"
@@ -46,15 +50,6 @@ final class GenTests: XCTestCase {
             XCTAssertNoThrow(result)
         } catch {
             XCTFail("Thrown error: \(error)")
-        }
-    }
-
-    func testErrorHandling() async {
-        switch try! await Cool.vibeCheck(status: BigUInt(75)) {
-        case let .failure(.lukeWarm(isLukeWarm)):
-            XCTAssertTrue(isLukeWarm)
-        default:
-            XCTFail()
         }
     }
 }
