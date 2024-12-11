@@ -1,5 +1,5 @@
 {
-  "originHash" : "9f85554a4a0b64f47a400654df21b6acfd91945f79d2d9fccb397e4c9f1ad535",
+  "originHash" : "392478dc45265e22cfdcef9df252d7110b3ba1671f6740a4d8129518af4e8895",
   "pins" : [
     {
       "identity" : "bigint",
@@ -40,10 +40,9 @@
     {
       "identity" : "swiftkeccak",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/bitflying/SwiftKeccak.git",
+      "location" : "https://github.com/hayesgm/SwiftKeccak.git",
       "state" : {
-        "revision" : "5fc323d4b08a8c77cbb690505445b32a3b5a8aff",
-        "version" : "0.1.2"
+        "revision" : "98a9d4a037dd62283977d5e0ef7d11c5612ff813"
       }
     }
   ],
