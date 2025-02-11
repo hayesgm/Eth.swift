@@ -16,7 +16,7 @@ final class GenoTests: XCTestCase {
             let schemas = f.outputs.map { parameterToValueType($0) }
             abiTypes.append(contentsOf: schemas)
         }
-        let desired = [".int256", ".tuple([.uint96, .uint160, .array(Cat.schema), .string])"]
+        let desired = [".int256", ".tuple([.uint96, .uint160, .array(Cat.schema), .string, .array(.uint256), Cat.schema, .array(.array(.bytes32))])"]
         for (i, _) in desired.enumerated() {
             XCTAssertEqual(abiTypes[i], desired[i])
         }
@@ -34,7 +34,7 @@ final class GenoTests: XCTestCase {
             let schemas = f.outputs.enumerated().map { i, p in parameterToMatchableValueType(p: p, index: i) }
             abiTypes.append(contentsOf: schemas)
         }
-        let desired = [".int256(var0)", ".tuple4(.uint96(a),\n .uint160(b),\n .array(Cat.schema, c),\n .string(d))"]
+        let desired = [".int256(var0)", ".tuple7(.uint96(a),\n .uint160(b),\n .array(Cat.schema, c),\n .string(d),\n .array(.uint256, e),\n f,\n .array(.array(.bytes32), g))"]
         for (i, _) in desired.enumerated() {
             XCTAssertEqual(abiTypes[i], desired[i])
         }
@@ -49,8 +49,8 @@ final class GenoTests: XCTestCase {
 
         let structDefs = generateStructs(c: contract)
 
-        // smoke test that is building somethign sane
-        let regex = try! NSRegularExpression(pattern: "struct Bat: Equatable\\{static let schema: ABI\\.Schema = ABI.Schema\\.tuple")
+        // smoke test that is building something sane
+        let regex = try! NSRegularExpression(pattern: "struct Bat: Equatable\\{public static let schema: ABI\\.Schema = ABI.Schema\\.tuple")
 
         // Perform the matching
         let testString = structDefs[1].description
@@ -77,7 +77,7 @@ final class GenoTests: XCTestCase {
             intializers.append(contentsOf: schemas)
         }
 
-        let desired = ["", "try Bat(a: a, b: b, c: c.map { try Cat.decodeValue($0) }, d: d)"]
+        let desired = ["", "try Bat(a: a, b: b, c: c.map { try Cat.decodeValue($0) }, d: d, e: e.map { $0.asBigUInt! }, f: try Cat.decodeValue(f), g: g.map { $0.asArray!.map { $0.asHex! } })"]
         for (i, _) in desired.enumerated() {
             XCTAssertEqual(intializers[i], desired[i])
         }
@@ -142,6 +142,38 @@ final class GenoTests: XCTestCase {
                                     "name": "d",
                                     "type": "string",
                                     "internalType": "string"
+                                },
+                                {
+                                    "name": "e",
+                                    "type": "uint256[]",
+                                    "internalType": "uint256[]"
+                                },
+                                {
+                                    "name": "f",
+                                    "type": "tuple",
+                                    "internalType": "struct Cat",
+                                    "components": [
+                                        {
+                                            "name": "ca",
+                                            "type": "int256",
+                                            "internalType": "int256"
+                                        },
+                                        {
+                                            "name": "cb",
+                                            "type": "bytes",
+                                            "internalType": "bytes"
+                                        },
+                                        {
+                                            "name": "cc",
+                                            "type": "bytes32",
+                                            "internalType": "bytes32"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "g",
+                                    "type": "bytes32[][]",
+                                    "internalType": "bytes32[][]"
                                 }
                             ]
                         }
@@ -212,6 +244,38 @@ final class GenoTests: XCTestCase {
                                     "name": "d",
                                     "type": "string",
                                     "internalType": "string"
+                                },
+                                {
+                                    "name": "e",
+                                    "type": "uint256[]",
+                                    "internalType": "uint256[]"
+                                },
+                                {
+                                    "name": "f",
+                                    "type": "tuple",
+                                    "internalType": "struct Cat",
+                                    "components": [
+                                        {
+                                            "name": "ca",
+                                            "type": "int256",
+                                            "internalType": "int256"
+                                        },
+                                        {
+                                            "name": "cb",
+                                            "type": "bytes",
+                                            "internalType": "bytes"
+                                        },
+                                        {
+                                            "name": "cc",
+                                            "type": "bytes32",
+                                            "internalType": "bytes32"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "g",
+                                    "type": "bytes32[][]",
+                                    "internalType": "bytes32[][]"
                                 }
                             ]
                         }
