@@ -206,7 +206,7 @@ func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax
 }
 
 func generateFunctionDecodeDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax {
-    var parameters = f.inputs.map { p in typeMapper(for: p) }
+    let parameters = f.inputs.map { p in typeMapper(for: p) }
 
     let letExpr: String
     if f.inputs.count > 0 {
@@ -265,10 +265,15 @@ func namedParameterToOutValue(p: Contract.ABI.Function.Parameter, index: Int) ->
     }
 }
 
-func fieldValue(parameter: Contract.ABI.Function.Parameter, index _: Int, name: String? = nil) -> String {
+func fieldValue(parameter: Contract.ABI.Function.Parameter, index: Int, name: String? = nil, inner: Bool = false) -> String {
     if isArray(parameter) {
-        let bp = baseParameter(parameter)
-        return "\(name ?? parameter.name).map { \(try! asValueMapper(parameter: bp)) }"
+        let innerParameter: Contract.ABI.Function.Parameter = stripOneArrayLevel(parameter)
+        let paramAsArray = inner ? ".asArray!" : ""
+        if isArray(innerParameter) {
+            return "\(name ?? parameter.name)\(paramAsArray).map { \(fieldValue(parameter: innerParameter, index: index, name: "$0", inner: true)) }"
+        } else {
+            return "\(name ?? parameter.name)\(paramAsArray).map { \(try! asValueMapper(parameter: innerParameter)) }"
+        }
     } else if structName(parameter) != nil {
         return try! asValueMapper(parameter: parameter, name: parameter.name)
     } else {
@@ -318,8 +323,7 @@ func callParameters(f: Contract.ABI.Function) -> String {
                 let structName = structName(p)!
                 return ".array(\(structName).schema, \(p.name).map { $0.asValue })"
             } else {
-                let baseParameter = baseParameter(p)
-                return ".array(.\(baseParameter.type), \(p.name).map { .\(baseParameter.type)($0) })"
+                return parameterToArrayType(p: p, index: 0, asValue: true)
             }
         } else if isStruct(p) {
             return "\(p.name).asValue"
@@ -349,23 +353,20 @@ func parameterToValueType(_ parameter: Contract.ABI.Function.Parameter, allowSch
     let inner: String
     let baseParameter = baseParameter(parameter)
 
-    if isTuple(parameter) {
+    if isArray(parameter) {
+        inner = ".array(\(parameterToValueType(stripOneArrayLevel(parameter), allowSchema: allowSchema)))"
+    } else if isTuple(parameter) {
         if allowSchema, let structName = structName(parameter) {
             inner = "\(structName).schema"
         } else {
             let componentTypes = parameter.components?.map { parameterToValueType($0, allowSchema: true) } ?? []
             inner = ".tuple([\(componentTypes.joined(separator: ", "))])"
         }
-
     } else {
         inner = ".\(baseParameter.type)"
     }
 
-    if isArray(parameter) {
-        return ".array(\(inner))"
-    } else {
-        return inner
-    }
+    return inner
 }
 
 func parameterToMatchableValueType(p: Contract.ABI.Function.Parameter, index: Int, asValue: Bool = false, isChild: Bool = false) -> String {
@@ -373,21 +374,7 @@ func parameterToMatchableValueType(p: Contract.ABI.Function.Parameter, index: In
     let varName = parameterVar(parameter: p, index: index, withPrefix: "var")
 
     if isArray(p) {
-        let baseParameter = baseParameter(p)
-        if isTuple(p) {
-            let structName = structName(p)!
-            if asValue {
-                return ".array(\(structName).schema, \(varName).map { $0.asValue })"
-            } else {
-                return ".array(\(structName).schema, \(varName))"
-            }
-        } else {
-            if asValue {
-                return ".array(.\(baseParameter.type), \(varName).map { .\(baseParameter.type)($0) })"
-            } else {
-                return ".array(.\(baseParameter.type), \(varName))"
-            }
-        }
+        return parameterToArrayType(p: p, index: index, asValue: asValue)
     } else {
         if isTuple(p) {
             if isChild && structName(p) != nil {
@@ -407,6 +394,46 @@ func parameterToMatchableValueType(p: Contract.ABI.Function.Parameter, index: In
     }
 }
 
+func parameterToArrayType(p: Contract.ABI.Function.Parameter, index: Int, asValue: Bool = false) -> String {
+    let varName = parameterVar(parameter: p, index: index, withPrefix: "var")
+
+    let baseParameter = baseParameter(p)
+    var innerSchema: String
+    var value: String
+    if isTuple(p) {
+        let structName = structName(p)!
+        innerSchema = "\(structName).schema"
+        value = asValue ? "\(varName).map { $0.asValue }" : varName
+    } else {
+        innerSchema = ".\(baseParameter.type)"
+        value = varName
+    }
+
+    // Build nested array schema
+    var currentParam = stripOneArrayLevel(p)
+    var schema: String = innerSchema
+    while isArray(currentParam) {
+        schema = ".array(\(schema))"
+        currentParam = stripOneArrayLevel(currentParam)
+    }
+
+    // For tuples, we can just return the `value` directly
+    if isTuple(p) {
+        return ".array(\(schema), \(value))"
+    }
+
+    // Build the map expressions from the inside out
+    if asValue {
+        // TODO: Make this recursive so it can handle infinitely nested arrays
+        if isArray(stripOneArrayLevel(p)) {
+            value = "\(value).map { .array(\(innerSchema), $0.map { .\(baseParameter.type)($0) }) }"
+        } else {
+            value = "\(value).map { .\(baseParameter.type)($0) }"
+        }
+    }
+    return ".array(\(schema), \(value))"
+}
+
 func parameterVar(parameter: Contract.ABI.Function.Parameter, index: Int, withPrefix prefix: String) -> String {
     return if parameter.name.isEmpty {
         "\(prefix)\(index)"
@@ -417,7 +444,7 @@ func parameterVar(parameter: Contract.ABI.Function.Parameter, index: Int, withPr
 
 func typeMapper(for p: Contract.ABI.Function.Parameter) -> String {
     if isArray(p) {
-        return "[\(typeMapper(for: baseParameter(p)))]"
+        return "[\(typeMapper(for: stripOneArrayLevel(p)))]"
     }
 
     if isStruct(p) {
@@ -533,6 +560,23 @@ func baseParameter(_ p: Contract.ABI.Function.Parameter) -> Contract.ABI.Functio
     let newType = p.type.replacingOccurrences(of: "[]", with: "")
     let newInternalType = p.internalType.replacingOccurrences(of: "[]", with: "")
     return Contract.ABI.Function.Parameter(name: p.name, type: newType, internalType: newInternalType, components: p.components)
+}
+
+func stripOneArrayLevel(_ p: Contract.ABI.Function.Parameter) -> Contract.ABI.Function.Parameter {
+    if !isArray(p) {
+        fatalError("Attempted to strip array level from non-array type: \(p.type)")
+    }
+
+    if !p.type.hasSuffix("[]") {
+        fatalError("Array type doesn't end with []: \(p.type)")
+    }
+
+    return Contract.ABI.Function.Parameter(
+        name: p.name,
+        type: String(p.type.dropLast(2)),
+        internalType: String(p.internalType.dropLast(2)),
+        components: p.components
+    )
 }
 
 func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: StructDeclSyntax]) {
