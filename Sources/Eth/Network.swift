@@ -16,6 +16,7 @@ public enum Network: Codable, Equatable, Hashable, Identifiable {
     case scroll
     case scrollSepolia
     case sepolia
+    case worldChain
     case unknown(BigInt)
 
     public var id: String {
@@ -50,6 +51,8 @@ public enum Network: Codable, Equatable, Hashable, Identifiable {
             "Scroll (Sepolia)"
         case .sepolia:
             "Sepolia"
+        case .worldChain:
+            "World Chain"
         case let .unknown(chainId):
             "Unknown (chainId=\(chainId.description))"
         }
@@ -113,6 +116,8 @@ public enum Network: Codable, Equatable, Hashable, Identifiable {
             .scrollSepolia
         case Network.sepolia.chainId:
             .sepolia
+        case Network.worldChain.chainId:
+            .worldChain
         default:
             .unknown(chainId)
         }
@@ -146,6 +151,8 @@ public enum Network: Codable, Equatable, Hashable, Identifiable {
             BigInt(534_351)
         case .sepolia:
             BigInt(11_155_111)
+        case .worldChain:
+            BigInt(480)
         case .unknown:
             BigInt(0)
         }
@@ -179,6 +186,8 @@ public enum Network: Codable, Equatable, Hashable, Identifiable {
             "Scrollscan (Sepolia)"
         case .sepolia:
             "Etherscan (Sepolia)"
+        case .worldChain:
+            "Worldscan"
         case .unknown:
             nil
         }
@@ -212,6 +221,8 @@ public enum Network: Codable, Equatable, Hashable, Identifiable {
             URL(string: "https://sepolia.scrollscan.com")
         case .sepolia:
             URL(string: "https://sepolia.etherscan.io")
+        case .worldChain:
+            URL(string: "https://worldscan.org/")
         case .unknown:
             nil
         }
