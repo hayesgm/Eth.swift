@@ -44,7 +44,7 @@ public extension ABI {
     /// > ABI.Function(name: "myError", inputs: [.uint8]).decodeInput(input: Hex("0x10ff10dd0000000000000000000000000000000000000000000000000000000000000016"))
     /// ABI.Value.tuple1(.uint8(22))
     /// ```
-    struct Function: Equatable, CustomStringConvertible {
+    struct Function: Equatable, CustomStringConvertible, Sendable {
         public let name: String
         public let inputs: [ABI.Schema]
         public let outputs: [ABI.Schema]

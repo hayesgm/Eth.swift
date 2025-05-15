@@ -2,7 +2,7 @@ import BigInt
 import Foundation
 
 /// A 256-bit (32-byte) word used in Ethereum operations.
-public struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, ExpressibleByStringLiteral {
+public struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, ExpressibleByStringLiteral, Sendable {
     public let hex: Hex
 
     /// Initializes an `EthWord` with a 32-byte `Hex` data.

@@ -56,7 +56,7 @@ private func longFFI(args: Hex) -> EVM.FFIResult {
     }
 }
 
-struct EvmTest {
+struct EvmTest: Sendable {
     let name: String
     let code: EVM.Code
     let input: EVM.CallInput

@@ -13,7 +13,7 @@ final class GenoTests: XCTestCase {
 
         var abiTypes: [String] = []
         for f in contract.functions {
-            let schemas = f.outputs.map { parameterToValueType($0) }
+            let schemas = f.outputs.map { parameterToValueType($0, contractName: "") }
             abiTypes.append(contentsOf: schemas)
         }
         let desired = [".int256", ".tuple([.uint96, .uint160, .array(Cat.schema), .string, .array(.uint256), Cat.schema, .array(.array(.bytes32))])"]
@@ -31,7 +31,7 @@ final class GenoTests: XCTestCase {
 
         var abiTypes: [String] = []
         for f in contract.functions {
-            let schemas = f.outputs.enumerated().map { i, p in parameterToMatchableValueType(p: p, index: i) }
+            let schemas = f.outputs.enumerated().map { i, p in parameterToMatchableValueType(p: p, index: i, contractName: "") }
             abiTypes.append(contentsOf: schemas)
         }
         let desired = [".int256(var0)", ".tuple7(.uint96(a),\n .uint160(b),\n .array(Cat.schema, c),\n .string(d),\n .array(.uint256, e),\n f,\n .array(.array(.bytes32), g))"]
@@ -47,10 +47,10 @@ final class GenoTests: XCTestCase {
         }
         let contract = try! JSONDecoder().decode(Contract.self, from: jsonData)
 
-        let structDefs = generateStructs(c: contract)
+        let structDefs = generateStructs(c: contract, contractName: "")
 
         // smoke test that is building something sane
-        let regex = try! NSRegularExpression(pattern: "struct Bat: Equatable\\{public static let schema: ABI\\.Schema = ABI.Schema\\.tuple")
+        let regex = try! NSRegularExpression(pattern: "struct Bat: Equatable, Sendable\\{public static let schema: ABI\\.Schema = ABI.Schema\\.tuple")
 
         // Perform the matching
         let testString = structDefs[1].description
@@ -73,7 +73,7 @@ final class GenoTests: XCTestCase {
 
         var intializers: [String] = []
         for f in contract.functions {
-            let schemas = f.outputs.enumerated().map { _, p in structInitializer(parameter: p, structName: "Bat") }
+            let schemas = f.outputs.enumerated().map { _, p in structInitializer(parameter: p, structName: "Bat", contractName: "") }
             intializers.append(contentsOf: schemas)
         }
 
@@ -83,13 +83,13 @@ final class GenoTests: XCTestCase {
         }
 
         let noDangerousChildren = Geno.Contract.ABI.Function.Parameter(name: "", type: "tuple", internalType: "struct Animal.Bat", components: [])
-        XCTAssertEqual(structInitializer(parameter: noDangerousChildren, structName: "Bat"), "Bat()")
+        XCTAssertEqual(structInitializer(parameter: noDangerousChildren, structName: "Bat", contractName: ""), "Bat()")
     }
 
     func testCallParameters() {
         let tf = Geno.Contract.ABI.Function(type: "function", name: "lookAtMoose", inputs: [Geno.Contract.ABI.Function.Parameter(name: "moose", type: "tuple[]", internalType: "struct Animal.Moose[]", components: Optional([Geno.Contract.ABI.Function.Parameter(name: "b", type: "uint256", internalType: "uint256", components: nil)])), Geno.Contract.ABI.Function.Parameter(name: "m", type: "uint256", internalType: "uint256", components: nil)], outputs: [Geno.Contract.ABI.Function.Parameter(name: "", type: "bool", internalType: "bool", components: nil)], stateMutability: "pure")
 
-        let callParams = callParameters(f: tf)
+        let callParams = callParameters(f: tf, contractName: "")
         XCTAssertEqual(callParams, ".array(Animal.Moose.schema, moose.map { $0.asValue }), .uint256(m)")
     }
 

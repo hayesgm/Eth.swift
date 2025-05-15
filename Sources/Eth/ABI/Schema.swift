@@ -19,7 +19,7 @@ public extension ABI {
      - mismatchedType: The types provided do not match the schema.
      - invalidResponse: The response is invalid.
      */
-    enum DecodeError: Error, Equatable {
+    enum DecodeError: Error, Equatable, Sendable {
         case insufficientData(Schema, Hex)
         case excessData(Schema, Hex)
         case nonEmptyDataFound(Schema, Hex)
@@ -38,7 +38,7 @@ public extension ABI {
     /**
      An enumeration of all possible Solidity ABI types (e.g. `.uint256` for "uint256", `.tuple([.array(.string)])` for "(string[])")
      */
-    enum Schema: Equatable, CustomStringConvertible {
+    enum Schema: Equatable, CustomStringConvertible, Sendable {
         // Unsigned Int
         case uint8
         case uint16
