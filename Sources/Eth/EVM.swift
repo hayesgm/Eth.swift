@@ -61,7 +61,7 @@ public enum EVM {
      - ok: The FFI succeeded and returned the given bytes
      - revert: The FFI reverted and returned the given error bytes
      */
-    public enum FFIResult: Error, Equatable {
+    public enum FFIResult: Error, Equatable, Sendable {
         case ok(Hex)
         case revert(Hex)
     }
@@ -78,7 +78,7 @@ public enum EVM {
     }
 
     /// Inputs to an EVM call. That is, the `calldata` and ETH `value`.
-    public struct CallInput {
+    public struct CallInput: Sendable {
         public let calldata: Hex
         public let value: BigUInt
 
@@ -110,9 +110,9 @@ public enum EVM {
     /// A structure to store the VM stack during execution of an EVM program.
     public typealias Stack = [EthWord]
 
-    public typealias FFIMap = [EthAddress: (Hex) async -> FFIResult]
+    public typealias FFIMap = [EthAddress: @Sendable (Hex) async -> FFIResult]
 
-    struct Context {
+    struct Context: Sendable {
         var pc: Int = 0
         var stack: Stack = []
         var memory: Data = .init()
@@ -252,7 +252,7 @@ public enum EVM {
     }
 
     /// A mapping of all known EVM operations.
-    public enum Operation: Equatable {
+    public enum Operation: Equatable, Sendable {
         case stop
         case add
         case sub

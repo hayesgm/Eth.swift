@@ -3,10 +3,9 @@ import Foundation
 import SwiftSyntax
 import SwiftSyntaxBuilder
 
-var contractName: String = ""
 // Create the struct declaration syntax
 func createSourceFileSyntax(from contract: Contract, name: String, structsOnly: Bool) -> SourceFileSyntax {
-    contractName = name // for ensuring structs aren't namespaced under the same name as the contract
+    let contractName = name // for ensuring structs aren't namespaced under the same name as the contract
 
     return SourceFileSyntax {
         try! ImportDeclSyntax("@preconcurrency import BigInt").with(\.trailingTrivia, .newline)
@@ -14,7 +13,7 @@ func createSourceFileSyntax(from contract: Contract, name: String, structsOnly: 
         try! ImportDeclSyntax("import Foundation").with(\.trailingTrivia, .newline)
 
         try! EnumDeclSyntax(leadingTrivia: .newline, modifiers: [DeclModifierSyntax(name: .keyword(.public))], name: .identifier(name, leadingTrivia: .space)) {
-            for s in generateStructs(c: contract) {
+            for s in generateStructs(c: contract, contractName: contractName) {
                 s
             }
 
@@ -27,7 +26,7 @@ func createSourceFileSyntax(from contract: Contract, name: String, structsOnly: 
                     try! VariableDeclSyntax("""
                     public static let \(raw: errorName(error)) = ABI.Function(
                             name: "\(raw: error.name)",
-                            inputs: [\(raw: mapToETHABITypes(error.inputs))]
+                            inputs: [\(raw: mapToETHABITypes(error.inputs, contractName: contractName))]
                     )
                     """)
                     .with(\.trailingTrivia, .newlines(2))
@@ -40,7 +39,7 @@ func createSourceFileSyntax(from contract: Contract, name: String, structsOnly: 
                 ]))
                 EnumDeclSyntax(leadingTrivia: .newline, modifiers: [DeclModifierSyntax(name: .keyword(.public))], name: .identifier("RevertReason", leadingTrivia: .space, trailingTrivia: .space), inheritanceClause: extendingErrorClause) {
                     for e in contract.errors {
-                        try! EnumCaseDeclSyntax("case \(raw: errorEnumCaseName(e))").with(\.leadingTrivia, .newline)
+                        try! EnumCaseDeclSyntax("case \(raw: errorEnumCaseName(e, contractName: contractName))").with(\.leadingTrivia, .newline)
                     }
                     try! EnumCaseDeclSyntax("case unknownRevert(String, String)").with(\.leadingTrivia, .newline)
                 }
@@ -50,7 +49,7 @@ func createSourceFileSyntax(from contract: Contract, name: String, structsOnly: 
                 """) {
                     SwitchExprSyntax(subject: ExprSyntax("(error, value)")) {
                         for error in contract.errors {
-                            generateErrorSwitchCase(error)
+                            generateErrorSwitchCase(error, contractName: contractName)
                         }
 
                         SwitchCaseSyntax("""
@@ -68,9 +67,9 @@ func createSourceFileSyntax(from contract: Contract, name: String, structsOnly: 
 
                 // Generate a swift function and {ETH.ABI.Function} for each ABI function
                 for (function, functionName) in renamedFunctions {
-                    generateETHABIFunction(f: function, name: functionName)
-                    generateFunctionDeclaration(f: function)
-                    generateFunctionDecodeDeclaration(f: function)
+                    generateETHABIFunction(f: function, name: functionName, contractName: contractName)
+                    generateFunctionDeclaration(f: function, contractName: contractName)
+                    generateFunctionDecodeDeclaration(f: function, contractName: contractName)
                 }
             }
         }
@@ -108,15 +107,15 @@ func renameFunctions(_ contractFunctions: [Contract.ABI.Function]) -> [(Contract
 ///          case (JustOneArgError, let .bool(value) ):
 ///             return .justOneArgError(value)
 ///          """)
-func generateErrorSwitchCase(_ e: Contract.ABI.Error) -> SwitchCaseSyntax {
+func generateErrorSwitchCase(_ e: Contract.ABI.Error, contractName: String) -> SwitchCaseSyntax {
     let outBindings = if e.inputs.count == 0 {
         "_"
     } else {
-        "let \(outParameters(ps: e.inputs))"
+        "let \(outParameters(ps: e.inputs, contractName: contractName))"
     }
     return SwitchCaseSyntax("""
     case (\(raw: errorName(e)), \(raw: outBindings)):
-        return .\(raw: errorEnumWithBoundOutputs(e, namedOutputs: outValues(ps: e.inputs)))
+        return .\(raw: errorEnumWithBoundOutputs(e, namedOutputs: outValues(ps: e.inputs, contractName: contractName)))
     """).with(\.trailingTrivia, .newline)
 }
 
@@ -130,10 +129,10 @@ func errorName(_ e: Contract.ABI.Error) -> String {
 /// Turns an error into the enum case name for the enum definition.
 /// swift> enumCaseName(Geno.Contract.ABI.Error(type: "error", name: "JustOneArg", inputs: [Geno.Contract.ABI.Function.Parameter(name: "", type: "bool", internalType: "bool", components: nil)]))
 /// "justOneArg(Bool)"
-func errorEnumCaseName(_ e: Contract.ABI.Error) -> String {
+func errorEnumCaseName(_ e: Contract.ABI.Error, contractName: String) -> String {
     var out = e.name.prefix(1).lowercased() + e.name.dropFirst()
     if e.inputs.count > 0 {
-        let inputs = e.inputs.map { p in typeMapper(for: p) }.joined(separator: ", ")
+        let inputs = e.inputs.map { p in typeMapper(for: p, contractName: contractName) }.joined(separator: ", ")
         out.append("(" + inputs + ")")
     }
     return out
@@ -152,26 +151,26 @@ func errorEnumWithBoundOutputs(_ e: Contract.ABI.Error, namedOutputs: String?) -
 }
 
 /// eg. ["string", "address[]"] -> [.string, .array(.address)]
-func mapToETHABITypes(_ ps: [Contract.ABI.Function.Parameter]) -> DeclSyntax {
-    let out: String = ps.map { parameterToValueType($0) }.joined(separator: ", ")
+func mapToETHABITypes(_ ps: [Contract.ABI.Function.Parameter], contractName: String) -> DeclSyntax {
+    let out: String = ps.map { parameterToValueType($0, contractName: contractName) }.joined(separator: ", ")
 
     return DeclSyntax("\(raw: out)")
 }
 
-func generateETHABIFunction(f: Contract.ABI.Function, name: String) -> VariableDeclSyntax {
+func generateETHABIFunction(f: Contract.ABI.Function, name: String, contractName: String) -> VariableDeclSyntax {
     return try! VariableDeclSyntax("""
     public static let \(raw: f.name)Fn = ABI.Function(
             name: "\(raw: name)",
-            inputs: [\(raw: mapToETHABITypes(f.inputs))],
-            outputs: [\(raw: mapToETHABITypes(f.outputs))]
+            inputs: [\(raw: mapToETHABITypes(f.inputs, contractName: contractName))],
+            outputs: [\(raw: mapToETHABITypes(f.outputs, contractName: contractName))]
     )
     """)
     .with(\.trailingTrivia, .newline)
 }
 
-func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax {
-    var parameters = functionParameters(f: f)
-    let outputs = returnValue(f: f)
+func generateFunctionDeclaration(f: Contract.ABI.Function, contractName: String) -> FunctionDeclSyntax {
+    var parameters = functionParameters(f: f, contractName: contractName)
+    let outputs = returnValue(f: f, contractName: contractName)
 
     parameters.append("withFunctions ffis: EVM.FFIMap = [:]")
     let letExpr: String
@@ -186,13 +185,13 @@ func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax
     """) {
         StmtSyntax("""
                 do {
-                    let query = try \(raw: f.name)Fn.encoded(with: [\(raw: callParameters(f: f))])
+                    let query = try \(raw: f.name)Fn.encoded(with: [\(raw: callParameters(f: f, contractName: contractName))])
                     let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
                     let decoded = try \(raw: f.name)Fn.decode(output: result)
 
                     switch decoded {
-                    case \(raw: letExpr) \(raw: outParameters(ps: f.outputs)):
-                        return .success(\(raw: outValues(ps: f.outputs)))
+                    case \(raw: letExpr) \(raw: outParameters(ps: f.outputs, contractName: contractName)):
+                        return .success(\(raw: outValues(ps: f.outputs, contractName: contractName)))
                     default:
                         throw ABI.DecodeError.mismatchedType(decoded.schema, \(raw: f.name)Fn.outputTuple)
                     }
@@ -205,8 +204,8 @@ func generateFunctionDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax
     .with(\.trailingTrivia, .newlines(2))
 }
 
-func generateFunctionDecodeDeclaration(f: Contract.ABI.Function) -> FunctionDeclSyntax {
-    let parameters = f.inputs.map { p in typeMapper(for: p) }
+func generateFunctionDecodeDeclaration(f: Contract.ABI.Function, contractName: String) -> FunctionDeclSyntax {
+    let parameters = f.inputs.map { p in typeMapper(for: p, contractName: contractName) }
 
     let letExpr: String
     if f.inputs.count > 0 {
@@ -216,7 +215,7 @@ func generateFunctionDecodeDeclaration(f: Contract.ABI.Function) -> FunctionDecl
     }
 
     let maybeTry: String
-    if f.inputs.contains(where: { isOrHasStruct($0) }) {
+    if f.inputs.contains(where: { isOrHasStruct($0, contractName: contractName) }) {
         maybeTry = "try"
     } else {
         maybeTry = ""
@@ -229,8 +228,8 @@ func generateFunctionDecodeDeclaration(f: Contract.ABI.Function) -> FunctionDecl
 
                 let decodedInput = try \(raw: f.name)Fn.decodeInput(input: input)
                 switch decodedInput {
-                case \(raw: letExpr) \(raw: outParameters(ps: f.inputs)):
-                    return \(raw: maybeTry) (\(raw: outValues(ps: f.inputs)))
+                case \(raw: letExpr) \(raw: outParameters(ps: f.inputs, contractName: contractName)):
+                    return \(raw: maybeTry) (\(raw: outValues(ps: f.inputs, contractName: contractName)))
                 default:
                     throw ABI.DecodeError.mismatchedType(decodedInput.schema, \(raw: f.name)Fn.inputTuple)
                 }
@@ -240,24 +239,24 @@ func generateFunctionDecodeDeclaration(f: Contract.ABI.Function) -> FunctionDecl
     .with(\.trailingTrivia, .newlines(2))
 }
 
-func outValues(ps: [Contract.ABI.Function.Parameter]) -> String {
+func outValues(ps: [Contract.ABI.Function.Parameter], contractName: String) -> String {
     if ps.count == 0 {
         return "()"
     } else {
         return ps.enumerated().map { index, p in
-            namedParameterToOutValue(p: p, index: index)
+            namedParameterToOutValue(p: p, index: index, contractName: contractName)
         }.joined(separator: ", ")
     }
 }
 
-func namedParameterToOutValue(p: Contract.ABI.Function.Parameter, index: Int) -> String {
+func namedParameterToOutValue(p: Contract.ABI.Function.Parameter, index: Int, contractName: String) -> String {
     if isArray(p) {
-        return "\(fieldValue(parameter: p, index: 0, name: parameterVar(parameter: p, index: index, withPrefix: "var")))"
+        return "\(fieldValue(parameter: p, index: 0, name: parameterVar(parameter: p, index: index, withPrefix: "var"), contractName: contractName))"
     } else if isTuple(p) {
-        if let structName = structName(p) {
-            return structInitializer(parameter: p, structName: structName)
+        if let structName = structName(p, contractName: contractName) {
+            return structInitializer(parameter: p, structName: structName, contractName: contractName)
         } else {
-            let componentTypes = p.components!.enumerated().map { i, p in parameterToMatchableValueType(p: p, index: i) }
+            let componentTypes = p.components!.enumerated().map { i, p in parameterToMatchableValueType(p: p, index: i, contractName: contractName) }
             return "(\(componentTypes.joined(separator: ", ")))"
         }
     } else {
@@ -265,17 +264,17 @@ func namedParameterToOutValue(p: Contract.ABI.Function.Parameter, index: Int) ->
     }
 }
 
-func fieldValue(parameter: Contract.ABI.Function.Parameter, index: Int, name: String? = nil, inner: Bool = false) -> String {
+func fieldValue(parameter: Contract.ABI.Function.Parameter, index: Int, name: String? = nil, inner: Bool = false, contractName: String) -> String {
     if isArray(parameter) {
         let innerParameter: Contract.ABI.Function.Parameter = stripOneArrayLevel(parameter)
         let paramAsArray = inner ? ".asArray!" : ""
         if isArray(innerParameter) {
-            return "\(name ?? parameter.name)\(paramAsArray).map { \(fieldValue(parameter: innerParameter, index: index, name: "$0", inner: true)) }"
+            return "\(name ?? parameter.name)\(paramAsArray).map { \(fieldValue(parameter: innerParameter, index: index, name: "$0", inner: true, contractName: contractName)) }"
         } else {
-            return "\(name ?? parameter.name)\(paramAsArray).map { \(try! asValueMapper(parameter: innerParameter)) }"
+            return "\(name ?? parameter.name)\(paramAsArray).map { \(try! asValueMapper(parameter: innerParameter, contractName: contractName)) }"
         }
-    } else if structName(parameter) != nil {
-        return try! asValueMapper(parameter: parameter, name: parameter.name)
+    } else if structName(parameter, contractName: contractName) != nil {
+        return try! asValueMapper(parameter: parameter, name: parameter.name, contractName: contractName)
     } else {
         return parameter.name
     }
@@ -283,9 +282,9 @@ func fieldValue(parameter: Contract.ABI.Function.Parameter, index: Int, name: St
 
 /// swiftt> structInitializer(parameter: Geno.Contract.ABI.Function.Parameter(name: "c", type: "tuple", internalType: "struct Cat", components: Optional([Geno.Contract.ABI.Function.Parameter(name: "ca", type: "int256", internalType: "int256", components: nil), Geno.Contract.ABI.Function.Parameter(name: "cb", type: "bytes", internalType: "bytes", components: nil), Geno.Contract.ABI.Function.Parameter(name: "cc", type: "bytes32", internalType: "bytes32", components: nil)]), structName: "Cat)
 /// > "Cat(ca: ca, cb: cb, cc: cc)"
-func structInitializer(parameter p: Contract.ABI.Function.Parameter, structName: String) -> String {
+func structInitializer(parameter p: Contract.ABI.Function.Parameter, structName: String, contractName: String) -> String {
     if let c = p.components {
-        let args = c.enumerated().map { "\($0.1.name): \(fieldValue(parameter: $0.1, index: $0.0))" }.joined(separator: ", ")
+        let args = c.enumerated().map { "\($0.1.name): \(fieldValue(parameter: $0.1, index: $0.0, contractName: contractName))" }.joined(separator: ", ")
 
         if args.range(of: "try") != nil {
             // Struct initialization with nested fields may contain decodes that throw, so we need the `try` keyword in many but not all cases
@@ -300,12 +299,12 @@ func structInitializer(parameter p: Contract.ABI.Function.Parameter, structName:
     }
 }
 
-func outParameters(ps: [Contract.ABI.Function.Parameter]) -> String {
+func outParameters(ps: [Contract.ABI.Function.Parameter], contractName: String) -> String {
     if ps.count == 0 {
         return ".tuple0"
     } else {
         let inner = ps.enumerated().map { index, o in
-            parameterToMatchableValueType(p: o, index: index)
+            parameterToMatchableValueType(p: o, index: index, contractName: contractName)
         }.joined(separator: ", ")
 
         guard ps.count <= 16 else {
@@ -316,19 +315,19 @@ func outParameters(ps: [Contract.ABI.Function.Parameter]) -> String {
     }
 }
 
-func callParameters(f: Contract.ABI.Function) -> String {
+func callParameters(f: Contract.ABI.Function, contractName: String) -> String {
     return f.inputs.map { p in
         if isArray(p) {
-            if isStruct(p) {
-                let structName = structName(p)!
+            if isStruct(p, contractName: contractName) {
+                let structName = structName(p, contractName: contractName)!
                 return ".array(\(structName).schema, \(p.name).map { $0.asValue })"
             } else {
-                return parameterToArrayType(p: p, index: 0, asValue: true)
+                return parameterToArrayType(p: p, index: 0, asValue: true, contractName: contractName)
             }
-        } else if isStruct(p) {
+        } else if isStruct(p, contractName: contractName) {
             return "\(p.name).asValue"
         } else if isTuple(p) {
-            let componentTypes = p.components!.enumerated().map { _, p in parameterToValueType(p, allowSchema: true) }
+            let componentTypes = p.components!.enumerated().map { _, p in parameterToValueType(p, allowSchema: true, contractName: contractName) }
             return ".tuple\(componentTypes.count)(\(componentTypes.joined(separator: ",\n ")))"
         } else {
             // turning them into the enum values, with name values
@@ -337,29 +336,29 @@ func callParameters(f: Contract.ABI.Function) -> String {
     }.joined(separator: ", ")
 }
 
-func functionParameters(f: Contract.ABI.Function) -> [String] {
-    return f.inputs.map { "\($0.name): \(typeMapper(for: $0))" }
+func functionParameters(f: Contract.ABI.Function, contractName: String) -> [String] {
+    return f.inputs.map { "\($0.name): \(typeMapper(for: $0, contractName: contractName))" }
 }
 
-func returnValue(f: Contract.ABI.Function) -> String {
+func returnValue(f: Contract.ABI.Function, contractName: String) -> String {
     if f.outputs.count == 0 {
         return "()"
     } else {
-        return f.outputs.map { typeMapper(for: $0) }.joined(separator: ", ")
+        return f.outputs.map { typeMapper(for: $0, contractName: contractName) }.joined(separator: ", ")
     }
 }
 
-func parameterToValueType(_ parameter: Contract.ABI.Function.Parameter, allowSchema: Bool = false) -> String {
+func parameterToValueType(_ parameter: Contract.ABI.Function.Parameter, allowSchema: Bool = false, contractName: String) -> String {
     let inner: String
     let baseParameter = baseParameter(parameter)
 
     if isArray(parameter) {
-        inner = ".array(\(parameterToValueType(stripOneArrayLevel(parameter), allowSchema: allowSchema)))"
+        inner = ".array(\(parameterToValueType(stripOneArrayLevel(parameter), allowSchema: allowSchema, contractName: contractName)))"
     } else if isTuple(parameter) {
-        if allowSchema, let structName = structName(parameter) {
+        if allowSchema, let structName = structName(parameter, contractName: contractName) {
             inner = "\(structName).schema"
         } else {
-            let componentTypes = parameter.components?.map { parameterToValueType($0, allowSchema: true) } ?? []
+            let componentTypes = parameter.components?.map { parameterToValueType($0, allowSchema: true, contractName: contractName) } ?? []
             inner = ".tuple([\(componentTypes.joined(separator: ", "))])"
         }
     } else {
@@ -369,22 +368,22 @@ func parameterToValueType(_ parameter: Contract.ABI.Function.Parameter, allowSch
     return inner
 }
 
-func parameterToMatchableValueType(p: Contract.ABI.Function.Parameter, index: Int, asValue: Bool = false, isChild: Bool = false) -> String {
+func parameterToMatchableValueType(p: Contract.ABI.Function.Parameter, index: Int, asValue: Bool = false, isChild: Bool = false, contractName: String) -> String {
     // Note: it's comical that all of these cases need to be handled differently...
     let varName = parameterVar(parameter: p, index: index, withPrefix: "var")
 
     if isArray(p) {
-        return parameterToArrayType(p: p, index: index, asValue: asValue)
+        return parameterToArrayType(p: p, index: index, asValue: asValue, contractName: contractName)
     } else {
         if isTuple(p) {
-            if isChild && structName(p) != nil {
+            if isChild && structName(p, contractName: contractName) != nil {
                 if asValue {
                     return "\(varName).asValue"
                 } else {
                     return varName
                 }
             } else {
-                let componentTypes = p.components!.enumerated().map { i, p in parameterToMatchableValueType(p: p, index: index * 10 + i, asValue: asValue, isChild: true) }
+                let componentTypes = p.components!.enumerated().map { i, p in parameterToMatchableValueType(p: p, index: index * 10 + i, asValue: asValue, isChild: true, contractName: contractName) }
                 return ".tuple\(componentTypes.count)(\(componentTypes.joined(separator: ",\n ")))"
             }
         } else {
@@ -394,14 +393,14 @@ func parameterToMatchableValueType(p: Contract.ABI.Function.Parameter, index: In
     }
 }
 
-func parameterToArrayType(p: Contract.ABI.Function.Parameter, index: Int, asValue: Bool = false) -> String {
+func parameterToArrayType(p: Contract.ABI.Function.Parameter, index: Int, asValue: Bool = false, contractName: String) -> String {
     let varName = parameterVar(parameter: p, index: index, withPrefix: "var")
 
     let baseParameter = baseParameter(p)
     var innerSchema: String
     var value: String
     if isTuple(p) {
-        let structName = structName(p)!
+        let structName = structName(p, contractName: contractName)!
         innerSchema = "\(structName).schema"
         value = asValue ? "\(varName).map { $0.asValue }" : varName
     } else {
@@ -442,13 +441,13 @@ func parameterVar(parameter: Contract.ABI.Function.Parameter, index: Int, withPr
     }
 }
 
-func typeMapper(for p: Contract.ABI.Function.Parameter) -> String {
+func typeMapper(for p: Contract.ABI.Function.Parameter, contractName: String) -> String {
     if isArray(p) {
-        return "[\(typeMapper(for: stripOneArrayLevel(p)))]"
+        return "[\(typeMapper(for: stripOneArrayLevel(p), contractName: contractName))]"
     }
 
-    if isStruct(p) {
-        return structName(p)!
+    if isStruct(p, contractName: contractName) {
+        return structName(p, contractName: contractName)!
     }
 
     switch p.type {
@@ -502,15 +501,15 @@ func generateAbiFile(input_path: URL, structsOnly: Bool) -> String {
     return text
 }
 
-func generateStructs(c: Contract) -> [StructDeclSyntax] {
+func generateStructs(c: Contract, contractName: String) -> [StructDeclSyntax] {
     var structsSoFar: [String: StructDeclSyntax] = [:]
     for f in c.functions {
         for i in f.inputs {
-            makeStruccs(i, struccs: &structsSoFar)
+            makeStruccs(i, struccs: &structsSoFar, contractName: contractName)
         }
 
         for o in f.outputs {
-            makeStruccs(o, struccs: &structsSoFar)
+            makeStruccs(o, struccs: &structsSoFar, contractName: contractName)
         }
     }
 
@@ -579,21 +578,33 @@ func stripOneArrayLevel(_ p: Contract.ABI.Function.Parameter) -> Contract.ABI.Fu
     )
 }
 
-func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: StructDeclSyntax]) {
-    if let structName = structName(p) {
-        let equatableClause = InheritanceClauseSyntax(inheritedTypes: InheritedTypeListSyntax([InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Equatable"))]))
+func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: StructDeclSyntax], contractName: String) {
+    if let structName = structName(p, contractName: contractName) {
+        let inheritanceClause = InheritanceClauseSyntax(
+            inheritedTypes: InheritedTypeListSyntax(
+                [
+                    InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Equatable"), trailingComma: .commaToken()),
+                    InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Sendable"))
+                ]
+            )
+        )
 
         let nameParts = structName.split(separator: ".")
-        let def = try! StructDeclSyntax(leadingTrivia: .newline, modifiers: [DeclModifierSyntax(name: .keyword(.public))], name: .identifier(String(nameParts.last!), leadingTrivia: .space), inheritanceClause: equatableClause) {
+        let def = try! StructDeclSyntax(
+            leadingTrivia: .newline,
+            modifiers: [DeclModifierSyntax(name: .keyword(.public))],
+            name: .identifier(String(nameParts.last!), leadingTrivia: .space),
+            inheritanceClause: inheritanceClause
+        ) {
             // if we find a struct nestled down in an array somewhere, pretend it is a top level thing
             let baseParameter = baseParameter(p)
-            try VariableDeclSyntax("public static let schema: ABI.Schema = \(raw: "ABI.Schema" + parameterToValueType(baseParameter))").with(\.trailingTrivia, .newlines(2))
+            try VariableDeclSyntax("public static let schema: ABI.Schema = \(raw: "ABI.Schema" + parameterToValueType(baseParameter, contractName: contractName))").with(\.trailingTrivia, .newlines(2))
 
             for c in p.components! {
-                try VariableDeclSyntax("public let \(raw: c.name): \(raw: typeMapper(for: c))")
+                try VariableDeclSyntax("public let \(raw: c.name): \(raw: typeMapper(for: c, contractName: contractName))")
             }
 
-            let initArgs = p.components!.map { "\($0.name): \(typeMapper(for: $0))" }.joined(separator: ", ")
+            let initArgs = p.components!.map { "\($0.name): \(typeMapper(for: $0, contractName: contractName))" }.joined(separator: ", ")
             let initBody = p.components!.map { "self.\($0.name) = \($0.name)" }.joined(separator: "\n ")
             DeclSyntax("""
             public init(\(raw: initArgs)) {
@@ -601,10 +612,10 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
             }
             """).with(\.leadingTrivia, .newlines(2))
             try VariableDeclSyntax("public var encoded: Hex { asValue.encoded }").with(\.trailingTrivia, .newlines(2)).with(\.leadingTrivia, .newlines(2))
-            try VariableDeclSyntax("public var asValue: ABI.Value { \(raw: parameterToMatchableValueType(p: baseParameter, index: 0, asValue: true)) }").with(\.trailingTrivia, .newlines(1))
+            try VariableDeclSyntax("public var asValue: ABI.Value { \(raw: parameterToMatchableValueType(p: baseParameter, index: 0, asValue: true, contractName: contractName)) }").with(\.trailingTrivia, .newlines(1))
 
             try! FunctionDeclSyntax("""
-            public static func decode(hex: Hex) throws -> \(raw: typeMapper(for: baseParameter))
+            public static func decode(hex: Hex) throws -> \(raw: typeMapper(for: baseParameter, contractName: contractName))
             """) {
                 ExprSyntax("""
 
@@ -622,13 +633,13 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
                 .with(\.leadingTrivia, .newlines(1))
 
             try! FunctionDeclSyntax("""
-            public static func decodeValue(_ value: ABI.Value) throws -> \(raw: typeMapper(for: baseParameter))
+            public static func decodeValue(_ value: ABI.Value) throws -> \(raw: typeMapper(for: baseParameter, contractName: contractName))
             """) {
                 StmtSyntax("""
 
                 switch value {
-                case let \(raw: parameterToMatchableValueType(p: baseParameter, index: 0)):
-                    return \(raw: namedParameterToOutValue(p: baseParameter, index: 0))
+                case let \(raw: parameterToMatchableValueType(p: baseParameter, index: 0, contractName: contractName)):
+                    return \(raw: namedParameterToOutValue(p: baseParameter, index: 0, contractName: contractName))
                 default:
                     throw ABI.DecodeError.mismatchedType(value.schema, schema)
                 }
@@ -642,12 +653,12 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
     }
     if let c = p.components {
         for cp in c {
-            makeStruccs(cp, struccs: &struccs)
+            makeStruccs(cp, struccs: &struccs, contractName: contractName)
         }
     }
 }
 
-func structName(_ p: Contract.ABI.Function.Parameter) -> String? {
+func structName(_ p: Contract.ABI.Function.Parameter, contractName: String) -> String? {
     if p.internalType.starts(with: "struct") {
         baseParameter(p).internalType
             .replacingOccurrences(of: "struct \(contractName).", with: "")
@@ -665,16 +676,16 @@ func isArray(_ p: Contract.ABI.Function.Parameter) -> Bool {
     p.type.hasSuffix("[]")
 }
 
-func isStruct(_ p: Contract.ABI.Function.Parameter) -> Bool {
-    structName(p) != nil
+func isStruct(_ p: Contract.ABI.Function.Parameter, contractName: String) -> Bool {
+    structName(p, contractName: contractName) != nil
 }
 
-func isOrHasStruct(_ p: Contract.ABI.Function.Parameter) -> Bool {
-    structName(p) != nil
+func isOrHasStruct(_ p: Contract.ABI.Function.Parameter, contractName: String) -> Bool {
+    structName(p, contractName: contractName) != nil
 }
 
-func asValueMapper(parameter: Contract.ABI.Function.Parameter, name: String = "$0") throws -> String {
-    if let structName = structName(parameter) {
+func asValueMapper(parameter: Contract.ABI.Function.Parameter, name: String = "$0", contractName: String) throws -> String {
+    if let structName = structName(parameter, contractName: contractName) {
         return "try \(structName).decodeValue(\(name))"
     } else {
         switch parameter.type {

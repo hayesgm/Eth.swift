@@ -2,7 +2,7 @@ import Foundation
 import SwiftKeccak
 
 /// `EthAddress` represents a 20-byte Ethereum address
-public struct EthAddress: Codable, Equatable, Hashable, CustomStringConvertible, ExpressibleByStringLiteral {
+public struct EthAddress: Codable, Equatable, Hashable, CustomStringConvertible, ExpressibleByStringLiteral, Sendable {
     /// The 20-byte `Hex` struct representing the Ethereum address
     public let address: Hex
 

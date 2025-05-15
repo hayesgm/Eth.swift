@@ -1,7 +1,7 @@
 import Foundation
 
 /// Hex is a light wrapper around `Data` to make it easily convertable to and from hex strings.
-public struct Hex: Codable, Equatable, Hashable, CustomStringConvertible, ExpressibleByStringLiteral {
+public struct Hex: Codable, Equatable, Hashable, CustomStringConvertible, ExpressibleByStringLiteral, Sendable {
     public let data: Data
 
     /// Represents an error parsing hex
@@ -52,7 +52,7 @@ public struct Hex: Codable, Equatable, Hashable, CustomStringConvertible, Expres
     }
 
     /// An empty `Hex` value
-    public static var empty = Hex(Data())
+    public static let empty = Hex(Data())
 
     /// A string representation of the `Hex` value.
     public var description: String {

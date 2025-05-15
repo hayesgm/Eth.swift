@@ -40,10 +40,18 @@ final class ComplianceTests: XCTestCase {
     func testRunComplianceTests() async throws {
         // Load all tests from `Tests/ComplianceJson/*.json` as a `ComplianceTest` struct
         let directoryPath = "./Tests/ComplianceJson/"
+        let complianceTests: [ComplianceTest] = loadComplianceTests(directoryPath: directoryPath)
+
+        for test in complianceTests {
+            let resp: Hex = try await EVM.runQuery(bytecode: test.bytecode, query: test.query)
+            XCTAssertEqual(resp, test.expResp, test.name)
+        }
+    }
+
+    private func loadComplianceTests(directoryPath: String) -> [ComplianceTest] {
         let fileManager = FileManager.default
         var complianceTests: [ComplianceTest] = []
 
-        // Get all JSON files in the directory
         if let enumerator = fileManager.enumerator(atPath: directoryPath) {
             for case let file as String in enumerator {
                 if file.hasSuffix(".json") {
@@ -56,10 +64,7 @@ final class ComplianceTests: XCTestCase {
                 }
             }
         }
-
-        for test in complianceTests {
-            let resp: Hex = try await EVM.runQuery(bytecode: test.bytecode, query: test.query)
-            XCTAssertEqual(resp, test.expResp, test.name)
-        }
+        
+        return complianceTests
     }
 }

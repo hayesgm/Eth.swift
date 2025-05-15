@@ -43,7 +43,7 @@ public extension ABI {
      *   - Small integers (≤32 bits) are represented as `UInt` or `Int` values. Larger values are represented as `BigUInt` or `BigInt`.
      *   - Tuples are canonically represented for easy pattern-matching, e.g., `.tuple2(.uint256, .uint256)`. For tuples with more than 16 values, use `.tupleN([.uint256, ...])`.
      */
-    enum Value: Equatable, CustomStringConvertible {
+    enum Value: Equatable, CustomStringConvertible, Sendable {
         // Unsigned Int
         case uint8(UInt)
         case uint16(UInt)

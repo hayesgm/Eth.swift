@@ -1,13 +1,13 @@
 {
-  "originHash" : "392478dc45265e22cfdcef9df252d7110b3ba1671f6740a4d8129518af4e8895",
+  "originHash" : "bd0ab141007bdb5d08b2cf99a644bcfb1b6059843fd04ada7eb94d1d6a2aee7a",
   "pins" : [
     {
       "identity" : "bigint",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/attaswift/BigInt.git",
       "state" : {
-        "revision" : "0ed110f7555c34ff468e72e1686e59721f2b0da6",
-        "version" : "5.3.0"
+        "revision" : "d013a2b66ee468aade6da1f26c6d55cb6cd2e9ad",
+        "version" : "5.5.2"
       }
     },
     {
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-syntax.git",
       "state" : {
-        "revision" : "303e5c5c36d6a558407d364878df131c3546fad8",
-        "version" : "510.0.2"
+        "revision" : "f99ae8aa18f0cf0d53481901f88a0991dc3bd4a2",
+        "version" : "601.0.1"
       }
     },
     {
