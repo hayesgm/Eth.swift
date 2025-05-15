@@ -2,7 +2,7 @@ import BigInt
 import Foundation
 
 /// A ``Network`` represents different Ethereum networks (e.g. `Mainnet` or `Base`).
-public enum Network: Codable, Equatable, Hashable, Identifiable {
+public enum Network: Codable, Equatable, Hashable, Identifiable, Sendable {
     case alephZero
     case arbitrum
     case arbitrumSepolia
