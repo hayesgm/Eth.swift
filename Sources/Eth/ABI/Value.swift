@@ -179,6 +179,14 @@ public extension ABI {
         indirect case tuple14(Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value)
         indirect case tuple15(Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value)
         indirect case tuple16(Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value)
+        indirect case tuple17(Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value)
+        indirect case tuple18(Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value)
+        indirect case tuple19(Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value)
+        indirect case tuple20(Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value)
+        indirect case tuple21(Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value)
+        indirect case tuple22(Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value)
+        indirect case tuple23(Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value)
+        indirect case tuple24(Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value, Value)
         indirect case tupleN([Value])
 
         /// Returns a `String` if ``Value` contains a `.string`, otherwise `nil`
@@ -367,14 +375,14 @@ public extension ABI {
                 values
             case let .array(_, values):
                 values
-            case .tuple0, .tuple1, .tuple2, .tuple3, .tuple4, .tuple5, .tuple6, .tuple7, .tuple8, .tuple9, .tuple10, .tuple11, .tuple12, .tuple13, .tuple14, .tuple15, .tuple16, .tupleN:
+            case .tuple0, .tuple1, .tuple2, .tuple3, .tuple4, .tuple5, .tuple6, .tuple7, .tuple8, .tuple9, .tuple10, .tuple11, .tuple12, .tuple13, .tuple14, .tuple15, .tuple16, .tuple17, .tuple18, .tuple19, .tuple20, .tuple21, .tuple22, .tuple23, .tuple24, .tupleN:
                 tupleValues
             default:
                 nil
             }
         }
 
-        /// If the type is a `.tuple0`, `.tuple1`, ... `.tuple16`, returns a `.tupleN`, otherwise `nil`.
+        /// If the type is a `.tuple0`, `.tuple1`, ... `.tuple24`, returns a `.tupleN`, otherwise `nil`.
         ///
         /// Examples:
         /// ```
@@ -613,7 +621,7 @@ public extension ABI {
                 .array(schema)
             case let .tupleN(values):
                 .tuple(values.map { $0.schema })
-            case .tuple0, .tuple1, .tuple2, .tuple3, .tuple4, .tuple5, .tuple6, .tuple7, .tuple8, .tuple9, .tuple10, .tuple11, .tuple12, .tuple13, .tuple14, .tuple15, .tuple16:
+            case .tuple0, .tuple1, .tuple2, .tuple3, .tuple4, .tuple5, .tuple6, .tuple7, .tuple8, .tuple9, .tuple10, .tuple11, .tuple12, .tuple13, .tuple14, .tuple15, .tuple16, .tuple17, .tuple18, .tuple19, .tuple20, .tuple21, .tuple22, .tuple23, .tuple24:
                 asTupleN!.schema
             }
         }
@@ -654,6 +662,22 @@ public extension ABI {
                 return .tuple15(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14])
             case 16:
                 return .tuple16(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15])
+            case 17:
+                return .tuple17(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15], values[16])
+            case 18:
+                return .tuple18(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15], values[16], values[17])
+            case 19:
+                return .tuple19(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15], values[16], values[17], values[18])
+            case 20:
+                return .tuple20(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15], values[16], values[17], values[18], values[19])
+            case 21:
+                return .tuple21(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15], values[16], values[17], values[18], values[19], values[20])
+            case 22:
+                return .tuple22(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15], values[16], values[17], values[18], values[19], values[20], values[21])
+            case 23:
+                return .tuple23(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15], values[16], values[17], values[18], values[19], values[20], values[21], values[22])
+            case 24:
+                return .tuple24(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15], values[16], values[17], values[18], values[19], values[20], values[21], values[22], values[23])
             default:
                 return .tupleN(values)
             }
@@ -695,6 +719,22 @@ public extension ABI {
                 return [value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14]
             case let .tuple16(value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14, value15):
                 return [value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14, value15]
+            case let .tuple17(value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14, value15, value16):
+                return [value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14, value15, value16]
+            case let .tuple18(value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14, value15, value16, value17):
+                return [value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14, value15, value16, value17]
+            case let .tuple19(value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14, value15, value16, value17, value18):
+                return [value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14, value15, value16, value17, value18]
+            case let .tuple20(value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14, value15, value16, value17, value18, value19):
+                return [value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14, value15, value16, value17, value18, value19]
+            case let .tuple21(value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14, value15, value16, value17, value18, value19, value20):
+                return [value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14, value15, value16, value17, value18, value19, value20]
+            case let .tuple22(value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14, value15, value16, value17, value18, value19, value20, value21):
+                return [value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14, value15, value16, value17, value18, value19, value20, value21]
+            case let .tuple23(value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14, value15, value16, value17, value18, value19, value20, value21, value22):
+                return [value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14, value15, value16, value17, value18, value19, value20, value21, value22]
+            case let .tuple24(value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14, value15, value16, value17, value18, value19, value20, value21, value22, value23):
+                return [value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14, value15, value16, value17, value18, value19, value20, value21, value22, value23]
             case let .tupleN(values):
                 return values
             default:
@@ -981,7 +1021,7 @@ public extension ABI {
                     }
                 }
                 return Hex(prim + heap)
-            case .tuple0, .tuple1, .tuple2, .tuple3, .tuple4, .tuple5, .tuple6, .tuple7, .tuple8, .tuple9, .tuple10, .tuple11, .tuple12, .tuple13, .tuple14, .tuple15, .tuple16:
+            case .tuple0, .tuple1, .tuple2, .tuple3, .tuple4, .tuple5, .tuple6, .tuple7, .tuple8, .tuple9, .tuple10, .tuple11, .tuple12, .tuple13, .tuple14, .tuple15, .tuple16, .tuple17, .tuple18, .tuple19, .tuple20, .tuple21, .tuple22, .tuple23, .tuple24:
                 return asTupleN!.encoded
             }
         }
@@ -1204,7 +1244,7 @@ public extension ABI {
                 "\(schema)[](\(values.map { $0.description }))"
             case let .tupleN(values):
                 "tuple(\(values.map { $0.description }))"
-            case .tuple0, .tuple1, .tuple2, .tuple3, .tuple4, .tuple5, .tuple6, .tuple7, .tuple8, .tuple9, .tuple10, .tuple11, .tuple12, .tuple13, .tuple14, .tuple15, .tuple16:
+            case .tuple0, .tuple1, .tuple2, .tuple3, .tuple4, .tuple5, .tuple6, .tuple7, .tuple8, .tuple9, .tuple10, .tuple11, .tuple12, .tuple13, .tuple14, .tuple15, .tuple16, .tuple17, .tuple18, .tuple19, .tuple20, .tuple21, .tuple22, .tuple23, .tuple24:
                 asTupleN!.description
             }
         }
@@ -1236,7 +1276,7 @@ public extension ABI {
                 return "'[\(v.map { $0.jsonValue }.joined(separator: ","))]'"
             case let .tupleN(v):
                 return "'(\(v.map { $0.jsonValue }.joined(separator: ",")))'"
-            case .tuple0, .tuple1, .tuple2, .tuple3, .tuple4, .tuple5, .tuple6, .tuple7, .tuple8, .tuple9, .tuple10, .tuple11, .tuple12, .tuple13, .tuple14, .tuple15, .tuple16:
+            case .tuple0, .tuple1, .tuple2, .tuple3, .tuple4, .tuple5, .tuple6, .tuple7, .tuple8, .tuple9, .tuple10, .tuple11, .tuple12, .tuple13, .tuple14, .tuple15, .tuple16, .tuple17, .tuple18, .tuple19, .tuple20, .tuple21, .tuple22, .tuple23, .tuple24:
                 return asTupleN!.jsonValue
             }
         }

@@ -307,8 +307,8 @@ func outParameters(ps: [Contract.ABI.Function.Parameter], contractName: String) 
             parameterToMatchableValueType(p: o, index: index, contractName: contractName)
         }.joined(separator: ", ")
 
-        guard ps.count <= 16 else {
-            // Note the count constraint could be expanded by adding more tuple{n} cases to the ABI.Value enum. 16 is chosen as a reasonable max until expansion is needed.
+        guard ps.count <= 24 else {
+            // Note the count constraint could be expanded by adding more tuple{n} cases to the ABI.Value enum. 24 is chosen as a reasonable max until expansion is needed.
             fatalError("Geno cannot decode tuples with more than 16 values")
         }
         return ".tuple\(ps.count)(\(inner))"
