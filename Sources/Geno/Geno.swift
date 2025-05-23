@@ -181,12 +181,12 @@ func generateFunctionDeclaration(f: Contract.ABI.Function, contractName: String)
     }
 
     return try! FunctionDeclSyntax("""
-    public static func \(raw: f.name)(\(raw: parameters.joined(separator: ", "))) async throws -> Result<\(raw: outputs), RevertReason>
+    public static func \(raw: f.name)(\(raw: parameters.joined(separator: ", "))) throws -> Result<\(raw: outputs), RevertReason>
     """) {
         StmtSyntax("""
                 do {
                     let query = try \(raw: f.name)Fn.encoded(with: [\(raw: callParameters(f: f, contractName: contractName))])
-                    let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
+                    let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
                     let decoded = try \(raw: f.name)Fn.decode(output: result)
 
                     switch decoded {
