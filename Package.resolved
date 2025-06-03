@@ -1,13 +1,12 @@
 {
-  "originHash" : "f9a1843ea5ea0b15dcdac153e43659df9c216fee8dcdadee2cfcb67d0adb197b",
+  "originHash" : "9e6aff8f76fe82196f04b6b4c86f58a354e4c3a556b537b06be565c1e8cd1f75",
   "pins" : [
     {
       "identity" : "bigint",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/banky/BigInt",
+      "location" : "https://github.com/legend-hq/BigInt",
       "state" : {
-        "branch" : "master",
-        "revision" : "65c7a1ab03cbbeac9fc388f636876f40aa66e63c"
+        "revision" : "4c9217e14d8f560896eed2afb279687482b38232"
       }
     },
     {
