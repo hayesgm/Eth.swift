@@ -23,7 +23,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/banky/BigInt", branch: "master"),
+        .package(url: "https://github.com/banky/BigInt", branch: "65c7a1ab03cbbeac9fc388f636876f40aa66e63c"),
         .package(url: "https://github.com/hayesgm/SwiftKeccak.git", branch: "98a9d4a037dd62283977d5e0ef7d11c5612ff813"),
         .package(url: "https://github.com/apple/swift-syntax.git", from: "601.0.1"),
         .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.1.0"),
