@@ -36,7 +36,9 @@ final class EthAddressTests: XCTestCase {
 
             XCTFail("Should have failed invalid address length")
         } catch {
-            XCTAssertEqual(error.localizedDescription, "The data couldn’t be read because it isn’t in the correct format.")
+            // iOS: "The data couldn’t be read because it isn’t in the correct format."
+            // Android: "The operation could not be completed. The data isn’t in the correct format."
+            XCTAssertTrue(error.localizedDescription.contains("correct format"))
         }
     }
 
