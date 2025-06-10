@@ -2,6 +2,7 @@ import BigInt
 import Foundation
 
 /// A ``Network`` represents different Ethereum networks (e.g. `Mainnet` or `Base`).
+// SKIP @bridge
 public enum Network: Codable, Equatable, Hashable, Identifiable, Sendable {
     case alephZero
     case arbitrum
@@ -118,7 +119,8 @@ public enum Network: Codable, Equatable, Hashable, Identifiable, Sendable {
         do {
             let value = try container.decode(String.self)
             guard let bigIntValue = BigInt(value) else {
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid BigInt value")
+                throw DecodingError.dataCorruptedError(
+                    in: container, debugDescription: "Invalid BigInt value")
             }
             self = Network.fromChainId(bigIntValue)
         } catch {
@@ -175,7 +177,7 @@ public enum Network: Codable, Equatable, Hashable, Identifiable, Sendable {
         case Network.linea.chainId:
             .linea
         case Network.lineaSepolia.chainId:
-            .lineaSepolia   
+            .lineaSepolia
         case Network.lisk.chainId:
             .lisk
         case Network.mantle.chainId:
@@ -278,10 +280,10 @@ public enum Network: Codable, Equatable, Hashable, Identifiable, Sendable {
         case .zkSync:
             BigInt(324)
         case .zora:
-            BigInt(7777777)
+            BigInt(7_777_777)
         case .unknown:
             BigInt(0)
-}
+        }
     }
 
     public var explorerName: String? {
@@ -318,9 +320,9 @@ public enum Network: Codable, Equatable, Hashable, Identifiable, Sendable {
             "Uniscan"
         case .unknown:
             nil
-        case .alephZero, .blast, .bnbSmartChain, .celo, .gnosis, .hyperEVM, 
-             .ink, .lens, .lisk, .mantle, .mode, .plume, .redstone, 
-             .soneium, .sonic, .zkSync, .zora:
+        case .alephZero, .blast, .bnbSmartChain, .celo, .gnosis, .hyperEVM,
+            .ink, .lens, .lisk, .mantle, .mode, .plume, .redstone,
+            .soneium, .sonic, .zkSync, .zora:
             "\(self.description) Explorer"
         }
     }

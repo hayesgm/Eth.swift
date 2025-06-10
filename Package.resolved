@@ -1,5 +1,5 @@
 {
-  "originHash" : "9e6aff8f76fe82196f04b6b4c86f58a354e4c3a556b537b06be565c1e8cd1f75",
+  "originHash" : "1214e635cf6a84d653845b9ae3fc18409331424d4c820ad1d0367f0d555ccdc3",
   "pins" : [
     {
       "identity" : "bigint",
@@ -7,6 +7,15 @@
       "location" : "https://github.com/legend-hq/BigInt",
       "state" : {
         "revision" : "4c9217e14d8f560896eed2afb279687482b38232"
+      }
+    },
+    {
+      "identity" : "skip",
+      "kind" : "remoteSourceControl",
+      "location" : "https://source.skip.tools/skip.git",
+      "state" : {
+        "revision" : "18aba366924bf622d047b97f3249560e1471cc25",
+        "version" : "1.5.21"
       }
     },
     {
