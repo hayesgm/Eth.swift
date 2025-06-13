@@ -43,7 +43,7 @@ default:
 }
 ```
 
-As noted above, tuples are generally represented as `.tuple2(.uint8(1), .uint8(2))` to make unwrapping easy. You can also unwrap values using helper methods such as ``ABI/Value/asString``, ``ABI/Value/asBigUInt``, ....
+As noted above, tuples are generally represented as `.tuple2(.uint8(1), .uint8(2))` to make unwrapping easy. You can also unwrap values using helper methods such as ``ABI/Value/asString``, ``ABI/Value/asNumber``, ....
 
 ## Generating Swift from ABI
 
@@ -75,7 +75,7 @@ Then, you could grab its deployed bytecode from `MyContract.sol/MyContract.json`
 ```swift
 let code = try! EVM.decodeCode(fromData: Hex.hex("...")) // The deployed bytecode
 let result = try! EVM.runQuery(bytecode: code, query: .tuple1(.uint256(22)))
-print("result=" + result.asArray![0].asBigUInt!)
+print("result=" + result.asArray![0].asNumber!)
 ```
 
 ## Compliance Tests

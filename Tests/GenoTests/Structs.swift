@@ -1,20 +1,20 @@
-@preconcurrency import BigInt
 @preconcurrency import Eth
 import Foundation
+@preconcurrency import SwiftNumber
 
 public enum Structs {
     public struct Bat: Equatable {
         public static let schema: ABI.Schema = .tuple([.uint96, .uint160, .array(Cat.schema), .string, .array(.uint256), Cat.schema, .array(.array(.bytes32))])
 
-        public let a: BigUInt
-        public let b: BigUInt
+        public let a: Number
+        public let b: Number
         public let c: [Cat]
         public let d: String
-        public let e: [BigUInt]
+        public let e: [Number]
         public let f: Cat
         public let g: [[Hex]]
 
-        public init(a: BigUInt, b: BigUInt, c: [Cat], d: String, e: [BigUInt], f: Cat, g: [[Hex]]) {
+        public init(a: Number, b: Number, c: [Cat], d: String, e: [Number], f: Cat, g: [[Hex]]) {
             self.a = a
             self.b = b
             self.c = c
@@ -70,7 +70,7 @@ public enum Structs {
                 return try Bat(a: a, b: b, c: c.map {
                     try Cat.decodeValue($0)
                 }, d: d, e: e.map {
-                    $0.asBigUInt!
+                    $0.asNumber!
                 }, f: Cat.decodeValue(f), g: g.map {
                     $0.asArray!.map {
                         $0.asHex!
@@ -85,11 +85,11 @@ public enum Structs {
     public struct Cat: Equatable {
         public static let schema: ABI.Schema = .tuple([.int256, .bytes, .bytes32])
 
-        public let ca: BigInt
+        public let ca: SNumber
         public let cb: Hex
         public let cc: Hex
 
-        public init(ca: BigInt, cb: Hex, cc: Hex) {
+        public init(ca: SNumber, cb: Hex, cc: Hex) {
             self.ca = ca
             self.cb = cb
             self.cc = cc
@@ -192,10 +192,10 @@ public enum Structs {
         public struct Goose: Equatable {
             public static let schema: ABI.Schema = .tuple([.uint256, .string])
 
-            public let b: BigUInt
+            public let b: Number
             public let c: String
 
-            public init(b: BigUInt, c: String) {
+            public init(b: Number, c: String) {
                 self.b = b
                 self.c = c
             }
@@ -235,9 +235,9 @@ public enum Structs {
         public struct Moose: Equatable {
             public static let schema: ABI.Schema = .tuple([.uint256])
 
-            public let b: BigUInt
+            public let b: Number
 
-            public init(b: BigUInt) {
+            public init(b: Number) {
                 self.b = b
             }
 
@@ -349,10 +349,10 @@ public enum Structs {
         outputs: [.int256]
     )
 
-    public static func acceptBat(bat: Bat, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<BigInt, RevertReason> {
+    public static func acceptBat(bat: Bat, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<SNumber, RevertReason> {
         do {
             let query = try acceptBatFn.encoded(with: [bat.asValue])
-            let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
+            let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
             let decoded = try acceptBatFn.decode(output: result)
 
             switch decoded {
@@ -376,7 +376,7 @@ public enum Structs {
                                  .array(.uint256, e),
                                  f,
                                  .array(.array(.bytes32), g))):
-            return try (Bat(a: a, b: b, c: c.map { try Cat.decodeValue($0) }, d: d, e: e.map { $0.asBigUInt! }, f: Cat.decodeValue(f), g: g.map { $0.asArray!.map { $0.asHex! } }))
+            return try (Bat(a: a, b: b, c: c.map { try Cat.decodeValue($0) }, d: d, e: e.map { $0.asNumber! }, f: Cat.decodeValue(f), g: g.map { $0.asArray!.map { $0.asHex! } }))
         default:
             throw ABI.DecodeError.mismatchedType(decodedInput.schema, acceptBatFn.inputTuple)
         }
@@ -388,10 +388,10 @@ public enum Structs {
         outputs: [.bytes32]
     )
 
-    public static func acceptDat(x: Dat, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Hex, RevertReason> {
+    public static func acceptDat(x: Dat, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Hex, RevertReason> {
         do {
             let query = try acceptDatFn.encoded(with: [x.asValue])
-            let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
+            let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
             let decoded = try acceptDatFn.decode(output: result)
 
             switch decoded {
@@ -422,14 +422,14 @@ public enum Structs {
         outputs: [.uint256]
     )
 
-    public static func acceptNestedArray(arr: [[BigUInt]], withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<BigUInt, RevertReason> {
+    public static func acceptNestedArray(arr: [[Number]], withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Number, RevertReason> {
         do {
             let query = try acceptNestedArrayFn.encoded(with: [.array(.array(.uint256), arr.map {
                 .array(.uint256, $0.map {
                     .uint256($0)
                 })
             })])
-            let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
+            let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
             let decoded = try acceptNestedArrayFn.decode(output: result)
 
             switch decoded {
@@ -443,11 +443,11 @@ public enum Structs {
         }
     }
 
-    public static func acceptNestedArrayDecode(input: Hex) throws -> ([[BigUInt]]) {
+    public static func acceptNestedArrayDecode(input: Hex) throws -> ([[Number]]) {
         let decodedInput = try acceptNestedArrayFn.decodeInput(input: input)
         switch decodedInput {
         case let .tuple1(.array(.array(.uint256), arr)):
-            return (arr.map { $0.asArray!.map { $0.asBigUInt! } })
+            return (arr.map { $0.asArray!.map { $0.asNumber! } })
         default:
             throw ABI.DecodeError.mismatchedType(decodedInput.schema, acceptNestedArrayFn.inputTuple)
         }
@@ -459,10 +459,10 @@ public enum Structs {
         outputs: [.bytes]
     )
 
-    public static func anotherEmptyGoose(withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Hex, RevertReason> {
+    public static func anotherEmptyGoose(withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Hex, RevertReason> {
         do {
             let query = try anotherEmptyGooseFn.encoded(with: [])
-            let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
+            let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
             let decoded = try anotherEmptyGooseFn.decode(output: result)
 
             switch decoded {
@@ -492,10 +492,10 @@ public enum Structs {
         outputs: [.tuple([.uint96, .uint160, .array(Cat.schema), .string, .array(.uint256), Cat.schema, .array(.array(.bytes32))])]
     )
 
-    public static func buildBat(x: BigUInt, y: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Bat, RevertReason> {
+    public static func buildBat(x: Number, y: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Bat, RevertReason> {
         do {
             let query = try buildBatFn.encoded(with: [.uint256(x), .uint256(y)])
-            let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
+            let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
             let decoded = try buildBatFn.decode(output: result)
 
             switch decoded {
@@ -509,7 +509,7 @@ public enum Structs {
                 return try .success(Bat(a: a, b: b, c: c.map {
                     try Cat.decodeValue($0)
                 }, d: d, e: e.map {
-                    $0.asBigUInt!
+                    $0.asNumber!
                 }, f: Cat.decodeValue(f), g: g.map {
                     $0.asArray!.map {
                         $0.asHex!
@@ -523,7 +523,7 @@ public enum Structs {
         }
     }
 
-    public static func buildBatDecode(input: Hex) throws -> (BigUInt, BigUInt) {
+    public static func buildBatDecode(input: Hex) throws -> (Number, Number) {
         let decodedInput = try buildBatFn.decodeInput(input: input)
         switch decodedInput {
         case let .tuple2(.uint256(x), .uint256(y)):
@@ -539,10 +539,10 @@ public enum Structs {
         outputs: [.tuple([.array(.array(.bytes32)), .array(.array(.bytes32))])]
     )
 
-    public static func buildDat(x: Hex, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Dat, RevertReason> {
+    public static func buildDat(x: Hex, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Dat, RevertReason> {
         do {
             let query = try buildDatFn.encoded(with: [.bytes32(x)])
-            let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
+            let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
             let decoded = try buildDatFn.decode(output: result)
 
             switch decoded {
@@ -581,17 +581,17 @@ public enum Structs {
         outputs: [.array(.array(.uint256))]
     )
 
-    public static func buildNestedArray(x: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<[[BigUInt]], RevertReason> {
+    public static func buildNestedArray(x: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<[[Number]], RevertReason> {
         do {
             let query = try buildNestedArrayFn.encoded(with: [.uint256(x)])
-            let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
+            let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
             let decoded = try buildNestedArrayFn.decode(output: result)
 
             switch decoded {
             case let .tuple1(.array(.array(.uint256), var0)):
                 return .success(var0.map {
                     $0.asArray!.map {
-                        $0.asBigUInt!
+                        $0.asNumber!
                     }
                 })
             default:
@@ -602,7 +602,7 @@ public enum Structs {
         }
     }
 
-    public static func buildNestedArrayDecode(input: Hex) throws -> (BigUInt) {
+    public static func buildNestedArrayDecode(input: Hex) throws -> (Number) {
         let decodedInput = try buildNestedArrayFn.decodeInput(input: input)
         switch decodedInput {
         case let .tuple1(.uint256(x)):
@@ -618,10 +618,10 @@ public enum Structs {
         outputs: [.tuple([.uint256, .string])]
     )
 
-    public static func emptyGoose(withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Animal.Goose, RevertReason> {
+    public static func emptyGoose(withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Animal.Goose, RevertReason> {
         do {
             let query = try emptyGooseFn.encoded(with: [])
-            let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
+            let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
             let decoded = try emptyGooseFn.decode(output: result)
 
             switch decoded {
@@ -652,12 +652,12 @@ public enum Structs {
         outputs: [.bool]
     )
 
-    public static func lookAtMoose(moose: [Animal.Moose], m: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<Bool, RevertReason> {
+    public static func lookAtMoose(moose: [Animal.Moose], m: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Bool, RevertReason> {
         do {
             let query = try lookAtMooseFn.encoded(with: [.array(Animal.Moose.schema, moose.map {
                 $0.asValue
             }), .uint256(m)])
-            let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
+            let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
             let decoded = try lookAtMooseFn.decode(output: result)
 
             switch decoded {
@@ -671,7 +671,7 @@ public enum Structs {
         }
     }
 
-    public static func lookAtMooseDecode(input: Hex) throws -> ([Animal.Moose], BigUInt) {
+    public static func lookAtMooseDecode(input: Hex) throws -> ([Animal.Moose], Number) {
         let decodedInput = try lookAtMooseFn.decodeInput(input: input)
         switch decodedInput {
         case let .tuple2(.array(Animal.Moose.schema, moose), .uint256(m)):
@@ -687,12 +687,12 @@ public enum Structs {
         outputs: [.address]
     )
 
-    public static func lookAtRat(rat: Animal.Rat, holes: [EthAddress], withFunctions ffis: EVM.FFIMap = [:]) async throws -> Result<EthAddress, RevertReason> {
+    public static func lookAtRat(rat: Animal.Rat, holes: [EthAddress], withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<EthAddress, RevertReason> {
         do {
             let query = try lookAtRatFn.encoded(with: [rat.asValue, .array(.address, holes.map {
                 .address($0)
             })])
-            let result = try await EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
+            let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
             let decoded = try lookAtRatFn.decode(output: result)
 
             switch decoded {

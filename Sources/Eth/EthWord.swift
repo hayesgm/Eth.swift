@@ -1,5 +1,5 @@
-import BigInt
 import Foundation
+import SwiftNumber
 
 /// A 256-bit (32-byte) word used in Ethereum operations.
 public struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, ExpressibleByStringLiteral, Sendable {
@@ -56,17 +56,17 @@ public struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, Ex
         self.init(hexExtending: hex)
     }
 
-    /// Initializes an `EthWord` from a `BigUInt` value.
-    /// - Parameter value: The `BigUInt` value to convert.
+    /// Initializes an `EthWord` from a `Number` value.
+    /// - Parameter value: The `Number` value to convert.
     /// - Returns: An optional `EthWord` instance, or `nil` if the conversion fails.
-    public init?(fromBigUInt value: BigUInt) {
+    public init?(fromNumber value: Number) {
         self.init(hexExtending: Hex(value.serialize()))
     }
 
-    /// Initializes an `EthWord` from a `BigInt` value.
-    /// - Parameter value: The `BigInt` value to convert.
+    /// Initializes an `EthWord` from a `SNumber` value.
+    /// - Parameter value: The `SNumber` value to convert.
     /// - Returns: An optional `EthWord` instance, or `nil` if the conversion fails.
-    public init?(fromBigInt value: BigInt) {
+    public init?(fromSNumber value: SNumber) {
         var data: Data
 
         if value.sign == .plus {
@@ -89,21 +89,21 @@ public struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, Ex
     /// - Parameter value: The `Int` value to convert.
     /// - Returns: An optional `EthWord` instance, or `nil` if the conversion fails.
     public init?(fromInt value: Int) {
-        self.init(fromBigInt: BigInt(value))
+        self.init(fromSNumber: SNumber(value))
     }
 
     /// Initializes an `EthWord` from a `UInt` value.
     /// - Parameter value: The `UInt` value to convert.
     /// - Returns: An optional `EthWord` instance, or `nil` if the conversion fails.
     public init?(fromUInt value: UInt) {
-        self.init(fromBigInt: BigInt(value))
+        self.init(fromSNumber: SNumber(value))
     }
 
     /// Initializes an `EthWord` from a `UInt8` value.
     /// - Parameter value: The `UInt8` value to convert.
     /// - Returns: An optional `EthWord` instance, or `nil` if the conversion fails.
     public init?(fromUInt8 value: UInt8) {
-        self.init(fromBigInt: BigInt(value))
+        self.init(fromSNumber: SNumber(value))
     }
 
     /// Initializes an `EthWord` from a string literal.
@@ -126,13 +126,13 @@ public struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, Ex
         hex.data
     }
 
-    /// Converts the `EthWord` to a `BigUInt`.
-    /// - Returns: A `BigUInt` representing the `EthWord`.
-    public func toBigUInt() -> BigUInt {
-        return BigUInt(hex.data)
+    /// Converts the `EthWord` to a `Number`.
+    /// - Returns: A `Number` representing the `EthWord`.
+    public func toNumber() -> Number {
+        return Number(hex.data)
     }
 
-    private static let maxInt256 = BigInt(1) << 256
+    private static let maxInt256 = SNumber(1) << 256
 
     private func bitwise(_ fn: (UInt8) -> UInt8) -> Data {
         var result = Data(count: 32)
@@ -142,12 +142,12 @@ public struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, Ex
         return result
     }
 
-    /// Converts the `EthWord` to a `BigInt`.
-    /// - Returns: A `BigInt` representing the `EthWord`.
-    public func toBigInt() -> BigInt {
-        // Convert EthWord number to a BigInt
+    /// Converts the `EthWord` to a `SNumber`.
+    /// - Returns: A `SNumber` representing the `EthWord`.
+    public func toSNumber() -> SNumber {
+        // Convert EthWord number to a SNumber
         // As EthWords are stored as two's complement, we will
-        // need to convert this to a form that BigInt recognizes,
+        // need to convert this to a form that SNumber recognizes,
         // which is [sign_byte, ...bytes]
         if hex.data[0] & 0x80 != 0 {
             // Negative number handling
@@ -157,24 +157,24 @@ public struct EthWord: Codable, Equatable, Hashable, CustomStringConvertible, Ex
                 invertedData[i] = ~hex.data[i]
             }
 
-            // Convert the inverted data to a BigInt and add 1 to get the positive equivalent
-            var positiveValue = BigInt(Data([0]) + invertedData) + 1
+            // Convert the inverted data to a SNumber and add 1 to get the positive equivalent
+            var positiveValue = SNumber(Data([0]) + invertedData) + 1
 
             // Negate the value to get the original negative number
             positiveValue = -positiveValue
 
             return positiveValue
         } else {
-            return BigInt(Data([0x00]) + hex.data)
+            return SNumber(Data([0x00]) + hex.data)
         }
     }
 
     /// Converts the `EthWord` to an `Int`, if possible.
     /// - Returns: An optional `Int` representing the `EthWord`, or `nil` if the value exceeds `Int.max`.
     public func toInt() -> Int? {
-        let bigInt = toBigUInt()
-        if bigInt <= BigUInt(Int.max) {
-            return Int(bigInt)
+        let sNumber = toNumber()
+        if sNumber <= Number(Int.max) {
+            return Int(sNumber)
         } else {
             return nil
         }

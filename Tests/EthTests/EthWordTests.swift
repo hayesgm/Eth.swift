@@ -1,5 +1,5 @@
-import BigInt
 @testable import Eth
+import SwiftNumber
 import XCTest
 
 final class EthWordTests: XCTestCase {
@@ -15,39 +15,39 @@ final class EthWordTests: XCTestCase {
         XCTAssertNil(EthWord(fromHexString: "0xaa"))
     }
 
-    func testInitFromBigUInt() throws {
-        XCTAssertEqual(EthWord(fromBigUInt: BigUInt(0))!, "0x0000000000000000000000000000000000000000000000000000000000000000")
-        XCTAssertEqual(EthWord(fromBigUInt: BigUInt(1))!, "0x0000000000000000000000000000000000000000000000000000000000000001")
-        XCTAssertEqual(EthWord(fromBigUInt: BigUInt(2))!, "0x0000000000000000000000000000000000000000000000000000000000000002")
-        XCTAssertEqual(EthWord(fromBigUInt: BigUInt(256))!, "0x0000000000000000000000000000000000000000000000000000000000000100")
-        XCTAssertEqual(EthWord(fromBigUInt: BigUInt(257))!, "0x0000000000000000000000000000000000000000000000000000000000000101")
-        XCTAssertEqual(EthWord(fromBigUInt: (BigUInt(1) << 256) - 1)!, "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
+    func testInitFromNumber() throws {
+        XCTAssertEqual(EthWord(fromNumber: Number(0))!, "0x0000000000000000000000000000000000000000000000000000000000000000")
+        XCTAssertEqual(EthWord(fromNumber: Number(1))!, "0x0000000000000000000000000000000000000000000000000000000000000001")
+        XCTAssertEqual(EthWord(fromNumber: Number(2))!, "0x0000000000000000000000000000000000000000000000000000000000000002")
+        XCTAssertEqual(EthWord(fromNumber: Number(256))!, "0x0000000000000000000000000000000000000000000000000000000000000100")
+        XCTAssertEqual(EthWord(fromNumber: Number(257))!, "0x0000000000000000000000000000000000000000000000000000000000000101")
+        XCTAssertEqual(EthWord(fromNumber: (Number(1) << 256) - 1)!, "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
     }
 
-    func testInitFromBigInt() throws {
-        XCTAssertEqual(EthWord(fromBigInt: BigInt(0))!, "0x0000000000000000000000000000000000000000000000000000000000000000")
-        XCTAssertEqual(EthWord(fromBigInt: BigInt(-1))!, "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
-        XCTAssertEqual(EthWord(fromBigInt: BigInt(-2))!, "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE")
-        XCTAssertEqual(EthWord(fromBigInt: BigInt(-256))!, "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00")
-        XCTAssertEqual(EthWord(fromBigInt: BigInt(-257))!, "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFF")
-        XCTAssertEqual(EthWord(fromBigInt: BigInt(2).power(254))!, "0x4000000000000000000000000000000000000000000000000000000000000000")
+    func testInitFromSNumber() throws {
+        XCTAssertEqual(EthWord(fromSNumber: SNumber(0))!, "0x0000000000000000000000000000000000000000000000000000000000000000")
+        XCTAssertEqual(EthWord(fromSNumber: SNumber(-1))!, "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
+        XCTAssertEqual(EthWord(fromSNumber: SNumber(-2))!, "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE")
+        XCTAssertEqual(EthWord(fromSNumber: SNumber(-256))!, "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00")
+        XCTAssertEqual(EthWord(fromSNumber: SNumber(-257))!, "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFF")
+        XCTAssertEqual(EthWord(fromSNumber: SNumber(2).power(254))!, "0x4000000000000000000000000000000000000000000000000000000000000000")
         // Largest valid signed value
-        XCTAssertEqual(EthWord(fromBigInt: (BigInt(1) << 255) - 1)!, "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
+        XCTAssertEqual(EthWord(fromSNumber: (SNumber(1) << 255) - 1)!, "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
         // Signed value overflow
-        XCTAssertNil(EthWord(fromBigInt: (BigInt(1) << 255) + 1))
+        XCTAssertNil(EthWord(fromSNumber: (SNumber(1) << 255) + 1))
     }
 
-    func testToBigInt() throws {
-        XCTAssertEqual(EthWord(fromHexString: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")!.toBigInt(), BigInt(-1))
-        XCTAssertEqual(EthWord(fromHexString: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE")!.toBigInt(), BigInt(-2))
-        XCTAssertEqual(EthWord(fromHexString: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00")!.toBigInt(), BigInt(-256))
-        XCTAssertEqual(EthWord(fromHexString: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFF")!.toBigInt(), BigInt(-257))
-        XCTAssertEqual(EthWord(fromHexString: "0x4000000000000000000000000000000000000000000000000000000000000000")!.toBigInt(), BigInt(2).power(254))
+    func testToSNumber() throws {
+        XCTAssertEqual(EthWord(fromHexString: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")!.toSNumber(), SNumber(-1))
+        XCTAssertEqual(EthWord(fromHexString: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE")!.toSNumber(), SNumber(-2))
+        XCTAssertEqual(EthWord(fromHexString: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00")!.toSNumber(), SNumber(-256))
+        XCTAssertEqual(EthWord(fromHexString: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFF")!.toSNumber(), SNumber(-257))
+        XCTAssertEqual(EthWord(fromHexString: "0x4000000000000000000000000000000000000000000000000000000000000000")!.toSNumber(), SNumber(2).power(254))
     }
 
-    func testIsomorphicBigInts() throws {
+    func testIsomorphicSNumbers() throws {
         for x in [-5, -20, -3000, -7542, -90000] {
-            XCTAssertEqual(EthWord(fromData: EthWord(fromBigInt: BigInt(x))!.data)!.toBigInt(), BigInt(x), "\(x)")
+            XCTAssertEqual(EthWord(fromData: EthWord(fromSNumber: SNumber(x))!.data)!.toSNumber(), SNumber(x), "\(x)")
         }
     }
 }

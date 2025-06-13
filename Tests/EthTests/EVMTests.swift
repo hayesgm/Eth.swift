@@ -1,9 +1,9 @@
-import BigInt
 @testable import Eth
+import SwiftNumber
 import XCTest
 
 private func word(_ x: Int) -> EthWord {
-    guard let ethWord = EthWord(fromBigInt: BigInt(x)) else {
+    guard let ethWord = EthWord(fromSNumber: SNumber(x)) else {
         fatalError("Invalid word in EVMTest \(x)")
     }
     return ethWord
@@ -32,8 +32,8 @@ private func addFFI(args: Hex) -> EVM.FFIResult {
         let bData = args.data.subdata(in: 36 ..< 68)
 
         if f == "0x771602f7" {
-            let a = BigUInt(aData)
-            let b = BigUInt(bData)
+            let a = Number(aData)
+            let b = Number(bData)
             let sum = a + b
             return .ok(ABI.Value.uint256(sum).encoded)
         } else if args == "0xdeadbeef" {
@@ -66,7 +66,7 @@ struct EvmTest: Sendable {
     let expRevert: Hex?
     let expError: EVM.VMError?
 
-    init(name: String, withCode code: EVM.Code, expStack: EVM.Stack? = nil, expReturn: Hex? = nil, expRevert: Hex? = nil, expError: EVM.VMError? = nil, withCallData callData: Hex = .empty, withCallValue callValue: BigUInt = BigUInt(0), withFunctions ffis: EVM.FFIMap = [:]) {
+    init(name: String, withCode code: EVM.Code, expStack: EVM.Stack? = nil, expReturn: Hex? = nil, expRevert: Hex? = nil, expError: EVM.VMError? = nil, withCallData callData: Hex = .empty, withCallValue callValue: Number = Number(0), withFunctions ffis: EVM.FFIMap = [:]) {
         self.name = name
         self.code = code
         self.ffis = ffis
@@ -1061,7 +1061,7 @@ let tests: [EvmTest] =
             expStack: [
                 word(55),
             ],
-            withCallValue: BigUInt(55)
+            withCallValue: Number(55)
         ),
         EvmTest(
             name: "CallDataLoad - Empty",

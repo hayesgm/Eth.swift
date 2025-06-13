@@ -33,7 +33,7 @@ contract Cool {
 The output from `Geno` should look something like this:
 
 ```swift
-import BigInt
+import SwiftNumber
 import Eth
 import Foundation
 
@@ -47,7 +47,7 @@ enum Cool {
         outputs: [.uint256]
     )
 
-    static func sum(x: BigUInt, y: BigUInt) throws -> BigUInt {
+    static func sum(x: Number, y: Number) throws -> Number {
         let query = try sumFn.encoded(with: [.uint256(x), .uint256(y)])
         let result = try EVM.runQuery(bytecode: runtimeCode, query: query)
         let decoded = try sumFn.decode(output: result)
@@ -65,6 +65,6 @@ enum Cool {
 From there, you can start to call into the real functionality of the contract. E.g. to run the `sum` function locally, you can run:
 
 ```swift
-> try Cool.sum(x: BigUInt(1000), y: BigUInt(1000))
-BigUInt(2000)
+> try Cool.sum(x: Number(1000), y: Number(1000))
+Number(2000)
 ```

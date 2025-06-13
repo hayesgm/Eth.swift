@@ -23,7 +23,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/legend-hq/BigInt", branch: "4c9217e14d8f560896eed2afb279687482b38232"),
+        .package(url: "https://github.com/legend-hq/SwiftNumber", branch: "4c311f4e0a09bd8aa3245dadc1d0c0f5c7f83553"),
         .package(url: "https://github.com/hayesgm/SwiftKeccak.git", branch: "98a9d4a037dd62283977d5e0ef7d11c5612ff813"),
         .package(url: "https://github.com/apple/swift-syntax.git", from: "601.0.1"),
         .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.1.0"),
@@ -33,7 +33,7 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "Eth",
-            dependencies: ["BigInt", "SwiftKeccak"]
+            dependencies: ["SwiftNumber", "SwiftKeccak"]
         ),
         .executableTarget(
             name: "Geno",

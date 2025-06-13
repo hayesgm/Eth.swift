@@ -1,15 +1,15 @@
-import BigInt
 import Foundation
 import SwiftKeccak
+import SwiftNumber
 
 public enum EVM {
-    static let maxUint256 = BigUInt(1) << 256
-    static let maxInt256 = BigInt(1) << 256
-    static let one = BigUInt(1)
-    static let sZero = BigInt(0)
-    static let sOne = BigInt(1)
-    static let wordZero = EthWord(fromBigInt: .zero)!
-    static let wordOne = EthWord(fromBigUInt: one)!
+    static let maxUint256 = Number(1) << 256
+    static let maxInt256 = SNumber(1) << 256
+    static let one = Number(1)
+    static let sZero = SNumber(0)
+    static let sOne = SNumber(1)
+    static let wordZero = EthWord(fromSNumber: .zero)!
+    static let wordOne = EthWord(fromNumber: one)!
     static let gasAmount = EthWord(fromInt: 4_000_000)!
 
     private static func consoleFFI(args: Hex) -> EVM.FFIResult {
@@ -80,7 +80,7 @@ public enum EVM {
     /// Inputs to an EVM call. That is, the `calldata` and ETH `value`.
     public struct CallInput: Sendable {
         public let calldata: Hex
-        public let value: BigUInt
+        public let value: Number
 
         /// Reads data from the call input with zero padding if necessary.
         /// - Parameters:
@@ -907,37 +907,37 @@ public enum EVM {
         return code[pc]
     }
 
-    private static func bigIntToEthWord(_ x: BigInt) throws -> EthWord {
+    private static func sNumberToEthWord(_ x: SNumber) throws -> EthWord {
         let xWrapped = x % maxInt256
-        guard let xWord = EthWord(fromBigInt: xWrapped) else {
+        guard let xWord = EthWord(fromSNumber: xWrapped) else {
             throw VMError.unexpectedError("wrapped signed overflow: \(Hex.toHex(xWrapped.serialize()))")
         }
         return xWord
     }
 
-    private static func bigUIntToEthWord(_ x: BigUInt) throws -> EthWord {
+    private static func numberToEthWord(_ x: Number) throws -> EthWord {
         let xWrapped = x % maxUint256
-        guard let xWord = EthWord(fromBigUInt: xWrapped) else {
+        guard let xWord = EthWord(fromNumber: xWrapped) else {
             throw VMError.unexpectedError("wrapped unsigned overflow: \(Hex.toHex(xWrapped.serialize()))")
         }
         return xWord
     }
 
-    private static func wrappedUnsignedOp1(a: EthWord, _ fn: (BigUInt) -> BigUInt) throws -> EthWord {
-        try bigUIntToEthWord(fn(a.toBigUInt()))
+    private static func wrappedUnsignedOp1(a: EthWord, _ fn: (Number) -> Number) throws -> EthWord {
+        try numberToEthWord(fn(a.toNumber()))
     }
 
-    private static func wrappedUnsignedOp2(a: EthWord, b: EthWord, _ fn: (BigUInt, BigUInt) -> BigUInt) throws -> EthWord {
-        try bigUIntToEthWord(fn(a.toBigUInt(), b.toBigUInt()))
+    private static func wrappedUnsignedOp2(a: EthWord, b: EthWord, _ fn: (Number, Number) -> Number) throws -> EthWord {
+        try numberToEthWord(fn(a.toNumber(), b.toNumber()))
     }
 
-    private static func wrappedUnsignedOp3(a: EthWord, b: EthWord, c: EthWord, _ fn: (BigUInt, BigUInt, BigUInt) -> BigUInt) throws -> EthWord {
-        try bigUIntToEthWord(fn(a.toBigUInt(), b.toBigUInt(), c.toBigUInt()))
+    private static func wrappedUnsignedOp3(a: EthWord, b: EthWord, c: EthWord, _ fn: (Number, Number, Number) -> Number) throws -> EthWord {
+        try numberToEthWord(fn(a.toNumber(), b.toNumber(), c.toNumber()))
     }
 
-    private static func wrappedSignedOp2(a: EthWord, b: EthWord, _ fn: (BigInt, BigInt) -> BigInt) throws -> EthWord {
-        // Note: the BigInt conversions here are likely wrong
-        try bigIntToEthWord(fn(a.toBigInt(), b.toBigInt()))
+    private static func wrappedSignedOp2(a: EthWord, b: EthWord, _ fn: (SNumber, SNumber) -> SNumber) throws -> EthWord {
+        // Note: the SNumber conversions here are likely wrong
+        try sNumberToEthWord(fn(a.toSNumber(), b.toSNumber()))
     }
 
     private static func wrappedBinaryOp1(a: EthWord, _ fn: (UInt8) -> UInt8) throws -> EthWord {
@@ -956,22 +956,22 @@ public enum EVM {
         return EthWord(Hex(result))!
     }
 
-    private static func unsignedOp1(_ context: inout Context, _ fn: (BigUInt) -> BigUInt) throws {
+    private static func unsignedOp1(_ context: inout Context, _ fn: (Number) -> Number) throws {
         let a = try context.pop()
         try context.push(wrappedUnsignedOp1(a: a, fn))
     }
 
-    private static func unsignedOp2(_ context: inout Context, _ fn: (BigUInt, BigUInt) -> BigUInt) throws {
+    private static func unsignedOp2(_ context: inout Context, _ fn: (Number, Number) -> Number) throws {
         let (a, b) = try context.pop2()
         try context.push(wrappedUnsignedOp2(a: a, b: b, fn))
     }
 
-    private static func unsignedOp3(_ context: inout Context, _ fn: (BigUInt, BigUInt, BigUInt) -> BigUInt) throws {
+    private static func unsignedOp3(_ context: inout Context, _ fn: (Number, Number, Number) -> Number) throws {
         let (a, b, c) = try context.pop3()
         try context.push(wrappedUnsignedOp3(a: a, b: b, c: c, fn))
     }
 
-    private static func signedOp2(_ context: inout Context, _ fn: (BigInt, BigInt) -> BigInt) throws {
+    private static func signedOp2(_ context: inout Context, _ fn: (SNumber, SNumber) -> SNumber) throws {
         let (a, b) = try context.pop2()
         try context.push(wrappedSignedOp2(a: a, b: b, fn))
     }
@@ -1018,19 +1018,19 @@ public enum EVM {
             guard let shift_ = shift.toInt(), shift_ < 256 else {
                 return wordZero
             }
-            return try bigUIntToEthWord(value.toBigUInt() << shift_)
+            return try numberToEthWord(value.toNumber() << shift_)
         }
 
         static func shr(shift: EthWord, value: EthWord) throws -> EthWord {
             guard let shift_ = shift.toInt(), shift_ < 256 else {
                 return wordZero
             }
-            return try bigUIntToEthWord(value.toBigUInt() >> shift_)
+            return try numberToEthWord(value.toNumber() >> shift_)
         }
 
         static func sar(shift theShift: EthWord, value theValue: EthWord) throws -> EthWord {
-            let shift = theShift.toBigInt()
-            let value = theValue.toBigInt()
+            let shift = theShift.toSNumber()
+            let value = theValue.toSNumber()
 
             if shift >= 256 {
                 switch value.sign {
@@ -1043,7 +1043,7 @@ public enum EVM {
             }
 
             let shiftedValue = value >> Int(shift)
-            return try! bigIntToEthWord(shiftedValue)
+            return try! sNumberToEthWord(shiftedValue)
         }
 
         static func mstore(offset: EthWord, value: EthWord, context: inout Context) throws {
@@ -1311,7 +1311,7 @@ public enum EVM {
             let (offset, size) = try context.pop2()
             try context.push(Op.keccak256(offset: offset, size: size, context: &context))
         case .callvalue:
-            try context.push(bigUIntToEthWord(input.value))
+            try context.push(numberToEthWord(input.value))
         case .calldataload:
             let i = try context.pop()
             try context.push(Op.calldataload(i: i, withInput: input))
@@ -1453,7 +1453,7 @@ public enum EVM {
     ///   - errors: A dictionary of known errors which we will attempt to decode from during a revert and throw a `QueryError.error`
     ///   - ffis: A dictionary of addresses to FFI (natively implemented) functions available to the VM.
     /// - Returns: The hex result of the execution of program successfully `RETURN`ed.
-    public static func runQuery(bytecode: Hex, query: Hex, withValue value: BigUInt = BigUInt(0), withErrors errors: [ABI.Function] = [], withFunctions ffis: FFIMap = [:]) throws -> Hex {
+    public static func runQuery(bytecode: Hex, query: Hex, withValue value: Number = Number(0), withErrors errors: [ABI.Function] = [], withFunctions ffis: FFIMap = [:]) throws -> Hex {
         let code: Code
         do {
             code = try EVM.decodeCode(fromHex: bytecode)

@@ -1,5 +1,5 @@
-import BigInt
 @testable import Geno
+import SwiftNumber
 import SwiftSyntax
 import XCTest
 
@@ -77,7 +77,7 @@ final class GenoTests: XCTestCase {
             intializers.append(contentsOf: schemas)
         }
 
-        let desired = ["", "try Bat(a: a, b: b, c: c.map { try Cat.decodeValue($0) }, d: d, e: e.map { $0.asBigUInt! }, f: try Cat.decodeValue(f), g: g.map { $0.asArray!.map { $0.asHex! } })"]
+        let desired = ["", "try Bat(a: a, b: b, c: c.map { try Cat.decodeValue($0) }, d: d, e: e.map { $0.asNumber! }, f: try Cat.decodeValue(f), g: g.map { $0.asArray!.map { $0.asHex! } })"]
         for (i, _) in desired.enumerated() {
             XCTAssertEqual(intializers[i], desired[i])
         }

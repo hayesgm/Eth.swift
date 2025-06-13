@@ -1,5 +1,5 @@
-import BigInt
 import Foundation
+import SwiftNumber
 
 public extension ABI {
     /**
@@ -722,17 +722,17 @@ private func loadVariableSizedData(data: Data, withSchema schema: ABI.Schema) th
     return rest.prefix(dataLen)
 }
 
-private func bigIntToInt(_ bigInt: BigInt) -> Int? {
-    if bigInt >= BigInt(Int.min), bigInt <= BigInt(Int.max) {
-        return Int(bigInt)
+private func sNumberToInt(_ sNumber: SNumber) -> Int? {
+    if sNumber >= SNumber(Int.min), sNumber <= SNumber(Int.max) {
+        return Int(sNumber)
     } else {
         return nil
     }
 }
 
-private func bigUIntToUInt(_ bigUInt: BigUInt) -> UInt? {
-    if bigUInt <= BigUInt(UInt.max) {
-        return UInt(bigUInt)
+private func numberToUInt(_ number: Number) -> UInt? {
+    if number <= Number(UInt.max) {
+        return UInt(number)
     } else {
         return nil
     }
@@ -740,8 +740,8 @@ private func bigUIntToUInt(_ bigUInt: BigUInt) -> UInt? {
 
 /** Decodes a word of data to a UInt or fails **/
 private func decodeUIntSmall(_ data: Data, inBits bits: Int, withSchema schema: ABI.Schema) throws -> UInt {
-    let bigUInt = try decodeUInt(data, inBits: bits, withSchema: schema)
-    guard let int = bigUIntToUInt(bigUInt) else {
+    let number = try decodeUInt(data, inBits: bits, withSchema: schema)
+    guard let int = numberToUInt(number) else {
         throw ABI.DecodeError.sizedUnsignedIntegerOverflow(bits, Hex(data))
     }
     return int
@@ -749,21 +749,21 @@ private func decodeUIntSmall(_ data: Data, inBits bits: Int, withSchema schema: 
 
 /** Decodes a word of data to an Int or fails **/
 private func decodeIntSmall(_ data: Data, inBits bits: Int, withSchema schema: ABI.Schema) throws -> Int {
-    let bigInt = try decodeInt(data, inBits: bits, withSchema: schema)
-    guard let int = bigIntToInt(bigInt) else {
+    let sNumber = try decodeInt(data, inBits: bits, withSchema: schema)
+    guard let int = sNumberToInt(sNumber) else {
         throw ABI.DecodeError.sizedSignedIntegerOverflow(bits, Hex(data))
     }
     return int
 }
 
-/** Decodes a word to a BigUInt **/
-private func decodeUInt(_ data: Data, inBits bits: Int, withSchema schema: ABI.Schema) throws -> BigUInt {
-    try toBigUInt(readExactSingleWord(data, withSchema: schema), bits: bits)
+/** Decodes a word to a Number **/
+private func decodeUInt(_ data: Data, inBits bits: Int, withSchema schema: ABI.Schema) throws -> Number {
+    try toNumber(readExactSingleWord(data, withSchema: schema), bits: bits)
 }
 
-/** Decodes a word to a BigInt **/
-private func decodeInt(_ data: Data, inBits bits: Int, withSchema schema: ABI.Schema) throws -> BigInt {
-    try toBigInt(readExactSingleWord(data, withSchema: schema), bits: bits)
+/** Decodes a word to a SNumber **/
+private func decodeInt(_ data: Data, inBits bits: Int, withSchema schema: ABI.Schema) throws -> SNumber {
+    try toSNumber(readExactSingleWord(data, withSchema: schema), bits: bits)
 }
 
 /** Sometimes we need to pack data into 32-byte words. This determines the minimum number of words needed
@@ -815,20 +815,20 @@ private func readExactSingleWord(_ data: Data, withSchema schema: ABI.Schema) th
     }
 }
 
-/** Returns a BigUInt if the data fits within N bits **/
-private func toBigUInt(_ word: EthWord, bits: Int) throws -> BigUInt {
-    let x = word.toBigUInt()
-    guard x < BigUInt(2).power(bits) else {
+/** Returns a Number if the data fits within N bits **/
+private func toNumber(_ word: EthWord, bits: Int) throws -> Number {
+    let x = word.toNumber()
+    guard x < Number(2).power(bits) else {
         throw ABI.DecodeError.sizedUnsignedIntegerOverflow(bits, Hex(word.data))
     }
     return x
 }
 
-/** Returns a BigInt if the data fits within N bits. Assumes two's complement encoding. **/
-private func toBigInt(_ word: EthWord, bits: Int) throws -> BigInt {
-    let x = word.toBigInt()
-    let maxValue = BigInt(2).power(bits - 1)
-    let minValue = BigInt(-2).power(bits - 1)
+/** Returns a SNumber if the data fits within N bits. Assumes two's complement encoding. **/
+private func toSNumber(_ word: EthWord, bits: Int) throws -> SNumber {
+    let x = word.toSNumber()
+    let maxValue = SNumber(2).power(bits - 1)
+    let minValue = SNumber(-2).power(bits - 1)
 
     guard x < maxValue, x >= minValue else {
         throw ABI.DecodeError.sizedSignedIntegerOverflow(bits, Hex(word.data))
@@ -839,7 +839,7 @@ private func toBigInt(_ word: EthWord, bits: Int) throws -> BigInt {
 /** Reads the N most significant bytes of a 32-byte data value **/
 private func readBytesN(_ data: Data, withSchema schema: ABI.Schema, bytes: Int) throws -> Hex {
     try checkDataSize(data, words: 1, forSchema: schema)
-    guard BigUInt(data.suffix(32 - bytes)) == .zero else {
+    guard Number(data.suffix(32 - bytes)) == .zero else {
         throw ABI.DecodeError.nonEmptyDataFound(schema, Hex(data))
     }
     return Hex(data.prefix(bytes))
@@ -848,7 +848,7 @@ private func readBytesN(_ data: Data, withSchema schema: ABI.Schema, bytes: Int)
 /** Reads the N least significant bytes of a 32-byte data value **/
 private func readRightBytesN(_ data: Data, withSchema schema: ABI.Schema, bytes: Int) throws -> Data {
     try checkDataSize(data, words: 1, forSchema: schema)
-    guard BigUInt(data.prefix(32 - bytes)) == .zero else {
+    guard Number(data.prefix(32 - bytes)) == .zero else {
         throw ABI.DecodeError.nonEmptyDataFound(schema, Hex(data))
     }
     return data.suffix(bytes)
