@@ -1,14 +1,6 @@
 {
-  "originHash" : "9e6aff8f76fe82196f04b6b4c86f58a354e4c3a556b537b06be565c1e8cd1f75",
+  "originHash" : "dba1f8cb35f5881793f5f76023d33ad0fc24d14144993700fcfc2b99327d3509",
   "pins" : [
-    {
-      "identity" : "bigint",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/legend-hq/BigInt",
-      "state" : {
-        "revision" : "4c9217e14d8f560896eed2afb279687482b38232"
-      }
-    },
     {
       "identity" : "swift-docc-plugin",
       "kind" : "remoteSourceControl",
@@ -42,6 +34,14 @@
       "location" : "https://github.com/hayesgm/SwiftKeccak.git",
       "state" : {
         "revision" : "98a9d4a037dd62283977d5e0ef7d11c5612ff813"
+      }
+    },
+    {
+      "identity" : "swiftnumber",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/legend-hq/SwiftNumber",
+      "state" : {
+        "revision" : "4c311f4e0a09bd8aa3245dadc1d0c0f5c7f83553"
       }
     }
   ],

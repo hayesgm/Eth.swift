@@ -26,7 +26,6 @@ func generateSwiftFromAbi() throws {
             }
         case "--structs-only":
             structsOnly = true
-
         case "--prefix":
             if i + 1 < arguments.count {
                 prefix = arguments[i + 1]

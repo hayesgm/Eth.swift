@@ -1,4 +1,3 @@
-
 import Foundation
 import SwiftSyntax
 import SwiftSyntaxBuilder
@@ -8,7 +7,7 @@ func createSourceFileSyntax(from contract: Contract, name: String, structsOnly: 
     let contractName = name // for ensuring structs aren't namespaced under the same name as the contract
 
     return SourceFileSyntax {
-        try! ImportDeclSyntax("@preconcurrency import BigInt").with(\.trailingTrivia, .newline)
+        try! ImportDeclSyntax("@preconcurrency import SwiftNumber").with(\.trailingTrivia, .newline)
         try! ImportDeclSyntax("@preconcurrency import Eth").with(\.trailingTrivia, .newline)
         try! ImportDeclSyntax("import Foundation").with(\.trailingTrivia, .newline)
 
@@ -468,7 +467,7 @@ func typeMapper(for p: Contract.ABI.Function.Parameter, contractName: String) ->
     case "uint32":
         return "UInt"
     case let type where type.starts(with: "uint"):
-        return "BigUInt"
+        return "Number"
     case "int8":
         return "Int"
     case "int16":
@@ -478,7 +477,7 @@ func typeMapper(for p: Contract.ABI.Function.Parameter, contractName: String) ->
     case "int32":
         return "Int"
     case let type where type.starts(with: "int"):
-        return "BigInt"
+        return "SNumber"
     case let bytesType where bytesType.starts(with: "bytes"):
         return "Hex" // Dynamically-sized bytes sequence.
     default:
@@ -584,7 +583,7 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
             inheritedTypes: InheritedTypeListSyntax(
                 [
                     InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Equatable"), trailingComma: .commaToken()),
-                    InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Sendable"))
+                    InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Sendable")),
                 ]
             )
         )
@@ -696,9 +695,9 @@ func asValueMapper(parameter: Contract.ABI.Function.Parameter, name: String = "$
         case "address", "address payable":
             return "$0.asEthAddress!"
         case let type where type.starts(with: "uint"):
-            return "$0.asBigUInt!"
+            return "$0.asNumber!"
         case let type where type.starts(with: "int"):
-            return "$0.asBigInt!"
+            return "$0.asSNumber!"
         case let bytesType where bytesType.starts(with: "bytes"):
             return "$0.asHex!" // Dynamically-sized bytes sequence.
         default:

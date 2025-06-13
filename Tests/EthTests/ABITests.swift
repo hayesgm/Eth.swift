@@ -1,5 +1,5 @@
-import BigInt
 @testable import Eth
+import SwiftNumber
 import XCTest
 
 func unwrapError<T: Error, U>(_ expression: @autoclosure () throws -> U, as expectedErrorType: T.Type) -> T? {
@@ -27,7 +27,7 @@ func unwrapErrorAsync<T: Error, U>(_ expression: @autoclosure () async throws ->
 }
 
 private func word(_ x: Int) -> EthWord {
-    guard let ethWord = EthWord(fromBigInt: BigInt(x)) else {
+    guard let ethWord = EthWord(fromSNumber: SNumber(x)) else {
         fatalError("Invalid word in EVMTest \(x)")
     }
     return ethWord
@@ -512,9 +512,9 @@ final class ABITests: XCTestCase {
     }
 
     func testLargeUIntClamped() throws {
-        XCTAssertEqual(ABI.Value.uint40(BigUInt(1) << 39).encoded.hex, "0x0000000000000000000000000000000000000000000000000000008000000000")
-        XCTAssertEqual(ABI.Value.uint40(BigUInt(1) << 41).encoded.hex, "0x000000000000000000000000000000000000000000000000000000ffffffffff")
-        XCTAssertEqual(ABI.Value.uint256(BigUInt(1) << 257).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
+        XCTAssertEqual(ABI.Value.uint40(Number(1) << 39).encoded.hex, "0x0000000000000000000000000000000000000000000000000000008000000000")
+        XCTAssertEqual(ABI.Value.uint40(Number(1) << 41).encoded.hex, "0x000000000000000000000000000000000000000000000000000000ffffffffff")
+        XCTAssertEqual(ABI.Value.uint256(Number(1) << 257).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
     }
 
     func testSmallIntClamped() throws {
@@ -530,12 +530,12 @@ final class ABITests: XCTestCase {
     }
 
     func testLargeIntClamped() throws {
-        XCTAssertEqual(ABI.Value.int40(BigInt(1) << 38).encoded.hex, "0x0000000000000000000000000000000000000000000000000000004000000000")
-        XCTAssertEqual(ABI.Value.int40(-(BigInt(1) << 38)).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffc000000000")
-        XCTAssertEqual(ABI.Value.int40(BigInt(1) << 41).encoded.hex, "0x0000000000000000000000000000000000000000000000000000007fffffffff")
-        XCTAssertEqual(ABI.Value.int40(-(BigInt(1) << 41)).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffff8000000000")
-        XCTAssertEqual(ABI.Value.int256(BigInt(1) << 257).encoded.hex, "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
-        XCTAssertEqual(ABI.Value.int256(-(BigInt(1) << 257)).encoded.hex, "0x8000000000000000000000000000000000000000000000000000000000000000")
+        XCTAssertEqual(ABI.Value.int40(SNumber(1) << 38).encoded.hex, "0x0000000000000000000000000000000000000000000000000000004000000000")
+        XCTAssertEqual(ABI.Value.int40(-(SNumber(1) << 38)).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffc000000000")
+        XCTAssertEqual(ABI.Value.int40(SNumber(1) << 41).encoded.hex, "0x0000000000000000000000000000000000000000000000000000007fffffffff")
+        XCTAssertEqual(ABI.Value.int40(-(SNumber(1) << 41)).encoded.hex, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffff8000000000")
+        XCTAssertEqual(ABI.Value.int256(SNumber(1) << 257).encoded.hex, "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
+        XCTAssertEqual(ABI.Value.int256(-(SNumber(1) << 257)).encoded.hex, "0x8000000000000000000000000000000000000000000000000000000000000000")
     }
 
     func testUnwrappingFunctions() throws {
@@ -543,13 +543,13 @@ final class ABITests: XCTestCase {
         XCTAssertEqual(ABI.Value.uint8(22).asString, nil)
         XCTAssertEqual(ABI.Value.uint8(22).asUInt, 22)
         XCTAssertEqual(ABI.Value.uint8(22).asInt, nil)
-        XCTAssertEqual(ABI.Value.uint8(22).asBigInt, nil)
-        XCTAssertEqual(ABI.Value.uint8(22).asBigUInt, BigUInt(22))
-        XCTAssertEqual(ABI.Value.uint256(BigUInt(22)).asBigUInt, BigUInt(22))
+        XCTAssertEqual(ABI.Value.uint8(22).asSNumber, nil)
+        XCTAssertEqual(ABI.Value.uint8(22).asNumber, Number(22))
+        XCTAssertEqual(ABI.Value.uint256(Number(22)).asNumber, Number(22))
         XCTAssertEqual(ABI.Value.int8(22).asInt, 22)
         XCTAssertEqual(ABI.Value.int8(22).asUInt, nil)
-        XCTAssertEqual(ABI.Value.int8(22).asBigInt, BigInt(22))
-        XCTAssertEqual(ABI.Value.int256(BigInt(22)).asBigInt, BigInt(22))
+        XCTAssertEqual(ABI.Value.int8(22).asSNumber, SNumber(22))
+        XCTAssertEqual(ABI.Value.int256(SNumber(22)).asSNumber, SNumber(22))
         XCTAssertEqual(ABI.Value.bool(true).asBool, true)
         XCTAssertEqual(ABI.Value.address(EthAddress("0x0000000000000000000000000000000000000002")).asEthAddress, EthAddress("0x0000000000000000000000000000000000000002"))
         XCTAssertEqual(ABI.Value.bytes1("0x11").asHex, "0x11")

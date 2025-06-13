@@ -1,5 +1,5 @@
-import BigInt
 import Foundation
+import SwiftNumber
 
 public enum IConsole {
     public static let creationCode: Hex = "0x"
@@ -47,7 +47,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__1(p0: Bool, p1: BigUInt, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__1(p0: Bool, p1: Number, p2: Number, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__1Fn.encoded(with: [.bool(p0), .uint256(p1), .uint256(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -93,7 +93,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__3(p0: BigUInt, p1: EthAddress, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__3(p0: Number, p1: EthAddress, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__3Fn.encoded(with: [.uint256(p0), .address(p1), .address(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -139,7 +139,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__5(p0: BigUInt, p1: Bool, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__5(p0: Number, p1: Bool, p2: EthAddress, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__5Fn.encoded(with: [.uint256(p0), .bool(p1), .address(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -162,7 +162,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__6(p0: Bool, p1: EthAddress, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__6(p0: Bool, p1: EthAddress, p2: Bool, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__6Fn.encoded(with: [.bool(p0), .address(p1), .bool(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -185,7 +185,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__7(p0: Bool, p1: BigUInt, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__7(p0: Bool, p1: Number, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__7Fn.encoded(with: [.bool(p0), .uint256(p1), .address(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -208,7 +208,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__8(p0: BigUInt, p1: EthAddress, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__8(p0: Number, p1: EthAddress, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__8Fn.encoded(with: [.uint256(p0), .address(p1), .address(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -231,7 +231,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__9(p0: EthAddress, p1: Bool, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__9(p0: EthAddress, p1: Bool, p2: Number, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__9Fn.encoded(with: [.address(p0), .bool(p1), .uint256(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -254,7 +254,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__10(p0: Bool, p1: Bool, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__10(p0: Bool, p1: Bool, p2: Number, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__10Fn.encoded(with: [.bool(p0), .bool(p1), .uint256(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -277,7 +277,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__11(p0: Bool, p1: EthAddress, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__11(p0: Bool, p1: EthAddress, p2: EthAddress, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__11Fn.encoded(with: [.bool(p0), .address(p1), .address(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -300,7 +300,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__12(p0: BigUInt, p1: EthAddress, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__12(p0: Number, p1: EthAddress, p2: Number, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__12Fn.encoded(with: [.uint256(p0), .address(p1), .uint256(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -323,7 +323,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__13(p0: String, p1: EthAddress, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__13(p0: String, p1: EthAddress, p2: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__13Fn.encoded(with: [.string(p0), .address(p1), .uint256(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -415,7 +415,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__17(p0: EthAddress, p1: String, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__17(p0: EthAddress, p1: String, p2: Number, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__17Fn.encoded(with: [.address(p0), .string(p1), .uint256(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -438,7 +438,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__18(p0: EthAddress, p1: BigUInt, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__18(p0: EthAddress, p1: Number, p2: EthAddress, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__18Fn.encoded(with: [.address(p0), .uint256(p1), .address(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -461,7 +461,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__19(p0: String, p1: String, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__19(p0: String, p1: String, p2: Number, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__19Fn.encoded(with: [.string(p0), .string(p1), .uint256(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -507,7 +507,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__21(p0: Bool, p1: String, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__21(p0: Bool, p1: String, p2: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__21Fn.encoded(with: [.bool(p0), .string(p1), .uint256(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -553,7 +553,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__23(p0: Bool, p1: Bool, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__23(p0: Bool, p1: Bool, p2: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__23Fn.encoded(with: [.bool(p0), .bool(p1), .uint256(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -576,7 +576,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__24(p0: Bool, p1: EthAddress, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__24(p0: Bool, p1: EthAddress, p2: Number, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__24Fn.encoded(with: [.bool(p0), .address(p1), .uint256(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -599,7 +599,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__25(p0: Bool, p1: BigUInt, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__25(p0: Bool, p1: Number, p2: EthAddress, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__25Fn.encoded(with: [.bool(p0), .uint256(p1), .address(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -622,7 +622,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__26(p0: Bool, p1: String, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__26(p0: Bool, p1: String, p2: Number, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__26Fn.encoded(with: [.bool(p0), .string(p1), .uint256(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -645,7 +645,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__27(p0: EthAddress, p1: String, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__27(p0: EthAddress, p1: String, p2: String, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__27Fn.encoded(with: [.address(p0), .string(p1), .string(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -668,7 +668,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__28(p0: BigUInt, p1: EthAddress, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__28(p0: Number, p1: EthAddress, p2: Number, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__28Fn.encoded(with: [.uint256(p0), .address(p1), .uint256(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -691,7 +691,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__29(p0: BigUInt, p1: BigUInt, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__29(p0: Number, p1: Number, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__29Fn.encoded(with: [.uint256(p0), .uint256(p1), .address(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -714,7 +714,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__30(p0: Bool, p1: String, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__30(p0: Bool, p1: String, p2: Bool, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__30Fn.encoded(with: [.bool(p0), .string(p1), .bool(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -760,7 +760,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__32(p0: EthAddress, p1: EthAddress, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__32(p0: EthAddress, p1: EthAddress, p2: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__32Fn.encoded(with: [.address(p0), .address(p1), .uint256(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -806,7 +806,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__34(p0: BigUInt, p1: BigUInt, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__34(p0: Number, p1: Number, p2: Number, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__34Fn.encoded(with: [.uint256(p0), .uint256(p1), .uint256(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -852,7 +852,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__36(p0: Bool, p1: String, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__36(p0: Bool, p1: String, p2: Number, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__36Fn.encoded(with: [.bool(p0), .string(p1), .uint256(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -875,7 +875,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__37(p0: Bool, p1: BigUInt, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__37(p0: Bool, p1: Number, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__37Fn.encoded(with: [.bool(p0), .uint256(p1), .address(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -921,7 +921,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__39(p0: String, p1: BigUInt, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__39(p0: String, p1: Number, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__39Fn.encoded(with: [.string(p0), .uint256(p1), .address(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -944,7 +944,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__40(p0: BigUInt, p1: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__40(p0: Number, p1: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__40Fn.encoded(with: [.uint256(p0), .bool(p1)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -990,7 +990,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__42(p0: EthAddress, p1: BigUInt, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__42(p0: EthAddress, p1: Number, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__42Fn.encoded(with: [.address(p0), .uint256(p1), .address(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1013,7 +1013,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__43(p0: EthAddress, p1: String, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__43(p0: EthAddress, p1: String, p2: Number, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__43Fn.encoded(with: [.address(p0), .string(p1), .uint256(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1059,7 +1059,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__45(p0: BigUInt, p1: Bool, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__45(p0: Number, p1: Bool, p2: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__45Fn.encoded(with: [.uint256(p0), .bool(p1), .uint256(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1105,7 +1105,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__47(p0: BigUInt, p1: Bool, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__47(p0: Number, p1: Bool, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__47Fn.encoded(with: [.uint256(p0), .bool(p1), .bool(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1128,7 +1128,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__48(p0: EthAddress, p1: BigUInt, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__48(p0: EthAddress, p1: Number, p2: Number, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__48Fn.encoded(with: [.address(p0), .uint256(p1), .uint256(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1174,7 +1174,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__50(p0: BigUInt, p1: String, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__50(p0: Number, p1: String, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__50Fn.encoded(with: [.uint256(p0), .string(p1), .string(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1243,7 +1243,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__53(p0: EthAddress, p1: BigUInt, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__53(p0: EthAddress, p1: Number, p2: Bool, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__53Fn.encoded(with: [.address(p0), .uint256(p1), .bool(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1289,7 +1289,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__55(p0: BigUInt, p1: EthAddress, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__55(p0: Number, p1: EthAddress, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__55Fn.encoded(with: [.uint256(p0), .address(p1), .address(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1312,7 +1312,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__56(p0: String, p1: Bool, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__56(p0: String, p1: Bool, p2: String, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__56Fn.encoded(with: [.string(p0), .bool(p1), .string(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1358,7 +1358,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__58(p0: Bool, p1: BigUInt, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__58(p0: Bool, p1: Number, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__58Fn.encoded(with: [.bool(p0), .uint256(p1), .address(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1381,7 +1381,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__59(p0: BigUInt, p1: BigUInt, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__59(p0: Number, p1: Number, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__59Fn.encoded(with: [.uint256(p0), .uint256(p1), .string(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1404,7 +1404,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__60(p0: Bool, p1: String, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__60(p0: Bool, p1: String, p2: Number, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__60Fn.encoded(with: [.bool(p0), .string(p1), .uint256(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1519,7 +1519,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__65(p0: BigUInt, p1: Bool, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__65(p0: Number, p1: Bool, p2: String, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__65Fn.encoded(with: [.uint256(p0), .bool(p1), .string(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1611,7 +1611,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__69(p0: BigInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__69(p0: SNumber, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__69Fn.encoded(with: [.int256(p0)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1749,7 +1749,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__75(p0: EthAddress, p1: BigUInt, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__75(p0: EthAddress, p1: Number, p2: Number, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__75Fn.encoded(with: [.address(p0), .uint256(p1), .uint256(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1772,7 +1772,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__76(p0: BigUInt, p1: Bool, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__76(p0: Number, p1: Bool, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__76Fn.encoded(with: [.uint256(p0), .bool(p1), .address(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1795,7 +1795,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__77(p0: String, p1: BigUInt, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__77(p0: String, p1: Number, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__77Fn.encoded(with: [.string(p0), .uint256(p1), .bool(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1841,7 +1841,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__79(p0: Bool, p1: BigUInt, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__79(p0: Bool, p1: Number, p2: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__79Fn.encoded(with: [.bool(p0), .uint256(p1), .uint256(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1864,7 +1864,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__80(p0: Bool, p1: BigUInt, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__80(p0: Bool, p1: Number, p2: Number, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__80Fn.encoded(with: [.bool(p0), .uint256(p1), .uint256(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1887,7 +1887,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__81(p0: BigUInt, p1: String, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__81(p0: Number, p1: String, p2: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__81Fn.encoded(with: [.uint256(p0), .string(p1), .uint256(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1910,7 +1910,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__82(p0: EthAddress, p1: Bool, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__82(p0: EthAddress, p1: Bool, p2: Number, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__82Fn.encoded(with: [.address(p0), .bool(p1), .uint256(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1933,7 +1933,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__83(p0: EthAddress, p1: EthAddress, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__83(p0: EthAddress, p1: EthAddress, p2: Bool, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__83Fn.encoded(with: [.address(p0), .address(p1), .bool(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1956,7 +1956,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__84(p0: Bool, p1: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__84(p0: Bool, p1: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__84Fn.encoded(with: [.bool(p0), .uint256(p1)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -1979,7 +1979,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__85(p0: BigUInt, p1: String, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__85(p0: Number, p1: String, p2: Number, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__85Fn.encoded(with: [.uint256(p0), .string(p1), .uint256(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2025,7 +2025,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__87(p0: EthAddress, p1: BigUInt, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__87(p0: EthAddress, p1: Number, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__87Fn.encoded(with: [.address(p0), .uint256(p1), .bool(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2048,7 +2048,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__88(p0: String, p1: BigInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__88(p0: String, p1: SNumber, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__88Fn.encoded(with: [.string(p0), .int256(p1)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2071,7 +2071,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__89(p0: BigUInt, p1: EthAddress, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__89(p0: Number, p1: EthAddress, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__89Fn.encoded(with: [.uint256(p0), .address(p1), .string(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2094,7 +2094,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__90(p0: String, p1: EthAddress, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__90(p0: String, p1: EthAddress, p2: Bool, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__90Fn.encoded(with: [.string(p0), .address(p1), .bool(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2186,7 +2186,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__94(p0: BigUInt, p1: BigUInt, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__94(p0: Number, p1: Number, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__94Fn.encoded(with: [.uint256(p0), .uint256(p1), .string(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2232,7 +2232,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__96(p0: EthAddress, p1: String, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__96(p0: EthAddress, p1: String, p2: Number, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__96Fn.encoded(with: [.address(p0), .string(p1), .uint256(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2255,7 +2255,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__97(p0: BigUInt, p1: Bool, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__97(p0: Number, p1: Bool, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__97Fn.encoded(with: [.uint256(p0), .bool(p1), .address(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2278,7 +2278,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__98(p0: EthAddress, p1: String, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__98(p0: EthAddress, p1: String, p2: EthAddress, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__98Fn.encoded(with: [.address(p0), .string(p1), .address(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2324,7 +2324,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__100(p0: BigUInt, p1: EthAddress, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__100(p0: Number, p1: EthAddress, p2: String, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__100Fn.encoded(with: [.uint256(p0), .address(p1), .string(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2370,7 +2370,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__102(p0: BigUInt, p1: BigUInt, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__102(p0: Number, p1: Number, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__102Fn.encoded(with: [.uint256(p0), .uint256(p1), .bool(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2393,7 +2393,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__103(p0: EthAddress, p1: BigUInt, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__103(p0: EthAddress, p1: Number, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__103Fn.encoded(with: [.address(p0), .uint256(p1), .address(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2439,7 +2439,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__105(p0: EthAddress, p1: BigUInt, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__105(p0: EthAddress, p1: Number, p2: Number, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__105Fn.encoded(with: [.address(p0), .uint256(p1), .uint256(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2508,7 +2508,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__108(p0: Bool, p1: Bool, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__108(p0: Bool, p1: Bool, p2: EthAddress, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__108Fn.encoded(with: [.bool(p0), .bool(p1), .address(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2531,7 +2531,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__109(p0: BigUInt, p1: String, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__109(p0: Number, p1: String, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__109Fn.encoded(with: [.uint256(p0), .string(p1), .bool(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2554,7 +2554,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__110(p0: String, p1: BigUInt, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__110(p0: String, p1: Number, p2: EthAddress, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__110Fn.encoded(with: [.string(p0), .uint256(p1), .address(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2623,7 +2623,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__113(p0: EthAddress, p1: String, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__113(p0: EthAddress, p1: String, p2: Bool, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__113Fn.encoded(with: [.address(p0), .string(p1), .bool(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2669,7 +2669,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__115(p0: Bool, p1: EthAddress, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__115(p0: Bool, p1: EthAddress, p2: Number, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__115Fn.encoded(with: [.bool(p0), .address(p1), .uint256(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2715,7 +2715,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__117(p0: Bool, p1: Bool, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__117(p0: Bool, p1: Bool, p2: Number, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__117Fn.encoded(with: [.bool(p0), .bool(p1), .uint256(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2738,7 +2738,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__118(p0: BigUInt, p1: BigUInt, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__118(p0: Number, p1: Number, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__118Fn.encoded(with: [.uint256(p0), .uint256(p1), .address(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2761,7 +2761,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__119(p0: String, p1: String, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__119(p0: String, p1: String, p2: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__119Fn.encoded(with: [.string(p0), .string(p1), .uint256(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2784,7 +2784,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__120(p0: String, p1: BigUInt, p2: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__120(p0: String, p1: Number, p2: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__120Fn.encoded(with: [.string(p0), .uint256(p1), .string(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2807,7 +2807,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__121(p0: BigUInt, p1: BigUInt, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__121(p0: Number, p1: Number, p2: Number, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__121Fn.encoded(with: [.uint256(p0), .uint256(p1), .uint256(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2830,7 +2830,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__122(p0: String, p1: EthAddress, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__122(p0: String, p1: EthAddress, p2: Number, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__122Fn.encoded(with: [.string(p0), .address(p1), .uint256(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2853,7 +2853,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__123(p0: BigUInt, p1: EthAddress, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__123(p0: Number, p1: EthAddress, p2: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__123Fn.encoded(with: [.uint256(p0), .address(p1), .uint256(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2876,7 +2876,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__124(p0: String, p1: BigUInt, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__124(p0: String, p1: Number, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__124Fn.encoded(with: [.string(p0), .uint256(p1), .string(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2899,7 +2899,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__125(p0: BigUInt, p1: EthAddress, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__125(p0: Number, p1: EthAddress, p2: Bool, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__125Fn.encoded(with: [.uint256(p0), .address(p1), .bool(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2922,7 +2922,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__126(p0: EthAddress, p1: BigUInt, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__126(p0: EthAddress, p1: Number, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__126Fn.encoded(with: [.address(p0), .uint256(p1), .string(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -2945,7 +2945,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__127(p0: BigUInt, p1: BigUInt, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__127(p0: Number, p1: Number, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__127Fn.encoded(with: [.uint256(p0), .uint256(p1), .address(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3014,7 +3014,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__130(p0: String, p1: Bool, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__130(p0: String, p1: Bool, p2: EthAddress, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__130Fn.encoded(with: [.string(p0), .bool(p1), .address(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3037,7 +3037,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__131(p0: String, p1: String, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__131(p0: String, p1: String, p2: Number, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__131Fn.encoded(with: [.string(p0), .string(p1), .uint256(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3060,7 +3060,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__132(p0: BigUInt, p1: BigUInt, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__132(p0: Number, p1: Number, p2: String, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__132Fn.encoded(with: [.uint256(p0), .uint256(p1), .string(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3106,7 +3106,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__134(p0: String, p1: BigUInt, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__134(p0: String, p1: Number, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__134Fn.encoded(with: [.string(p0), .uint256(p1), .address(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3175,7 +3175,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__137(p0: BigUInt, p1: EthAddress, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__137(p0: Number, p1: EthAddress, p2: Number, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__137Fn.encoded(with: [.uint256(p0), .address(p1), .uint256(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3198,7 +3198,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__138(p0: Bool, p1: EthAddress, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__138(p0: Bool, p1: EthAddress, p2: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__138Fn.encoded(with: [.bool(p0), .address(p1), .uint256(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3221,7 +3221,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__139(p0: BigUInt, p1: String, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__139(p0: Number, p1: String, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__139Fn.encoded(with: [.uint256(p0), .string(p1), .address(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3244,7 +3244,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__140(p0: Bool, p1: Bool, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__140(p0: Bool, p1: Bool, p2: Number, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__140Fn.encoded(with: [.bool(p0), .bool(p1), .uint256(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3267,7 +3267,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__141(p0: EthAddress, p1: String, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__141(p0: EthAddress, p1: String, p2: Number, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__141Fn.encoded(with: [.address(p0), .string(p1), .uint256(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3290,7 +3290,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__142(p0: BigUInt, p1: EthAddress, p2: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__142(p0: Number, p1: EthAddress, p2: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__142Fn.encoded(with: [.uint256(p0), .address(p1), .string(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3313,7 +3313,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__143(p0: String, p1: EthAddress, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__143(p0: String, p1: EthAddress, p2: Number, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__143Fn.encoded(with: [.string(p0), .address(p1), .uint256(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3336,7 +3336,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__144(p0: BigUInt, p1: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__144(p0: Number, p1: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__144Fn.encoded(with: [.uint256(p0), .string(p1)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3359,7 +3359,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__145(p0: String, p1: Bool, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__145(p0: String, p1: Bool, p2: Number, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__145Fn.encoded(with: [.string(p0), .bool(p1), .uint256(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3428,7 +3428,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__148(p0: EthAddress, p1: BigUInt, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__148(p0: EthAddress, p1: Number, p2: Number, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__148Fn.encoded(with: [.address(p0), .uint256(p1), .uint256(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3451,7 +3451,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__149(p0: EthAddress, p1: BigUInt, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__149(p0: EthAddress, p1: Number, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__149Fn.encoded(with: [.address(p0), .uint256(p1), .bool(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3474,7 +3474,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__150(p0: EthAddress, p1: String, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__150(p0: EthAddress, p1: String, p2: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__150Fn.encoded(with: [.address(p0), .string(p1), .uint256(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3497,7 +3497,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__151(p0: BigUInt, p1: Bool, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__151(p0: Number, p1: Bool, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__151Fn.encoded(with: [.uint256(p0), .bool(p1), .string(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3520,7 +3520,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__152(p0: BigUInt, p1: String, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__152(p0: Number, p1: String, p2: Number, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__152Fn.encoded(with: [.uint256(p0), .string(p1), .uint256(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3543,7 +3543,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__153(p0: BigUInt, p1: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__153(p0: Number, p1: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__153Fn.encoded(with: [.uint256(p0), .address(p1)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3566,7 +3566,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__154(p0: BigUInt, p1: Bool, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__154(p0: Number, p1: Bool, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__154Fn.encoded(with: [.uint256(p0), .bool(p1), .bool(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3589,7 +3589,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__155(p0: Bool, p1: BigUInt, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__155(p0: Bool, p1: Number, p2: String, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__155Fn.encoded(with: [.bool(p0), .uint256(p1), .string(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3635,7 +3635,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__157(p0: Bool, p1: String, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__157(p0: Bool, p1: String, p2: Number, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__157Fn.encoded(with: [.bool(p0), .string(p1), .uint256(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3658,7 +3658,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__158(p0: BigUInt, p1: BigUInt, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__158(p0: Number, p1: Number, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__158Fn.encoded(with: [.uint256(p0), .uint256(p1), .address(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3727,7 +3727,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__161(p0: Bool, p1: Bool, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__161(p0: Bool, p1: Bool, p2: Bool, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__161Fn.encoded(with: [.bool(p0), .bool(p1), .bool(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3842,7 +3842,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__166(p0: BigUInt, p1: BigUInt, p2: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__166(p0: Number, p1: Number, p2: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__166Fn.encoded(with: [.uint256(p0), .uint256(p1), .string(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3865,7 +3865,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__167(p0: BigUInt, p1: EthAddress, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__167(p0: Number, p1: EthAddress, p2: EthAddress, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__167Fn.encoded(with: [.uint256(p0), .address(p1), .address(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3888,7 +3888,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__168(p0: String, p1: Bool, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__168(p0: String, p1: Bool, p2: Number, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__168Fn.encoded(with: [.string(p0), .bool(p1), .uint256(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3911,7 +3911,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__169(p0: BigUInt, p1: Bool, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__169(p0: Number, p1: Bool, p2: Bool, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__169Fn.encoded(with: [.uint256(p0), .bool(p1), .bool(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -3980,7 +3980,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__172(p0: String, p1: BigUInt, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__172(p0: String, p1: Number, p2: Number, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__172Fn.encoded(with: [.string(p0), .uint256(p1), .uint256(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4026,7 +4026,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__174(p0: BigUInt, p1: BigUInt, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__174(p0: Number, p1: Number, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__174Fn.encoded(with: [.uint256(p0), .uint256(p1), .string(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4049,7 +4049,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__175(p0: BigUInt, p1: String, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__175(p0: Number, p1: String, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__175Fn.encoded(with: [.uint256(p0), .string(p1), .address(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4072,7 +4072,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__176(p0: EthAddress, p1: BigUInt, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__176(p0: EthAddress, p1: Number, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__176Fn.encoded(with: [.address(p0), .uint256(p1), .address(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4095,7 +4095,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__177(p0: Bool, p1: String, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__177(p0: Bool, p1: String, p2: String, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__177Fn.encoded(with: [.bool(p0), .string(p1), .string(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4118,7 +4118,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__178(p0: Bool, p1: EthAddress, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__178(p0: Bool, p1: EthAddress, p2: Number, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__178Fn.encoded(with: [.bool(p0), .address(p1), .uint256(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4141,7 +4141,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__179(p0: String, p1: BigUInt, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__179(p0: String, p1: Number, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__179Fn.encoded(with: [.string(p0), .uint256(p1), .string(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4164,7 +4164,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__180(p0: String, p1: String, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__180(p0: String, p1: String, p2: EthAddress, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__180Fn.encoded(with: [.string(p0), .string(p1), .address(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4187,7 +4187,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__181(p0: String, p1: BigUInt, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__181(p0: String, p1: Number, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__181Fn.encoded(with: [.string(p0), .uint256(p1), .string(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4210,7 +4210,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__182(p0: Bool, p1: Bool, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__182(p0: Bool, p1: Bool, p2: Number, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__182Fn.encoded(with: [.bool(p0), .bool(p1), .uint256(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4233,7 +4233,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__183(p0: Bool, p1: BigUInt, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__183(p0: Bool, p1: Number, p2: Bool, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__183Fn.encoded(with: [.bool(p0), .uint256(p1), .bool(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4279,7 +4279,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__185(p0: EthAddress, p1: Bool, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__185(p0: EthAddress, p1: Bool, p2: String, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__185Fn.encoded(with: [.address(p0), .bool(p1), .string(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4302,7 +4302,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__186(p0: String, p1: BigUInt, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__186(p0: String, p1: Number, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__186Fn.encoded(with: [.string(p0), .uint256(p1), .address(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4325,7 +4325,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__187(p0: BigUInt, p1: String, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__187(p0: Number, p1: String, p2: Number, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__187Fn.encoded(with: [.uint256(p0), .string(p1), .uint256(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4348,7 +4348,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__188(p0: EthAddress, p1: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__188(p0: EthAddress, p1: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__188Fn.encoded(with: [.address(p0), .uint256(p1)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4417,7 +4417,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__191(p0: String, p1: BigUInt, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__191(p0: String, p1: Number, p2: Number, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__191Fn.encoded(with: [.string(p0), .uint256(p1), .uint256(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4440,7 +4440,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__192(p0: BigUInt, p1: Bool, p2: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__192(p0: Number, p1: Bool, p2: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__192Fn.encoded(with: [.uint256(p0), .bool(p1), .string(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4463,7 +4463,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__193(p0: EthAddress, p1: BigUInt, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__193(p0: EthAddress, p1: Number, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__193Fn.encoded(with: [.address(p0), .uint256(p1), .string(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4486,7 +4486,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__194(p0: BigUInt, p1: Bool, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__194(p0: Number, p1: Bool, p2: Number, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__194Fn.encoded(with: [.uint256(p0), .bool(p1), .uint256(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4509,7 +4509,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__195(p0: BigUInt, p1: BigUInt, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__195(p0: Number, p1: Number, p2: EthAddress, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__195Fn.encoded(with: [.uint256(p0), .uint256(p1), .address(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4555,7 +4555,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__197(p0: String, p1: Bool, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__197(p0: String, p1: Bool, p2: Number, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__197Fn.encoded(with: [.string(p0), .bool(p1), .uint256(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4601,7 +4601,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__199(p0: EthAddress, p1: Bool, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__199(p0: EthAddress, p1: Bool, p2: Bool, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__199Fn.encoded(with: [.address(p0), .bool(p1), .bool(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4624,7 +4624,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__200(p0: EthAddress, p1: EthAddress, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__200(p0: EthAddress, p1: EthAddress, p2: Number, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__200Fn.encoded(with: [.address(p0), .address(p1), .uint256(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4647,7 +4647,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__201(p0: String, p1: Bool, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__201(p0: String, p1: Bool, p2: Bool, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__201Fn.encoded(with: [.string(p0), .bool(p1), .bool(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4670,7 +4670,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__202(p0: Bool, p1: BigUInt, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__202(p0: Bool, p1: Number, p2: Number, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__202Fn.encoded(with: [.bool(p0), .uint256(p1), .uint256(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4693,7 +4693,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__203(p0: String, p1: String, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__203(p0: String, p1: String, p2: String, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__203Fn.encoded(with: [.string(p0), .string(p1), .string(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4716,7 +4716,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__204(p0: String, p1: EthAddress, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__204(p0: String, p1: EthAddress, p2: EthAddress, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__204Fn.encoded(with: [.string(p0), .address(p1), .address(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4785,7 +4785,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__207(p0: BigUInt, p1: String, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__207(p0: Number, p1: String, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__207Fn.encoded(with: [.uint256(p0), .string(p1), .address(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4808,7 +4808,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__208(p0: BigUInt, p1: EthAddress, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__208(p0: Number, p1: EthAddress, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__208Fn.encoded(with: [.uint256(p0), .address(p1), .bool(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4831,7 +4831,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__209(p0: Bool, p1: BigUInt, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__209(p0: Bool, p1: Number, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__209Fn.encoded(with: [.bool(p0), .uint256(p1), .bool(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4854,7 +4854,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__210(p0: BigUInt, p1: Bool, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__210(p0: Number, p1: Bool, p2: Number, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__210Fn.encoded(with: [.uint256(p0), .bool(p1), .uint256(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4877,7 +4877,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__211(p0: String, p1: EthAddress, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__211(p0: String, p1: EthAddress, p2: String, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__211Fn.encoded(with: [.string(p0), .address(p1), .string(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4923,7 +4923,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__213(p0: String, p1: Bool, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__213(p0: String, p1: Bool, p2: Number, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__213Fn.encoded(with: [.string(p0), .bool(p1), .uint256(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -4946,7 +4946,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__214(p0: EthAddress, p1: EthAddress, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__214(p0: EthAddress, p1: EthAddress, p2: EthAddress, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__214Fn.encoded(with: [.address(p0), .address(p1), .address(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5061,7 +5061,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__219(p0: BigUInt, p1: BigUInt, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__219(p0: Number, p1: Number, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__219Fn.encoded(with: [.uint256(p0), .uint256(p1), .bool(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5084,7 +5084,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__220(p0: Bool, p1: BigUInt, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__220(p0: Bool, p1: Number, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__220Fn.encoded(with: [.bool(p0), .uint256(p1), .bool(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5107,7 +5107,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__221(p0: EthAddress, p1: EthAddress, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__221(p0: EthAddress, p1: EthAddress, p2: Number, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__221Fn.encoded(with: [.address(p0), .address(p1), .uint256(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5130,7 +5130,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__222(p0: BigUInt, p1: EthAddress, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__222(p0: Number, p1: EthAddress, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__222Fn.encoded(with: [.uint256(p0), .address(p1), .bool(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5153,7 +5153,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__223(p0: BigUInt, p1: String, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__223(p0: Number, p1: String, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__223Fn.encoded(with: [.uint256(p0), .string(p1), .address(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5176,7 +5176,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__224(p0: EthAddress, p1: Bool, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__224(p0: EthAddress, p1: Bool, p2: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__224Fn.encoded(with: [.address(p0), .bool(p1), .uint256(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5199,7 +5199,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__225(p0: BigUInt, p1: EthAddress, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__225(p0: Number, p1: EthAddress, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__225Fn.encoded(with: [.uint256(p0), .address(p1), .string(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5268,7 +5268,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__228(p0: String, p1: BigUInt, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__228(p0: String, p1: Number, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__228Fn.encoded(with: [.string(p0), .uint256(p1), .address(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5337,7 +5337,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__231(p0: EthAddress, p1: BigUInt, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__231(p0: EthAddress, p1: Number, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__231Fn.encoded(with: [.address(p0), .uint256(p1), .address(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5360,7 +5360,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__232(p0: BigUInt, p1: Bool, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__232(p0: Number, p1: Bool, p2: EthAddress, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__232Fn.encoded(with: [.uint256(p0), .bool(p1), .address(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5383,7 +5383,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__233(p0: EthAddress, p1: BigUInt, p2: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__233(p0: EthAddress, p1: Number, p2: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__233Fn.encoded(with: [.address(p0), .uint256(p1), .string(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5406,7 +5406,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__234(p0: EthAddress, p1: BigUInt, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__234(p0: EthAddress, p1: Number, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__234Fn.encoded(with: [.address(p0), .uint256(p1), .bool(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5429,7 +5429,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__235(p0: BigUInt, p1: BigUInt, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__235(p0: Number, p1: Number, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__235Fn.encoded(with: [.uint256(p0), .uint256(p1), .bool(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5452,7 +5452,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__236(p0: Bool, p1: String, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__236(p0: Bool, p1: String, p2: EthAddress, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__236Fn.encoded(with: [.bool(p0), .string(p1), .address(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5521,7 +5521,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__239(p0: EthAddress, p1: Bool, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__239(p0: EthAddress, p1: Bool, p2: EthAddress, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__239Fn.encoded(with: [.address(p0), .bool(p1), .address(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5544,7 +5544,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__240(p0: String, p1: BigUInt, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__240(p0: String, p1: Number, p2: Number, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__240Fn.encoded(with: [.string(p0), .uint256(p1), .uint256(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5636,7 +5636,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__244(p0: BigUInt, p1: BigUInt, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__244(p0: Number, p1: Number, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__244Fn.encoded(with: [.uint256(p0), .uint256(p1), .bool(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5659,7 +5659,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__245(p0: String, p1: BigUInt, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__245(p0: String, p1: Number, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__245Fn.encoded(with: [.string(p0), .uint256(p1), .bool(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5682,7 +5682,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__246(p0: BigUInt, p1: Bool, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__246(p0: Number, p1: Bool, p2: EthAddress, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__246Fn.encoded(with: [.uint256(p0), .bool(p1), .address(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5705,7 +5705,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__247(p0: BigUInt, p1: String, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__247(p0: Number, p1: String, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__247Fn.encoded(with: [.uint256(p0), .string(p1), .bool(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5728,7 +5728,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__248(p0: BigUInt, p1: String, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__248(p0: Number, p1: String, p2: String, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__248Fn.encoded(with: [.uint256(p0), .string(p1), .string(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5797,7 +5797,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__251(p0: BigUInt, p1: String, p2: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__251(p0: Number, p1: String, p2: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__251Fn.encoded(with: [.uint256(p0), .string(p1), .string(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5820,7 +5820,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__252(p0: BigUInt, p1: String, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__252(p0: Number, p1: String, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__252Fn.encoded(with: [.uint256(p0), .string(p1), .string(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5843,7 +5843,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__253(p0: Bool, p1: BigUInt, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__253(p0: Bool, p1: Number, p2: EthAddress, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__253Fn.encoded(with: [.bool(p0), .uint256(p1), .address(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5889,7 +5889,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__255(p0: String, p1: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__255(p0: String, p1: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__255Fn.encoded(with: [.string(p0), .uint256(p1)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5912,7 +5912,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__256(p0: EthAddress, p1: BigUInt, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__256(p0: EthAddress, p1: Number, p2: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__256Fn.encoded(with: [.address(p0), .uint256(p1), .uint256(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5935,7 +5935,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__257(p0: BigUInt, p1: Bool, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__257(p0: Number, p1: Bool, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__257Fn.encoded(with: [.uint256(p0), .bool(p1), .bool(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -5958,7 +5958,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__258(p0: BigUInt, p1: String, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__258(p0: Number, p1: String, p2: Number, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__258Fn.encoded(with: [.uint256(p0), .string(p1), .uint256(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6004,7 +6004,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__260(p0: BigUInt, p1: String, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__260(p0: Number, p1: String, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__260Fn.encoded(with: [.uint256(p0), .string(p1), .bool(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6050,7 +6050,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__262(p0: BigUInt, p1: EthAddress, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__262(p0: Number, p1: EthAddress, p2: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__262Fn.encoded(with: [.uint256(p0), .address(p1), .address(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6073,7 +6073,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__263(p0: EthAddress, p1: EthAddress, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__263(p0: EthAddress, p1: EthAddress, p2: Number, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__263Fn.encoded(with: [.address(p0), .address(p1), .uint256(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6096,7 +6096,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__264(p0: Bool, p1: BigUInt, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__264(p0: Bool, p1: Number, p2: Number, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__264Fn.encoded(with: [.bool(p0), .uint256(p1), .uint256(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6119,7 +6119,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__265(p0: EthAddress, p1: BigUInt, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__265(p0: EthAddress, p1: Number, p2: String, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__265Fn.encoded(with: [.address(p0), .uint256(p1), .string(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6165,7 +6165,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__267(p0: Bool, p1: EthAddress, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__267(p0: Bool, p1: EthAddress, p2: String, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__267Fn.encoded(with: [.bool(p0), .address(p1), .string(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6211,7 +6211,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__269(p0: String, p1: String, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__269(p0: String, p1: String, p2: Number, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__269Fn.encoded(with: [.string(p0), .string(p1), .uint256(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6257,7 +6257,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__271(p0: Bool, p1: BigUInt, p2: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__271(p0: Bool, p1: Number, p2: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__271Fn.encoded(with: [.bool(p0), .uint256(p1), .string(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6280,7 +6280,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__272(p0: EthAddress, p1: Bool, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__272(p0: EthAddress, p1: Bool, p2: Number, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__272Fn.encoded(with: [.address(p0), .bool(p1), .uint256(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6303,7 +6303,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__273(p0: BigUInt, p1: BigUInt, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__273(p0: Number, p1: Number, p2: Number, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__273Fn.encoded(with: [.uint256(p0), .uint256(p1), .uint256(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6326,7 +6326,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__274(p0: EthAddress, p1: BigUInt, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__274(p0: EthAddress, p1: Number, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__274Fn.encoded(with: [.address(p0), .uint256(p1), .bool(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6349,7 +6349,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__275(p0: String, p1: BigUInt, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__275(p0: String, p1: Number, p2: String, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__275Fn.encoded(with: [.string(p0), .uint256(p1), .string(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6372,7 +6372,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__276(p0: BigUInt, p1: Bool, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__276(p0: Number, p1: Bool, p2: Number, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__276Fn.encoded(with: [.uint256(p0), .bool(p1), .uint256(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6418,7 +6418,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__278(p0: String, p1: Bool, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__278(p0: String, p1: Bool, p2: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__278Fn.encoded(with: [.string(p0), .bool(p1), .uint256(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6441,7 +6441,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__279(p0: String, p1: BigUInt, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__279(p0: String, p1: Number, p2: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__279Fn.encoded(with: [.string(p0), .uint256(p1), .uint256(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6464,7 +6464,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__280(p0: String, p1: BigUInt, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__280(p0: String, p1: Number, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__280Fn.encoded(with: [.string(p0), .uint256(p1), .bool(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6510,7 +6510,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__282(p0: BigUInt, p1: EthAddress, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__282(p0: Number, p1: EthAddress, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__282Fn.encoded(with: [.uint256(p0), .address(p1), .string(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6533,7 +6533,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__283(p0: EthAddress, p1: Bool, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__283(p0: EthAddress, p1: Bool, p2: Number, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__283Fn.encoded(with: [.address(p0), .bool(p1), .uint256(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6556,7 +6556,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__284(p0: Bool, p1: BigUInt, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__284(p0: Bool, p1: Number, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__284Fn.encoded(with: [.bool(p0), .uint256(p1), .bool(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6579,7 +6579,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__285(p0: BigUInt, p1: String, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__285(p0: Number, p1: String, p2: Bool, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__285Fn.encoded(with: [.uint256(p0), .string(p1), .bool(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6625,7 +6625,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__287(p0: EthAddress, p1: BigUInt, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__287(p0: EthAddress, p1: Number, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__287Fn.encoded(with: [.address(p0), .uint256(p1), .string(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6671,7 +6671,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__289(p0: BigUInt, p1: BigUInt, p2: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__289(p0: Number, p1: Number, p2: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__289Fn.encoded(with: [.uint256(p0), .uint256(p1), .uint256(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6717,7 +6717,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__291(p0: BigUInt, p1: String, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__291(p0: Number, p1: String, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__291Fn.encoded(with: [.uint256(p0), .string(p1), .bool(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6740,7 +6740,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__292(p0: BigUInt, p1: String, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__292(p0: Number, p1: String, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__292Fn.encoded(with: [.uint256(p0), .string(p1), .string(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6763,7 +6763,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__293(p0: Bool, p1: EthAddress, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__293(p0: Bool, p1: EthAddress, p2: Number, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__293Fn.encoded(with: [.bool(p0), .address(p1), .uint256(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6786,7 +6786,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__294(p0: String, p1: String, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__294(p0: String, p1: String, p2: Bool, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__294Fn.encoded(with: [.string(p0), .string(p1), .bool(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6901,7 +6901,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__299(p0: BigUInt, p1: EthAddress, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__299(p0: Number, p1: EthAddress, p2: Number, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__299Fn.encoded(with: [.uint256(p0), .address(p1), .uint256(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6924,7 +6924,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__300(p0: BigUInt, p1: Bool, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__300(p0: Number, p1: Bool, p2: Bool, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__300Fn.encoded(with: [.uint256(p0), .bool(p1), .bool(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -6947,7 +6947,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__301(p0: BigUInt, p1: Bool, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__301(p0: Number, p1: Bool, p2: Number, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__301Fn.encoded(with: [.uint256(p0), .bool(p1), .uint256(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7062,7 +7062,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__306(p0: String, p1: BigUInt, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__306(p0: String, p1: Number, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__306Fn.encoded(with: [.string(p0), .uint256(p1), .bool(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7108,7 +7108,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__308(p0: String, p1: BigUInt, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__308(p0: String, p1: Number, p2: Number, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__308Fn.encoded(with: [.string(p0), .uint256(p1), .uint256(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7177,7 +7177,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__311(p0: BigUInt, p1: EthAddress, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__311(p0: Number, p1: EthAddress, p2: Bool, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__311Fn.encoded(with: [.uint256(p0), .address(p1), .bool(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7200,7 +7200,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__312(p0: Bool, p1: Bool, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__312(p0: Bool, p1: Bool, p2: String, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__312Fn.encoded(with: [.bool(p0), .bool(p1), .string(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7223,7 +7223,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__313(p0: String, p1: BigUInt, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__313(p0: String, p1: Number, p2: Bool, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__313Fn.encoded(with: [.string(p0), .uint256(p1), .bool(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7246,7 +7246,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__314(p0: Bool, p1: BigUInt, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__314(p0: Bool, p1: Number, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__314Fn.encoded(with: [.bool(p0), .uint256(p1), .string(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7269,7 +7269,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__315(p0: BigUInt, p1: String, p2: EthAddress, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__315(p0: Number, p1: String, p2: EthAddress, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__315Fn.encoded(with: [.uint256(p0), .string(p1), .address(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7292,7 +7292,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__316(p0: Bool, p1: BigUInt, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__316(p0: Bool, p1: Number, p2: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__316Fn.encoded(with: [.bool(p0), .uint256(p1), .bool(p2)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7338,7 +7338,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__318(p0: BigUInt, p1: BigUInt, p2: Bool, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__318(p0: Number, p1: Number, p2: Bool, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__318Fn.encoded(with: [.uint256(p0), .uint256(p1), .bool(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7384,7 +7384,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__320(p0: BigUInt, p1: Bool, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__320(p0: Number, p1: Bool, p2: String, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__320Fn.encoded(with: [.uint256(p0), .bool(p1), .string(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7430,7 +7430,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__322(p0: EthAddress, p1: EthAddress, p2: String, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__322(p0: EthAddress, p1: EthAddress, p2: String, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__322Fn.encoded(with: [.address(p0), .address(p1), .string(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7453,7 +7453,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__323(p0: BigUInt, p1: Bool, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__323(p0: Number, p1: Bool, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__323Fn.encoded(with: [.uint256(p0), .bool(p1), .string(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7476,7 +7476,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__324(p0: BigUInt, p1: EthAddress, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__324(p0: Number, p1: EthAddress, p2: Bool, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__324Fn.encoded(with: [.uint256(p0), .address(p1), .bool(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7568,7 +7568,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__328(p0: String, p1: String, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__328(p0: String, p1: String, p2: Number, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__328Fn.encoded(with: [.string(p0), .string(p1), .uint256(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7614,7 +7614,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__330(p0: Bool, p1: BigUInt, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__330(p0: Bool, p1: Number, p2: String, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__330Fn.encoded(with: [.bool(p0), .uint256(p1), .string(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7637,7 +7637,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__331(p0: BigUInt, p1: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__331(p0: Number, p1: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__331Fn.encoded(with: [.uint256(p0), .uint256(p1)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7706,7 +7706,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__334(p0: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__334(p0: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__334Fn.encoded(with: [.uint256(p0)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7729,7 +7729,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__335(p0: String, p1: EthAddress, p2: BigUInt, p3: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__335(p0: String, p1: EthAddress, p2: Number, p3: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__335Fn.encoded(with: [.string(p0), .address(p1), .uint256(p2), .uint256(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7775,7 +7775,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__337(p0: BigUInt, p1: BigUInt, p2: BigUInt, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__337(p0: Number, p1: Number, p2: Number, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__337Fn.encoded(with: [.uint256(p0), .uint256(p1), .uint256(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7821,7 +7821,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__339(p0: String, p1: EthAddress, p2: BigUInt, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__339(p0: String, p1: EthAddress, p2: Number, p3: Bool, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__339Fn.encoded(with: [.string(p0), .address(p1), .uint256(p2), .bool(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7867,7 +7867,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__341(p0: EthAddress, p1: EthAddress, p2: BigUInt, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__341(p0: EthAddress, p1: EthAddress, p2: Number, p3: String, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__341Fn.encoded(with: [.address(p0), .address(p1), .uint256(p2), .string(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -7890,7 +7890,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func log__342(p0: Bool, p1: BigUInt, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func log__342(p0: Bool, p1: Number, p2: String, p3: EthAddress, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try log__342Fn.encoded(with: [.bool(p0), .uint256(p1), .string(p2), .address(p3)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -8718,7 +8718,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func logInt(p0: BigInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func logInt(p0: SNumber, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try logIntFn.encoded(with: [.int256(p0)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)
@@ -8764,7 +8764,7 @@ public enum IConsole {
         outputs: []
     )
 
-    public static func logUint(p0: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
+    public static func logUint(p0: Number, withFunctions ffis: EVM.FFIMap = [:]) throws -> Result<Void, RevertReason> {
         do {
             let query = try logUintFn.encoded(with: [.uint256(p0)])
             let result = try EVM.runQuery(bytecode: runtimeCode, query: query, withErrors: errors, withFunctions: ffis)

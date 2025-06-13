@@ -1,11 +1,11 @@
-import BigInt
 @testable import Eth
+import SwiftNumber
 import XCTest
 
 final class ExampleTests: XCTestCase {
     func testDrollAddition() async throws {
-        let error = try await Drool.additionVmCall(x: BigUInt(5))
-        XCTAssertEqual(error, BigUInt(60), "additionVmCall(5)")
+        let error = try await Drool.additionVmCall(x: Number(5))
+        XCTAssertEqual(error, Number(60), "additionVmCall(5)")
     }
 
     func testCatEncode() throws {

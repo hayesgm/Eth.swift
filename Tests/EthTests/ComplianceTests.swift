@@ -1,5 +1,5 @@
-import BigInt
 @testable import Eth
+import SwiftNumber
 import XCTest
 
 struct ComplianceTest: Decodable {
@@ -64,7 +64,7 @@ final class ComplianceTests: XCTestCase {
                 }
             }
         }
-        
+
         return complianceTests
     }
 }

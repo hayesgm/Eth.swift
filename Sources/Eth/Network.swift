@@ -1,5 +1,5 @@
-import BigInt
 import Foundation
+import SwiftNumber
 
 /// A ``Network`` represents different Ethereum networks (e.g. `Mainnet` or `Base`).
 public enum Network: Codable, Equatable, Hashable, Identifiable, Sendable {
@@ -35,7 +35,7 @@ public enum Network: Codable, Equatable, Hashable, Identifiable, Sendable {
     case worldChain
     case zkSync
     case zora
-    case unknown(BigInt)
+    case unknown(Number)
 
     public var id: String {
         description
@@ -112,17 +112,17 @@ public enum Network: Codable, Equatable, Hashable, Identifiable, Sendable {
         }
     }
 
-    /// Decodes from either an Int or an Int-String
+    /// Decodes from either an UInt or an UInt-String (Number)
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         do {
             let value = try container.decode(String.self)
-            guard let bigIntValue = BigInt(value) else {
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid BigInt value")
+            guard let numberValue = Number(value) else {
+                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid Number value")
             }
-            self = Network.fromChainId(bigIntValue)
+            self = Network.fromChainId(numberValue)
         } catch {
-            let value = try container.decode(Int.self)
+            let value = try container.decode(UInt.self)
             self = Network.fromChainId(value)
         }
     }
@@ -136,13 +136,13 @@ public enum Network: Codable, Equatable, Hashable, Identifiable, Sendable {
         try container.encode(chainId.description)
     }
 
-    public static func fromChainId(_ chainId: Int) -> Self {
-        fromChainId(BigInt(chainId))
+    public static func fromChainId(_ chainId: UInt) -> Self {
+        fromChainId(Number(chainId))
     }
 
-    /// Create `Network` from BigInt. `Unknown` is returned
+    /// Create `Network` from Number. `Unknown` is returned
     /// if the chainId  is not supported
-    public static func fromChainId(_ chainId: BigInt) -> Self {
+    public static func fromChainId(_ chainId: Number) -> Self {
         switch chainId {
         case Network.alephZero.chainId:
             .alephZero
@@ -175,7 +175,7 @@ public enum Network: Codable, Equatable, Hashable, Identifiable, Sendable {
         case Network.linea.chainId:
             .linea
         case Network.lineaSepolia.chainId:
-            .lineaSepolia   
+            .lineaSepolia
         case Network.lisk.chainId:
             .lisk
         case Network.mantle.chainId:
@@ -213,75 +213,75 @@ public enum Network: Codable, Equatable, Hashable, Identifiable, Sendable {
         }
     }
 
-    public var chainId: BigInt {
+    public var chainId: Number {
         switch self {
         case .alephZero:
-            BigInt(41455)
+            Number(41455)
         case .arbitrum:
-            BigInt(42161)
+            Number(42161)
         case .arbitrumSepolia:
-            BigInt(421_614)
+            Number(421_614)
         case .avalanche:
-            BigInt(43114)
+            Number(43114)
         case .base:
-            BigInt(8453)
+            Number(8453)
         case .baseSepolia:
-            BigInt(84532)
+            Number(84532)
         case .blast:
-            BigInt(81457)
+            Number(81457)
         case .bnbSmartChain:
-            BigInt(56)
+            Number(56)
         case .celo:
-            BigInt(42220)
+            Number(42220)
         case .ethereum:
-            BigInt(1)
+            Number(1)
         case .gnosis:
-            BigInt(100)
+            Number(100)
         case .hyperEVM:
-            BigInt(999)
+            Number(999)
         case .ink:
-            BigInt(57073)
+            Number(57073)
         case .lens:
-            BigInt(232)
+            Number(232)
         case .linea:
-            BigInt(59144)
+            Number(59144)
         case .lineaSepolia:
-            BigInt(59141)
+            Number(59141)
         case .lisk:
-            BigInt(1135)
+            Number(1135)
         case .mantle:
-            BigInt(5000)
+            Number(5000)
         case .mode:
-            BigInt(34443)
+            Number(34443)
         case .plume:
-            BigInt(98865)
+            Number(98865)
         case .optimism:
-            BigInt(10)
+            Number(10)
         case .polygon:
-            BigInt(137)
+            Number(137)
         case .redstone:
-            BigInt(690)
+            Number(690)
         case .scroll:
-            BigInt(534_352)
+            Number(534_352)
         case .scrollSepolia:
-            BigInt(534_351)
+            Number(534_351)
         case .soneium:
-            BigInt(1868)
+            Number(1868)
         case .sonic:
-            BigInt(146)
+            Number(146)
         case .sepolia:
-            BigInt(11_155_111)
+            Number(11_155_111)
         case .unichain:
-            BigInt(130)
+            Number(130)
         case .worldChain:
-            BigInt(480)
+            Number(480)
         case .zkSync:
-            BigInt(324)
+            Number(324)
         case .zora:
-            BigInt(7777777)
+            Number(7_777_777)
         case .unknown:
-            BigInt(0)
-}
+            Number(0)
+        }
     }
 
     public var explorerName: String? {
@@ -318,10 +318,10 @@ public enum Network: Codable, Equatable, Hashable, Identifiable, Sendable {
             "Uniscan"
         case .unknown:
             nil
-        case .alephZero, .blast, .bnbSmartChain, .celo, .gnosis, .hyperEVM, 
-             .ink, .lens, .lisk, .mantle, .mode, .plume, .redstone, 
+        case .alephZero, .blast, .bnbSmartChain, .celo, .gnosis, .hyperEVM,
+             .ink, .lens, .lisk, .mantle, .mode, .plume, .redstone,
              .soneium, .sonic, .zkSync, .zora:
-            "\(self.description) Explorer"
+            "\(description) Explorer"
         }
     }
 

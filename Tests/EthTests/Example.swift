@@ -1,5 +1,5 @@
-import BigInt
 @testable import Eth
+import SwiftNumber
 import XCTest
 
 struct Cat: Equatable {
@@ -31,11 +31,11 @@ enum Drool {
         outputs: [.uint256]
     )
 
-    static func additionEncode(x: BigUInt) throws -> Hex {
+    static func additionEncode(x: Number) throws -> Hex {
         try additionFn.encoded(with: [.uint256(x)])
     }
 
-    static func additionVmCall(x: BigUInt, withFunctions ffis: EVM.FFIMap = [:]) async throws -> BigUInt {
+    static func additionVmCall(x: Number, withFunctions ffis: EVM.FFIMap = [:]) async throws -> Number {
         switch try additionFn.decode(output: await EVM.runQuery(bytecode: bytecode, query: additionEncode(x: x), withFunctions: ffis)) {
         case let .tuple1(.uint256(x)):
             return x

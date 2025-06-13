@@ -1,9 +1,9 @@
-import BigInt
 @testable import Eth
+import SwiftNumber
 import XCTest
 
 private func word(_ x: Int) -> EthWord {
-    guard let ethWord = EthWord(fromBigInt: BigInt(x)) else {
+    guard let ethWord = EthWord(fromSNumber: SNumber(x)) else {
         fatalError("Invalid word in SARtest \(x)")
     }
     return ethWord

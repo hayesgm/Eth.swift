@@ -1,5 +1,5 @@
-import BigInt
 import Foundation
+import SwiftNumber
 
 public extension ABI {
     /**
@@ -7,7 +7,7 @@ public extension ABI {
      *
      * Example Values:
      * ```
-     * ABI.Value.uint256(BigUInt(0x55))
+     * ABI.Value.uint256(Number(0x55))
      * ABI.Value.uint8(55)
      * ABI.Value.string("hi")
      * ABI.Value.array(.string, [.string("hello"), .string("world")])
@@ -17,7 +17,7 @@ public extension ABI {
      * Values can be encoded with the `.encoded` computed property
      *
      * ```
-     * > ABI.Value.uint256(BigUInt(0x55)).encoded
+     * > ABI.Value.uint256(Number(0x55)).encoded
      * Hex("0x0000000000000000000000000000000000000000000000000000000000000055")
      * ```
      *
@@ -25,7 +25,7 @@ public extension ABI {
      *
      * ```
      * > ABI.Schema.uint256.decode("0x0000000000000000000000000000000000000000000000000000000000000055")
-     * ABI.Value.uint256(BigUInt(0x55))
+     * ABI.Value.uint256(Number(0x55))
      * ```
      *
      * Canonically, to decode a complex tuple, you can pattern match on the the decoded `Value`.
@@ -40,7 +40,7 @@ public extension ABI {
      * ```
      *
      * Notes:
-     *   - Small integers (≤32 bits) are represented as `UInt` or `Int` values. Larger values are represented as `BigUInt` or `BigInt`.
+     *   - Small integers (≤32 bits) are represented as `UInt` or `Int` values. Larger values are represented as `Number` or `SNumber`.
      *   - Tuples are canonically represented for easy pattern-matching, e.g., `.tuple2(.uint256, .uint256)`. For tuples with more than 16 values, use `.tupleN([.uint256, ...])`.
      */
     enum Value: Equatable, CustomStringConvertible, Sendable {
@@ -49,68 +49,68 @@ public extension ABI {
         case uint16(UInt)
         case uint24(UInt)
         case uint32(UInt)
-        case uint40(BigUInt)
-        case uint48(BigUInt)
-        case uint56(BigUInt)
-        case uint64(BigUInt)
-        case uint72(BigUInt)
-        case uint80(BigUInt)
-        case uint88(BigUInt)
-        case uint96(BigUInt)
-        case uint104(BigUInt)
-        case uint112(BigUInt)
-        case uint120(BigUInt)
-        case uint128(BigUInt)
-        case uint136(BigUInt)
-        case uint144(BigUInt)
-        case uint152(BigUInt)
-        case uint160(BigUInt)
-        case uint168(BigUInt)
-        case uint176(BigUInt)
-        case uint184(BigUInt)
-        case uint192(BigUInt)
-        case uint200(BigUInt)
-        case uint208(BigUInt)
-        case uint216(BigUInt)
-        case uint224(BigUInt)
-        case uint232(BigUInt)
-        case uint240(BigUInt)
-        case uint248(BigUInt)
-        case uint256(BigUInt)
+        case uint40(Number)
+        case uint48(Number)
+        case uint56(Number)
+        case uint64(Number)
+        case uint72(Number)
+        case uint80(Number)
+        case uint88(Number)
+        case uint96(Number)
+        case uint104(Number)
+        case uint112(Number)
+        case uint120(Number)
+        case uint128(Number)
+        case uint136(Number)
+        case uint144(Number)
+        case uint152(Number)
+        case uint160(Number)
+        case uint168(Number)
+        case uint176(Number)
+        case uint184(Number)
+        case uint192(Number)
+        case uint200(Number)
+        case uint208(Number)
+        case uint216(Number)
+        case uint224(Number)
+        case uint232(Number)
+        case uint240(Number)
+        case uint248(Number)
+        case uint256(Number)
 
         // Signed Int
         case int8(Int)
         case int16(Int)
         case int24(Int)
         case int32(Int)
-        case int40(BigInt)
-        case int48(BigInt)
-        case int56(BigInt)
-        case int64(BigInt)
-        case int72(BigInt)
-        case int80(BigInt)
-        case int88(BigInt)
-        case int96(BigInt)
-        case int104(BigInt)
-        case int112(BigInt)
-        case int120(BigInt)
-        case int128(BigInt)
-        case int136(BigInt)
-        case int144(BigInt)
-        case int152(BigInt)
-        case int160(BigInt)
-        case int168(BigInt)
-        case int176(BigInt)
-        case int184(BigInt)
-        case int192(BigInt)
-        case int200(BigInt)
-        case int208(BigInt)
-        case int216(BigInt)
-        case int224(BigInt)
-        case int232(BigInt)
-        case int240(BigInt)
-        case int248(BigInt)
-        case int256(BigInt)
+        case int40(SNumber)
+        case int48(SNumber)
+        case int56(SNumber)
+        case int64(SNumber)
+        case int72(SNumber)
+        case int80(SNumber)
+        case int88(SNumber)
+        case int96(SNumber)
+        case int104(SNumber)
+        case int112(SNumber)
+        case int120(SNumber)
+        case int128(SNumber)
+        case int136(SNumber)
+        case int144(SNumber)
+        case int152(SNumber)
+        case int160(SNumber)
+        case int168(SNumber)
+        case int176(SNumber)
+        case int184(SNumber)
+        case int192(SNumber)
+        case int200(SNumber)
+        case int208(SNumber)
+        case int216(SNumber)
+        case int224(SNumber)
+        case int232(SNumber)
+        case int240(SNumber)
+        case int248(SNumber)
+        case int256(SNumber)
 
         // Bool
         case bool(Bool)
@@ -212,7 +212,7 @@ public extension ABI {
         /// > ABI.Value.int8(-22).asInt
         /// -22
         ///
-        /// > ABI.Value.int256(BigInt(-22)).asInt
+        /// > ABI.Value.int256(SNumber(-22)).asInt
         /// nil
         /// ```
         public var asInt: Int? {
@@ -231,7 +231,7 @@ public extension ABI {
         /// > ABI.Value.uint8(22).asUInt
         /// 22
         ///
-        /// > ABI.Value.uint256(BigUInt(22)).asUInt
+        /// > ABI.Value.uint256(Number(22)).asUInt
         /// nil
         /// ```
         public var asUInt: UInt? {
@@ -243,17 +243,17 @@ public extension ABI {
             }
         }
 
-        /// Returns a `BigUInt` if `Value` contains any `.uint` value, otherwise `nil`
+        /// Returns a `Number` if `Value` contains any `.uint` value, otherwise `nil`
         ///
         /// Examples:
         /// ```
-        /// > ABI.Value.uint8(22).asBigUInt
-        /// BigUInt(22)
+        /// > ABI.Value.uint8(22).asNumber
+        /// Number(22)
         ///
-        /// > ABI.Value.uint256(BigUInt(22)).asBigUInt
-        /// BigUInt(22)
+        /// > ABI.Value.uint256(Number(22)).asNumber
+        /// Number(22)
         /// ```
-        public var asBigUInt: BigUInt? {
+        public var asNumber: Number? {
             switch self {
             case let .uint40(x), let .uint48(x), let .uint56(x), let .uint64(x),
                  let .uint72(x), let .uint80(x), let .uint88(x), let .uint96(x),
@@ -264,23 +264,23 @@ public extension ABI {
                  let .uint232(x), let .uint240(x), let .uint248(x), let .uint256(x):
                 x
             case let .uint8(x), let .uint16(x), let .uint24(x), let .uint32(x):
-                BigUInt(x)
+                Number(x)
             default:
                 nil
             }
         }
 
-        /// Returns a `BigInt` if `Value` contains any signed `.int` value, otherwise `nil`
+        /// Returns a `SNumber` if `Value` contains any signed `.int` value, otherwise `nil`
         ///
         /// Examples:
         /// ```
-        /// > ABI.Value.int8(-22).asBigInt
-        /// BigInt(-22)
+        /// > ABI.Value.int8(-22).asSNumber
+        /// SNumber(-22)
         ///
-        /// > ABI.Value.int256(BigInt(-22)).asBigInt
-        /// BigInt(-22)
+        /// > ABI.Value.int256(SNumber(-22)).asSNumber
+        /// SNumber(-22)
         /// ```
-        public var asBigInt: BigInt? {
+        public var asSNumber: SNumber? {
             switch self {
             case let .int40(x), let .int48(x), let .int56(x), let .int64(x),
                  let .int72(x), let .int80(x), let .int88(x), let .int96(x),
@@ -291,7 +291,7 @@ public extension ABI {
                  let .int232(x), let .int240(x), let .int248(x), let .int256(x):
                 x
             case let .int8(x), let .int16(x), let .int24(x), let .int32(x):
-                BigInt(x)
+                SNumber(x)
             default:
                 nil
             }
@@ -882,10 +882,10 @@ public extension ABI {
          *
          * Examples:
          * ```
-         * > .uint256(BigUInt(0x55)).encoded
+         * > .uint256(Number(0x55)).encoded
          * Hex("0x0000000000000000000000000000000000000000000000000000000000000055")
          *
-         * > .tuple2(.uint256(BigUInt(0x55), .bool(true)).encoded
+         * > .tuple2(.uint256(Number(0x55), .bool(true)).encoded
          * Hex("0x00000000000000000000000000000000000000000000000000000000000000550000000000000000000000000000000000000000000000000000000000000001")
          * ```
          *
@@ -906,9 +906,9 @@ public extension ABI {
                 return EthWord(fromUInt: clamped)!.hex
             case let .uint40(v), let .uint48(v), let .uint56(v), let .uint64(v), let .uint72(v), let .uint80(v), let .uint88(v), let .uint96(v), let .uint104(v), let .uint112(v), let .uint120(v), let .uint128(v), let .uint136(v), let .uint144(v), let .uint152(v), let .uint160(v), let .uint168(v), let .uint176(v), let .uint184(v), let .uint192(v), let .uint200(v), let .uint208(v), let .uint216(v), let .uint224(v), let .uint232(v), let .uint240(v), let .uint248(v), let .uint256(v):
                 let bits = self.bits!
-                let max: BigUInt = (BigUInt(1) << bits) - 1
-                let clamped = clamped(bigUInt: v, to: 0 ... max)
-                return EthWord(fromBigUInt: clamped)!.hex
+                let max: Number = (Number(1) << bits) - 1
+                let clamped = clamped(number: v, to: 0 ... max)
+                return EthWord(fromNumber: clamped)!.hex
             case let .int8(v), let .int16(v), let .int24(v), let .int32(v):
                 let bits = self.bits!
                 let max: Int = (1 << (bits - 1)) - 1
@@ -917,10 +917,10 @@ public extension ABI {
                 return EthWord(fromInt: clamped)!.hex
             case let .int40(v), let .int48(v), let .int56(v), let .int64(v), let .int72(v), let .int80(v), let .int88(v), let .int96(v), let .int104(v), let .int112(v), let .int120(v), let .int128(v), let .int136(v), let .int144(v), let .int152(v), let .int160(v), let .int168(v), let .int176(v), let .int184(v), let .int192(v), let .int200(v), let .int208(v), let .int216(v), let .int224(v), let .int232(v), let .int240(v), let .int248(v), let .int256(v):
                 let bits = self.bits!
-                let max: BigInt = (BigInt(1) << (bits - 1)) - 1
-                let min: BigInt = -(BigInt(1) << (bits - 1))
-                let clamped = clamped(bigInt: v, to: min ... max)
-                return EthWord(fromBigInt: clamped)!.hex
+                let max: SNumber = (SNumber(1) << (bits - 1)) - 1
+                let min: SNumber = -(SNumber(1) << (bits - 1))
+                let clamped = clamped(sNumber: v, to: min ... max)
+                return EthWord(fromSNumber: clamped)!.hex
             case let .bool(b):
                 // Zero and one are guaranteed to fit in an EthWord, QED
                 return EthWord(fromUInt: b ? 1 : 0)!.hex
@@ -1303,10 +1303,10 @@ private func clamped(int x: Int, to limits: ClosedRange<Int>) -> Int {
     return min(max(x, limits.lowerBound), limits.upperBound)
 }
 
-private func clamped(bigUInt x: BigUInt, to limits: ClosedRange<BigUInt>) -> BigUInt {
+private func clamped(number x: Number, to limits: ClosedRange<Number>) -> Number {
     return min(max(x, limits.lowerBound), limits.upperBound)
 }
 
-private func clamped(bigInt x: BigInt, to limits: ClosedRange<BigInt>) -> BigInt {
+private func clamped(sNumber x: SNumber, to limits: ClosedRange<SNumber>) -> SNumber {
     return min(max(x, limits.lowerBound), limits.upperBound)
 }
