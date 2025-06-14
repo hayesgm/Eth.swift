@@ -6,9 +6,11 @@ import PackageDescription
 let package = Package(
     name: "Eth",
     platforms: [
-        .macOS(.v10_15),
+        .macOS(.v13),
         .iOS(.v13),
         .tvOS(.v13),
+        .watchOS(.v4),
+        .macCatalyst(.v13),
         .visionOS(.v1),
     ],
     products: [
