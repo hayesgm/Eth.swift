@@ -2,6 +2,7 @@ name: Eth.swift Test
 
 on:
   push:
+  pull_request:
 
 jobs:
   test:
@@ -9,15 +10,14 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - uses: swift-actions/setup-swift@v2
       with:
         swift-version: "5.10"
 
     - name: Cache SwiftPM
-      id: cache-swiftpm
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: |
           ~/.swiftpm
