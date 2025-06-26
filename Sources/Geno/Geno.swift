@@ -34,7 +34,7 @@ func createSourceFileSyntax(from contract: Contract, name: String, structsOnly: 
 
                 // -- Begin Enums for revert errors
                 let extendingErrorClause = InheritanceClauseSyntax(inheritedTypes: InheritedTypeListSyntax([
-                    InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Equatable,")),
+                    InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Hashable,")),
                     InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Error")),
                 ]))
                 EnumDeclSyntax(leadingTrivia: .newline, modifiers: [DeclModifierSyntax(name: .keyword(.public))], name: .identifier("RevertReason", leadingTrivia: .space, trailingTrivia: .space), inheritanceClause: extendingErrorClause) {
@@ -583,7 +583,7 @@ func makeStruccs(_ p: Contract.ABI.Function.Parameter, struccs: inout [String: S
         let inheritanceClause = InheritanceClauseSyntax(
             inheritedTypes: InheritedTypeListSyntax(
                 [
-                    InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Equatable"), trailingComma: .commaToken()),
+                    InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Hashable"), trailingComma: .commaToken()),
                     InheritedTypeSyntax(leadingTrivia: .space, type: TypeSyntax("Sendable"))
                 ]
             )

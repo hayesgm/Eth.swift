@@ -50,7 +50,7 @@ final class GenoTests: XCTestCase {
         let structDefs = generateStructs(c: contract, contractName: "")
 
         // smoke test that is building something sane
-        let regex = try! NSRegularExpression(pattern: "struct Bat: Equatable, Sendable\\{public static let schema: ABI\\.Schema = ABI.Schema\\.tuple")
+        let regex = try! NSRegularExpression(pattern: "struct Bat: Hashable, Sendable\\{public static let schema: ABI\\.Schema = ABI.Schema\\.tuple")
 
         // Perform the matching
         let testString = structDefs[1].description
