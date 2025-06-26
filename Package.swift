@@ -7,7 +7,7 @@ let package = Package(
     name: "Eth",
     platforms: [
         .macOS(.v13),
-        .iOS(.v13),
+        .iOS(.v16),
         .tvOS(.v13),
         .watchOS(.v4),
         .macCatalyst(.v13),
