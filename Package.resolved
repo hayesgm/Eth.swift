@@ -1,5 +1,5 @@
 {
-  "originHash" : "1e2f0437ba3dca98b89568200e3855554e686cb30d26a681affd9a4c046e618f",
+  "originHash" : "e2775ef59af6216a978318faf41f2abedc3e16e62f883ec28738d32692356dfb",
   "pins" : [
     {
       "identity" : "swift-docc-plugin",
@@ -41,7 +41,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/legend-hq/SwiftNumber",
       "state" : {
-        "revision" : "9f78361c6e8df2e77bb31ffd48011da60c18844c"
+        "revision" : "89e127293ab1a0a7b276bed91b18ee60b651e7e9"
       }
     }
   ],
