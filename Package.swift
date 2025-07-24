@@ -7,7 +7,7 @@ let package = Package(
     name: "Eth",
     platforms: [
         .macOS(.v13),
-        .iOS(.v13),
+        .iOS(.v16),
         .tvOS(.v13),
         .watchOS(.v4),
         .macCatalyst(.v13),
@@ -25,7 +25,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/legend-hq/SwiftNumber", branch: "9f78361c6e8df2e77bb31ffd48011da60c18844c"),
+        .package(url: "https://github.com/legend-hq/SwiftNumber", branch: "89e127293ab1a0a7b276bed91b18ee60b651e7e9"),
         .package(url: "https://github.com/hayesgm/SwiftKeccak.git", branch: "98a9d4a037dd62283977d5e0ef7d11c5612ff813"),
         .package(url: "https://github.com/apple/swift-syntax.git", from: "601.0.1"),
         .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.1.0"),
