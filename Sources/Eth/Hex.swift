@@ -174,7 +174,16 @@ public struct Hex: Codable, Equatable, Hashable, CustomStringConvertible, Expres
      * - Returns: A hexadecimal string representation of the `Data` with a `0x` prefix.
      */
     public static func toHex(_ data: Data) -> String {
-        return "0x" + data.map { String(format: "%02x", $0) }.joined()
+       let hexChars = Array("0123456789abcdef")
+       var result = "0x"
+       result.reserveCapacity(2 + data.count * 2)
+
+       for byte in data {
+           result.append(hexChars[Int(byte >> 4)])
+           result.append(hexChars[Int(byte & 0x0F)])
+       }
+
+       return result
     }
 
     /**
