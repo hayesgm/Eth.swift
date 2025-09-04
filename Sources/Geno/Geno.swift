@@ -190,7 +190,7 @@ func generateFunctionDeclaration(f: Contract.ABI.Function, contractName: String)
 
                     switch decoded {
                     case \(raw: letExpr) \(raw: outParameters(ps: f.outputs, contractName: contractName)):
-                        return .success(\(raw: outValues(ps: f.outputs, contractName: contractName)))
+                        return .success(try \(raw: outValues(ps: f.outputs, contractName: contractName)))
                     default:
                         throw ABI.DecodeError.mismatchedType(decoded.schema, \(raw: f.name)Fn.outputTuple)
                     }
