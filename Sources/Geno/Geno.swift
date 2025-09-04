@@ -315,7 +315,7 @@ func outParameters(ps: [Contract.ABI.Function.Parameter], contractName: String) 
 }
 
 func callParameters(f: Contract.ABI.Function, contractName: String) -> String {
-    return f.inputs.map { p in
+    return f.inputs.enumerated().map { index, p in
         if isArray(p) {
             if isStruct(p, contractName: contractName) {
                 let structName = structName(p, contractName: contractName)!
@@ -330,13 +330,19 @@ func callParameters(f: Contract.ABI.Function, contractName: String) -> String {
             return ".tuple\(componentTypes.count)(\(componentTypes.joined(separator: ",\n ")))"
         } else {
             // turning them into the enum values, with name values
-            return ".\(p.type)(\(p.name))"
+            return ".\(p.type)(\(isEmpty(p.name, orElse: "in\(index)")))"
         }
     }.joined(separator: ", ")
 }
 
+func isEmpty(_ a: String, orElse: String) -> String {
+    return a.isEmpty ? orElse : a
+}
+
 func functionParameters(f: Contract.ABI.Function, contractName: String) -> [String] {
-    return f.inputs.map { "\($0.name): \(typeMapper(for: $0, contractName: contractName))" }
+    return f.inputs.enumerated().map { index, value in
+        "\(isEmpty(value.name, orElse: "in\(index)")): \(typeMapper(for: value, contractName: contractName))"
+    }
 }
 
 func returnValue(f: Contract.ABI.Function, contractName: String) -> String {
