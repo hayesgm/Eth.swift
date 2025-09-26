@@ -263,14 +263,16 @@ func namedParameterToOutValue(p: Contract.ABI.Function.Parameter, index: Int, co
     }
 }
 
-func fieldValue(parameter: Contract.ABI.Function.Parameter, index: Int, name: String? = nil, inner: Bool = false, contractName: String) -> String {
+func fieldValue(parameter: Contract.ABI.Function.Parameter, index: Int, name: String? = nil, inner: Bool = false, contractName: String, inStruct: Bool = false) -> String {
     if isArray(parameter) {
         let innerParameter: Contract.ABI.Function.Parameter = stripOneArrayLevel(parameter)
         let paramAsArray = inner ? ".asArray!" : ""
         if isArray(innerParameter) {
             return "\(name ?? parameter.name)\(paramAsArray).map { \(fieldValue(parameter: innerParameter, index: index, name: "$0", inner: true, contractName: contractName)) }"
         } else {
-            return "\(name ?? parameter.name)\(paramAsArray).map { \(try! asValueMapper(parameter: innerParameter, contractName: contractName)) }"
+            let innerValue = try! asValueMapper(parameter: innerParameter, contractName: contractName)
+            let maybeTry = !inStruct && innerValue.contains("try") ? "try " : ""
+            return "\(maybeTry)\(name ?? parameter.name)\(paramAsArray).map { \(innerValue) }"
         }
     } else if structName(parameter, contractName: contractName) != nil {
         return try! asValueMapper(parameter: parameter, name: parameter.name, contractName: contractName)
@@ -283,7 +285,7 @@ func fieldValue(parameter: Contract.ABI.Function.Parameter, index: Int, name: St
 /// > "Cat(ca: ca, cb: cb, cc: cc)"
 func structInitializer(parameter p: Contract.ABI.Function.Parameter, structName: String, contractName: String) -> String {
     if let c = p.components {
-        let args = c.enumerated().map { "\($0.1.name): \(fieldValue(parameter: $0.1, index: $0.0, contractName: contractName))" }.joined(separator: ", ")
+        let args = c.enumerated().map { "\($0.1.name): \(fieldValue(parameter: $0.1, index: $0.0, contractName: contractName, inStruct: true))" }.joined(separator: ", ")
 
         if args.range(of: "try") != nil {
             // Struct initialization with nested fields may contain decodes that throw, so we need the `try` keyword in many but not all cases
@@ -315,28 +317,33 @@ func outParameters(ps: [Contract.ABI.Function.Parameter], contractName: String) 
 }
 
 func callParameters(f: Contract.ABI.Function, contractName: String) -> String {
-    return f.inputs.map { p in
+    return f.inputs.enumerated().map { index, p in
+        let paramName = parameterVar(parameter: p, index: index, withPrefix: "_arg")
         if isArray(p) {
             if isStruct(p, contractName: contractName) {
                 let structName = structName(p, contractName: contractName)!
-                return ".array(\(structName).schema, \(p.name).map { $0.asValue })"
+                return ".array(\(structName).schema, \(paramName).map { $0.asValue })"
             } else {
-                return parameterToArrayType(p: p, index: 0, asValue: true, contractName: contractName)
+                return parameterToArrayType(p: p, index: index, asValue: true, contractName: contractName)
             }
         } else if isStruct(p, contractName: contractName) {
-            return "\(p.name).asValue"
+            return "\(paramName).asValue"
         } else if isTuple(p) {
             let componentTypes = p.components!.enumerated().map { _, p in parameterToValueType(p, allowSchema: true, contractName: contractName) }
             return ".tuple\(componentTypes.count)(\(componentTypes.joined(separator: ",\n ")))"
         } else {
             // turning them into the enum values, with name values
-            return ".\(p.type)(\(p.name))"
+            return ".\(p.type)(\(paramName))"
         }
     }.joined(separator: ", ")
 }
 
 func functionParameters(f: Contract.ABI.Function, contractName: String) -> [String] {
-    return f.inputs.map { "\($0.name): \(typeMapper(for: $0, contractName: contractName))" }
+    return f.inputs.enumerated().map { index, p in
+        // unnamed parameters should be declared with an underscore to ignore them
+        let parameterName = parameterVar(parameter: p, index: index, withPrefix: "_arg");
+        return "\(parameterName): \(typeMapper(for: p, contractName: contractName))";
+    }
 }
 
 func returnValue(f: Contract.ABI.Function, contractName: String) -> String {
