@@ -26,7 +26,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/legend-hq/SwiftNumber", branch: "89e127293ab1a0a7b276bed91b18ee60b651e7e9"),
-        .package(url: "https://github.com/hayesgm/SwiftKeccak.git", branch: "98a9d4a037dd62283977d5e0ef7d11c5612ff813"),
+        .package(url: "https://github.com/hayesgm/SwiftKeccak.git", branch: "6cefdfe75abc348b792a16b81ad908a3e9f11578"),
         .package(url: "https://github.com/apple/swift-syntax.git", from: "601.0.1"),
         .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.1.0"),
     ],
