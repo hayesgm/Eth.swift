@@ -1,19 +1,19 @@
 {
-  "originHash" : "e2775ef59af6216a978318faf41f2abedc3e16e62f883ec28738d32692356dfb",
+  "originHash" : "a8552b61ce9f7285ced914f3f5c52ad90866953dbcd8daf21af3fb35909f4da9",
   "pins" : [
     {
       "identity" : "swift-docc-plugin",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-docc-plugin",
       "state" : {
-        "revision" : "26ac5758409154cc448d7ab82389c520fa8a8247",
-        "version" : "1.3.0"
+        "revision" : "3e4f133a77e644a5812911a0513aeb7288b07d06",
+        "version" : "1.4.5"
       }
     },
     {
       "identity" : "swift-docc-symbolkit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-docc-symbolkit",
+      "location" : "https://github.com/swiftlang/swift-docc-symbolkit",
       "state" : {
         "revision" : "b45d1f2ed151d057b54504d653e0da5552844e34",
         "version" : "1.0.0"
@@ -33,7 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hayesgm/SwiftKeccak.git",
       "state" : {
-        "revision" : "98a9d4a037dd62283977d5e0ef7d11c5612ff813"
+        "revision" : "98a9d4a037dd62283977d5e0ef7d11c5612ff813",
+        "version" : "1.0.0"
       }
     },
     {
@@ -41,7 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/legend-hq/SwiftNumber",
       "state" : {
-        "revision" : "89e127293ab1a0a7b276bed91b18ee60b651e7e9"
+        "revision" : "89e127293ab1a0a7b276bed91b18ee60b651e7e9",
+        "version" : "1.0.0"
       }
     }
   ],
