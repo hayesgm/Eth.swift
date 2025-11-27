@@ -701,8 +701,12 @@ func asValueMapper(parameter: Contract.ABI.Function.Parameter, name: String = "$
             return "$0.asString!"
         case "address", "address payable":
             return "$0.asEthAddress!"
+        case "uint8", "uint16", "uint24", "uint32":
+            return "$0.asUInt!"
         case let type where type.starts(with: "uint"):
             return "$0.asNumber!"
+        case "int8", "int16", "int24", "int32":
+            return "Int($0.asUInt!)"
         case let type where type.starts(with: "int"):
             return "$0.asSNumber!"
         case let bytesType where bytesType.starts(with: "bytes"):

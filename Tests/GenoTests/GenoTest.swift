@@ -93,6 +93,42 @@ final class GenoTests: XCTestCase {
         XCTAssertEqual(callParams, ".array(Animal.Moose.schema, moose.map { $0.asValue }), .uint256(m)")
     }
 
+    func testAsValueMapperForSmallUintTypes() throws {
+        // uint8, uint16, uint24, uint32 should use asUInt! (returns UInt)
+        // larger uint types should use asNumber! (returns Number)
+        let uint8Param = Geno.Contract.ABI.Function.Parameter(name: "x", type: "uint8", internalType: "uint8", components: nil)
+        let uint16Param = Geno.Contract.ABI.Function.Parameter(name: "x", type: "uint16", internalType: "uint16", components: nil)
+        let uint24Param = Geno.Contract.ABI.Function.Parameter(name: "x", type: "uint24", internalType: "uint24", components: nil)
+        let uint32Param = Geno.Contract.ABI.Function.Parameter(name: "x", type: "uint32", internalType: "uint32", components: nil)
+        let uint64Param = Geno.Contract.ABI.Function.Parameter(name: "x", type: "uint64", internalType: "uint64", components: nil)
+        let uint256Param = Geno.Contract.ABI.Function.Parameter(name: "x", type: "uint256", internalType: "uint256", components: nil)
+
+        XCTAssertEqual(try asValueMapper(parameter: uint8Param, contractName: ""), "$0.asUInt!")
+        XCTAssertEqual(try asValueMapper(parameter: uint16Param, contractName: ""), "$0.asUInt!")
+        XCTAssertEqual(try asValueMapper(parameter: uint24Param, contractName: ""), "$0.asUInt!")
+        XCTAssertEqual(try asValueMapper(parameter: uint32Param, contractName: ""), "$0.asUInt!")
+        XCTAssertEqual(try asValueMapper(parameter: uint64Param, contractName: ""), "$0.asNumber!")
+        XCTAssertEqual(try asValueMapper(parameter: uint256Param, contractName: ""), "$0.asNumber!")
+    }
+
+    func testAsValueMapperForSmallIntTypes() throws {
+        // int8, int16, int24, int32 should use Int($0.asUInt!) (returns Int)
+        // larger int types should use asSNumber! (returns SNumber)
+        let int8Param = Geno.Contract.ABI.Function.Parameter(name: "x", type: "int8", internalType: "int8", components: nil)
+        let int16Param = Geno.Contract.ABI.Function.Parameter(name: "x", type: "int16", internalType: "int16", components: nil)
+        let int24Param = Geno.Contract.ABI.Function.Parameter(name: "x", type: "int24", internalType: "int24", components: nil)
+        let int32Param = Geno.Contract.ABI.Function.Parameter(name: "x", type: "int32", internalType: "int32", components: nil)
+        let int64Param = Geno.Contract.ABI.Function.Parameter(name: "x", type: "int64", internalType: "int64", components: nil)
+        let int256Param = Geno.Contract.ABI.Function.Parameter(name: "x", type: "int256", internalType: "int256", components: nil)
+
+        XCTAssertEqual(try asValueMapper(parameter: int8Param, contractName: ""), "Int($0.asUInt!)")
+        XCTAssertEqual(try asValueMapper(parameter: int16Param, contractName: ""), "Int($0.asUInt!)")
+        XCTAssertEqual(try asValueMapper(parameter: int24Param, contractName: ""), "Int($0.asUInt!)")
+        XCTAssertEqual(try asValueMapper(parameter: int32Param, contractName: ""), "Int($0.asUInt!)")
+        XCTAssertEqual(try asValueMapper(parameter: int64Param, contractName: ""), "$0.asSNumber!")
+        XCTAssertEqual(try asValueMapper(parameter: int256Param, contractName: ""), "$0.asSNumber!")
+    }
+
     func jsonString() -> String {
         """
         {
