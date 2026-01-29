@@ -350,7 +350,7 @@ public enum Network: Codable, Equatable, Hashable, Identifiable, Sendable {
         case .gnosis:
             URL(string: "https://gnosisscan.io")
         case .hyperEVM:
-            URL(string: "https://app.hyperliquid.xyz/explorer")
+            URL(string: "https://hyperevmscan.io")
         case .ink:
             URL(string: "https://explorer.inkonchain.com")
         case .lens:
