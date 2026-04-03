@@ -31,6 +31,7 @@ public enum Network: Codable, Equatable, Hashable, Identifiable, Sendable {
     case sepolia
     case soneium
     case sonic
+    case tempo
     case unichain
     case worldChain
     case zkSync
@@ -99,6 +100,8 @@ public enum Network: Codable, Equatable, Hashable, Identifiable, Sendable {
             "Soneium"
         case .sonic:
             "Sonic"
+        case .tempo:
+            "Tempo"
         case .unichain:
             "Unichain"
         case .worldChain:
@@ -200,6 +203,8 @@ public enum Network: Codable, Equatable, Hashable, Identifiable, Sendable {
             .soneium
         case Network.sonic.chainId:
             .sonic
+        case Network.tempo.chainId:
+            .tempo
         case Network.unichain.chainId:
             .unichain
         case Network.worldChain.chainId:
@@ -269,6 +274,8 @@ public enum Network: Codable, Equatable, Hashable, Identifiable, Sendable {
             Number(1868)
         case .sonic:
             Number(146)
+        case .tempo:
+            Number(4217)
         case .sepolia:
             Number(11_155_111)
         case .unichain:
@@ -320,7 +327,7 @@ public enum Network: Codable, Equatable, Hashable, Identifiable, Sendable {
             nil
         case .alephZero, .blast, .bnbSmartChain, .celo, .gnosis, .hyperEVM,
              .ink, .lens, .lisk, .mantle, .mode, .plume, .redstone,
-             .soneium, .sonic, .zkSync, .zora:
+             .soneium, .sonic, .tempo, .zkSync, .zora:
             "\(description) Explorer"
         }
     }
@@ -383,6 +390,8 @@ public enum Network: Codable, Equatable, Hashable, Identifiable, Sendable {
             URL(string: "https://soneium.blockscout.com")
         case .sonic:
             URL(string: "https://sonicscan.org")
+        case .tempo:
+            URL(string: "https://explore.tempo.xyz")
         case .unichain:
             URL(string: "https://uniscan.xyz")
         case .worldChain:
